@@ -1,6 +1,7 @@
 package com.onoo.gomlgy.Presentation.ui.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +20,12 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.ViewHolder> {
-
+    int selected_position = 0;
     private Context context;
     private List<Category> mCategories;
     private LayoutInflater mInflater;
     private AllCategoryClickListener mClickListener;
-
+    int selectedPosition=-1;
     // data is passed into the constructor
     public AllCategoryAdapter(Context context, List<Category> categories, AllCategoryClickListener listener) {
         this.context = context;
@@ -45,6 +46,18 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(mCategories.get(position));
+//        if(selectedPosition==position)
+//            holder.itemView.setBackgroundColor(Color.parseColor("#e4e4e4"));
+//        else
+//            holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
+        holder.itemView.setBackgroundColor(selected_position == position ? Color.parseColor("#DCDCDC") : Color.WHITE);
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (mClickListener != null) mClickListener.onCategoryClick(mCategories.get(position));
+//            }
+//        });
     }
 
     // total number of rows
@@ -54,25 +67,31 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
     }
 
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         ImageView imageView;
         TextView textView;
 
         ViewHolder(View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.category_icon);
+        //    imageView = itemView.findViewById(R.id.category_icon);
             textView = itemView.findViewById(R.id.category_name);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(final Category category) {
-            Glide.with(context).load(AppConfig.ASSET_URL + category.getIcon()).into(imageView);
+           // Glide.with(context).load(AppConfig.ASSET_URL + category.getIcon()).into(imageView);
             textView.setText(category.getName());
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mClickListener != null) mClickListener.onCategoryClick(category);
-                }
-            });
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (getAdapterPosition() == RecyclerView.NO_POSITION) return;
+            // Updating old as well as new positions
+            notifyItemChanged(selected_position);
+            selected_position = getAdapterPosition();
+            notifyItemChanged(selected_position);
+            if (mClickListener != null) mClickListener.onCategoryClick(mCategories.get(getAdapterPosition()));
         }
     }
 }

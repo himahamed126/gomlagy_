@@ -32,6 +32,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.onoo.gomlgy.Presentation.ui.activities.impl.ProductListingActivityAlternative" />
+
+
         <activity android:name="com.onoo.gomlgy.Presentation.ui.activities.impl.ProductReviewActivity" />
         <activity android:name="com.onoo.gomlgy.Presentation.ui.activities.impl.AccountInfoActivity" />
         <activity android:name="com.onoo.gomlgy.Presentation.ui.activities.impl.StripePaymentActivity" />

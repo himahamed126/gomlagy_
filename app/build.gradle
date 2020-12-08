@@ -80,7 +80,7 @@ dependencies {
     implementation('com.github.thekhaeng:recycler-margin:1.2.1') {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
-
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     //Countdown
     implementation 'com.github.iwgang:countdownview:2.1.6'
 

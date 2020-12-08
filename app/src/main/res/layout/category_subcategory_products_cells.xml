@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="13dp"
+    app:cardElevation="5dp"
+    app:cardCornerRadius="5dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/subcategoryText"
+            android:text="Hair care"
+            android:textColor="#000"
+            android:padding="15dp"
+            android:textSize="16sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="See All"
+            android:id="@+id/SEEALL"
+            android:layout_gravity="end"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:layout_alignParentEnd="true"
+            android:textAllCaps="true"
+            android:textColor="#F09A3F"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textSize="16sp" />
+    </RelativeLayout>
+<View
+    android:layout_width="match_parent"
+    android:background="#e4e4e4"
+    android:layout_height="1dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/product_list_card"
+            android:layout_width="match_parent"
+            android:scrollbars="horizontal"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</RelativeLayout>
+</androidx.cardview.widget.CardView>

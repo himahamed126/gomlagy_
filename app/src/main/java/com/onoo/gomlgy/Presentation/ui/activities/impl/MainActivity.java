@@ -35,7 +35,10 @@ import q.rorbin.badgeview.QBadgeView;
 public class MainActivity extends AppCompatActivity implements AppSettingsInteractor.CallBack {
 
     final Fragment homeFragment = new HomeFragment();
-    final Fragment categoriesFragment = new CategoriesFragment();
+ //   final Fragment categoriesFragment = new CategoriesFragment();TwoFragmentsDetails
+
+    final Fragment categoriesFragment = new twofragments();
+
     private Fragment cartFragment = new CartFragment();
     private Fragment accountFragment = new AccountFragment();
     private Fragment searchFragment = new ProductSearchFragment();
