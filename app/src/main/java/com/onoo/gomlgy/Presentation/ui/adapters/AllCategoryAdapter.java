@@ -41,8 +41,6 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
         View view = mInflater.inflate(R.layout.category_list_item, parent, false);
         return new ViewHolder(view);
     }
-
-    // binds the data to the view and textview in each row
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(mCategories.get(position));
@@ -70,7 +68,6 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         ImageView imageView;
         TextView textView;
-
         ViewHolder(View itemView) {
             super(itemView);
         //    imageView = itemView.findViewById(R.id.category_icon);
@@ -87,7 +84,6 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
         @Override
         public void onClick(View v) {
             if (getAdapterPosition() == RecyclerView.NO_POSITION) return;
-            // Updating old as well as new positions
             notifyItemChanged(selected_position);
             selected_position = getAdapterPosition();
             notifyItemChanged(selected_position);

@@ -6,6 +6,10 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Category implements Serializable {
+
+    @SerializedName("id")
+    @Expose
+    private int id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -46,7 +50,12 @@ public class Category implements Serializable {
     public CategoryLinks getLinks() {
         return links;
     }
-
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public void setLinks(CategoryLinks links) {
         this.links = links;
     }

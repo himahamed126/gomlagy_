@@ -3,6 +3,7 @@ package com.onoo.gomlgy.Presentation.ui.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.onoo.gomlgy.Models.Category;
 import com.onoo.gomlgy.Models.collectionmodel;
 //import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductListingActivityAlternative;
+import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductListingActivity;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductListingActivityAlternative;
 import com.onoo.gomlgy.Presentation.ui.listeners.AllCategoryClickListener;
 import com.onoo.gomlgy.R;
@@ -34,15 +36,16 @@ public class AllProductsAndSubcategoryAdapter extends RecyclerView.Adapter<AllPr
     private LayoutInflater mInflater;
     private AllCategoryClickListener mClickListener;
     int selectedPosition = -1;
+    int categoryId;
     // data is passed into the constructor
     RecyclerView.LayoutManager RecyclerViewLayoutManager;
     LinearLayoutManager HorizontalLayout;
 
-    public AllProductsAndSubcategoryAdapter(Context context, collectionmodel products) {
+    public AllProductsAndSubcategoryAdapter(Context context, collectionmodel products,int categoryId) {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
         this.myProductsAndSubcatagory = products;
-
+this.categoryId=categoryId;
     }
 
     // inflates the row layout from xml when needed
@@ -68,9 +71,11 @@ public class AllProductsAndSubcategoryAdapter extends RecyclerView.Adapter<AllPr
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//TODO navigate to whatever you want bro
-                Intent i = new Intent(getApplicationContext(), ProductListingActivityAlternative.class);
-                i.putExtra("products", (Serializable) model.getData().get(0).getSubCategories().get(position).getProducts());
+                int subCategoryID=model.getData().get(0).getSubCategories().get(position).getId();
+               //TODO navigate to whatever you want bro
+                Log.i("URLLLL", "https://www.gomlgy.com/api/v1/get-product?category_id="+categoryId+"&sub_category_id="+subCategoryID);
+                Intent i = new Intent(getApplicationContext(), ProductListingActivity.class);
+                i.putExtra("url", "https://www.gomlgy.com/api/v1/get-product?category_id="+categoryId+"&sub_category_id="+subCategoryID);
                 i.putExtra("title", model.getData().get(0).getSubCategories().get(position).getName());
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);

@@ -16,12 +16,12 @@ public class Product implements Serializable {
     @SerializedName("thumbnail_image")
     @Expose
     private String thumbnailImage;
-    @SerializedName("featured_image")
-    @Expose
-    private String featuredImage;
-    @SerializedName("flash_deal_image")
-    @Expose
-    private String flashDealImage;
+//    @SerializedName("featured_image")
+//    @Expose
+//    private String featuredImage;
+//    @SerializedName("flash_deal_image")
+//    @Expose
+//    private String flashDealImage;
     @SerializedName("base_price")
     @Expose
     private Double basePrice;
@@ -76,23 +76,21 @@ public class Product implements Serializable {
     public void setThumbnailImage(String thumbnailImage) {
         this.thumbnailImage = thumbnailImage;
     }
-
-    public String getFeaturedImage() {
-        return featuredImage;
-    }
-
-    public void setFeaturedImage(String featuredImage) {
-        this.featuredImage = featuredImage;
-    }
-
-    public String getFlashDealImage() {
-        return flashDealImage;
-    }
-
-    public void setFlashDealImage(String flashDealImage) {
-        this.flashDealImage = flashDealImage;
-    }
-
+    //    public String getFeaturedImage() {
+//        return featuredImage;
+//    }
+//
+//    public void setFeaturedImage(String featuredImage) {
+//        this.featuredImage = featuredImage;
+//    }
+//
+//    public String getFlashDealImage() {
+//        return flashDealImage;
+//    }
+//
+//    public void setFlashDealImage(String flashDealImage) {
+//        this.flashDealImage = flashDealImage;
+//    }
     public Double getBasePrice() {
         return basePrice;
     }
