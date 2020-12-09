@@ -148,6 +148,17 @@ public class Productmodel implements Serializable {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("image_path")
+    @Expose
+    private String image_path;
+
+    public String getImage_path() {
+        return image_path;
+    }
+
+    public void setImage_path(String image_path) {
+        this.image_path = image_path;
+    }
 
     public Integer getId() {
         return id;

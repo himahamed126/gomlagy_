@@ -3,12 +3,14 @@ package com.onoo.gomlgy.Presentation.ui.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -75,9 +77,9 @@ public class productsOfSubCategoryAdapter extends RecyclerView.Adapter<productsO
         }
 
         public void bind(Productmodel product) {
-           Glide.with(context).load(AppConfig.ASSET_URL + product.getThumbnailImg()).into(image);
-
-//
+           Glide.with(context).load( product.getImage_path()).into(image);
+          //  Toast.makeText(context, ""+AppConfig.ASSET_URL + product.getThumbnailImg(), Toast.LENGTH_SHORT).show();
+            Log.i("weare", "bind: "+product.getImage_path());
             name.setText(product.getName());
         }
     }

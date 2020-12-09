@@ -93,7 +93,7 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
 
     @Override
     public void onProductItemClick(Product product) {
-        Toast.makeText(this,  product.getLinks().getDetails(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this,  product.getLinks().getDetails(), Toast.LENGTH_SHORT).show();
         Log.i("jjjjjjjjjjjj", "onProductItemClick: "+ product.getLinks().getDetails());
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra("product_name", product.getName());
