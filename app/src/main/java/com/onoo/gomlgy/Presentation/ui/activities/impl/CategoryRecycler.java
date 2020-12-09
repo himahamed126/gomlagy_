@@ -1,19 +1,16 @@
 package com.onoo.gomlgy.Presentation.ui.activities.impl;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,12 +28,10 @@ import com.onoo.gomlgy.Presentation.ui.listeners.SubCategoryClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -45,7 +40,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 public class CategoryRecycler extends Fragment implements CategoryView, AllCategoryClickListener, SwipeRefreshLayout.OnRefreshListener, SubCategoryView, SubCategoryClickListener {
     private View v;
     private CategoryPresenter categoryPresenter;
@@ -121,6 +115,7 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
             @Override
             public void onResponse(Call<collectionmodel> call, Response<collectionmodel> response) {
                 collectionmodel model = response.body();
+                Log.i("qwe", "onResponse: "+call.request().url());
                 RecyclerView recyclerView = rightFragment.getView().findViewById(R.id.List_subcategory_products);
                 AllProductsAndSubcategoryAdapter adapter = new AllProductsAndSubcategoryAdapter(getActivity(), model,cat_id);
                 recyclerView.setHasFixedSize(true);
@@ -135,15 +130,19 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
         });
     }
     @Override
-    public void onRefresh() {
+    public void onRefresh()
+    {
         mSwipeRefreshLayout.setRefreshing(true);
         categoryPresenter.getAllCategories();
     }
     @Override
-    public void setSubCategories(List<SubCategory> subCategories) {
+    public void setSubCategories(List<SubCategory> subCategories)
+    {
 
     }
     @Override
-    public void onSubCategoryItemClick(SubCategory subCategory) {
+    public void onSubCategoryItemClick(SubCategory subCategory)
+    {
+
     }
 }

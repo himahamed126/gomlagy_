@@ -28,14 +28,6 @@ public class AppConfig {
     public static AppSettings getAppSettings(Context context){
         return new UserPrefs(context).getAppSettingsPreferenceObjectJson("app_settings_response").getData().get(0);
     }
-
-    /**
-     * This method converts dp unit to equivalent pixels, depending on device density.
-     *
-     * @param dp      A value in dp (density independent pixels) unit. Which we need to convert into pixels
-     * @param context Context to get resources and device specific display metrics
-     * @return A float value to represent px equivalent to dp depending on device density
-     */
     public static int convertDpToPx(Context context, float dp) {
         return (int) (dp * context.getResources().getDisplayMetrics().density);
     }
