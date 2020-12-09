@@ -43,10 +43,10 @@
                 android:layout_below="@+id/image_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Featured Products"
+                android:text="@string/featured_products"
                 android:textStyle="bold"
                 android:textColor="#000"
                 android:textSize="18sp" />
@@ -56,8 +56,8 @@
                 android:id="@+id/featured_products"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -66,10 +66,10 @@
                 android:layout_below="@+id/featured_products"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Top Selling Products"
+                android:text="@string/top_selling_products"
                 android:textStyle="bold"
                 android:textColor="#000"
                 android:textSize="18sp" />
@@ -79,8 +79,8 @@
                 android:id="@+id/top_selling"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -89,10 +89,10 @@
                 android:layout_below="@+id/top_selling"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="15dp"
-                android:text="New Arrivals"
+                android:text="@string/new_arrivals"
                 android:textStyle="bold"
                 android:textColor="#000"
                 android:textSize="18sp" />
@@ -111,8 +111,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_products"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="0dp">
@@ -121,7 +121,7 @@
                     android:id="@+id/btnSellerProducts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="View all products from this store"
+                    android:text="@string/view_all_products_from_this_store"
                     android:padding="16dp"
                     android:textColor="@android:color/white"
                     android:background="@color/colorPrimary"

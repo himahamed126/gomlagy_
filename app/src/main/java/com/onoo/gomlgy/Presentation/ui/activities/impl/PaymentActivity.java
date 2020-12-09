@@ -99,7 +99,7 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
                     }
                 }
                 else {
-                    CustomToast.showToast(PaymentActivity.this, "Please select a payment method", R.color.colorWarning);
+                    CustomToast.showToast(PaymentActivity.this, getString(R.string.please_select_a_payment_method), R.color.colorWarning);
                 }
             }
         });
@@ -118,7 +118,7 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
                     }
                 }
                 else {
-                    CustomToast.showToast(PaymentActivity.this, "Please enter coupon code first", R.color.colorWarning);
+                    CustomToast.showToast(PaymentActivity.this, getString(R.string.please_enter_coupon_code_first), R.color.colorWarning);
                 }
             }
         });
@@ -127,16 +127,16 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
     private void setPaymentOptions(){
         List<PaymentModel> paymentModels = new ArrayList<>();
         if (AppConfig.BRAINTREE_KEY.length() > 0){
-            paymentModels.add(new PaymentModel(R.drawable.paypal_logo_png_7, "paypal", "Checkout with PayPal"));
+            paymentModels.add(new PaymentModel(R.drawable.paypal_logo_png_7, "paypal", getString(R.string.checkout_with_PayPal)));
         }
         if (AppConfig.STRIPE_KEY.length() > 0){
-            paymentModels.add(new PaymentModel(R.drawable.cardpayment, "card", "Checkout with Card"));
+            paymentModels.add(new PaymentModel(R.drawable.cardpayment, "card", getString(R.string.checkout_with_card)));
         }
         if (AppConfig.CASH_ON_DELIVERY) {
-            paymentModels.add(new PaymentModel(R.drawable.cod, "cod", "Cash on Delivery"));
+            paymentModels.add(new PaymentModel(R.drawable.cod, "cod", getString(R.string.cash_on_delivery)));
         }
         if (AppConfig.WALLET_USE) {
-            paymentModels.add(new PaymentModel(R.drawable.wallet_select, "wallet", "Wallet Balance"));
+            paymentModels.add(new PaymentModel(R.drawable.wallet_select, "wallet", getString(R.string.wallet_balance)));
         }
 
         RecyclerView recyclerView = findViewById(R.id.payment_select_list);
@@ -201,7 +201,7 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
     }
 
     private void checkout_done(String paymentID){
-        progressDialog.setMessage("Checkout is processing. Please wait.");
+        progressDialog.setMessage(getString(R.string.checkout_is_processing_please_wait));
         progressDialog.show();
 
         JsonObject jsonObject = new JsonObject();

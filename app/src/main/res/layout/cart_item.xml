@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginLeft="10dp"
+    android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginEnd="10dp"
     app:cardCornerRadius="1dp"
     app:cardElevation="0dp"
     android:foreground="?android:attr/selectableItemBackground">
@@ -25,19 +25,19 @@
             android:id="@+id/cart_product_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/cart_quantity_update"
-            android:layout_toRightOf="@id/cart_product_image">
+            android:layout_toStartOf="@+id/cart_quantity_update"
+            android:layout_toEndOf="@id/cart_product_image">
 
             <TextView
                 android:id="@+id/cart_product_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="#333"/>
 
             <TextView
@@ -45,9 +45,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cart_product_name"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="Variant"
+                android:text="@string/variant"
                 android:textColor="#B9B9BE" />
 
             <TextView
@@ -55,8 +55,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cart_variant"
-                android:layout_marginLeft="10dp"
-                android:text="Price"
+                android:layout_marginStart="10dp"
+                android:text="@string/price"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -66,9 +66,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cart_price"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="Shipping"
+                android:text="@string/shipping"
                 android:textColor="#B9B9BE" />
 
         </RelativeLayout>
@@ -77,8 +77,8 @@
             android:id="@+id/cart_quantity_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
             android:layout_centerInParent="true"
             android:orientation="vertical">
 

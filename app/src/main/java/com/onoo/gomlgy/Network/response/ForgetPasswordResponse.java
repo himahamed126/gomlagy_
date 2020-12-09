@@ -1,21 +1,23 @@
+
 package com.onoo.gomlgy.Network.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RegistrationResponse {
+public class ForgetPasswordResponse {
+
     @SerializedName("success")
     @Expose
-    private String success;
+    private Boolean success;
     @SerializedName("message")
     @Expose
     private String message;
 
-    public String getSuccess() {
+    public Boolean getSuccess() {
         return success;
     }
 
-    public void setSuccess(String success) {
+    public void setSuccess(Boolean success) {
         this.success = success;
     }
 
@@ -26,4 +28,5 @@ public class RegistrationResponse {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }

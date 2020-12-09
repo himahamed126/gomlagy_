@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/product_name"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:text="TextView"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"/>
@@ -43,8 +43,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/product_name"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/product_discounted_price"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/product_discounted_price"
             android:text="TextView" />
 
         <RatingBar
@@ -55,7 +55,7 @@
             android:layout_below="@id/product_discounted_price"
             android:clickable="false"
             android:numStars="5"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:theme="@style/RatingBar"/>
@@ -66,8 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/product_rating"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/product_rating"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/product_rating"
             android:text="0 sold"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textSize="12sp"/>

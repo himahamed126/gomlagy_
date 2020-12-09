@@ -24,6 +24,7 @@
         <activity android:name="com.onoo.gomlgy.Presentation.ui.activities.impl.WalletActivity"></activity>
         <activity android:name="com.onoo.gomlgy.Presentation.ui.activities.impl.ProductDescriptionActivity" />
         <activity android:name="com.onoo.gomlgy.Presentation.ui.activities.impl.ResetPasswordActivity" />
+        <activity android:name="com.onoo.gomlgy.Presentation.ui.activities.impl.ForgetPasswordActivity" />
         <activity android:name="com.onoo.gomlgy.Presentation.ui.activities.impl.MyBidsActivity" />
         <activity android:name="com.onoo.gomlgy.Presentation.ui.activities.impl.SplashActivity">
             <intent-filter>

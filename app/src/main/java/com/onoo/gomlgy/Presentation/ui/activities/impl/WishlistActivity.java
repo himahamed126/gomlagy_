@@ -37,7 +37,7 @@ public class WishlistActivity extends BaseActivity implements WishlistView, Wish
         setContentView(R.layout.activity_wishlist);
 
         initializeActionBar();
-        setTitle("My Wishlist");
+        setTitle(getString(R.string.my_wishlist));
 
         progressBar = findViewById(R.id.item_progress_bar);
         wishlist_empty_text = findViewById(R.id.wishlist_empty_text);

@@ -9,11 +9,11 @@ import java.text.DecimalFormat;
 public class AppConfig {
     public static AppSettings appSettings;
 
-//    public static String BASE_URL = "http://demo.activeitzone.com/ecommerce/api/v1/";
-//    public static String ASSET_URL = "http://demo.activeitzone.com/ecommerce/public/";
-
     public static String BASE_URL = "https://www.gomlgy.com/api/v1/";
-    public static String ASSET_URL = "https://www.gomlgy.com/public/";
+    public static String ASSET_URL = "http://demo.activeitzone.com/ecommerce/public/";
+
+//    public static String BASE_URL = "http://192.168.0.129/shop/api/v1/";
+//    public static String ASSET_URL = "http://192.168.0.129/shop/public/";
 
     public static String STRIPE_KEY = "pk_test_c6VvBEbwHFdulFZ62q1IQrar";
     public static String BRAINTREE_KEY = "sandbox_pghddbzc_h44cx45wt7g27wmc";

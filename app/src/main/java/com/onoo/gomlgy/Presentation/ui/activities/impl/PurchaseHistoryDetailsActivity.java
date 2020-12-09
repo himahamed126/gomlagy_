@@ -34,7 +34,7 @@ public class PurchaseHistoryDetailsActivity extends BaseActivity implements Purc
         setContentView(R.layout.activity_purchase_history_details);
 
         initializeActionBar();
-        setTitle("Order Details");
+        setTitle(getString(R.string.order_details));
         initviews();
         mPurchaseHistory = (PurchaseHistory) getIntent().getSerializableExtra("purchase_history");
         setDetails();
@@ -63,7 +63,7 @@ public class PurchaseHistoryDetailsActivity extends BaseActivity implements Purc
 
     private void setDetails(){
         order_code.setText(mPurchaseHistory.getCode());
-        shipping_method.setText("Flat Shipping Rate");
+        shipping_method.setText(getString(R.string.flat_shipping_rate));
         order_date.setText(mPurchaseHistory.getDate());
         payment_method.setText(StringUtils.capitalize(mPurchaseHistory.getPaymentType()));
         payment_status.setText(StringUtils.capitalize(mPurchaseHistory.getPaymentStatus()));

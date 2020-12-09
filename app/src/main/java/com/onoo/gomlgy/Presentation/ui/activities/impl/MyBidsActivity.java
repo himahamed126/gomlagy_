@@ -52,7 +52,7 @@ public class MyBidsActivity extends BaseActivity implements MybidView, MyBidClic
         setContentView(R.layout.activity_my_bids);
 
         initializeActionBar();
-        setTitle("My Bids");
+        setTitle(getString(R.string.my_bids));
 
         progressBar = findViewById(R.id.item_progress_bar);
         mybids_empty_text = findViewById(R.id.mybids_empty_text);
@@ -113,7 +113,7 @@ public class MyBidsActivity extends BaseActivity implements MybidView, MyBidClic
 
         Glide.with(this).load(AppConfig.ASSET_URL + userBid.getAuctionProduct().getData().get(0).getImage()).into(image);
         current_bid_amount.setText(AppConfig.convertPrice(this, userBid.getHighestBid()));
-        total_bids.setText(userBid.getAuctionProduct().getData().get(0).getBidsCount()+" Bids");
+        total_bids.setText(userBid.getAuctionProduct().getData().get(0).getBidsCount()+getString(R.string._bids));
         name.setText(userBid.getProduct());
 
 
@@ -134,7 +134,7 @@ public class MyBidsActivity extends BaseActivity implements MybidView, MyBidClic
                         jsonObject.addProperty("amount", amount);
 
                         dialog.hide();
-                        progressDialog.setMessage("Your bid is being submitted. Please wait.");
+                        progressDialog.setMessage(getString(R.string.your_bid_is_being_submitted_please_wait));
                         progressDialog.show();
                         mybidsPresenter.submitBid(jsonObject, authResponse.getAccessToken());
                     }
@@ -143,7 +143,7 @@ public class MyBidsActivity extends BaseActivity implements MybidView, MyBidClic
                     }
                 }
                 else {
-                    CustomToast.showToast(MyBidsActivity.this, "Your bidding amount must be greater than the current bid", R.color.colorWarning);
+                    CustomToast.showToast(MyBidsActivity.this, getString(R.string.your_bidding_amount_must_be_greater_than_the_current_bid), R.color.colorWarning);
                     bid_amount.requestFocus();
                 }
             }

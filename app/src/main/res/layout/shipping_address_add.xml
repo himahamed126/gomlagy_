@@ -20,7 +20,7 @@
                 android:id="@+id/input_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Address"
+                android:hint="@string/address"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -35,7 +35,7 @@
                 android:id="@+id/input_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="City"
+                android:hint="@string/city"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -50,7 +50,7 @@
                 android:id="@+id/input_postal_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Postal Code"
+                android:hint="@string/postal_code"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,7 +65,7 @@
                 android:id="@+id/input_country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Country"
+                android:hint="@string/country"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,7 +80,7 @@
                 android:id="@+id/input_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Phone Number"
+                android:hint="@string/phone_number"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 

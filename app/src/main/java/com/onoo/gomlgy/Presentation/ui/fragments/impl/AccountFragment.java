@@ -42,7 +42,7 @@ public class AccountFragment extends Fragment implements AccountView, AppSetting
     private ImageView account_image;
     private TextView account_name;
     private AuthResponse authResponse;
-    private RelativeLayout wishlist, purchase_history, wallet_info, account_info, logout;
+    private RelativeLayout wishlist, purchase_history, wallet_info, account_info, language, logout;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_account, null);
@@ -50,20 +50,19 @@ public class AccountFragment extends Fragment implements AccountView, AppSetting
         initViews();
 
         authResponse = new UserPrefs(getActivity()).getAuthPreferenceObjectJson("auth_response");
-        if(authResponse != null && authResponse.getUser() != null){
+        if (authResponse != null && authResponse.getUser() != null) {
             account_name.setText(authResponse.getUser().getName());
-            Glide.with(getActivity()).load(AppConfig.ASSET_URL+authResponse.getUser().getAvatarOriginal()).placeholder(R.drawable.icons8_male_user_100).into(account_image);
+            Glide.with(getActivity()).load(AppConfig.ASSET_URL + authResponse.getUser().getAvatarOriginal()).placeholder(R.drawable.icons8_male_user_100).into(account_image);
             account_name.setText(authResponse.getUser().getName());
-        }
-        else {
-            account_name.setText("SIGN IN / REGISTER");
+        } else {
+            account_name.setText(getString(R.string.sign_or_register));
             logout.setVisibility(View.GONE);
         }
 
         account_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(account_name.getText().equals("SIGN IN / REGISTER")){
+                if (account_name.getText().equals(getString(R.string.sign_or_register))) {
                     startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
                 }
             }
@@ -72,7 +71,7 @@ public class AccountFragment extends Fragment implements AccountView, AppSetting
         account_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(account_name.getText().equals("SIGN IN / REGISTER")){
+                if (account_name.getText().equals(getString(R.string.sign_or_register))) {
                     startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
                 }
             }
@@ -81,18 +80,26 @@ public class AccountFragment extends Fragment implements AccountView, AppSetting
         return v;
     }
 
-    private void initViews(){
+    private void initViews() {
         account_name = v.findViewById(R.id.account_name);
         account_image = v.findViewById(R.id.account_image);
+
+        language = v.findViewById(R.id.language);
+        language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new UserPrefs(getActivity()).showChangeLanguage(getActivity());
+            }
+        });
+
 
         wishlist = v.findViewById(R.id.wishlist);
         wishlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(authResponse != null && authResponse.getUser() != null){
+                if (authResponse != null && authResponse.getUser() != null) {
                     startActivity(new Intent(getContext(), WishlistActivity.class));
-                }
-                else {
+                } else {
                     startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
                 }
             }
@@ -102,10 +109,9 @@ public class AccountFragment extends Fragment implements AccountView, AppSetting
         purchase_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(authResponse != null && authResponse.getUser() != null){
+                if (authResponse != null && authResponse.getUser() != null) {
                     startActivity(new Intent(getContext(), PurchaseHistoryActivity.class));
-                }
-                else {
+                } else {
                     startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
                 }
             }
@@ -115,10 +121,9 @@ public class AccountFragment extends Fragment implements AccountView, AppSetting
         wallet_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(authResponse != null && authResponse.getUser() != null){
+                if (authResponse != null && authResponse.getUser() != null) {
                     startActivity(new Intent(getContext(), WalletActivity.class));
-                }
-                else {
+                } else {
                     startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
                 }
             }
@@ -128,10 +133,9 @@ public class AccountFragment extends Fragment implements AccountView, AppSetting
         account_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(authResponse != null && authResponse.getUser() != null){
+                if (authResponse != null && authResponse.getUser() != null) {
                     startActivity(new Intent(getContext(), AccountInfoActivity.class));
-                }
-                else {
+                } else {
                     startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
                 }
             }
@@ -141,12 +145,12 @@ public class AccountFragment extends Fragment implements AccountView, AppSetting
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(authResponse != null && authResponse.getUser() != null){
+                if (authResponse != null && authResponse.getUser() != null) {
                     new UserPrefs(getContext()).clearPreference();
 
                     new AppSettingsInteractorImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), AccountFragment.this).execute();
 
-                    account_name.setText("SIGN IN / REGISTER");
+                    account_name.setText(getString(R.string.sign_or_register));
                     logout.setVisibility(View.GONE);
                     account_image.setImageResource(R.drawable.icons8_male_user_100);
 
@@ -167,7 +171,7 @@ public class AccountFragment extends Fragment implements AccountView, AppSetting
 
         new AppSettingsInteractorImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this).execute();
 
-        account_name.setText("SIGN IN / REGISTER");
+        account_name.setText(getString(R.string.sign_or_register));
         logout.setVisibility(View.GONE);
         account_image.setImageResource(R.drawable.icons8_male_user_100);
 

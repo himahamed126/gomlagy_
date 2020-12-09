@@ -30,28 +30,28 @@
             android:id="@+id/cancelled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancelled"
+            android:text="@string/cancelled"
             android:textColor="#fff"
             android:background="@color/bt_error_red"
             android:padding="5dp"
-            android:layout_toLeftOf="@id/unpaid" />
+            android:layout_toStartOf="@id/unpaid" />
 
         <TextView
             android:id="@+id/unpaid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Unpaid"
+            android:text="@string/unpaid"
             android:textColor="#fff"
             android:background="@color/carbon_orange_400"
             android:padding="5dp"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentEnd="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="30 Jul, 11:29 PM"
             android:layout_below="@id/unpaid"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
             android:textSize="16sp"/>
 

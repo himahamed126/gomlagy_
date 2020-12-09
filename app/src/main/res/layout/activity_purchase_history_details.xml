@@ -32,9 +32,9 @@
                         android:id="@+id/order_code_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:ellipsize="end"
-                        android:text="Order Code"
+                        android:text="@string/order_code"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
@@ -43,31 +43,31 @@
                         android:layout_below="@id/order_code_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:ellipsize="end"
-                        android:text="Order Code"
+                        android:text="@string/order_code"
                         android:textColor="@color/colorPrimary"/>
 
                     <TextView
                         android:id="@+id/shipping_method_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
                         android:ellipsize="end"
-                        android:text="Shipping Method"
+                        android:text="@string/shipping_method"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/shipping_method"
                         android:layout_below="@id/shipping_method_text"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="10dp"
                         android:ellipsize="end"
-                        android:text="Shipping Method"/>
+                        android:text="@string/shipping_method"/>
 
 
                 </RelativeLayout>
@@ -94,9 +94,9 @@
                         android:id="@+id/order_date_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:ellipsize="end"
-                        android:text="Order Date"
+                        android:text="@string/order_date"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
@@ -105,30 +105,30 @@
                         android:layout_below="@id/order_date_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:ellipsize="end"
-                        android:text="Order Code"/>
+                        android:text="@string/order_code"/>
 
                     <TextView
                         android:id="@+id/payment_method_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
                         android:ellipsize="end"
-                        android:text="Payment Method"
+                        android:text="@string/payment_method"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/payment_method"
                         android:layout_below="@id/payment_method_text"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="10dp"
                         android:ellipsize="end"
-                        android:text="Payment Method"/>
+                        android:text="@string/payment_method"/>
 
 
                 </RelativeLayout>
@@ -156,9 +156,9 @@
                         android:id="@+id/payment_status_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:ellipsize="end"
-                        android:text="Payment Status"
+                        android:text="@string/payment_status"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
@@ -167,31 +167,31 @@
                         android:layout_below="@id/payment_status_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:ellipsize="end"
-                        android:text="Status"
+                        android:text="@string/status"
                         android:textColor="@color/colorPrimary"/>
 
                     <TextView
                         android:id="@+id/total_amount_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
                         android:ellipsize="end"
-                        android:text="Total Amount"
+                        android:text="@string/total_amount"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/total_amount"
                         android:layout_below="@id/total_amount_text"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="10dp"
                         android:ellipsize="end"
-                        android:text="Amount"
+                        android:text="@string/amount"
                         android:textColor="@color/colorPrimary"
                         android:textStyle="bold"/>
 
@@ -220,9 +220,9 @@
                         android:id="@+id/shipping_address_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:ellipsize="end"
-                        android:text="Shipping Address"
+                        android:text="@string/shipping_address"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
@@ -231,10 +231,10 @@
                         android:layout_below="@id/shipping_address_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginBottom="10dp"
                         android:ellipsize="end"
-                        android:text="Shipping Address"/>
+                        android:text="@string/shipping_address"/>
 
 
                 </RelativeLayout>
@@ -246,7 +246,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/card_view3"
-                android:text="Ordered Products"
+                android:text="@string/ordered_products"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:layout_centerVertical="true"
@@ -282,7 +282,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="2"
                         android:layout_height="match_parent"
-                        android:text="SUB TOTAL"
+                        android:text="@string/sub_total"
                         android:textStyle="bold"
                         android:textColor="#000"
                         android:gravity="end" />
@@ -296,7 +296,7 @@
                         android:text="$ 00"
                         android:textColor="#000"
                         android:textStyle="bold"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginEnd="10dp"/>
 
                 </LinearLayout>
 
@@ -312,7 +312,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:gravity="end"
-                        android:text="TAX"
+                        android:text="@string/tax"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
@@ -324,7 +324,7 @@
                         android:gravity="end"
                         android:text="$ 00"
                         android:textColor="#000"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginEnd="10dp"/>
 
                 </LinearLayout>
 
@@ -340,7 +340,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:gravity="end"
-                        android:text="SHIPPING COST"
+                        android:text="@string/shipping_cost"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
@@ -352,7 +352,7 @@
                         android:gravity="end"
                         android:text="$ 00"
                         android:textColor="#000"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginEnd="10dp"/>
 
                 </LinearLayout>
 
@@ -368,7 +368,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:gravity="end"
-                        android:text="DISCOUNT"
+                        android:text="@string/discount"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
@@ -380,7 +380,7 @@
                         android:gravity="end"
                         android:text="$ 00"
                         android:textColor="#000"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginEnd="10dp"/>
 
                 </LinearLayout>
 
@@ -396,7 +396,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:gravity="end"
-                        android:text="GRAND TOTAL"
+                        android:text="@string/grand_total"
                         android:textColor="#000"
                         android:textStyle="bold" />
 
@@ -409,7 +409,7 @@
                         android:text="$ 00"
                         android:textColor="@color/colorPrimary"
                         android:textStyle="bold"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginEnd="10dp"/>
 
                 </LinearLayout>
 

@@ -36,7 +36,7 @@ public class LoginInteractorImpl extends AbstractInteractor {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("email", email);
         jsonObject.addProperty("password", password);
-        jsonObject.addProperty("remember_me", true);
+//        jsonObject.addProperty("remember_me", true);
 
         Call<AuthResponse> call = apiService.sendLoginCredentials(jsonObject);
 

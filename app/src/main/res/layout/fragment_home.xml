@@ -41,10 +41,10 @@
                         android:id="@+id/featured_categories_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Featured Categories"
+                        android:text="@string/featured_categories"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp" />
@@ -53,8 +53,8 @@
                         android:layout_width="75dp"
                         android:layout_height="3dp"
                         android:layout_alignBottom="@id/featured_categories_text"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:background="@color/colorPrimary" />
 
@@ -63,8 +63,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/featured_categories_text"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp">
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
 
                     </androidx.recyclerview.widget.RecyclerView>
 
@@ -79,10 +79,10 @@
                         android:id="@+id/flash_deals_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Flash Deal"
+                        android:text="@string/flash_deal"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp" />
@@ -91,8 +91,8 @@
 <!--                        android:layout_width="75dp"-->
 <!--                        android:layout_height="3dp"-->
 <!--                        android:layout_alignBottom="@id/flash_deals_text"-->
-<!--                        android:layout_alignParentRight="true"-->
-<!--                        android:layout_marginRight="10dp"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_marginEnd="10dp"-->
 <!--                        android:layout_marginBottom="10dp"-->
 <!--                        android:background="@color/colorPrimary" />-->
 
@@ -101,8 +101,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignBottom="@id/flash_deals_text"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginTop="15dp"
                         app:isHideTimeBackground="false"
                         app:timeBgColor="@color/colorPrimaryLight"
@@ -119,8 +119,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/flash_deals_text"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp">
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
 
                     </androidx.recyclerview.widget.RecyclerView>
 
@@ -135,10 +135,10 @@
                         android:id="@+id/todays_deals_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Today's Deal"
+                        android:text="@string/todays_deal"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp" />
@@ -147,8 +147,8 @@
                         android:layout_width="75dp"
                         android:layout_height="3dp"
                         android:layout_alignBottom="@id/todays_deals_text"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:background="@color/colorPrimary" />
 
@@ -157,8 +157,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/todays_deals_text"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp">
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
 
                     </androidx.recyclerview.widget.RecyclerView>
 
@@ -180,10 +180,10 @@
                         android:id="@+id/featured_products_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Featured Products"
+                        android:text="@string/featured_products"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp" />
@@ -192,8 +192,8 @@
                         android:layout_width="75dp"
                         android:layout_height="3dp"
                         android:layout_alignBottom="@id/featured_products_text"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:background="@color/colorPrimary" />
 
@@ -202,8 +202,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/featured_products_text"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp">
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
 
                     </androidx.recyclerview.widget.RecyclerView>
 
@@ -225,10 +225,10 @@
                         android:id="@+id/best_selling_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Best Selling"
+                        android:text="@string/best_selling"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp" />
@@ -237,8 +237,8 @@
                         android:layout_width="75dp"
                         android:layout_height="3dp"
                         android:layout_alignBottom="@id/best_selling_text"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:background="@color/colorPrimary" />
 
@@ -247,8 +247,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/best_selling_text"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp">
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
 
                     </androidx.recyclerview.widget.RecyclerView>
 
@@ -291,10 +291,10 @@
                         android:id="@+id/popular_brands_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Our Popular Brands"
+                        android:text="@string/our_popular_brands"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp" />
@@ -303,8 +303,8 @@
                         android:layout_width="75dp"
                         android:layout_height="3dp"
                         android:layout_alignBottom="@id/popular_brands_text"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:background="@color/colorPrimary" />
 
@@ -313,8 +313,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/popular_brands_text"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp">
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
 
                     </androidx.recyclerview.widget.RecyclerView>
 
@@ -329,10 +329,10 @@
                         android:id="@+id/auction_products_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Auction Products"
+                        android:text="@string/auction_products"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp" />
@@ -341,8 +341,8 @@
                         android:layout_width="75dp"
                         android:layout_height="3dp"
                         android:layout_alignBottom="@id/auction_products_text"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:background="@color/colorPrimary" />
 
@@ -351,8 +351,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/auction_products_text"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp">
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
 
                     </androidx.recyclerview.widget.RecyclerView>
 

@@ -2,37 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:foreground="?android:attr/selectableItemBackground"
     android:paddingLeft="10dp"
+
     android:paddingTop="@dimen/activity_horizontal_margin"
     android:paddingRight="10dp"
-    android:paddingBottom="@dimen/activity_horizontal_margin"
-    android:foreground="?android:attr/selectableItemBackground">
-
-<!--    <View-->
-<!--        android:id="@+id/category_icon"-->
-<!--        android:layout_width="2dp"-->
-<!--        android:background="#000"-->
-<!--        android:layout_height="match_parent"-->
-<!--      />-->
-
-<!--    <ImageView-->
-<!--        android:layout_width="15dp"-->
-<!--        android:layout_height="15dp"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        app:srcCompat="@drawable/arrow" />-->
+    android:paddingBottom="@dimen/activity_horizontal_margin">
 
     <TextView
         android:id="@+id/category_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-
-        android:ellipsize="end"
+        android:layout_centerInParent="true"
         android:gravity="center"
+        android:maxLines="2"
         android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="13sp" />
 
 </RelativeLayout>

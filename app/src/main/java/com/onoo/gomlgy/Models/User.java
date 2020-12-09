@@ -21,25 +21,25 @@ public class User implements Serializable {
     private String email;
     @SerializedName("avatar")
     @Expose
-    private String avatar;
+    private Object avatar;
     @SerializedName("avatar_original")
     @Expose
-    private String avatarOriginal;
+    private Object avatarOriginal;
     @SerializedName("address")
     @Expose
-    private String address;
+    private Object address;
     @SerializedName("country")
     @Expose
-    private String country;
+    private Object country;
     @SerializedName("city")
     @Expose
-    private String city;
+    private Object city;
     @SerializedName("postal_code")
     @Expose
-    private String postalCode;
+    private Object postalCode;
     @SerializedName("phone")
     @Expose
-    private String phone;
+    private Object phone;
 
     public Integer getId() {
         return id;
@@ -73,60 +73,59 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getAvatar() {
+    public Object getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(Object avatar) {
         this.avatar = avatar;
     }
 
-    public String getAvatarOriginal() {
+    public Object getAvatarOriginal() {
         return avatarOriginal;
     }
 
-    public void setAvatarOriginal(String avatarOriginal) {
+    public void setAvatarOriginal(Object avatarOriginal) {
         this.avatarOriginal = avatarOriginal;
     }
 
-    public String getAddress() {
+    public Object getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Object address) {
         this.address = address;
     }
 
-    public String getCountry() {
+    public Object getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Object country) {
         this.country = country;
     }
 
-    public String getCity() {
+    public Object getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(Object city) {
         this.city = city;
     }
 
-    public String getPostalCode() {
+    public Object getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
+    public void setPostalCode(Object postalCode) {
         this.postalCode = postalCode;
     }
 
-    public String getPhone() {
+    public Object getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Object phone) {
         this.phone = phone;
     }
-
 }

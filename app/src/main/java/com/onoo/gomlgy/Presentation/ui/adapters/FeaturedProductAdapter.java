@@ -59,6 +59,8 @@ public class FeaturedProductAdapter extends RecyclerView.Adapter<FeaturedProduct
         return mProducts.get(id);
     }
 
+
+
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;

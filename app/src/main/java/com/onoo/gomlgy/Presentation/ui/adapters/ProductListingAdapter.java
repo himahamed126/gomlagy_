@@ -88,7 +88,7 @@ public class ProductListingAdapter extends RecyclerView.Adapter<ProductListingAd
             price.setPaintFlags(price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             name.setText(product.getName());
             ratingBar.setRating(product.getRating());
-            sales.setText(product.getSales()+" sold");
+            sales.setText(product.getSales()+context.getString(R.string._sold));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

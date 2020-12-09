@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,10 +33,11 @@ public class AllProductsAndSubcategoryAdapter extends RecyclerView.Adapter<AllPr
     private collectionmodel myProductsAndSubcatagory;
     private LayoutInflater mInflater;
     private AllCategoryClickListener mClickListener;
-    int selectedPosition=-1;
+    int selectedPosition = -1;
     // data is passed into the constructor
     RecyclerView.LayoutManager RecyclerViewLayoutManager;
     LinearLayoutManager HorizontalLayout;
+
     public AllProductsAndSubcategoryAdapter(Context context, collectionmodel products) {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
@@ -55,21 +57,21 @@ public class AllProductsAndSubcategoryAdapter extends RecyclerView.Adapter<AllPr
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 //        holder.bind(mCategories.get(position));
-        collectionmodel model=myProductsAndSubcatagory;
+        collectionmodel model = myProductsAndSubcatagory;
         holder.subcategoryTitle.setText(model.getData().get(0).getSubCategories().get(position).getName());
         RecyclerViewLayoutManager = new LinearLayoutManager(getApplicationContext());
         holder.recyclerView.setLayoutManager(RecyclerViewLayoutManager);
-        productsOfSubCategoryAdapter adapter = new productsOfSubCategoryAdapter(getApplicationContext(),model.getData().get(0).getSubCategories().get(position).getProducts());
-        HorizontalLayout = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-        holder.recyclerView.setLayoutManager(HorizontalLayout);
+        productsOfSubCategoryAdapter adapter = new productsOfSubCategoryAdapter(getApplicationContext(), model.getData().get(0).getSubCategories().get(position).getProducts());
+//        HorizontalLayout = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        holder.recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
         holder.recyclerView.setAdapter(adapter);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //TODO navigate to whatever you want bro
-                Intent i=new Intent(getApplicationContext(), ProductListingActivityAlternative.class);
-                i.putExtra("products",(Serializable) model.getData().get(0).getSubCategories().get(position).getProducts());
-                i.putExtra("title",model.getData().get(0).getSubCategories().get(position).getName());
+                Intent i = new Intent(getApplicationContext(), ProductListingActivityAlternative.class);
+                i.putExtra("products", (Serializable) model.getData().get(0).getSubCategories().get(position).getProducts());
+                i.putExtra("title", model.getData().get(0).getSubCategories().get(position).getName());
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
             }
@@ -88,11 +90,12 @@ public class AllProductsAndSubcategoryAdapter extends RecyclerView.Adapter<AllPr
         TextView subcategoryTitle;
         TextView seeAll;
         RecyclerView recyclerView;
+
         ViewHolder(View itemView) {
             super(itemView);
             subcategoryTitle = itemView.findViewById(R.id.subcategoryText);
-            seeAll= itemView.findViewById(R.id.SEEALL);
-             recyclerView =itemView.findViewById(R.id.product_list_card);
+            seeAll = itemView.findViewById(R.id.SEEALL);
+            recyclerView = itemView.findViewById(R.id.product_list_card);
         }
     }
 }

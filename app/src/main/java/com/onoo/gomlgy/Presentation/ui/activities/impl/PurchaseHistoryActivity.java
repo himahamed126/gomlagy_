@@ -36,7 +36,7 @@ public class PurchaseHistoryActivity extends BaseActivity implements PurchaseHis
         setContentView(R.layout.activity_purchase_history);
 
         initializeActionBar();
-        setTitle("Purchase History");
+        setTitle(getString(R.string.purchase_history));
 
         progressBar = findViewById(R.id.item_progress_bar);
         purchase_history_empty_text = findViewById(R.id.purchase_history_empty_text);

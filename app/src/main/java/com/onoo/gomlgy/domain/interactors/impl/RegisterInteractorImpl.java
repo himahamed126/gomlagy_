@@ -49,6 +49,5 @@ public class RegisterInteractorImpl extends AbstractInteractor {
                 mCallback.onRegistrationError();
             }
         });
-
     }
 }

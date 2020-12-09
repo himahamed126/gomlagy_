@@ -177,7 +177,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         else {
             AuthResponse authResponse = new UserPrefs(getApplicationContext()).getAuthPreferenceObjectJson("auth_response");
             if(authResponse != null && authResponse.getUser() != null){
-                progressDialog.setMessage("Adding item to your shopping cart. Please wait.");
+                progressDialog.setMessage(getString(R.string.adding_item_to_your_shopping_cart_please_wait));
                 progressDialog.show();
                 productDetailsPresenter.addToCart(authResponse.getAccessToken(), authResponse.getUser().getId(), productDetails.getId(), null);
             }
@@ -195,7 +195,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             startActivity(intent);
         }
         else{
-            CustomToast.showToast(this, "This product doesn't have any buying options.", R.color.colorWarning);
+            CustomToast.showToast(this, getString(R.string.this_product_doesnt_have_any_buying_options), R.color.colorWarning);
         }
     }
 

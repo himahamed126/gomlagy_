@@ -14,19 +14,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="Product Name" />
+            android:text="@string/product_name" />
 
         <TextView
             android:id="@+id/product_variant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/product_name"
-            android:layout_marginLeft="10dp"
-            android:text="Variant"
+            android:layout_marginStart="10dp"
+            android:text="@string/variant"
             android:textColor="#000"/>
 
         <TextView
@@ -34,10 +34,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/product_name"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
             android:gravity="end"
-            android:layout_toRightOf="@id/product_variant"
+            android:layout_toEndOf="@id/product_variant"
             android:text="0"
             android:textColor="#000"/>
 
@@ -47,8 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/product_variant"
-            android:layout_marginLeft="10dp"
-            android:text="Pending"
+            android:layout_marginStart="10dp"
+            android:text="@string/pending"
             android:textColor="@color/colorPrimary"
             />
 
@@ -57,11 +57,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/product_variant"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="15dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:gravity="end"
-            android:layout_toRightOf="@id/delivery_status"
+            android:layout_toEndOf="@id/delivery_status"
             android:text="0"
             android:textColor="@color/colorPrimary"/>
 

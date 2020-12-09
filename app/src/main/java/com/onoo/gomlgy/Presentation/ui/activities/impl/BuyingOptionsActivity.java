@@ -247,12 +247,12 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
         if(authResponse != null && authResponse.getUser() != null){
             if (variantResponse != null && variantResponse.getInStock()){
                 //Log.d("Test", variantResponse.getVariant());
-                progressDialog.setMessage("Adding item to your shopping cart. Please wait.");
+                progressDialog.setMessage(getString(R.string.adding_item_to_your_shopping_cart_please_wait));
                 progressDialog.show();
                 buyingOptionPresenter.addToCart(authResponse.getAccessToken(), authResponse.getUser().getId(), variantResponse.getProductId(), variantResponse.getVariant());
             }
             else {
-                CustomToast.showToast(BuyingOptionsActivity.this, "This variant of this product isn't available now", R.color.colorWarning);
+                CustomToast.showToast(BuyingOptionsActivity.this, getString(R.string.this_variant_of_this_product_isnt_available_now), R.color.colorWarning);
             }
         }
         else {

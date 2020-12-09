@@ -14,10 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.onoo.gomlgy.Network.response.AppSettingsResponse;
 import com.onoo.gomlgy.Presentation.ui.fragments.impl.AccountFragment;
 import com.onoo.gomlgy.Presentation.ui.fragments.impl.CartFragment;
-import com.onoo.gomlgy.Presentation.ui.fragments.impl.CategoriesFragment;
 import com.onoo.gomlgy.Presentation.ui.fragments.impl.HomeFragment;
 import com.onoo.gomlgy.Presentation.ui.fragments.impl.ProductSearchFragment;
 import com.onoo.gomlgy.R;
@@ -27,15 +28,13 @@ import com.onoo.gomlgy.Utils.UserPrefs;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 import com.onoo.gomlgy.domain.interactors.AppSettingsInteractor;
 import com.onoo.gomlgy.domain.interactors.impl.AppSettingsInteractorImpl;
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import q.rorbin.badgeview.QBadgeView;
 
 public class MainActivity extends AppCompatActivity implements AppSettingsInteractor.CallBack {
 
     final Fragment homeFragment = new HomeFragment();
- //   final Fragment categoriesFragment = new CategoriesFragment();TwoFragmentsDetails
+    //   final Fragment categoriesFragment = new CategoriesFragment();TwoFragmentsDetails
 
     final Fragment categoriesFragment = new twofragments();
 
@@ -59,19 +58,19 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
                     loadFragment(homeFragment);
                     break;
                 case R.id.navigation_categories:
-                    title.setText("Categories");
+                    title.setText(getString(R.string.categories));
                     loadFragment(categoriesFragment);
                     break;
                 case R.id.navigation_search:
-                    title.setText("Search");
+                    title.setText(getString(R.string.search));
                     loadFragment(searchFragment);
                     break;
                 case R.id.navigation_cart:
-                    title.setText("Shopping Cart");
+                    title.setText(getString(R.string.shopping_cart));
                     loadFragment(cartFragment);
                     break;
                 case R.id.navigation_account:
-                    title.setText("My Account");
+                    title.setText(getString(R.string.my_account));
                     loadFragment(accountFragment);
                     break;
             }
@@ -81,16 +80,17 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new UserPrefs(this).loadLocate(this);
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
         getSupportActionBar().setElevation(0);
 
-        View view =getSupportActionBar().getCustomView();
+        View view = getSupportActionBar().getCustomView();
 
         cart = view.findViewById(R.id.action_bar_cart);
         search = view.findViewById(R.id.action_bar_search);
@@ -133,29 +133,26 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
-            if (fragment != homeFragment){
+            if (fragment != homeFragment) {
                 cart.setVisibility(View.GONE);
                 search.setVisibility(View.GONE);
-            }
-            else {
+            } else {
                 cart.setVisibility(View.VISIBLE);
                 search.setVisibility(View.VISIBLE);
             }
-            if(fragment == cartFragment){
+            if (fragment == cartFragment) {
                 cartFragment = new CartFragment();
                 fm.beginTransaction().remove(fragment).commitAllowingStateLoss();
                 fm.beginTransaction().add(R.id.fragment_container, cartFragment, "cart").hide(cartFragment).commitAllowingStateLoss();
                 fm.beginTransaction().hide(active).show(cartFragment).commitAllowingStateLoss();
                 active = cartFragment;
-            }
-            else if (fragment == accountFragment){
+            } else if (fragment == accountFragment) {
                 accountFragment = new AccountFragment();
                 fm.beginTransaction().remove(fragment).commitAllowingStateLoss();
                 fm.beginTransaction().add(R.id.fragment_container, accountFragment, "account").hide(accountFragment).commitAllowingStateLoss();
                 fm.beginTransaction().hide(active).show(accountFragment).commitAllowingStateLoss();
                 active = accountFragment;
-            }
-            else{
+            } else {
                 fm.beginTransaction().hide(active).show(fragment).commit();
                 active = fragment;
             }
@@ -167,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
     @Override
     protected void onStart() {
         super.onStart();
-        if (getIntent().getExtras() != null){
+        if (getIntent().getExtras() != null) {
             String message = getIntent().getStringExtra("message");
             String position = getIntent().getStringExtra("position");
 
@@ -175,11 +172,10 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
             getIntent().removeExtra("message");
             getIntent().removeExtra("position");
 
-            if(position.equals("cart")){
+            if (position.equals("cart")) {
                 loadFragment(cartFragment);
                 navView.setSelectedItemId(R.id.navigation_cart);
-            }
-            else if (position.equals("account")){
+            } else if (position.equals("account")) {
                 loadFragment(accountFragment);
                 navView.setSelectedItemId(R.id.navigation_account);
             }
@@ -188,10 +184,9 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
 
     @Override
     public void onBackPressed() {
-        if (active == homeFragment){
+        if (active == homeFragment) {
             super.onBackPressed();
-        }
-        else {
+        } else {
             loadFragment(homeFragment);
             navView.setSelectedItemId(R.id.navigation_home);
         }

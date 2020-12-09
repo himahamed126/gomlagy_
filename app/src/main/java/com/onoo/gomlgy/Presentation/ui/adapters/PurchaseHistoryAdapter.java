@@ -72,8 +72,8 @@ public class PurchaseHistoryAdapter extends RecyclerView.Adapter<PurchaseHistory
 
         public void bind(PurchaseHistory purchaseHistory) {
             order_code.setText(purchaseHistory.getCode());
-            order_date.setText("Date - "+purchaseHistory.getDate());
-            payment_status.setText("Payment Status - "+ StringUtils.capitalize(purchaseHistory.getPaymentStatus()));
+            order_date.setText(context.getString(R.string.data_)+purchaseHistory.getDate());
+            payment_status.setText(context.getString(R.string.payment_status_)+ StringUtils.capitalize(purchaseHistory.getPaymentStatus()));
             order_amount.setText(AppConfig.convertPrice(context, purchaseHistory.getGrandTotal()));
 
             itemView.setOnClickListener(new View.OnClickListener() {

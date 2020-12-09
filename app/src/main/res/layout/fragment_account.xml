@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="?android:colorBackground">
+    android:background="?android:colorBackground"
+    android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -19,8 +19,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="0dp"
-                app:cardCornerRadius="0dp">
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="30dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/icons8_male_user_100"/>
+                        android:src="@drawable/icons8_male_user_100" />
 
                     <TextView
                         android:id="@+id/account_name"
@@ -45,9 +45,9 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="40dp"
-                        android:text="SIGN IN / REGISTER"
-                        android:textSize="20sp"
-                        android:textColor="#fff" />
+                        android:text="@string/sign_or_register"
+                        android:textColor="#fff"
+                        android:textSize="20sp" />
 
                 </RelativeLayout>
 
@@ -58,19 +58,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:orientation="vertical"
-                android:divider="@android:color/black">
+                android:divider="@android:color/black"
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:id="@+id/wishlist"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
-                    android:paddingLeft="10dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
                     android:paddingBottom="@dimen/activity_horizontal_margin">
 
                     <ImageView
@@ -82,7 +82,7 @@
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         app:srcCompat="@drawable/arrow" />
 
@@ -90,27 +90,27 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/wishlist_icon"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/wishlist_icon"
                         android:ellipsize="end"
                         android:gravity="center"
                         android:maxLines="1"
-                        android:text="Wishlist"
+                        android:text="@string/wishlist"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/purchase_history"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
-                    android:paddingLeft="10dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
                     android:paddingBottom="@dimen/activity_horizontal_margin">
 
                     <ImageView
@@ -122,7 +122,7 @@
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         app:srcCompat="@drawable/arrow" />
 
@@ -130,27 +130,27 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/purchase_history_icon"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/purchase_history_icon"
                         android:ellipsize="end"
                         android:gravity="center"
                         android:maxLines="1"
-                        android:text="Purchase History"
+                        android:text="@string/purchase_history"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/wallet_info"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
-                    android:paddingLeft="10dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
                     android:paddingBottom="@dimen/activity_horizontal_margin">
 
                     <ImageView
@@ -162,7 +162,7 @@
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         app:srcCompat="@drawable/arrow" />
 
@@ -170,27 +170,27 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/wallet_info_icon"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/wallet_info_icon"
                         android:ellipsize="end"
                         android:gravity="center"
                         android:maxLines="1"
-                        android:text="My Wallet"
+                        android:text="@string/my_wallet"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/account_info"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
-                    android:paddingLeft="10dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
                     android:paddingBottom="@dimen/activity_horizontal_margin">
 
                     <ImageView
@@ -202,7 +202,7 @@
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         app:srcCompat="@drawable/arrow" />
 
@@ -210,27 +210,67 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/account_info_icon"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/account_info_icon"
                         android:ellipsize="end"
                         android:gravity="center"
                         android:maxLines="1"
-                        android:text="Account Information"
+                        android:text="@string/account_information"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/language"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:color/white"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:paddingStart="10dp"
+                    android:paddingTop="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="@dimen/activity_horizontal_margin">
+
+                    <ImageView
+                        android:id="@+id/language_icon"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_language" />
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        app:srcCompat="@drawable/arrow" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/language_icon"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="@string/language"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/logout"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
-                    android:paddingLeft="10dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
                     android:paddingBottom="@dimen/activity_horizontal_margin">
 
                     <ImageView
@@ -242,7 +282,7 @@
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         app:srcCompat="@drawable/arrow" />
 
@@ -250,12 +290,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/logout_icon"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/logout_icon"
                         android:ellipsize="end"
                         android:gravity="center"
                         android:maxLines="1"
-                        android:text="Logout"
+                        android:text="@string/logout"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 </RelativeLayout>

@@ -47,7 +47,7 @@ public class AccountInfoActivity extends BaseActivity implements AccountInfoView
         setContentView(R.layout.activity_account_info);
 
         initializeActionBar();
-        setTitle("Account Information");
+        setTitle(getString(R.string.account_information));
 
         initviews();
 
@@ -76,7 +76,7 @@ public class AccountInfoActivity extends BaseActivity implements AccountInfoView
                 builder.setView(dialogLayout);
 
                 //Setting message manually and performing action on button click
-                builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(getString(R.string.save), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         EditText input_address = dialogLayout.findViewById(R.id.input_address);
                         EditText input_city = dialogLayout.findViewById(R.id.input_city);
@@ -88,30 +88,30 @@ public class AccountInfoActivity extends BaseActivity implements AccountInfoView
 
                         if(input_address.getText().toString().length() <= 0){
                             TextInputLayout til = dialogLayout.findViewById(R.id.input_address_layout);
-                            til.setError("Address is required");
+                            til.setError(getString(R.string.address_is_required));
                             isValid = false;
                         }
                         if(input_city.getText().toString().length() <= 0){
                             TextInputLayout til = dialogLayout.findViewById(R.id.input_city_layout);
-                            til.setError("City is required");
+                            til.setError(getString(R.string.city_is_required));
                             isValid = false;
                         }
 
                         if(input_postal_code.getText().toString().length() <= 0){
                             TextInputLayout til = dialogLayout.findViewById(R.id.input_postal_code_layout);
-                            til.setError("Postal code is required");
+                            til.setError(getString(R.string.postal_code_is_required));
                             isValid = false;
                         }
 
                         if(input_country.getText().toString().length() <= 0){
                             TextInputLayout til = dialogLayout.findViewById(R.id.input_country_layout);
-                            til.setError("Country is required");
+                            til.setError(getString(R.string.country_is_required));
                             isValid = false;
                         }
 
                         if(input_phone.getText().toString().length() <= 0){
                             TextInputLayout til = dialogLayout.findViewById(R.id.input_phone_layout);
-                            til.setError("Phone number is required");
+                            til.setError(getString(R.string.phone_number_is_required));
                             isValid = false;
                         }
 
@@ -130,14 +130,14 @@ public class AccountInfoActivity extends BaseActivity implements AccountInfoView
                         }
                     }
                 })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.dismiss();
                             }
                         });
 
                 alert = builder.create();
-                alert.setTitle("Shipping Information");
+                alert.setTitle(getString(R.string.shipping_information));
                 alert.setOnShowListener( new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface arg0) {
@@ -164,7 +164,7 @@ public class AccountInfoActivity extends BaseActivity implements AccountInfoView
 
                 if(input_name.getText().toString().length() <= 0){
                     TextInputLayout til = (TextInputLayout) findViewById(R.id.input_name_layout);
-                    til.setError("Name is required");
+                    til.setError(getString(R.string.name_is_required));
                     isValid = false;
                 }
 

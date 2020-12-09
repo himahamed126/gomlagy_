@@ -31,7 +31,7 @@ public class ProductReviewActivity extends BaseActivity implements ProductReview
         url = getIntent().getStringExtra("url");
 
         initializeActionBar();
-        setTitle("Product Reviews");
+        setTitle(getString(R.string.product_reviews));
 
         progressBar = findViewById(R.id.item_progress_bar);
         product_reviews_empty_text = findViewById(R.id.product_reviews_empty_text);

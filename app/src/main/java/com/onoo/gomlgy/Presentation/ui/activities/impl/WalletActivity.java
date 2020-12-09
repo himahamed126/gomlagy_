@@ -29,7 +29,7 @@ public class WalletActivity extends BaseActivity implements WalletView {
         setContentView(R.layout.activity_wallet);
 
         initializeActionBar();
-        setTitle("My Wallet");
+        setTitle(getString(R.string.my_wallet));
         initviews();
 
         authResponse = new UserPrefs(getApplicationContext()).getAuthPreferenceObjectJson("auth_response");

@@ -51,8 +51,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         setContentView(R.layout.activity_login);
 
         initializeActionBar();
-        setTitle("My Account");
-
+        setTitle(getString(R.string.my_account));
         initviews();
 
         bLogin.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +74,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         link_forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ResetPasswordActivity.class));
+                startActivity(new Intent(getApplicationContext(), ForgetPasswordActivity.class));
             }
         });
 
@@ -109,7 +108,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
             @Override
             public void onCancel() {
-                CustomToast.showToast(LoginActivity.this, "Login canceled", R.color.colorWarning);
+                CustomToast.showToast(LoginActivity.this, getString(R.string.login_canceled), R.color.colorWarning);
             }
 
             @Override

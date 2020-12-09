@@ -21,7 +21,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Amount"
+                android:text="@string/amount"
                 android:textColor="#000"/>
 
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Method"
+                android:text="@string/method"
                 android:textColor="#000"/>
 
             <TextView
@@ -67,7 +67,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Approval"
+                android:text="@string/approval"
                 android:textColor="#000"/>
 
             <TextView

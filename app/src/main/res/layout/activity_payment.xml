@@ -26,28 +26,28 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp">
 
             <EditText
                 android:id="@+id/coupon_code"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:background="@drawable/edit_text_style"
-                android:hint="Coupon Code"
+                android:hint="@string/coupon_code"
                 android:padding="10dp"/>
             <Button
                 android:id="@+id/apply_coupon"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_alignBottom="@+id/coupon_code"
-                android:layout_alignParentRight="true"
-                android:layout_toRightOf="@+id/coupon_code"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/coupon_code"
                 android:background="@drawable/button_background_style"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:text="Apply Coupon"
+                android:text="@string/apply_coupon"
                 android:textColor="#fff"/>
 
         </RelativeLayout>
@@ -60,10 +60,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="Total Amount"
+                android:text="@string/total_amount"
                 android:textSize="16sp"
                 android:textColor="#000"/>
 
@@ -71,10 +71,10 @@
                 android:id="@+id/total_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:text="0"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:foreground="?android:attr/selectableItemBackground"
-            android:text="PLACE MY ORDER"
+            android:text="@string/place_my_order"
             android:textColor="#fff"
             android:textStyle="bold" />
 

@@ -1,56 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_margin="13dp"
-    app:cardElevation="5dp"
-    app:cardCornerRadius="5dp"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    android:background="@color/grey"
+    app:cardBackgroundColor="#fff"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="0dp">
+
     <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/subcategoryText"
-            android:text="Hair care"
-            android:textColor="#000"
-            android:padding="15dp"
-            android:textSize="16sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="See All"
-            android:id="@+id/SEEALL"
-            android:layout_gravity="end"
-            android:textStyle="bold"
-            android:gravity="end"
-            android:layout_alignParentEnd="true"
-            android:textAllCaps="true"
-            android:textColor="#F09A3F"
-            android:paddingEnd="5dp"
-            android:paddingStart="5dp"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:textSize="16sp" />
-    </RelativeLayout>
-<View
-    android:layout_width="match_parent"
-    android:background="#e4e4e4"
-    android:layout_height="1dp"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/product_list_card"
+        android:background="#fff">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:scrollbars="horizontal"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-</RelativeLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/subcategoryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="Hair care"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/SEEALL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:paddingStart="5dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="15dp"
+                    android:text="@string/see_all"
+                    android:textAllCaps="true"
+                    android:textColor="#F09A3F"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e4e4e4" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/product_list_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clipToPadding="false"
+                android:paddingStart="4dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="4dp"
+                android:paddingBottom="4dp"
+                android:scrollbars="none" />
+        </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

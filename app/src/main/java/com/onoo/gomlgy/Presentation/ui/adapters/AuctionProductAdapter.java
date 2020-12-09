@@ -76,7 +76,7 @@ public class AuctionProductAdapter extends RecyclerView.Adapter<AuctionProductAd
         public void bind(AuctionProduct auctionProduct) {
             Glide.with(context).load(AppConfig.ASSET_URL + auctionProduct.getImage()).into(image);
             current_bid_amount.setText(AppConfig.convertPrice(context, auctionProduct.getCurrentPrice()));
-            total_bids.setText(auctionProduct.getBidsCount()+" Bids");
+            total_bids.setText(auctionProduct.getBidsCount() + context.getString(R.string._bids));
             name.setText(auctionProduct.getName());
             mCvCountdownView.start(auctionProduct.getEndDate());
 

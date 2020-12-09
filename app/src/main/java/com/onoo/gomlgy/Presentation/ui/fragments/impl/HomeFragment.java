@@ -82,6 +82,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
     private TextView flash_deals_text;
     private CountdownView mCvCountdownView;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -263,22 +264,14 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
 
     @Override
     public void setFeaturedProducts(List<Product> products) {
-        products.subList(0, 4);
+
         RecyclerView recyclerView = v.findViewById(R.id.featured_products);
         GridLayoutManager horizontalLayoutManager
                 = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
         FeaturedProductAdapter adapter = new FeaturedProductAdapter(getActivity(), products, this);
         recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
-        recyclerView.setAdapter(adapter);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0) {
-
-                }
-            }
-        });
+//        recyclerView.setAdapter(adapter);
 
     }
 
@@ -374,7 +367,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
 
         Glide.with(getContext()).load(AppConfig.ASSET_URL + auctionProduct.getImage()).into(image);
         current_bid_amount.setText(AppConfig.convertPrice(getContext(), auctionProduct.getCurrentPrice()));
-        total_bids.setText(auctionProduct.getBidsCount() + " Bids");
+        total_bids.setText(auctionProduct.getBidsCount() + getString(R.string._bids));
         name.setText(auctionProduct.getName());
 
 
@@ -395,14 +388,14 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
                         jsonObject.addProperty("amount", amount);
 
                         dialog.hide();
-                        progressDialog.setMessage("Your bid is being submitted. Please wait.");
+                        progressDialog.setMessage(getString(R.string.your_bid_is_being_submitted_please_wait));
                         progressDialog.show();
                         homePresenter.submitBid(jsonObject, authResponse.getAccessToken());
                     } else {
                         startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
                     }
                 } else {
-                    CustomToast.showToast(getActivity(), "Your bidding amount must be greater than the current bid", R.color.colorWarning);
+                    CustomToast.showToast(getActivity(), getString(R.string.your_bidding_amount_must_be_greater_than_the_current_bid), R.color.colorWarning);
                     bid_amount.requestFocus();
                 }
             }

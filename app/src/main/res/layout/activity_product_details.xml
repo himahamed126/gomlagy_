@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/image_card"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:maxLines="2"
@@ -61,7 +61,7 @@
                 android:layout_below="@id/product_name"
                 android:clickable="false"
                 android:numStars="5"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:theme="@style/RatingBar"/>
 
@@ -71,8 +71,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/product_rating"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/product_rating"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/product_rating"
                 android:text="(0)"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textSize="12sp"/>
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/product_rating"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:text="TextView"
                 android:textStyle="bold"
@@ -93,8 +93,8 @@
                 android:id="@+id/heart_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
                 android:layout_below="@id/product_rating_count"
                 android:src="@drawable/ic_heart"
                 />
@@ -110,7 +110,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp">
+                    android:paddingStart="10dp">
 
                     <ImageView
                         android:id="@+id/shop_logo"
@@ -124,8 +124,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/shop_logo"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/shop_logo"
                         android:text="Inhouse Product" />
 
                 </RelativeLayout>
@@ -148,23 +148,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
-                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
                     android:paddingBottom="@dimen/activity_horizontal_margin">
 
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
-                        android:paddingRight="10dp"
+                        android:paddingEnd="10dp"
                         app:srcCompat="@drawable/arrow" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Buying Options" />
+                        android:text="@string/buying_options" />
 
                 </RelativeLayout>
 
@@ -175,23 +175,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
-                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
                     android:paddingBottom="@dimen/activity_horizontal_margin">
 
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
-                        android:paddingRight="10dp"
+                        android:paddingEnd="10dp"
                         app:srcCompat="@drawable/arrow" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Specification" />
+                        android:text="@string/specification" />
 
                 </RelativeLayout>
 
@@ -202,17 +202,17 @@
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:layout_marginBottom="5dp"-->
 <!--                    android:background="@android:color/white"-->
-<!--                    android:paddingLeft="10dp"-->
+<!--                    android:paddingStart="10dp"-->
 <!--                    android:paddingTop="@dimen/activity_horizontal_margin"-->
-<!--                    android:paddingRight="10dp"-->
+<!--                    android:paddingEnd="10dp"-->
 <!--                    android:paddingBottom="@dimen/activity_horizontal_margin">-->
 
 <!--                    <ImageView-->
 <!--                        android:layout_width="15dp"-->
 <!--                        android:layout_height="15dp"-->
-<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:layout_alignParentEnd="true"-->
 <!--                        android:layout_centerInParent="true"-->
-<!--                        android:paddingRight="10dp"-->
+<!--                        android:paddingEnd="10dp"-->
 <!--                        app:srcCompat="@drawable/arrow" />-->
 
 <!--                    <TextView-->
@@ -229,23 +229,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
-                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
                     android:paddingBottom="@dimen/activity_horizontal_margin">
 
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
-                        android:paddingRight="10dp"
+                        android:paddingEnd="10dp"
                         app:srcCompat="@drawable/arrow" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Reviews" />
+                        android:text="@string/reviews" />
 
                 </RelativeLayout>
 
@@ -257,23 +257,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
-                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
                     android:paddingBottom="@dimen/activity_horizontal_margin">
 
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
-                        android:paddingRight="10dp"
+                        android:paddingEnd="10dp"
                         app:srcCompat="@drawable/arrow" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Seller Policy" />
+                        android:text="@string/seller_policy" />
 
                 </RelativeLayout>
 
@@ -284,23 +284,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
-                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
                     android:paddingBottom="@dimen/activity_horizontal_margin">
 
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
-                        android:paddingRight="10dp"
+                        android:paddingEnd="10dp"
                         app:srcCompat="@drawable/arrow" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Return Policy" />
+                        android:text="@string/return_policy" />
 
                 </RelativeLayout>
 
@@ -311,23 +311,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
-                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
                     android:paddingBottom="@dimen/activity_horizontal_margin">
 
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
-                        android:paddingRight="10dp"
+                        android:paddingEnd="10dp"
                         app:srcCompat="@drawable/arrow" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Support Policy" />
+                        android:text="@string/support_policy" />
 
                 </RelativeLayout>
 
@@ -338,10 +338,10 @@
                 android:layout_below="@+id/options"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="Products you might also like"
+                android:text="@string/products_you_might_also_like"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp" />
@@ -351,8 +351,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/related_products_text"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -361,10 +361,10 @@
                 android:layout_below="@+id/related_products"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="Top selling products from this seller"
+                android:text="@string/top_selling_products_from_this_seller"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp" />
@@ -374,8 +374,8 @@
                 android:id="@+id/top_selling"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -396,7 +396,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="ADD TO CART"
+            android:text="@string/add_to_cart"
             android:textColor="@android:color/white"
             android:background="@color/colorPrimaryLight"
             android:textStyle="bold"/>
@@ -409,7 +409,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:textColor="@android:color/white"
-            android:text="BUY NOW"
+            android:text="@string/buy_now"
             android:textStyle="bold"/>
 
     </LinearLayout>

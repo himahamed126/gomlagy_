@@ -32,7 +32,7 @@ import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductSearchFragment extends Fragment implements ProductSearchView , SearchProductClickListener {
+public class ProductSearchFragment extends Fragment implements ProductSearchView, SearchProductClickListener {
     private View v;
 
     private List<SearchProduct> mProducts = new ArrayList<>();
@@ -42,7 +42,7 @@ public class ProductSearchFragment extends Fragment implements ProductSearchView
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private ProductSearchPresenter productSearchPresenter;
-    private String url = AppConfig.BASE_URL+"products/search?key=&scope=product&page=1";
+    private String url = AppConfig.BASE_URL + "products/search?key=&scope=product&page=1";
     private String key = "", scope = "product";
     private ProductSearchResponse mProductSearchResponse = null;
 
@@ -51,7 +51,7 @@ public class ProductSearchFragment extends Fragment implements ProductSearchView
 
         recyclerView = v.findViewById(R.id.product_list);
 
-        recyclerView.addItemDecoration( new LayoutMarginDecoration( 1,  AppConfig.convertDpToPx(getContext(), 10)) );
+        recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getContext(), 10)));
 
         progressBar = v.findViewById(R.id.item_progress_bar);
 
@@ -70,14 +70,14 @@ public class ProductSearchFragment extends Fragment implements ProductSearchView
                 //load search query
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 //Log.d("Test", "QueryTextChange: "+ newText);
-                if (newText.length() == 0){
+                if (newText.length() == 0) {
                     key = "";
                     searchProduct(key, scope);
-                }
-                else {
+                } else {
                     key = newText;
                     searchProduct(key, scope);
                 }
@@ -99,10 +99,10 @@ public class ProductSearchFragment extends Fragment implements ProductSearchView
         return v;
     }
 
-    private void searchProduct(String key, String scope){
+    private void searchProduct(String key, String scope) {
         //Log.d("Test", scope);
-        url = url.replace("key="+url.split("key=")[1].split("&")[0], "key="+key);
-        url = url.replace("scope="+url.split("scope=")[1].split("&")[0], "scope="+scope.toLowerCase());
+        url = url.replace("key=" + url.split("key=")[1].split("&")[0], "key=" + key);
+        url = url.replace("scope=" + url.split("scope=")[1].split("&")[0], "scope=" + scope.toLowerCase());
 
         //Log.d("Test", url);
 
@@ -114,7 +114,7 @@ public class ProductSearchFragment extends Fragment implements ProductSearchView
 
         adapter = new ProductSearchAdapter(getContext(), mProducts, this);
 
-        recyclerView.addOnScrollListener(       new EndlessRecyclerOnScrollListener() {
+        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
             @Override
             public void onLoadMore() {
                 addDataToList(mProductSearchResponse);
@@ -128,8 +128,8 @@ public class ProductSearchFragment extends Fragment implements ProductSearchView
         productSearchPresenter.getSearchedProducts(url);
     }
 
-    public void addDataToList(ProductSearchResponse productSearchResponse){
-        if (productSearchResponse != null && productSearchResponse.getMeta() != null && !productSearchResponse.getMeta().getCurrentPage().equals(productSearchResponse.getMeta().getLastPage())){
+    public void addDataToList(ProductSearchResponse productSearchResponse) {
+        if (productSearchResponse != null && productSearchResponse.getMeta() != null && !productSearchResponse.getMeta().getCurrentPage().equals(productSearchResponse.getMeta().getLastPage())) {
             progressBar.setVisibility(View.VISIBLE);
             productSearchPresenter.getSearchedProducts(productSearchResponse.getLinks().getNext());
         }

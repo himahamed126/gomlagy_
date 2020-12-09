@@ -2,9 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
+    android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginEnd="10dp"
     app:cardCornerRadius="2dp"
     app:cardElevation="0dp">
 
@@ -12,7 +12,7 @@
         android:id="@+id/payment_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:padding="16dp">
 
         <ImageView
@@ -27,11 +27,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_toRightOf="@id/payment_icon"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/payment_icon"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Checkout with PayPal"
+            android:text="@string/checkout_with_PayPal"
             android:textColor="#000"
             android:textSize="18sp"/>
 

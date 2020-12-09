@@ -31,15 +31,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SUB TOTAL"
+                    android:text="@string/sub_total"
                     android:textColor="#fff"/>
 
                 <TextView
                     android:id="@+id/sub_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:gravity="right"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:text="$1500"
                     android:textColor="#fff"/>
 
@@ -53,15 +53,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TAX"
+                    android:text="@string/tax"
                     android:textColor="#fff" />
 
                 <TextView
                     android:id="@+id/tax"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:gravity="right"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:text="$1500"
                     android:textColor="#fff"/>
 
@@ -76,15 +76,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SHIPPING COST"
+                    android:text="@string/shipping_cost"
                     android:textColor="#fff" />
 
                 <TextView
                     android:id="@+id/shipping"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:gravity="right"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:text="$1500"
                     android:textColor="#fff"/>
 
@@ -98,15 +98,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="COUPON DISCOUNT"
+                    android:text="@string/coupon_discount"
                     android:textColor="#fff" />
 
                 <TextView
                     android:id="@+id/coupon_discount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:gravity="right"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:text="$1500"
                     android:textColor="#fff"/>
 
@@ -119,15 +119,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="GRAND TOTAL"
+                    android:text="@string/grand_total"
                     android:textColor="#fff" />
 
                 <TextView
                     android:id="@+id/grand_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:gravity="right"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:text="$1500"
                     android:textColor="#fff"/>
 
@@ -155,7 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Enter your credit or debit card information to complete the checkout and place your order"
+                android:text="@string/enter_your_credit_or_debit_card_information_to_complete_the_checkout_and_place_your_order"
                 android:textColor="#000"
                 android:textSize="16sp"/>
 
@@ -176,7 +176,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/colorPrimary"
                 android:padding="10dp"
-                android:text="Confirm Payment"
+                android:text="@string/confirm_payment"
                 android:textColor="#fff"
                 android:textStyle="bold" />
 

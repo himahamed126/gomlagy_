@@ -45,7 +45,7 @@ public class ShippingActivity extends BaseActivity implements AccountInfoView, S
         tax = getIntent().getDoubleExtra("tax", 0.0);
 
         initializeActionBar();
-        setTitle("Shipping Information");
+        setTitle(getString(R.string.shipping_nformation));
         initviews();
 
         authResponse = new UserPrefs(this).getAuthPreferenceObjectJson("auth_response");
@@ -82,7 +82,7 @@ public class ShippingActivity extends BaseActivity implements AccountInfoView, S
                     startActivity(intent);
                 }
                 else {
-                    CustomToast.showToast(ShippingActivity.this, "Please choose shipping address.", R.color.colorWarning);
+                    CustomToast.showToast(ShippingActivity.this, getString(R.string.please_choose_shipping_address), R.color.colorWarning);
                 }
             }
         });

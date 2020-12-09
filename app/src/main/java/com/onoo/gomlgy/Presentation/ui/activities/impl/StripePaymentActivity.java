@@ -53,7 +53,7 @@ public class StripePaymentActivity extends BaseActivity implements StripePayment
         coupon_discount = getIntent().getDoubleExtra("coupon_discount", 0.0);
 
         initializeActionBar();
-        setTitle("Card Payment");
+        setTitle(getString(R.string.card_payment));
 
         initviews();
 
@@ -84,7 +84,7 @@ public class StripePaymentActivity extends BaseActivity implements StripePayment
         Button payButton = findViewById(R.id.payButton);
         payButton.setOnClickListener((View view) -> {
 
-            progressDialog.setMessage("Please wait. Your transaction is processing.");
+            progressDialog.setMessage(getString(R.string.please_wait_your_transaction_is_processing));
             progressDialog.show();
 
             JsonObject jsonObject = new JsonObject();
