@@ -53,7 +53,6 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
     private List<Category> mCategories = new ArrayList<>();
     private RecyclerView recyclerView;
     private AllCategoryAdapter adapter;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,23 +61,16 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
             Fragment rightFragment = fragmentManager.findFragmentById(R.id.subcategory);
             SpinKitView spin = rightFragment.getView().findViewById(R.id.spin_kit);
             spin.setVisibility(View.VISIBLE);
-            getDAta(mCategories.get(0).getName(), rightFragment, spin);
-
+            getDAta(mCategories.get(0).getName(),mCategories.get(0).getId(), rightFragment, spin);
         }
-
     }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_category_recycler, null);
         mSwipeRefreshLayout = v.findViewById(R.id.swipe_container);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
-                android.R.color.holo_green_dark,
-                android.R.color.holo_orange_dark,
-                android.R.color.holo_blue_dark);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, android.R.color.holo_green_dark, android.R.color.holo_orange_dark, android.R.color.holo_blue_dark);
         recyclerView = v.findViewById(R.id.category_list);
         recyclerView.hasFixedSize();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
@@ -87,10 +79,8 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
         recyclerView.setAdapter(adapter);
         categoryPresenter = new CategoryPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         categoryPresenter.getAllCategories();
-
         return v;
     }
-
     @Override
     public void setAllCategories(List<Category> categories) {
         mCategories.clear();
@@ -98,19 +88,15 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
         adapter.notifyDataSetChanged();
         mSwipeRefreshLayout.setRefreshing(false);
     }
-
     @Override
     public void onCategoryClick(Category category) {
-
         FragmentManager fragmentManager = getFragmentManager();
         Fragment rightFragment = fragmentManager.findFragmentById(R.id.subcategory);
         SpinKitView spin = rightFragment.getView().findViewById(R.id.spin_kit);
         spin.setVisibility(View.VISIBLE);
-        getDAta(category.getName(), rightFragment, spin);
-
+        getDAta(category.getName(),category.getId(), rightFragment, spin);
     }
-
-    private void getDAta(String subCategories, Fragment rightFragment, SpinKitView spin) {
+    private void getDAta(String Categoriy,int cat_id, Fragment rightFragment, SpinKitView spin) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
@@ -121,7 +107,6 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
                 .writeTimeout(10000, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
                 .build();
-
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -131,42 +116,34 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         getProductsWithSubcategory conn = retrofit.create(getProductsWithSubcategory.class);
-        Call<collectionmodel> getProducts = conn.get_Products_With_SubCategory("Mobile accessories");
-
+        Call<collectionmodel> getProducts = conn.get_Products_With_SubCategory(Categoriy);
         getProducts.enqueue(new Callback<collectionmodel>() {
             @Override
             public void onResponse(Call<collectionmodel> call, Response<collectionmodel> response) {
-
                 collectionmodel model = response.body();
-                Toast.makeText(getContext(), "" + model.getData().get(0).getSubCategories().get(0).getProducts().get(0).getName(), Toast.LENGTH_SHORT).show();
                 RecyclerView recyclerView = rightFragment.getView().findViewById(R.id.List_subcategory_products);
-                AllProductsAndSubcategoryAdapter adapter = new AllProductsAndSubcategoryAdapter(getActivity(), model);
+                AllProductsAndSubcategoryAdapter adapter = new AllProductsAndSubcategoryAdapter(getActivity(), model,cat_id);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setAdapter(adapter);
                 spin.setVisibility(View.GONE);
             }
-
             @Override
             public void onFailure(Call<collectionmodel> call, Throwable t) {
                 Log.i("asd", "onFailure: " + t.getMessage());
             }
         });
     }
-
     @Override
     public void onRefresh() {
         mSwipeRefreshLayout.setRefreshing(true);
         categoryPresenter.getAllCategories();
     }
-
     @Override
     public void setSubCategories(List<SubCategory> subCategories) {
 
     }
-
     @Override
     public void onSubCategoryItemClick(SubCategory subCategory) {
-
     }
 }

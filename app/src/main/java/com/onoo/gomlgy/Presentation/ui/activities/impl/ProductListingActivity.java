@@ -3,9 +3,11 @@ package com.onoo.gomlgy.Presentation.ui.activities.impl;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,9 +67,7 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
                     addDataToList(productListingResponse);
             }
         });
-
         progressBar.setVisibility(View.VISIBLE);
-
         productListingPresenter = new ProductListingPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         productListingPresenter.getProducts(url);
     }
@@ -93,20 +93,14 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
 
     @Override
     public void onProductItemClick(Product product) {
+        Toast.makeText(this,  product.getLinks().getDetails(), Toast.LENGTH_SHORT).show();
+        Log.i("jjjjjjjjjjjj", "onProductItemClick: "+ product.getLinks().getDetails());
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra("product_name", product.getName());
         intent.putExtra("link", product.getLinks().getDetails());
         intent.putExtra("top_selling", product.getLinks().getRelated());
         startActivity(intent);
     }
-
-    /**
-     * This method converts dp unit to equivalent pixels, depending on device density.
-     *
-     * @param dp      A value in dp (density independent pixels) unit. Which we need to convert into pixels
-     * @param context Context to get resources and device specific display metrics
-     * @return A float value to represent px equivalent to dp depending on device density
-     */
     public int convertDpToPx(Context context, float dp) {
         return (int) (dp * context.getResources().getDisplayMetrics().density);
     }

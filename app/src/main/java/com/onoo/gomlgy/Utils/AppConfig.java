@@ -10,7 +10,7 @@ public class AppConfig {
     public static AppSettings appSettings;
 
     public static String BASE_URL = "https://www.gomlgy.com/api/v1/";
-    public static String ASSET_URL = "http://demo.activeitzone.com/ecommerce/public/";
+    public static String ASSET_URL = "https://www.gomlgy.com/public/";
 
 //    public static String BASE_URL = "http://192.168.0.129/shop/api/v1/";
 //    public static String ASSET_URL = "http://192.168.0.129/shop/public/";
