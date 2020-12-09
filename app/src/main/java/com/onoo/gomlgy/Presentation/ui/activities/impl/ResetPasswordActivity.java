@@ -22,7 +22,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
     TextView tvCode, tvNewPassword;
     Button confirmBtn;
     private RestPasswordInterface apiService;
-    String code, newPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

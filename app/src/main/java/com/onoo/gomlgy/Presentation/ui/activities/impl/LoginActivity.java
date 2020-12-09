@@ -7,15 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.onoo.gomlgy.Network.response.AuthResponse;
-import com.onoo.gomlgy.Presentation.presenters.LoginPresenter;
-import com.onoo.gomlgy.Presentation.ui.activities.LoginView;
-import com.onoo.gomlgy.R;
-import com.onoo.gomlgy.Threading.MainThreadImpl;
-import com.onoo.gomlgy.Utils.CustomToast;
-import com.onoo.gomlgy.Utils.UserPrefs;
-import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -31,8 +24,23 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.onoo.gomlgy.Network.ApiClient;
+import com.onoo.gomlgy.Network.response.AuthResponse;
+import com.onoo.gomlgy.Network.response.CheckVerificationResponse;
+import com.onoo.gomlgy.Network.services.CheckVerificationInterface;
+import com.onoo.gomlgy.Presentation.presenters.LoginPresenter;
+import com.onoo.gomlgy.Presentation.ui.activities.LoginView;
+import com.onoo.gomlgy.R;
+import com.onoo.gomlgy.Threading.MainThreadImpl;
+import com.onoo.gomlgy.Utils.CustomToast;
+import com.onoo.gomlgy.Utils.UserPrefs;
+import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 
 import org.json.JSONObject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends BaseActivity implements LoginView {
 
@@ -45,6 +53,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
     private GoogleSignInOptions gso;
     private GoogleSignInClient mGoogleSignInClient;
     private SignInButton signInButton;
+
+    private CheckVerificationInterface apiService;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +123,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
             @Override
             public void onError(FacebookException exception) {
-                Log.d("FaceBook Response :",exception.getLocalizedMessage());
+                Log.d("FaceBook Response :", exception.getLocalizedMessage());
             }
         });
     }
@@ -127,13 +137,12 @@ public class LoginActivity extends BaseActivity implements LoginView {
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
-        }
-        else {
+        } else {
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 
-    private void initviews(){
+    private void initviews() {
         tvEmail = findViewById(R.id.input_email);
         tvPassword = findViewById(R.id.input_password);
         bLogin = findViewById(R.id.btn_login);
@@ -144,6 +153,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
         callbackManager = CallbackManager.Factory.create();
         loginButton.setReadPermissions("email", "public_profile");
+
+        apiService = ApiClient.getClient().create(CheckVerificationInterface.class);
 
         fb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,11 +209,31 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @Override
     public void setLoginResponse(AuthResponse authResponse) {
-        UserPrefs userPrefs = new UserPrefs(getApplicationContext());
-        userPrefs.setAuthPreferenceObject(authResponse, "auth_response");
+        apiService.checkEmail("himahamed999@gmail.com").enqueue(new Callback<CheckVerificationResponse>() {
+            @Override
+            public void onResponse(Call<CheckVerificationResponse> call, Response<CheckVerificationResponse> response) {
+                if (response.code() == 200) {
+                    if (response.body().getMessage().equals("Non Verified")) {
+                        Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        finish();
+                        startActivity(new Intent(LoginActivity.this, SendCodeActivity.class));
+                    } else {
+                        UserPrefs userPrefs = new UserPrefs(getApplicationContext());
+                        userPrefs.setAuthPreferenceObject(authResponse, "auth_response");
+                        Intent returnIntent = new Intent();
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        finish();
+                    }
+                } else {
+                    Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
 
-        Intent returnIntent = new Intent();
-        setResult(Activity.RESULT_OK, returnIntent);
-        finish();
+            @Override
+            public void onFailure(Call<CheckVerificationResponse> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
+

@@ -51,7 +51,7 @@
     <string name="please_wait_your_transaction_is_processing">ارجوك انتظر.معاملتك بمعالجة.</string>
     <string name="my_wallet">محفظتي</string>
     <string name="my_wishlist">قائمة امنياتي</string>
-    <string name="sign_or_register">التوقيع في السجل</string>
+    <string name="sign_or_register">تسجيل الدخول او انشاء حساب</string>
     <string name="_bids">        العروض</string>
     <string name="_sold">تم البيع</string>
     <string name="data_">تاريخ -</string>
@@ -62,9 +62,9 @@
     <string name="save_changes">حفظ التغييرات</string>
     <string name="add_to_cart">أضف إلى السلة</string>
     <string name="buy_now">اشتري الآن</string>
-    <string name="sign_in">الغناء في</string>
+    <string name="sign_in">تسجيل الدخول</string>
     <string name="password">كلمه السر</string>
-    <string name="facebook">موقع التواصل الاجتماعي الفيسبوك</string>
+    <string name="facebook">الفيسبوك</string>
     <string name="google">جوجل</string>
     <string name="forgot_password">هل نسيت كلمة المرور؟</string>
     <string name="no_account_yet_create_one">لا يوجد حساب بعد؟اصنع واحدا</string>
@@ -93,7 +93,7 @@
     <string name="amount">كمية</string>
     <string name="shipping_address">عنوان الشحن</string>
     <string name="ordered_products">المنتجات المطلوبة</string>
-    <string name="sub_total">SUB المجموع</string>
+    <string name="sub_total"> المجموع الفرعي</string>
     <string name="tax">ضريبة</string>
     <string name="shipping_cost">تكلفة الشحن</string>
     <string name="discount">خصم</string>
@@ -101,7 +101,7 @@
     <string name="sign_up">سجل</string>
     <string name="confirm_password">تأكيد كلمة المرور</string>
     <string name="reset_password">إعادة تعيين كلمة المرور</string>
-    <string name="confirm">تؤكد</string>
+    <string name="confirm">تأكد</string>
     <string name="featured_products">منتجات مميزة</string>
     <string name="top_selling_products">أعلى المنتجات مبيعا</string>
     <string name="new_arrivals">القادمون الجدد</string>

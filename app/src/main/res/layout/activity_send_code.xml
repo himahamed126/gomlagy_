@@ -43,7 +43,7 @@
                     android:id="@+id/input_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/email"
+                    android:hint="@string/code"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,8 +57,8 @@
                 android:layout_marginBottom="24dp"
                 android:padding="12dp"
                 android:background="@color/colorPrimary"
-                android:textColor="@color/white"
                 android:text="@string/confirm"
+                android:textColor="@color/white"
                 android:foreground="?android:attr/selectableItemBackground"/>
 
         </LinearLayout>

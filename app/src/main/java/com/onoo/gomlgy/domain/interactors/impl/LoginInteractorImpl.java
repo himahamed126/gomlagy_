@@ -57,6 +57,5 @@ public class LoginInteractorImpl extends AbstractInteractor {
                 mCallback.onLoginError();
             }
         });
-
     }
 }
