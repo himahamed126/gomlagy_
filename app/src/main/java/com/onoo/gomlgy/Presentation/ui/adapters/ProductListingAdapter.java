@@ -18,6 +18,7 @@ import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.AppConfig;
 import com.bumptech.glide.Glide;
 
+
 import java.util.List;
 
 public class ProductListingAdapter extends RecyclerView.Adapter<ProductListingAdapter.ViewHolder> {
@@ -26,21 +27,37 @@ public class ProductListingAdapter extends RecyclerView.Adapter<ProductListingAd
     private LayoutInflater mInflater;
     private Context context;
     private ProductClickListener productClickListener;
+    private boolean isViewWithCatalog;
+    private ViewType currentViewType;
+
+
+    public enum ViewType {
+        VIEW_TYPE_GRID, VIEW_TYPE_List
+    }
 
     // data is passed into the constructor
-    public ProductListingAdapter(Context context, List<Product> mProducts, ProductClickListener productClickListener) {
+    public ProductListingAdapter(Context context, List<Product> mProducts, ProductClickListener productClickListener, ViewType viewType) {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
         this.mProducts = mProducts;
         this.productClickListener = productClickListener;
+        this.currentViewType = viewType;
     }
 
     // inflates the row layout from xml when needed
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.product_box_item, parent, false);
-        return new ViewHolder(view);
+        if (viewType == ViewType.VIEW_TYPE_List.ordinal()) {
+            View listLayout = mInflater.inflate(R.layout.product_box_item, parent, false);
+            return new ViewHolder(listLayout);
+        } else if (viewType == ViewType.VIEW_TYPE_GRID.ordinal()) {
+            View gridLayout = mInflater.inflate(R.layout.product_box_item, parent, false);
+            return new ViewHolder(gridLayout);
+        } else {
+            View cardMagazineLayout = mInflater.inflate(R.layout.product_box_item, parent, false);
+            return new ViewHolder(cardMagazineLayout);
+        }
     }
 
     // binds the data to the view and textview in each row
@@ -48,6 +65,16 @@ public class ProductListingAdapter extends RecyclerView.Adapter<ProductListingAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(mProducts.get(position));
     }
+
+    public void updateViewType(ViewType type) {
+        this.currentViewType = type;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return this.currentViewType.ordinal();
+    }
+
 
     // total number of rows
     @Override
@@ -88,7 +115,7 @@ public class ProductListingAdapter extends RecyclerView.Adapter<ProductListingAd
             price.setPaintFlags(price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             name.setText(product.getName());
             ratingBar.setRating(product.getRating());
-            sales.setText(product.getSales()+context.getString(R.string._sold));
+            sales.setText(product.getSales() + context.getString(R.string._sold));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -15,6 +15,8 @@ import com.onoo.gomlgy.Presentation.ui.listeners.CategoryClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.AppConfig;
 import com.bumptech.glide.Glide;
+import com.onoo.gomlgy.Utils.HelperMethod;
+import com.onoo.gomlgy.Utils.ItemAnimation;
 
 import java.util.List;
 
@@ -24,7 +26,8 @@ public class TopCategoryAdapter extends RecyclerView.Adapter<TopCategoryAdapter.
     private List<Category> mCategories;
     private LayoutInflater mInflater;
     private CategoryClickListener mClickListener;
-
+    private int lastPosition = -1;
+    private boolean on_attach = true;
     // data is passed into the constructor
     public TopCategoryAdapter(Context context, List<Category> categories, CategoryClickListener listener) {
         this.context = context;
@@ -45,6 +48,7 @@ public class TopCategoryAdapter extends RecyclerView.Adapter<TopCategoryAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(mCategories.get(position));
+        HelperMethod.setAnimation(holder.itemView, position, ItemAnimation.RIGHT_LEFT, lastPosition, on_attach);
     }
 
     // total number of rows

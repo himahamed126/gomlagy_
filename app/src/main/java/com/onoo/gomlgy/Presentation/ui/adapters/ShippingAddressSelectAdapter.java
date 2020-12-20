@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,7 +25,7 @@ public class ShippingAddressSelectAdapter extends RecyclerView.Adapter<ShippingA
     private ShippingAddressSelectListener shippingAddressSelectListener;
     private int row_index = -1;
 
-    public Context getContext(){
+    public Context getContext() {
         return this.context;
     }
 
@@ -69,6 +70,7 @@ public class ShippingAddressSelectAdapter extends RecyclerView.Adapter<ShippingA
         TextView country;
         TextView phone;
         LinearLayout shipping_address_layout;
+        CheckBox checkBox;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -78,6 +80,7 @@ public class ShippingAddressSelectAdapter extends RecyclerView.Adapter<ShippingA
             country = itemView.findViewById(R.id.country);
             phone = itemView.findViewById(R.id.phone);
             shipping_address_layout = itemView.findViewById(R.id.shipping_address_layout);
+            checkBox = itemView.findViewById(R.id.checkbox_shipping);
         }
 
         public void bind(ShippingAddress shippingAddress, int position) {
@@ -86,22 +89,13 @@ public class ShippingAddressSelectAdapter extends RecyclerView.Adapter<ShippingA
             postal_code.setText(shippingAddress.getPostalCode());
             country.setText(shippingAddress.getCountry());
             phone.setText(shippingAddress.getPhone());
+            checkBox.setVisibility(View.VISIBLE);
+            checkBox.setChecked(row_index == position);
 
-            if(row_index == position){
-                shipping_address_layout.setBackgroundResource(R.drawable.payment_card_selected_background);
-            }
-            else
-            {
-                shipping_address_layout.setBackgroundColor(Color.parseColor("#ffffff"));
-            }
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    row_index = position;
-                    notifyDataSetChanged();
-                    shippingAddressSelectListener.onShippingAddressItemClick(shippingAddress);
-                }
+            itemView.setOnClickListener(v -> {
+                row_index = position;
+                notifyDataSetChanged();
+                shippingAddressSelectListener.onShippingAddressItemClick(shippingAddress);
             });
         }
     }

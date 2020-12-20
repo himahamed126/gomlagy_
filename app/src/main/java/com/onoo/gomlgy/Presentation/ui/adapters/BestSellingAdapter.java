@@ -17,6 +17,8 @@ import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.AppConfig;
 import com.bumptech.glide.Glide;
+import com.onoo.gomlgy.Utils.HelperMethod;
+import com.onoo.gomlgy.Utils.ItemAnimation;
 
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class BestSellingAdapter extends RecyclerView.Adapter<BestSellingAdapter.
     private LayoutInflater mInflater;
     private Context context;
     private ProductClickListener productClickListener;
+    private int lastPosition = -1;
+    private boolean on_attach = true;
 
     // data is passed into the constructor
     public BestSellingAdapter(Context context, List<Product> mProducts, ProductClickListener productClickListener) {
@@ -46,6 +50,7 @@ public class BestSellingAdapter extends RecyclerView.Adapter<BestSellingAdapter.
     @Override
     public void onBindViewHolder(@NonNull BestSellingAdapter.ViewHolder holder, int position) {
         holder.bind(mProducts.get(position));
+        HelperMethod.setAnimation(holder.itemView, position, ItemAnimation.LEFT_RIGHT, lastPosition, on_attach);
     }
 
     // total number of rows

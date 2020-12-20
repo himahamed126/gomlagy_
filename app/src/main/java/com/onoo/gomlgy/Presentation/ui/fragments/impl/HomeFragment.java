@@ -2,7 +2,6 @@ package com.onoo.gomlgy.Presentation.ui.fragments.impl;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,16 +13,31 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.gson.JsonObject;
+import com.kingfisher.easyviewindicator.AnyViewIndicator;
 import com.onoo.gomlgy.Models.AuctionProduct;
-import com.onoo.gomlgy.Models.Banner;
 import com.onoo.gomlgy.Models.Brand;
 import com.onoo.gomlgy.Models.Category;
-import com.onoo.gomlgy.Models.FlashDeal;
 import com.onoo.gomlgy.Models.Product;
-import com.onoo.gomlgy.Models.SliderImage;
+import com.onoo.gomlgy.Models.SubCategorymodel;
+import com.onoo.gomlgy.Models.offers_sources.offers.OffersData;
+import com.onoo.gomlgy.Network.ApiClient;
 import com.onoo.gomlgy.Network.response.AppSettingsResponse;
 import com.onoo.gomlgy.Network.response.AuctionBidResponse;
 import com.onoo.gomlgy.Network.response.AuthResponse;
+import com.onoo.gomlgy.Network.response.ProductListingResponse;
+import com.onoo.gomlgy.Network.services.ProductListingApiInterface;
 import com.onoo.gomlgy.Presentation.presenters.HomePresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.LoginActivity;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductDetailsActivity;
@@ -32,8 +46,8 @@ import com.onoo.gomlgy.Presentation.ui.adapters.AuctionProductAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.BestSellingAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.BrandAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.FeaturedProductAdapter;
+import com.onoo.gomlgy.Presentation.ui.adapters.HomeSubCategoryAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.TodaysDealAdapter;
-import com.onoo.gomlgy.Presentation.ui.adapters.TopCategoryAdapter;
 import com.onoo.gomlgy.Presentation.ui.fragments.HomeView;
 import com.onoo.gomlgy.Presentation.ui.listeners.AuctionClickListener;
 import com.onoo.gomlgy.Presentation.ui.listeners.BrandClickListener;
@@ -45,43 +59,35 @@ import com.onoo.gomlgy.Utils.AppConfig;
 import com.onoo.gomlgy.Utils.CustomToast;
 import com.onoo.gomlgy.Utils.UserPrefs;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
-import com.bumptech.glide.Glide;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.daimajia.slider.library.Tricks.ViewPagerEx;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.gson.JsonObject;
-import com.kingfisher.easyviewindicator.AnyViewIndicator;
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import cn.iwgang.countdownview.CountdownView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment implements HomeView, CategoryClickListener, BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener, ProductClickListener, BrandClickListener, AuctionClickListener {
     private View v;
-    List<SliderImage> sliderImages;
+    List<OffersData> sliderImages;
     private SliderLayout sliderLayout;
     private HomePresenter homePresenter;
     private AnyViewIndicator gridIndicator;
-    private RelativeLayout auction_product_section, todays_deal_section, flash_deal_section;
+    private RelativeLayout auction_product_section, todays_deal_section;
     private AuthResponse authResponse;
     private ProgressDialog progressDialog;
     private BottomSheetDialog dialog;
     private RecyclerView auction_recyclerView;
     private List<AuctionProduct> mAuctionProducts = new ArrayList<>();
     private AuctionProductAdapter adapter;
-    private TextView flash_deals_text;
     private CountdownView mCvCountdownView;
+    private static final String TAG = "HomeFragment";
+    private ProductListingApiInterface apiService1;
 
+
+    TextView bestSellingSeeAll, cat1SeeAll, cat2SeeAll, cat3SeeAll, cat4SeeAll;
 
     @Nullable
     @Override
@@ -92,13 +98,11 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         //gridIndicator = v.findViewById(R.id.anyViewIndicator);
         auction_product_section = v.findViewById(R.id.auction_product_section);
         todays_deal_section = v.findViewById(R.id.todays_deal_section);
-        flash_deal_section = v.findViewById(R.id.flash_deal_section);
-        flash_deals_text = v.findViewById(R.id.flash_deals_text);
+
         mCvCountdownView = (CountdownView) v.findViewById(R.id.countdown);
 
         auction_product_section.setVisibility(View.GONE);
         todays_deal_section.setVisibility(View.GONE);
-        flash_deal_section.setVisibility(View.GONE);
         progressDialog = new ProgressDialog(getContext());
         auction_recyclerView = v.findViewById(R.id.auction_products);
         GridLayoutManager horizontalLayoutManager
@@ -111,14 +115,19 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
 
         sliderLayout = v.findViewById(R.id.imageSlider);
         sliderLayout.setVisibility(View.GONE);
-        sliderLayout.stopAutoCycle();
+//        sliderLayout.stopAutoCycle();
 
         homePresenter = new HomePresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         homePresenter.getAppSettings();
         homePresenter.getSliderImages();
         homePresenter.getTopCategories();
         homePresenter.getBanners();
+        apiService1 = ApiClient.getClient().create(ProductListingApiInterface.class);
 
+        getData1(6);
+        getData2(7);
+        getData3(8);
+        getData4(9);
         return v;
     }
 
@@ -136,13 +145,13 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
     }
 
     @Override
-    public void setSliderImages(List<SliderImage> sliderImages) {
+    public void setSliderImages(List<OffersData> sliderImages) {
         this.sliderImages = sliderImages;
-        for (SliderImage sliderImage : sliderImages) {
+        for (OffersData offersData : sliderImages) {
             TextSliderView textSliderView = new TextSliderView(getContext());
             textSliderView
                     .description("")
-                    .image(AppConfig.ASSET_URL + sliderImage.getPhoto())
+                    .image(offersData.getOfferImagePath())
                     .setScaleType(BaseSliderView.ScaleType.Fit);
             sliderLayout.addSlider(textSliderView);
             //Log.d("Sliders", AppConfig.ASSET_URL + sliderImage.getPhoto());
@@ -151,7 +160,6 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         sliderLayout.addOnPageChangeListener(this);
         sliderLayout.setVisibility(View.VISIBLE);
-        //Glide.with(getContext()).load(AppConfig.ASSET_URL + sliderImages.get(0).getPhoto()).transform(new BlurTransformation(75, 1)).into(imageSliderShadow);
     }
 
     @Override
@@ -166,100 +174,210 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
 
     @Override
     public void setTodaysDeal(List<Product> products) {
+        List<Product> productList = new ArrayList<>();
         RecyclerView recyclerView = v.findViewById(R.id.todays_deals);
         GridLayoutManager horizontalLayoutManager
                 = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-//        if (products.size() < 4) {
-        TodaysDealAdapter adapter = new TodaysDealAdapter(getActivity(), products, this);
-        recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
-        recyclerView.setAdapter(adapter);
-//        }
+        for (int x = 0; x < products.size(); x++) {
+            if (productList.size() < 4) {
+                productList.add(products.get(x));
+                TodaysDealAdapter adapter = new TodaysDealAdapter(getActivity(), productList, this);
+                recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
+                recyclerView.setAdapter(adapter);
+            }
+        }
         todays_deal_section.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void setFlashDeal(FlashDeal flashDeal) {
-        if (flashDeal.getProducts().getData().size() < 8) {
-            flash_deals_text.setText(flashDeal.getTitle());
-
-            mCvCountdownView.start((flashDeal.getEndDate() * 1000) - System.currentTimeMillis());
-
-            RecyclerView recyclerView = v.findViewById(R.id.flash_deals);
-            GridLayoutManager horizontalLayoutManager
-                    = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
-            recyclerView.setLayoutManager(horizontalLayoutManager);
-            TodaysDealAdapter adapter = new TodaysDealAdapter(getActivity(), flashDeal.getProducts().getData(), this);
-            recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
-            recyclerView.setAdapter(adapter);
-
-            flash_deal_section.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    public void setBanners(List<Banner> banners) {
-        ImageView banner_1 = v.findViewById(R.id.banner_1);
-        ImageView banner_2 = v.findViewById(R.id.banner_2);
-        ImageView banner_3 = v.findViewById(R.id.banner_3);
-
-        Glide.with(getContext()).load(AppConfig.ASSET_URL + banners.get(0).getPhoto()).into(banner_1);
-        Glide.with(getContext()).load(AppConfig.ASSET_URL + banners.get(1).getPhoto()).into(banner_2);
-        Glide.with(getContext()).load(AppConfig.ASSET_URL + banners.get(2).getPhoto()).into(banner_3);
-
-        banner_1.setOnClickListener(v -> {
-            String url = banners.get(0).getUrl();
-            if (!url.startsWith("http://") && !url.startsWith("https://"))
-                url = "http://" + url;
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(browserIntent);
-        });
-
-        banner_2.setOnClickListener(v -> {
-            String url = banners.get(1).getUrl();
-            if (!url.startsWith("http://") && !url.startsWith("https://"))
-                url = "http://" + url;
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(browserIntent);
-        });
-
-        banner_3.setOnClickListener(v -> {
-            String url = banners.get(2).getUrl();
-            if (!url.startsWith("http://") && !url.startsWith("https://"))
-                url = "http://" + url;
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(browserIntent);
-        });
-    }
 
     @Override
     public void setBestSelling(final List<Product> products) {
+        List<Product> productList = new ArrayList<>();
         RecyclerView recyclerView = v.findViewById(R.id.best_selling);
         GridLayoutManager horizontalLayoutManager
                 = new GridLayoutManager(getActivity(), 1, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
         //recyclerView.addItemDecoration(new CirclePagerIndicatorDecoration());
-        BestSellingAdapter adapter = new BestSellingAdapter(getActivity(), products, this);
-        recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getContext(), 10)));
-        recyclerView.setAdapter(adapter);
+        for (int x = 0; x < products.size(); x++) {
+            if (productList.size() < 4) {
+                productList.add(products.get(x));
+                BestSellingAdapter adapter = new BestSellingAdapter(getActivity(), productList, this);
+                recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getContext(), 10)));
+                recyclerView.setAdapter(adapter);
+            }
+        }
 
-        //gridIndicator.setItemCount((int) Math.ceil((float)products.size() / (float)3));
-        //gridIndicator.setCurrentPosition(0);
-        //LinearSnapHelper gridLayoutSnapHelper = new LinearSnapHelper();
-        //gridLayoutSnapHelper.attachToRecyclerView(recyclerView);
-
-//        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//        bestSellingSeeAll = v.findViewById(R.id.best_selling_see_all);
+//        bestSellingSeeAll.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//                switch (newState) {
-//                    case RecyclerView.SCROLL_STATE_IDLE:
-//                        int position = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
-//                        gridIndicator.setCurrentPosition((int) Math.ceil((position) / 3));
-//                        break;
-//                }
+//            public void onClick(View v) {
+//                int categoryId = 1;
+//                int subCategoryID = model.getId();
+//                Log.i("URLLLL", "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID);
+//                Intent i = new Intent(getApplicationContext(), ProductListingActivity.class);
+//                i.putExtra("url", "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID);
+//                i.putExtra("title", model.getName());
+//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                MainActivity.this.startActivity(i);
 //            }
 //        });
+    }
+
+    void goToProductList(int subCategoryID) {
+        int categoryId1 = 1;
+        Log.i("URLLLL", "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId1 + "&sub_category_id=" + subCategoryID);
+        Intent i = new Intent(getActivity(), ProductListingActivity.class);
+        i.putExtra("url", "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId1 + "&sub_category_id=" + subCategoryID);
+//                i.putExtra("title", model.getName());
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getActivity().startActivity(i);
+    }
+
+    private void getData1(int subCategoryID) {
+        List<Product> productList = new ArrayList<>();
+        RecyclerView recyclerView = v.findViewById(R.id.cat_1_deals);
+        GridLayoutManager horizontalLayoutManager
+                = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+        int categoryId = 1;
+        String url = "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID;
+        Call<ProductListingResponse> call = apiService1.getProducts(url);
+        SubCategorymodel subCategorymodel;
+        call.enqueue(new Callback<ProductListingResponse>() {
+            @Override
+            public void onResponse(Call<ProductListingResponse> call, Response<ProductListingResponse> response) {
+                try {
+                    for (int x = 0; x < response.body().getData().size(); x++) {
+                        if (productList.size() < 4) {
+                            productList.add(response.body().getData().get(x));
+                            HomeSubCategoryAdapter adapter = new HomeSubCategoryAdapter(getActivity(), productList);
+                            recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
+                            recyclerView.setAdapter(adapter);
+                        }
+                    }
+                    cat1SeeAll = v.findViewById(R.id.cat_1_see_all);
+                    cat1SeeAll.setVisibility(View.VISIBLE);
+                    cat1SeeAll.setOnClickListener(v -> goToProductList(subCategoryID));
+                } catch (Exception e) {
+                    Log.e("Exception", e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductListingResponse> call, Throwable t) {
+                Log.e("Exception", t.getMessage());
+            }
+        });
+    }
+
+    private void getData2(int subCategoryID) {
+        List<Product> productList = new ArrayList<>();
+        RecyclerView recyclerView = v.findViewById(R.id.cat_2_deals);
+        GridLayoutManager horizontalLayoutManager
+                = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+        int categoryId = 1;
+        String url = "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID;
+        Call<ProductListingResponse> call = apiService1.getProducts(url);
+        call.enqueue(new Callback<ProductListingResponse>() {
+            @Override
+            public void onResponse(Call<ProductListingResponse> call, Response<ProductListingResponse> response) {
+                try {
+                    for (int x = 0; x < response.body().getData().size(); x++) {
+                        if (productList.size() < 4) {
+                            productList.add(response.body().getData().get(x));
+                            HomeSubCategoryAdapter adapter = new HomeSubCategoryAdapter(getActivity(), productList);
+                            recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
+                            recyclerView.setAdapter(adapter);
+                        }
+                    }
+                    cat2SeeAll = v.findViewById(R.id.cat_2_see_all);
+                    cat2SeeAll.setVisibility(View.VISIBLE);
+                    cat2SeeAll.setOnClickListener(v -> goToProductList(subCategoryID));
+                } catch (Exception e) {
+                    Log.e("Exception", e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductListingResponse> call, Throwable t) {
+                Log.e("Exception", t.getMessage());
+            }
+        });
+    }
+
+    private void getData3(int subCategoryID) {
+        List<Product> productList = new ArrayList<>();
+        RecyclerView recyclerView = v.findViewById(R.id.cat_3_deals);
+        GridLayoutManager horizontalLayoutManager
+                = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+        int categoryId = 1;
+        String url = "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID;
+        Call<ProductListingResponse> call = apiService1.getProducts(url);
+        call.enqueue(new Callback<ProductListingResponse>() {
+            @Override
+            public void onResponse(Call<ProductListingResponse> call, Response<ProductListingResponse> response) {
+                try {
+                    for (int x = 0; x < response.body().getData().size(); x++) {
+                        if (productList.size() < 4) {
+                            productList.add(response.body().getData().get(x));
+                            HomeSubCategoryAdapter adapter = new HomeSubCategoryAdapter(getActivity(), productList);
+                            recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
+                            recyclerView.setAdapter(adapter);
+                        }
+                    }
+                    cat3SeeAll = v.findViewById(R.id.cat_3_see_all);
+                    cat3SeeAll.setVisibility(View.VISIBLE);
+                    cat3SeeAll.setOnClickListener(v -> goToProductList(subCategoryID));
+                } catch (Exception e) {
+                    Log.e("Exception", e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductListingResponse> call, Throwable t) {
+                Log.e("Exception", t.getMessage());
+            }
+        });
+    }
+
+    private void getData4(int subCategoryID) {
+        List<Product> productList = new ArrayList<>();
+        RecyclerView recyclerView = v.findViewById(R.id.cat_4_deals);
+        GridLayoutManager horizontalLayoutManager
+                = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+        int categoryId = 1;
+        String url = "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID;
+        Call<ProductListingResponse> call = apiService1.getProducts(url);
+        call.enqueue(new Callback<ProductListingResponse>() {
+            @Override
+            public void onResponse(Call<ProductListingResponse> call, Response<ProductListingResponse> response) {
+                try {
+                    for (int x = 0; x < response.body().getData().size(); x++) {
+                        if (productList.size() < 4) {
+                            productList.add(response.body().getData().get(x));
+                            HomeSubCategoryAdapter adapter = new HomeSubCategoryAdapter(getActivity(), productList);
+                            recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
+                            recyclerView.setAdapter(adapter);
+                        }
+                    }
+                    cat4SeeAll = v.findViewById(R.id.cat_4_see_all);
+                    cat4SeeAll.setVisibility(View.VISIBLE);
+                    cat4SeeAll.setOnClickListener(v -> goToProductList(subCategoryID));
+                } catch (Exception e) {
+                    Log.e("Exception", e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductListingResponse> call, Throwable t) {
+                Log.e("Exception", t.getMessage());
+            }
+        });
+
     }
 
     @Override
@@ -267,24 +385,24 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
 
         RecyclerView recyclerView = v.findViewById(R.id.featured_products);
         GridLayoutManager horizontalLayoutManager
-                = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
-        FeaturedProductAdapter adapter = new FeaturedProductAdapter(getActivity(), products, this);
-        recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
-//        recyclerView.setAdapter(adapter);
-
-    }
-
-    @Override
-    public void setTopCategories(List<Category> categories) {
-        RecyclerView recyclerView = v.findViewById(R.id.top_categories);
-        GridLayoutManager horizontalLayoutManager
                 = new GridLayoutManager(getActivity(), 1, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        TopCategoryAdapter adapter = new TopCategoryAdapter(getActivity(), categories, HomeFragment.this);
+        FeaturedProductAdapter adapter = new FeaturedProductAdapter(getActivity(), products, this);
         recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getContext(), 10)));
         recyclerView.setAdapter(adapter);
+
     }
+
+//    @Override
+//    public void setTopCategories(List<Category> categories) {
+//        RecyclerView recyclerView = v.findViewById(R.id.top_categories);
+//        GridLayoutManager horizontalLayoutManager
+//                = new GridLayoutManager(getActivity(), 1, GridLayoutManager.HORIZONTAL, false);
+//        recyclerView.setLayoutManager(horizontalLayoutManager);
+//        TopCategoryAdapter adapter = new TopCategoryAdapter(getActivity(), categories, HomeFragment.this);
+//        recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getContext(), 10)));
+//        recyclerView.setAdapter(adapter);
+//    }
 
     @Override
     public void setPopularBrands(List<Brand> brands) {

@@ -1,7 +1,9 @@
 package com.onoo.gomlgy.Network.services;
 
+import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Network.response.CheckVerificationResponse;
 import com.onoo.gomlgy.Network.response.ForgetPasswordResponse;
+import com.onoo.gomlgy.Network.response.LoginResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -12,5 +14,5 @@ public interface SendVerificationInterface {
 
     @POST("auth/check_code")
     @FormUrlEncoded
-    Call<CheckVerificationResponse> sendCode(@Field("code") String code);
+    Call<AuthResponse> sendCode(@Field("code") String code);
 }

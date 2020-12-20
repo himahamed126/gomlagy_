@@ -37,7 +37,7 @@ public class SellerShopActivity extends BaseActivity implements SellerShopView, 
     private SliderLayout sliderLayout;
     private ShopPresenter shopPresenter;
     private ProgressBar progress_bar;
-    private TextView featured,top_selling, new_arrival;
+    private TextView featured, top_selling, new_arrival;
     private NestedScrollView shop_details;
     private Button btn_seller_products;
 
@@ -63,7 +63,7 @@ public class SellerShopActivity extends BaseActivity implements SellerShopView, 
         shopPresenter.getShopDetails(shop_link);
     }
 
-    private void initviews(){
+    private void initviews() {
         sliderLayout = findViewById(R.id.imageSlider);
         sliderLayout.stopAutoCycle();
         progress_bar = findViewById(R.id.item_progress_bar);
@@ -134,9 +134,9 @@ public class SellerShopActivity extends BaseActivity implements SellerShopView, 
                 = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(horizontalLayoutManager);
         //adapter.setClickListener(this);
-        RecyclerViewMargin decoration = new RecyclerViewMargin(convertDpToPx(this,10), 2);
+        RecyclerViewMargin decoration = new RecyclerViewMargin(convertDpToPx(this, 10), 2);
         recyclerView.addItemDecoration(decoration);
-        ProductListingAdapter adapter = new ProductListingAdapter(getApplicationContext(), products, this);
+        ProductListingAdapter adapter = new ProductListingAdapter(getApplicationContext(), products, this, ProductListingAdapter.ViewType.VIEW_TYPE_List);
         recyclerView.setAdapter(adapter);
 
         progress_bar.setVisibility(View.GONE);

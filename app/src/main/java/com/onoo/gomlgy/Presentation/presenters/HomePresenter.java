@@ -7,6 +7,7 @@ import com.onoo.gomlgy.Models.Category;
 import com.onoo.gomlgy.Models.FlashDeal;
 import com.onoo.gomlgy.Models.Product;
 import com.onoo.gomlgy.Models.SliderImage;
+import com.onoo.gomlgy.Models.offers_sources.offers.OffersData;
 import com.onoo.gomlgy.Network.response.AppSettingsResponse;
 import com.onoo.gomlgy.Network.response.AuctionBidResponse;
 import com.onoo.gomlgy.Presentation.ui.fragments.HomeView;
@@ -109,7 +110,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
     }
 
     @Override
-    public void onSliderDownloaded(List<SliderImage> sliderImages) {
+    public void onSliderDownloaded(List<OffersData> sliderImages) {
         if (homeView != null) {
             homeView.setSliderImages(sliderImages);
         }
@@ -171,7 +172,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
     @Override
     public void onTopCategoriesDownloaded(List<Category> categories) {
         if (homeView != null) {
-            homeView.setTopCategories(categories);
+//            homeView.setTopCategories(categories);
         }
     }
 
@@ -195,7 +196,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
     @Override
     public void onBannersDownloaded(List<Banner> banners) {
         if (homeView != null){
-            homeView.setBanners(banners);
+
         }
     }
 
@@ -231,7 +232,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
     @Override
     public void onFlashDealProductDownloaded(FlashDeal flashDeal) {
         if (homeView != null) {
-            homeView.setFlashDeal(flashDeal);
+
         }
     }
 

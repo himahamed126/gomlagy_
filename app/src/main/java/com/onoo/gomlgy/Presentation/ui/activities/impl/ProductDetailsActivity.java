@@ -50,7 +50,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     private SliderLayout sliderLayout;
     private TextView name;
     private RatingBar ratingBar;
-    private TextView rating_count, price_range;
+    private TextView rating_count, price_1, price_2, price_3, quntity_1, quntity_2, quntity_3;
     private ImageView shop_logo, heart_icon;
     private TextView shop_name;
     private RelativeLayout buying_option, specification, reviews, seller_policy, return_policy, support_policy;
@@ -170,36 +170,33 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         });
     }
 
-    private void processAddToCart(){
-        if(productDetails != null && (productDetails.getChoiceOptions().size() > 0 || productDetails.getColors().size() > 0)){
+    private void processAddToCart() {
+        if (productDetails != null && (productDetails.getChoiceOptions().size() > 0 || productDetails.getColors().size() > 0)) {
             startBuyingOptionActivity();
-        }
-        else {
+        } else {
             AuthResponse authResponse = new UserPrefs(getApplicationContext()).getAuthPreferenceObjectJson("auth_response");
-            if(authResponse != null && authResponse.getUser() != null){
+            if (authResponse != null && authResponse.getUser() != null) {
                 progressDialog.setMessage(getString(R.string.adding_item_to_your_shopping_cart_please_wait));
                 progressDialog.show();
                 productDetailsPresenter.addToCart(authResponse.getAccessToken(), authResponse.getUser().getId(), productDetails.getId(), null);
-            }
-            else {
+            } else {
                 startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), 100);
                 finish();
             }
         }
     }
 
-    private void startBuyingOptionActivity(){
-        if(productDetails != null && (productDetails.getChoiceOptions().size() > 0 || productDetails.getColors().size() > 0)){
+    private void startBuyingOptionActivity() {
+        if (productDetails != null && (productDetails.getChoiceOptions().size() > 0 || productDetails.getColors().size() > 0)) {
             Intent intent = new Intent(getApplicationContext(), BuyingOptionsActivity.class);
             intent.putExtra("product_details", productDetails);
             startActivity(intent);
-        }
-        else{
+        } else {
             CustomToast.showToast(this, getString(R.string.this_product_doesnt_have_any_buying_options), R.color.colorWarning);
         }
     }
 
-    private void initviews(){
+    private void initviews() {
         product_details = findViewById(R.id.product_details);
         product_buttons = findViewById(R.id.product_buttons);
         progress_bar = findViewById(R.id.item_progress_bar);
@@ -208,7 +205,13 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         name = findViewById(R.id.product_name);
         ratingBar = findViewById(R.id.product_rating);
         rating_count = findViewById(R.id.product_rating_count);
-        price_range = findViewById(R.id.product_price_range);
+        price_1 = findViewById(R.id.product_price_1);
+        price_2 = findViewById(R.id.product_price_2);
+        price_3 = findViewById(R.id.product_price_3);
+        quntity_1 = findViewById(R.id.product_quntity_1);
+        quntity_2 = findViewById(R.id.product_quntity_2);
+        quntity_3 = findViewById(R.id.product_quntity_3);
+
         shop_logo = findViewById(R.id.shop_logo);
         heart_icon = findViewById(R.id.heart_icon);
         shop_name = findViewById(R.id.shop_name);
@@ -247,13 +250,12 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
 
         name.setText(productDetails.getName());
         ratingBar.setRating(productDetails.getRating());
-        rating_count.setText("("+productDetails.getRatingCount()+")");
+        rating_count.setText("(" + productDetails.getRatingCount() + ")");
 
         authResponse = new UserPrefs(getApplicationContext()).getAuthPreferenceObjectJson("auth_response");
-        if(authResponse != null && authResponse.getUser() != null){
+        if (authResponse != null && authResponse.getUser() != null) {
             productDetailsPresenter.checkOnWishlist(authResponse.getAccessToken(), authResponse.getUser().getId(), productDetails.getId());
-        }
-        else {
+        } else {
             heart_icon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -263,7 +265,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             });
         }
 
-        if (!productDetails.getAddedBy().equals("admin")){
+        if (!productDetails.getAddedBy().equals("admin")) {
             Glide.with(this).load(AppConfig.ASSET_URL + productDetails.getUser().getShopLogo()).into(shop_logo);
             shop_name.setText(productDetails.getUser().getShopName());
             shop_info.setOnClickListener(new View.OnClickListener() {
@@ -275,20 +277,24 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
                     startActivity(intent);
                 }
             });
-        }
-        else {
+        } else {
             AppSettingsResponse appSettingsResponse = new UserPrefs(this).getAppSettingsPreferenceObjectJson("app_settings_response");
-            if (appSettingsResponse != null){
+            if (appSettingsResponse != null) {
                 Glide.with(this).load(AppConfig.ASSET_URL + appSettingsResponse.getData().get(0).getLogo()).into(shop_logo);
             }
         }
 
-        if(productDetails.getPriceLower().equals(productDetails.getPriceHigher())){
-            price_range.setText(AppConfig.convertPrice(this, productDetails.getPriceLower()));
+        if (productDetails.getPriceLower().equals(productDetails.getPriceHigher())) {
+            price_1.setText(AppConfig.convertPrice(this, productDetails.getPriceLower()));
+        } else {
+            price_1.setText(AppConfig.convertPrice(this, productDetails.getPriceLower()) + "-" + AppConfig.convertPrice(this, productDetails.getPriceHigher()));
         }
-        else {
-            price_range.setText(AppConfig.convertPrice(this, productDetails.getPriceLower())+"-"+AppConfig.convertPrice(this, productDetails.getPriceHigher()));
-        }
+        price_2.setText(AppConfig.convertPrice(this, productDetails.getPriceLower()));
+        price_3.setText(AppConfig.convertPrice(this, productDetails.getPriceLower()));
+        quntity_1.setText("1-50" + " " + getString(R.string.piece));
+        quntity_2.setText("50-100" + " " + getString(R.string.piece));
+        quntity_3.setText("100-500" + " " + getString(R.string.piece));
+
 
         progress_bar.setVisibility(View.GONE);
         product_details.setVisibility(View.VISIBLE);
@@ -306,7 +312,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
                 = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
         FeaturedProductAdapter adapter = new FeaturedProductAdapter(this, relatedProducts, this);
-        recyclerView.addItemDecoration( new LayoutMarginDecoration( 1,  AppConfig.convertDpToPx(getApplicationContext(), 10)) );
+        recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getApplicationContext(), 10)));
         recyclerView.setAdapter(adapter);
     }
 
@@ -317,21 +323,20 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
                 = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
         BestSellingofSellerAdapter adapter = new BestSellingofSellerAdapter(this, topSellingProducts, this);
-        recyclerView.addItemDecoration( new LayoutMarginDecoration( 1,  AppConfig.convertDpToPx(getApplicationContext(), 10)) );
+        recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getApplicationContext(), 10)));
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void setAddToCartMessage(AddToCartResponse addToCartResponse) {
         progressDialog.dismiss();
-        if (isBuyNow){
+        if (isBuyNow) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("message", addToCartResponse.getMessage());
             intent.putExtra("position", "cart");
             startActivity(intent);
             finish();
-        }
-        else {
+        } else {
             CustomToast.showToast(this, addToCartResponse.getMessage(), R.color.colorSuccess);
         }
     }
@@ -345,7 +350,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
 
     @Override
     public void onCheckWishlist(CheckWishlistResponse checkWishlistResponse) {
-        if(checkWishlistResponse.getIsInWishlist()){
+        if (checkWishlistResponse.getIsInWishlist()) {
             heart_icon.setImageResource(R.drawable.ic_heart_filled);
             heart_icon.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -353,8 +358,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
                     productDetailsPresenter.removeFromWishlist(authResponse.getAccessToken(), checkWishlistResponse.getWishlistId());
                 }
             });
-        }
-        else{
+        } else {
             heart_icon.setImageResource(R.drawable.ic_heart);
             heart_icon.setOnClickListener(new View.OnClickListener() {
                 @Override

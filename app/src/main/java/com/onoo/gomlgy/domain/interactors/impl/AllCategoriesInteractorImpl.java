@@ -1,10 +1,14 @@
 package com.onoo.gomlgy.domain.interactors.impl;
 
 import android.util.Log;
+import android.widget.Toast;
 
+import com.onoo.gomlgy.Models.collectionmodel;
 import com.onoo.gomlgy.Network.ApiClient;
 import com.onoo.gomlgy.Network.response.CategoryResponse;
 import com.onoo.gomlgy.Network.services.AllCategoryApiInterface;
+import com.onoo.gomlgy.Network.services.getProductsWithSubcategory;
+import com.onoo.gomlgy.Presentation.ui.activities.impl.MainActivity;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;
 import com.onoo.gomlgy.domain.interactors.AllCategoryInteractor;
@@ -16,7 +20,7 @@ import retrofit2.Response;
 
 public class AllCategoriesInteractorImpl extends AbstractInteractor {
     private AllCategoryInteractor.CallBack mCallback;
-    private AllCategoryApiInterface apiService;
+    private getProductsWithSubcategory apiService;
 
     public AllCategoriesInteractorImpl(Executor threadExecutor, MainThread mainThread, AllCategoryInteractor.CallBack callBack) {
         super(threadExecutor, mainThread);
@@ -25,24 +29,23 @@ public class AllCategoriesInteractorImpl extends AbstractInteractor {
 
     @Override
     public void run() {
-        apiService = ApiClient.getClient().create(AllCategoryApiInterface.class);
-        Call<CategoryResponse> call = apiService.getAllCategories();
 
-        call.enqueue(new Callback<CategoryResponse>() {
+        apiService = ApiClient.getClient().create(getProductsWithSubcategory.class);
+        Call<collectionmodel> getProducts = apiService.get_Products_With_SubCategory("Mobile accessories");
+
+        getProducts.enqueue(new Callback<collectionmodel>() {
             @Override
-            public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
+            public void onResponse(Call<collectionmodel> call, Response<collectionmodel> response) {
                 try {
-                    mCallback.onAllCategoriesDownloaded(response.body().getData());
+                    mCallback.onAllCategoriesDownloaded(response.body().getData().get(0).getSubCategories());
                 } catch (Exception e) {
                     Log.e("Exception", e.getMessage());
                 }
             }
-
             @Override
-            public void onFailure(Call<CategoryResponse> call, Throwable t) {
+            public void onFailure(Call<collectionmodel> call, Throwable t) {
                 mCallback.onAllCategoriesDownloadError();
             }
         });
-
     }
 }

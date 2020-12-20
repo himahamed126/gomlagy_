@@ -2,10 +2,13 @@ package com.onoo.gomlgy.Presentation.ui.fragments.impl;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
@@ -45,6 +48,7 @@ public class ProductSearchFragment extends Fragment implements ProductSearchView
     private String url = AppConfig.BASE_URL + "products/search?key=&scope=product&page=1";
     private String key = "", scope = "product";
     private ProductSearchResponse mProductSearchResponse = null;
+    EditText searchEt;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_search, null);
@@ -55,44 +59,27 @@ public class ProductSearchFragment extends Fragment implements ProductSearchView
 
         progressBar = v.findViewById(R.id.item_progress_bar);
 
-        searchView = v.findViewById(R.id.search_key);
         //radioScope = v.findViewById(R.id.scope_radio);
 
         productSearchPresenter = new ProductSearchPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
 
-        //searchView.setQueryHint("I'm looking for...");
+        searchEt = getActivity().findViewById(R.id.search_et);
+        searchEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            public boolean onQueryTextSubmit(String query) {
-                searchView.clearFocus();     // Close keyboard on pressing IME_ACTION_SEARCH option
-                key = query;
-                searchProduct(key, scope);
-                //load search query
-                return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                //Log.d("Test", "QueryTextChange: "+ newText);
-                if (newText.length() == 0) {
-                    key = "";
-                    searchProduct(key, scope);
-                } else {
-                    key = newText;
-                    searchProduct(key, scope);
-                }
-                return true;
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                searchProduct(s.toString(), "product");
             }
         });
-
-//        radioScope.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                RadioButton radiochecked = (RadioButton) v.findViewById(checkedId);
-//                scope = radiochecked.getText().toString();
-//                searchProduct(key, scope);
-//            }
-//        });
 
         searchProduct("", "product");
 

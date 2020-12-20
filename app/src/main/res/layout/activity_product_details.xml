@@ -16,10 +16,10 @@
         android:visibility="gone" />
 
     <androidx.core.widget.NestedScrollView
-        android:layout_above="@id/product_buttons"
         android:id="@+id/product_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/product_buttons"
         android:overScrollMode="never">
 
         <RelativeLayout
@@ -49,9 +49,9 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="TextView"
-                android:textStyle="bold"
                 android:textColor="#000"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <RatingBar
                 android:id="@+id/product_rating"
@@ -59,11 +59,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/product_name"
-                android:clickable="false"
-                android:numStars="5"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:theme="@style/RatingBar"/>
+                android:clickable="false"
+                android:numStars="5"
+                android:theme="@style/RatingBar" />
 
             <TextView
                 android:id="@+id/product_rating_count"
@@ -75,36 +75,81 @@
                 android:layout_toEndOf="@id/product_rating"
                 android:text="(0)"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/product_price_range"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/price_ly"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/product_rating"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:text="TextView"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="@color/colorPrimary"/>
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/product_price_1"
+                    style="@style/product_prices"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toStartOf="@id/product_price_2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/product_quntity_1"
+                    style="@style/product_quantity"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="@id/product_price_1"
+                    app:layout_constraintStart_toStartOf="@id/product_price_1"
+                    app:layout_constraintTop_toBottomOf="@id/product_price_1" />
+
+
+                <TextView
+                    android:id="@+id/product_price_2"
+                    style="@style/product_prices"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/product_price_1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/product_quntity_2"
+                    style="@style/product_quantity"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="@id/product_price_2"
+                    app:layout_constraintStart_toStartOf="@id/product_price_2"
+                    app:layout_constraintTop_toBottomOf="@id/product_price_1" />
+
+                <TextView
+                    android:id="@+id/product_price_3"
+                    style="@style/product_prices"
+                    android:layout_marginTop="4dp"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/product_quntity_2" />
+
+                <TextView
+                    android:id="@+id/product_quntity_3"
+                    style="@style/product_quantity"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="@id/product_price_3"
+                    app:layout_constraintStart_toStartOf="@id/product_price_3"
+                    app:layout_constraintTop_toBottomOf="@id/product_price_3" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/heart_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_alignTop="@id/product_name"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="10dp"
-                android:layout_below="@id/product_rating_count"
-                android:src="@drawable/ic_heart"
-                />
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_heart" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/shop_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/product_price_range"
-                android:layout_marginTop="10dp"
+                android:layout_below="@id/price_ly"
+                android:layout_marginTop="20dp"
                 app:cardElevation="0dp">
 
                 <RelativeLayout
@@ -136,18 +181,18 @@
                 android:id="@+id/options"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_below="@id/shop_info"
-                android:orientation="vertical"
-                android:divider="@android:color/black">
+                android:layout_marginTop="10dp"
+                android:divider="@android:color/black"
+                android:orientation="vertical">
 
                 <RelativeLayout
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:id="@+id/buying_option"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
                     android:paddingEnd="10dp"
@@ -169,12 +214,12 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:id="@+id/specification"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
                     android:paddingEnd="10dp"
@@ -195,40 +240,40 @@
 
                 </RelativeLayout>
 
-<!--                <RelativeLayout-->
-<!--                    android:foreground="?android:attr/selectableItemBackground"-->
-<!--                    android:id="@+id/description"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginBottom="5dp"-->
-<!--                    android:background="@android:color/white"-->
-<!--                    android:paddingStart="10dp"-->
-<!--                    android:paddingTop="@dimen/activity_horizontal_margin"-->
-<!--                    android:paddingEnd="10dp"-->
-<!--                    android:paddingBottom="@dimen/activity_horizontal_margin">-->
+                <!--                <RelativeLayout-->
+                <!--                    android:foreground="?android:attr/selectableItemBackground"-->
+                <!--                    android:id="@+id/description"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginBottom="5dp"-->
+                <!--                    android:background="@android:color/white"-->
+                <!--                    android:paddingStart="10dp"-->
+                <!--                    android:paddingTop="@dimen/activity_horizontal_margin"-->
+                <!--                    android:paddingEnd="10dp"-->
+                <!--                    android:paddingBottom="@dimen/activity_horizontal_margin">-->
 
-<!--                    <ImageView-->
-<!--                        android:layout_width="15dp"-->
-<!--                        android:layout_height="15dp"-->
-<!--                        android:layout_alignParentEnd="true"-->
-<!--                        android:layout_centerInParent="true"-->
-<!--                        android:paddingEnd="10dp"-->
-<!--                        app:srcCompat="@drawable/arrow" />-->
+                <!--                    <ImageView-->
+                <!--                        android:layout_width="15dp"-->
+                <!--                        android:layout_height="15dp"-->
+                <!--                        android:layout_alignParentEnd="true"-->
+                <!--                        android:layout_centerInParent="true"-->
+                <!--                        android:paddingEnd="10dp"-->
+                <!--                        app:srcCompat="@drawable/arrow" />-->
 
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Description" />-->
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:text="Description" />-->
 
-<!--                </RelativeLayout>-->
+                <!--                </RelativeLayout>-->
 
                 <RelativeLayout
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:id="@+id/reviews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
                     android:paddingEnd="10dp"
@@ -251,12 +296,12 @@
 
 
                 <RelativeLayout
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:id="@+id/seller_policy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
                     android:paddingEnd="10dp"
@@ -278,12 +323,12 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:id="@+id/return_policy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
                     android:paddingEnd="10dp"
@@ -305,12 +350,12 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:id="@+id/support_policy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/white"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:paddingStart="10dp"
                     android:paddingTop="@dimen/activity_horizontal_margin"
                     android:paddingEnd="10dp"
@@ -335,16 +380,16 @@
 
             <TextView
                 android:id="@+id/related_products_text"
-                android:layout_below="@+id/options"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/options"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/products_you_might_also_like"
-                android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/related_products"
@@ -358,22 +403,22 @@
 
             <TextView
                 android:id="@+id/top_selling_text"
-                android:layout_below="@+id/related_products"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/related_products"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/top_selling_products_from_this_seller"
-                android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_below="@+id/top_selling_text"
                 android:id="@+id/top_selling"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/top_selling_text"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp">
 
@@ -387,30 +432,30 @@
         android:id="@+id/product_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/addToCart"
-            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryLight"
+            android:foreground="?android:attr/selectableItemBackground"
             android:text="@string/add_to_cart"
             android:textColor="@android:color/white"
-            android:background="@color/colorPrimaryLight"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/buyNow"
-            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
+            android:foreground="?android:attr/selectableItemBackground"
             android:text="@string/buy_now"
-            android:textStyle="bold"/>
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

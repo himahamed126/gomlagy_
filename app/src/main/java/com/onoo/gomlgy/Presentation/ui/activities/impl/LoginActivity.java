@@ -26,7 +26,6 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.onoo.gomlgy.Network.ApiClient;
 import com.onoo.gomlgy.Network.response.AuthResponse;
-import com.onoo.gomlgy.Network.response.CheckVerificationResponse;
 import com.onoo.gomlgy.Network.services.CheckVerificationInterface;
 import com.onoo.gomlgy.Presentation.presenters.LoginPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.LoginView;
@@ -37,10 +36,6 @@ import com.onoo.gomlgy.Utils.UserPrefs;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 
 import org.json.JSONObject;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginActivity extends BaseActivity implements LoginView {
 
@@ -55,6 +50,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     private SignInButton signInButton;
 
     private CheckVerificationInterface apiService;
+    private static final String TAG = "LoginActivity";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -209,31 +205,17 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @Override
     public void setLoginResponse(AuthResponse authResponse) {
-        apiService.checkEmail("himahamed999@gmail.com").enqueue(new Callback<CheckVerificationResponse>() {
-            @Override
-            public void onResponse(Call<CheckVerificationResponse> call, Response<CheckVerificationResponse> response) {
-                if (response.code() == 200) {
-                    if (response.body().getMessage().equals("Non Verified")) {
-                        Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                        finish();
-                        startActivity(new Intent(LoginActivity.this, SendCodeActivity.class));
-                    } else {
-                        UserPrefs userPrefs = new UserPrefs(getApplicationContext());
-                        userPrefs.setAuthPreferenceObject(authResponse, "auth_response");
-                        Intent returnIntent = new Intent();
-                        setResult(Activity.RESULT_OK, returnIntent);
-                        finish();
-                    }
-                } else {
-                    Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CheckVerificationResponse> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+        if (authResponse.getIsVerified() == 0) {
+            Toast.makeText(LoginActivity.this, authResponse.getMessage(), Toast.LENGTH_LONG).show();
+            finish();
+            startActivity(new Intent(LoginActivity.this, SendCodeActivity.class));
+        } else {
+            UserPrefs userPrefs = new UserPrefs(getApplicationContext());
+            userPrefs.setAuthPreferenceObject(authResponse, "auth_response");
+            Intent returnIntent = new Intent();
+            setResult(Activity.RESULT_OK, returnIntent);
+            finish();
+        }
     }
 }
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1082784483141",
+    "project_id": "gomlagy",
+    "storage_bucket": "gomlagy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082784483141:android:b155622e2535bd5d42202c",
+        "android_client_info": {
+          "package_name": "com.onoo.gomlgy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082784483141-lc6dho2ddd2l6at5f5uhjllnl8nuflov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnWSdheHU3puNo90iNemvAvvBW7diXEM8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082784483141-lc6dho2ddd2l6at5f5uhjllnl8nuflov.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

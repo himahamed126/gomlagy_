@@ -4,8 +4,8 @@
 <!--    <color name="colorPrimary">#ce1745</color>-->
 <!--    <color name="colorPrimaryDark">#ce1745</color>-->
 
-    <color name="colorPrimary">#E62E04</color>
-    <color name="colorPrimaryDark">#CF2A04</color>
+    <color name="colorPrimary">#ef6500</color>
+    <color name="colorPrimaryDark">#BD5100</color>
 
     <color name="colorPrimaryLight">#fc8a1a</color>
     <color name="colorAccent">#111111</color>
@@ -15,4 +15,5 @@
     <color name="colorDanger">#dc3545</color>
     <color name="colorInfo">#17a2b8</color>
     <color name="white">#fff</color>
+    <color name="black">#000</color>
 </resources>

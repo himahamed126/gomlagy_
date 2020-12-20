@@ -11,30 +11,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.Category;
+import com.onoo.gomlgy.Models.SubCategorymodel;
 import com.onoo.gomlgy.Presentation.ui.listeners.AllCategoryClickListener;
 import com.onoo.gomlgy.R;
-import com.onoo.gomlgy.Utils.AppConfig;
-import com.bumptech.glide.Glide;
+import com.onoo.gomlgy.Utils.HelperMethod;
+import com.onoo.gomlgy.Utils.ItemAnimation;
 
 import java.util.List;
 
 public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.ViewHolder> {
     int selected_position = 0;
     private Context context;
-    private List<Category> mCategories;
+    private List<SubCategorymodel> mCategories;
     private LayoutInflater mInflater;
     private AllCategoryClickListener mClickListener;
     int selectedPosition=-1;
-    // data is passed into the constructor
-    public AllCategoryAdapter(Context context, List<Category> categories, AllCategoryClickListener listener) {
+    private int lastPosition = -1;
+    private boolean on_attach = true;
+
+    public AllCategoryAdapter(Context context, List<SubCategorymodel> categories, AllCategoryClickListener listener) {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
         this.mCategories = categories;
         this.mClickListener = listener;
     }
 
-    // inflates the row layout from xml when needed
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,18 +45,8 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(mCategories.get(position));
-//        if(selectedPosition==position)
-//            holder.itemView.setBackgroundColor(Color.parseColor("#e4e4e4"));
-//        else
-//            holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
         holder.itemView.setBackgroundColor(selected_position == position ? Color.parseColor("#DCDCDC") : Color.WHITE);
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (mClickListener != null) mClickListener.onCategoryClick(mCategories.get(position));
-//            }
-//        });
+//        HelperMethod.setAnimation(holder.itemView, position, ItemAnimation.BOTTOM_UP, lastPosition, on_attach);
     }
 
     // total number of rows
@@ -75,7 +66,7 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
             itemView.setOnClickListener(this);
         }
 
-        public void bind(final Category category) {
+        public void bind(final SubCategorymodel category) {
            // Glide.with(context).load(AppConfig.ASSET_URL + category.getIcon()).into(imageView);
             textView.setText(category.getName());
 

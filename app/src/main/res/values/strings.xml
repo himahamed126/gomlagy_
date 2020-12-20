@@ -150,4 +150,9 @@
     <string name="new_password">New Password</string>
     <string name="send_code">Send Code</string>
     <string name="see_all">See All</string>
+    <string name="drawer_open" translatable="false">open</string>
+    <string name="drawer_close" translatable="false">close</string>
+    <string name="what_are_you_looking_for">what are you looking for?</string>
+    <string name="choose_a_shipping_address">Choose a shipping address</string>
+    <string name="piece">Piece</string>
 </resources>

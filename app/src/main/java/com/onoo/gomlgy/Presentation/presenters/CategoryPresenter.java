@@ -1,6 +1,7 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
 import com.onoo.gomlgy.Models.Category;
+import com.onoo.gomlgy.Models.SubCategorymodel;
 import com.onoo.gomlgy.Presentation.ui.fragments.CategoryView;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;
@@ -23,7 +24,7 @@ public class CategoryPresenter extends AbstractPresenter implements AllCategoryI
     }
 
     @Override
-    public void onAllCategoriesDownloaded(List<Category> categories) {
+    public void onAllCategoriesDownloaded(List<SubCategorymodel> categories) {
         if (categoryView != null) {
             categoryView.setAllCategories(categories);
         }

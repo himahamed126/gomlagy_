@@ -17,6 +17,8 @@ import com.onoo.gomlgy.Presentation.ui.listeners.SearchProductClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.AppConfig;
 import com.bumptech.glide.Glide;
+import com.onoo.gomlgy.Utils.HelperMethod;
+import com.onoo.gomlgy.Utils.ItemAnimation;
 
 import java.util.List;
 
@@ -26,7 +28,8 @@ public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdap
     private LayoutInflater mInflater;
     private Context context;
     private SearchProductClickListener productClickListener;
-
+    private int lastPosition = -1;
+    private boolean on_attach = true;
     // data is passed into the constructor
     public ProductSearchAdapter(Context context, List<SearchProduct> mProducts, SearchProductClickListener productClickListener) {
         this.context = context;
@@ -47,6 +50,7 @@ public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(mProducts.get(position));
+        HelperMethod.setAnimation(holder.itemView, position, ItemAnimation.LEFT_RIGHT, lastPosition, on_attach);
     }
 
     // total number of rows

@@ -23,7 +23,7 @@
     <string name="adding_item_to_your_shopping_cart_please_wait">إضافة عنصر إلى سلة التسوق الخاصة بك. ارجوك انتظر.</string>
     <string name="this_variant_of_this_product_isnt_available_now">هذا البديل من هذا المنتج غير متوفر حاليا</string>
     <string name="my_account">حسابي</string>
-    <string name="login_canceled">تسجيل الدخول إلغاء</string>
+    <string name="login_canceled">إلغاء تسجيل الدخول</string>
     <string name="categories">التصنيفات</string>
     <string name="search">بحث</string>
     <string name="shopping_cart">عربة التسوق</string>
@@ -33,15 +33,15 @@
     <string name="please_select_a_payment_method">الرجاء اختيار طريقة الدفع</string>
     <string name="please_enter_coupon_code_first">الرجاء إدخال رمز القسيمة أولا</string>
     <string name="checkout_with_PayPal">الدفع عن طريق خدمة باي بال</string>
-    <string name="checkout_with_card">الخروج مع بطاقة</string>
+    <string name="checkout_with_card">الدفع مع بطاقة</string>
     <string name="cash_on_delivery">الدفع عند الاستلام</string>
     <string name="wallet_balance">محفظة الميزان</string>
-    <string name="checkout_is_processing_please_wait">الخروج يتم معالجة.ارجوك انتظر.</string>
-    <string name="this_product_doesnt_have_any_buying_options">لم يكن هذا المنتج أي خيارات الشراء.</string>
+    <string name="checkout_is_processing_please_wait"> يتم الدفع.ارجوك انتظر.</string>
+    <string name="this_product_doesnt_have_any_buying_options">لا يحتوى هذا المنتج أي خيارات الشراء.</string>
     <string name="product_reviews">تعليقات المنتج</string>
     <string name="purchase_history">تاريخ شراء</string>
     <string name="order_details">تفاصيل الطلب</string>
-    <string name="flat_shipping_rate">معدل مسطح يشحن</string>
+    <string name="flat_shipping_rate">معدل الشحن</string>
     <string name="email_is_required">البريد الالكتروني مطلوب</string>
     <string name="password_is_required_and_must_be_6_characters_at_least">مطلوب كلمة المرور و يجب أن يكون 6 أحرف على الأقل</string>
     <string name="confirm_password_mismatch_with_password">عدم تطابق تأكيد كلمة المرور مع كلمة المرور</string>
@@ -50,9 +50,9 @@
     <string name="card_payment">بطاقه ائتمان</string>
     <string name="please_wait_your_transaction_is_processing">ارجوك انتظر.معاملتك بمعالجة.</string>
     <string name="my_wallet">محفظتي</string>
-    <string name="my_wishlist">قائمة امنياتي</string>
+    <string name="my_wishlist">قائمة المفضلة</string>
     <string name="sign_or_register">تسجيل الدخول او انشاء حساب</string>
-    <string name="_bids">        العروض</string>
+    <string name="_bids">العروض</string>
     <string name="_sold">تم البيع</string>
     <string name="data_">تاريخ -</string>
     <string name="payment_status_">حالة السداد -</string>
@@ -81,7 +81,7 @@
     <string name="support_policy">سياسة الدعم</string>
     <string name="products_you_might_also_like">المنتجات التي قد ترغب أيضا</string>
     <string name="top_selling_products_from_this_seller">بيع المنتجات أعلى من هذا البائع</string>
-    <string name="no_products_found">لا توجد منتجات وجدت</string>
+    <string name="no_products_found">لا توجد منتجات</string>
     <string name="no_reviews_found">لا توجد اية تعليقات</string>
     <string name="no_purchase_history_found">لم يتم العثور على تاريخ الشراء</string>
     <string name="order_code">رمز الطلب</string>
@@ -101,7 +101,7 @@
     <string name="sign_up">سجل</string>
     <string name="confirm_password">تأكيد كلمة المرور</string>
     <string name="reset_password">إعادة تعيين كلمة المرور</string>
-    <string name="confirm">تأكد</string>
+    <string name="confirm">تأكيد</string>
     <string name="featured_products">منتجات مميزة</string>
     <string name="top_selling_products">أعلى المنتجات مبيعا</string>
     <string name="new_arrivals">القادمون الجدد</string>
@@ -110,13 +110,13 @@
     <string name="coupon_discount">القسيمة DISCOUNT</string>
     <string name="enter_your_credit_or_debit_card_information_to_complete_the_checkout_and_place_your_order">أدخل معلومات بطاقة الائتمان أو بطاقة الخصم الخاصة بك لإكمال الخروج وطلبك</string>
     <string name="confirm_payment">تأكيد الدفع</string>
-    <string name="wallet_recharge_history">المحفظة شحن التاريخ</string>
+    <string name="wallet_recharge_history">التاريخ شحن المحفظة</string>
     <string name="variant">مختلف</string>
     <string name="price">السعر</string>
     <string name="shipping">الشحن</string>
-    <string name="wishlist">قائمة الرغبات</string>
+    <string name="wishlist">قائمة المفضلة</string>
     <string name="logout">تسجيل خروج</string>
-    <string name="proceed_to_checkout">باشرالخروج من الفندق</string>
+    <string name="proceed_to_checkout">تابع إلى الدفع</string>
     <string name="your_shopping_cart_is_empty">سلة التسوق الخاصة بك فارغة</string>
     <string name="featured_categories">فئات مميزة</string>
     <string name="flash_deal">صفقة فلاش</string>
@@ -145,4 +145,7 @@
     <string name="new_password">كلمة المرور الجديدة</string>
     <string name="send_code">ارسل الرمز</string>
     <string name="see_all">عرض المزيد</string>
+    <string name="what_are_you_looking_for">عن ماذا تبحث ؟</string>
+    <string name="choose_a_shipping_address">اختار عنوان الشحن</string>
+    <string name="piece">قطعة</string>
 </resources>

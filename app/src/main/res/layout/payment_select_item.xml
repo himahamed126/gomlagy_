@@ -33,8 +33,14 @@
             android:maxLines="1"
             android:text="@string/checkout_with_PayPal"
             android:textColor="#000"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
+        <CheckBox
+            android:id="@+id/checkbox_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="6dp" />
     </RelativeLayout>
-
 </androidx.cardview.widget.CardView>

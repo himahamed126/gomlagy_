@@ -15,6 +15,8 @@ import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.AppConfig;
 import com.bumptech.glide.Glide;
+import com.onoo.gomlgy.Utils.HelperMethod;
+import com.onoo.gomlgy.Utils.ItemAnimation;
 
 import java.util.List;
 
@@ -23,6 +25,8 @@ public class TodaysDealAdapter extends RecyclerView.Adapter<TodaysDealAdapter.Vi
     private LayoutInflater mInflater;
     private Context context;
     private ProductClickListener productClickListener;
+    private int lastPosition = -1;
+    private boolean on_attach = true;
 
     // data is passed into the constructor
     public TodaysDealAdapter(Context context, List<Product> mProducts, ProductClickListener productClickListener) {
@@ -44,6 +48,7 @@ public class TodaysDealAdapter extends RecyclerView.Adapter<TodaysDealAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull TodaysDealAdapter.ViewHolder holder, int position) {
         holder.bind(mProducts.get(position));
+        HelperMethod.setAnimation(holder.itemView, position, ItemAnimation.BOTTOM_UP, lastPosition, on_attach);
     }
 
     // total number of rows
@@ -58,6 +63,7 @@ public class TodaysDealAdapter extends RecyclerView.Adapter<TodaysDealAdapter.Vi
     }
 
     // stores and recycles views as they are scrolled off screen
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView discounted_price;

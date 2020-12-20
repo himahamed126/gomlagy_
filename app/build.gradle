@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -90,6 +91,17 @@ dependencies {
     //Google
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
 
+    // Add the Firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics:17.4.3'
+
+    // Add the SDK for Firebase Cloud Messaging
+    implementation 'com.google.firebase:firebase-messaging:20.2.1'
     //Carbon
     api 'tk.zielony:carbon:0.16.0.1'
+
+    implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'
+
+    //A fast circular ImageView perfect for profile images
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+
 }

@@ -1,6 +1,7 @@
 package com.onoo.gomlgy.domain.interactors;
 
-import com.onoo.gomlgy.Models.SliderImage;
+import com.onoo.gomlgy.Models.offers_sources.offers.Offers;
+import com.onoo.gomlgy.Models.offers_sources.offers.OffersData;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ public interface SliderInteractor {
 
     interface CallBack {
 
-        void onSliderDownloaded(List<SliderImage> sliderImages);
+        void onSliderDownloaded(List<OffersData> offersList);
 
         void onSliderDownloadError();
     }

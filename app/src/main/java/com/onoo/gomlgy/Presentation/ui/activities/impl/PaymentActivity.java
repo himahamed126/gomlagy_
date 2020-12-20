@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.onoo.gomlgy.Models.PurchaseHistory;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Network.response.CouponResponse;
 import com.onoo.gomlgy.Network.response.OrderResponse;
@@ -36,6 +37,7 @@ import com.braintreepayments.api.interfaces.PaymentMethodNonceCreatedListener;
 import com.braintreepayments.api.models.PayPalRequest;
 import com.braintreepayments.api.models.PaymentMethodNonce;
 import com.google.gson.JsonObject;
+import com.stripe.android.stripe3ds2.a.n;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,8 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
     private TextView total_amount;
     private ProgressDialog progressDialog;
     private AuthResponse authResponse;
+    JsonObject jsonObject;
+    PurchaseHistory purchaseHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,26 +83,22 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
         place_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(payment_method != null){
-                    if (payment_method.equals("paypal")){
+                if (payment_method != null) {
+                    if (payment_method.equals("paypal")) {
                         setupBraintreeAndStartExpressCheckout();
-                    }
-                    else if (payment_method.equals("card")){
+                    } else if (payment_method.equals("card")) {
                         Intent intent = new Intent(PaymentActivity.this, StripePaymentActivity.class);
                         intent.putExtra("total", total);
                         intent.putExtra("shipping", shipping);
                         intent.putExtra("tax", tax);
                         intent.putExtra("coupon_discount", coupon_discount);
                         startActivityForResult(intent, 500);
-                    }
-                    else if(payment_method.equals("cod")){
+                    } else if (payment_method.equals("cod")) {
+                        checkout_done(null);
+                    } else if (payment_method.equals("wallet")) {
                         checkout_done(null);
                     }
-                    else if(payment_method.equals("wallet")){
-                        checkout_done(null);
-                    }
-                }
-                else {
+                } else {
                     CustomToast.showToast(PaymentActivity.this, getString(R.string.please_select_a_payment_method), R.color.colorWarning);
                 }
             }
@@ -108,28 +108,26 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
             @Override
             public void onClick(View v) {
                 String code = coupon_code.getText().toString();
-                if(code.length() > 0){
+                if (code.length() > 0) {
                     AuthResponse authResponse = new UserPrefs(PaymentActivity.this).getAuthPreferenceObjectJson("auth_response");
-                    if(authResponse != null && authResponse.getUser() != null){
+                    if (authResponse != null && authResponse.getUser() != null) {
                         new PaymentPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), PaymentActivity.this).applyCoupon(authResponse.getUser().getId(), code, authResponse.getAccessToken());
-                    }
-                    else {
+                    } else {
 
                     }
-                }
-                else {
+                } else {
                     CustomToast.showToast(PaymentActivity.this, getString(R.string.please_enter_coupon_code_first), R.color.colorWarning);
                 }
             }
         });
     }
 
-    private void setPaymentOptions(){
+    private void setPaymentOptions() {
         List<PaymentModel> paymentModels = new ArrayList<>();
-        if (AppConfig.BRAINTREE_KEY.length() > 0){
+        if (AppConfig.BRAINTREE_KEY.length() > 0) {
             paymentModels.add(new PaymentModel(R.drawable.paypal_logo_png_7, "paypal", getString(R.string.checkout_with_PayPal)));
         }
-        if (AppConfig.STRIPE_KEY.length() > 0){
+        if (AppConfig.STRIPE_KEY.length() > 0) {
             paymentModels.add(new PaymentModel(R.drawable.cardpayment, "card", getString(R.string.checkout_with_card)));
         }
         if (AppConfig.CASH_ON_DELIVERY) {
@@ -200,11 +198,11 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
 
     }
 
-    private void checkout_done(String paymentID){
+    private void checkout_done(String paymentID) {
         progressDialog.setMessage(getString(R.string.checkout_is_processing_please_wait));
         progressDialog.show();
 
-        JsonObject jsonObject = new JsonObject();
+        jsonObject = new JsonObject();
         jsonObject.addProperty("shipping_address", shipping_address);
         jsonObject.addProperty("payment_type", payment_method);
         jsonObject.addProperty("payment_status", payment_method == "cod" ? "unpaid" : "paid");
@@ -213,19 +211,17 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
         jsonObject.addProperty("coupon_discount", coupon_discount);
         jsonObject.addProperty("coupon_code", "");
 
-        if (payment_method.equals("paypal")){
+        if (payment_method.equals("paypal")) {
             jsonObject.addProperty("nonce", paymentID);
             new PaymentPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this).submitPaypalOrder(authResponse.getAccessToken(), jsonObject);
-        }
-        else if(payment_method.equals("card")){
+        } else if (payment_method.equals("card")) {
             new PaymentPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this).submitOrder(authResponse.getAccessToken(), jsonObject);
-        }
-        else if (payment_method.equals("wallet")){
+        } else if (payment_method.equals("wallet")) {
             new PaymentPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this).submitWalletOrder(authResponse.getAccessToken(), jsonObject);
-        }
-        else if (payment_method.equals("cod")){
+        } else if (payment_method.equals("cod")) {
             new PaymentPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this).submitCODOrder(authResponse.getAccessToken(), jsonObject);
         }
+
     }
 
     @Override
@@ -235,13 +231,12 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
 
     @Override
     public void onCouponApplied(CouponResponse couponResponse) {
-        if (couponResponse.getSuccess()){
+        if (couponResponse.getSuccess()) {
             CustomToast.showToast(this, couponResponse.getMessage(), R.color.colorSuccess);
             coupon_discount = couponResponse.getDiscount();
             total -= coupon_discount;
             total_amount.setText(AppConfig.convertPrice(this, total));
-        }
-        else {
+        } else {
             CustomToast.showToast(this, couponResponse.getMessage(), R.color.colorWarning);
         }
     }
@@ -249,20 +244,20 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
     @Override
     public void onOrderSubmitted(OrderResponse orderResponse) {
         progressDialog.dismiss();
-        if (orderResponse.getSuccess()){
-            //CustomToast.showToast(this, orderResponse.getMessage(), R.color.colorSuccess);
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("message", orderResponse.getMessage());
-            intent.putExtra("position", "cart");
-            startActivity(intent);
+        if (orderResponse.getSuccess()) {
+            CustomToast.showToast(this, orderResponse.getMessage(), R.color.colorSuccess);
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.putExtra("message", orderResponse.getMessage());
+//            intent.putExtra("position", "cart");
+//            startActivity(intent);
+            startActivity(new Intent(this, PurchaseHistoryActivity.class));
             finish();
-        }
-        else {
+        } else {
             CustomToast.showToast(this, orderResponse.getMessage(), R.color.colorDanger);
         }
     }
 
-    public class PaymentModel{
+    public class PaymentModel {
         int drawable;
         String payment_method, payment_text;
 

@@ -6,20 +6,12 @@ import com.google.gson.annotations.SerializedName;
 
 public class CheckVerificationResponse {
 
-    @SerializedName("success")
-    @Expose
-    private Boolean success;
     @SerializedName("message")
     @Expose
     private String message;
-
-    public Boolean getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(Boolean success) {
-        this.success = success;
-    }
+    @SerializedName("email_verified_at")
+    @Expose
+    private Object emailVerifiedAt;
 
     public String getMessage() {
         return message;
@@ -27,6 +19,14 @@ public class CheckVerificationResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Object getEmailVerifiedAt() {
+        return emailVerifiedAt;
+    }
+
+    public void setEmailVerifiedAt(Object emailVerifiedAt) {
+        this.emailVerifiedAt = emailVerifiedAt;
     }
 
 }

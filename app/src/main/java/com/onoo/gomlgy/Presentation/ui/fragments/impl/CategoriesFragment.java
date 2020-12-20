@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.onoo.gomlgy.Models.Category;
+import com.onoo.gomlgy.Models.SubCategorymodel;
 import com.onoo.gomlgy.Presentation.presenters.CategoryPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.SubCategoryActivity;
 import com.onoo.gomlgy.Presentation.ui.adapters.AllCategoryAdapter;
@@ -31,7 +32,7 @@ public class CategoriesFragment extends Fragment implements CategoryView, AllCat
     private View v;
     private CategoryPresenter categoryPresenter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private List<Category> mCategories = new ArrayList<>();
+    private List<SubCategorymodel> mCategories = new ArrayList<>();
     private RecyclerView recyclerView;
     private AllCategoryAdapter adapter;
 
@@ -61,7 +62,7 @@ public class CategoriesFragment extends Fragment implements CategoryView, AllCat
     }
 
     @Override
-    public void setAllCategories(List<Category> categories) {
+    public void setAllCategories(List<SubCategorymodel> categories) {
         mCategories.clear();
         mCategories.addAll(categories);
         adapter.notifyDataSetChanged();
@@ -69,9 +70,9 @@ public class CategoriesFragment extends Fragment implements CategoryView, AllCat
     }
 
     @Override
-    public void onCategoryClick(Category category) {
+    public void onCategoryClick(SubCategorymodel category) {
         Intent intent = new Intent(getContext(), SubCategoryActivity.class);
-        intent.putExtra("category", category);
+//        intent.putExtra("category", category);
         startActivity(intent);
     }
 

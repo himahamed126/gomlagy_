@@ -38,7 +38,7 @@ import java.util.List;
 
 import q.rorbin.badgeview.QBadgeView;
 
-import static com.onoo.gomlgy.Presentation.ui.activities.impl.MainActivity.navView;
+//import static com.onoo.gomlgy.Presentation.ui.activities.impl.MainActivity.navView;
 
 public class CartFragment extends Fragment implements CartView, CartItemListener {
     private View v;
@@ -105,9 +105,9 @@ public class CartFragment extends Fragment implements CartView, CartItemListener
 
             total_amount.setText(AppConfig.convertPrice(getContext(), total));
 
-            BottomNavigationMenuView bottomNavigationMenuView =
-                    (BottomNavigationMenuView) navView.getChildAt(0);
-            View v = bottomNavigationMenuView.getChildAt(3); // number of menu from left
+//            BottomNavigationMenuView bottomNavigationMenuView =
+//                    (BottomNavigationMenuView) navView.getChildAt(0);
+//            View v = bottomNavigationMenuView.getChildAt(3); // number of menu from left
             new QBadgeView(getActivity()).bindTarget(v).setBadgeText(String.valueOf(qty)).setShowShadow(false);
         }
     }

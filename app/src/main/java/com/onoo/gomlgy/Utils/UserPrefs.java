@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.onoo.gomlgy.Network.response.AppSettingsResponse;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.google.gson.Gson;
+import com.onoo.gomlgy.Network.response.LoginResponse;
 import com.onoo.gomlgy.R;
 
 import java.util.Locale;

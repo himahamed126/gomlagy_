@@ -1,6 +1,7 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
 import com.onoo.gomlgy.Network.response.AuthResponse;
+import com.onoo.gomlgy.Network.response.LoginResponse;
 import com.onoo.gomlgy.Presentation.ui.activities.LoginView;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;

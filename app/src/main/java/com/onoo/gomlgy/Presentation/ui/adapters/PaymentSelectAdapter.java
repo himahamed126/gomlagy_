@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -59,34 +60,27 @@ public class PaymentSelectAdapter extends RecyclerView.Adapter<PaymentSelectAdap
         ImageView payment_icon;
         TextView payment_text;
         RelativeLayout payment_layout;
+        CheckBox checkBox;
 
         ViewHolder(View itemView) {
             super(itemView);
             payment_icon = itemView.findViewById(R.id.payment_icon);
             payment_text = itemView.findViewById(R.id.payment_text);
             payment_layout = itemView.findViewById(R.id.payment_layout);
+            checkBox = itemView.findViewById(R.id.checkbox_payment);
         }
 
         public void bind(final PaymentModel paymentModel, int position) {
             payment_icon.setImageResource(paymentModel.getDrawable());
             payment_text.setText(paymentModel.getPayment_text());
 
-            if(row_index == position){
-                payment_layout.setBackgroundResource(R.drawable.payment_card_selected_background);
-            }
-            else
-            {
-                payment_layout.setBackgroundColor(Color.parseColor("#ffffff"));
-            }
+            checkBox.setChecked(row_index == position);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    row_index = position;
-                    notifyDataSetChanged();
-                    if (paymentSelectListener != null){
-                        paymentSelectListener.onPaymentItemClick(paymentModel);
-                    }
+            itemView.setOnClickListener(v -> {
+                row_index = position;
+                notifyDataSetChanged();
+                if (paymentSelectListener != null) {
+                    paymentSelectListener.onPaymentItemClick(paymentModel);
                 }
             });
         }

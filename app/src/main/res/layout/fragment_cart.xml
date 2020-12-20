@@ -8,19 +8,19 @@
         android:id="@+id/product_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/checkout_button"/>
+        android:layout_above="@id/checkout_button" />
 
     <LinearLayout
         android:id="@+id/checkout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
         <RelativeLayout
-            android:background="@android:color/white"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -29,32 +29,32 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="@string/total_amount"
-                android:textSize="16sp"
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/total_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="0"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
         <Button
             android:id="@+id/checkout"
-            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:textColor="#fff"
+            android:background="@color/white"
+            android:foreground="?android:attr/selectableItemBackground"
             android:text="@string/proceed_to_checkout"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -77,7 +77,6 @@
         android:gravity="center"
         android:text="@string/your_shopping_cart_is_empty"
         android:textSize="18sp"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -23,7 +24,7 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
     private Context context;
     private ShippingAddressListener shippingAddressListener;
 
-    public Context getContext(){
+    public Context getContext() {
         return this.context;
     }
 
@@ -91,7 +92,7 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
             toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
-                    switch (item.getItemId()){
+                    switch (item.getItemId()) {
                         case R.id.address_delete:
                             shippingAddressListener.onItemDeleteClick(shippingAddress);
                     }

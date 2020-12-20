@@ -17,4 +17,8 @@ public class SliderImage implements Serializable {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
+    public SliderImage(String photo) {
+        this.photo = photo;
+    }
 }

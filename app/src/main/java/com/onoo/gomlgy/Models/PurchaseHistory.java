@@ -138,4 +138,19 @@ public class PurchaseHistory implements Serializable {
     public void setLinks(PurchaseHistoryLink links) {
         this.links = links;
     }
+
+    public PurchaseHistory(String code, User user, ShippingAddress shippingAddress, String paymentType, String paymentStatus, Double grandTotal, Double shippingCost, Double coupon_discount, Double subtotal, Double tax, String date, PurchaseHistoryLink links) {
+        this.code = code;
+        this.user = user;
+        this.shippingAddress = shippingAddress;
+        this.paymentType = paymentType;
+        this.paymentStatus = paymentStatus;
+        this.grandTotal = grandTotal;
+        this.shippingCost = shippingCost;
+        this.coupon_discount = coupon_discount;
+        this.subtotal = subtotal;
+        this.tax = tax;
+        this.date = date;
+        this.links = links;
+    }
 }

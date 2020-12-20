@@ -23,46 +23,48 @@
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/imageSlider"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp" />
+                    android:layout_height="180dp" />
 
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_below="@id/home_top_section">
+                android:layout_below="@id/home_top_section"
+                android:orientation="vertical">
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/featured_categories_text"
+                        android:id="@+id/featured_products_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="@string/featured_categories"
-                        android:textStyle="bold"
+                        android:text="@string/featured_products"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <View
                         android:layout_width="75dp"
                         android:layout_height="3dp"
-                        android:layout_alignBottom="@id/featured_categories_text"
+                        android:layout_alignBottom="@id/featured_products_text"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:background="@color/colorPrimary" />
 
+
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/top_categories"
+                        android:id="@+id/featured_products"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/featured_categories_text"
+                        android:layout_below="@id/featured_products_text"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
@@ -71,60 +73,43 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/flash_deal_section"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/flash_deals_text"
+                        android:id="@+id/best_selling_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="@string/flash_deal"
-                        android:textStyle="bold"
+                        android:text="@string/best_selling"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-<!--                    <View-->
-<!--                        android:layout_width="75dp"-->
-<!--                        android:layout_height="3dp"-->
-<!--                        android:layout_alignBottom="@id/flash_deals_text"-->
-<!--                        android:layout_alignParentEnd="true"-->
-<!--                        android:layout_marginEnd="10dp"-->
-<!--                        android:layout_marginBottom="10dp"-->
-<!--                        android:background="@color/colorPrimary" />-->
-
-                    <cn.iwgang.countdownview.CountdownView
-                        android:id="@+id/countdown"
+                    <TextView
+                        android:id="@+id/best_selling_see_all"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@id/flash_deals_text"
+                        android:layout_alignBottom="@id/best_selling_text"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="10dp"
-                        android:layout_marginTop="15dp"
-                        app:isHideTimeBackground="false"
-                        app:timeBgColor="@color/colorPrimaryLight"
-                        app:isShowDay="true"
-                        app:isShowHour="true"
-                        app:isShowMinute="true"
-                        app:isShowSecond="true"
-                        app:timeTextColor="@android:color/white"
-                        app:timeTextSize="16sp"
-                        app:isTimeTextBold="true"/>
+                        android:text="@string/see_all"
+                        android:textColor="@color/colorPrimary" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/flash_deals"
+                        android:id="@+id/best_selling"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/flash_deals_text"
+                        android:layout_below="@id/best_selling_text"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
                     </androidx.recyclerview.widget.RecyclerView>
 
                 </RelativeLayout>
+
 
                 <RelativeLayout
                     android:id="@+id/todays_deal_section"
@@ -139,9 +124,9 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:text="@string/todays_deal"
-                        android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <View
                         android:layout_width="75dp"
@@ -164,44 +149,41 @@
 
                 </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/banner_1"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"/>
-
                 <RelativeLayout
+                    android:id="@+id/cat_1_section"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
 
                     <TextView
-                        android:id="@+id/featured_products_text"
+                        android:id="@+id/cat_1_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="@string/featured_products"
-                        android:textStyle="bold"
+                        android:text="@string/todays_deal"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
 
-                    <View
-                        android:layout_width="75dp"
-                        android:layout_height="3dp"
-                        android:layout_alignBottom="@id/featured_products_text"
+                    <TextView
+                        android:id="@+id/cat_1_see_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/cat_1_text"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/colorPrimary" />
+                        android:text="@string/see_all"
+                        android:textColor="@color/colorPrimary"
+                        android:visibility="gone" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/featured_products"
+                        android:id="@+id/cat_1_deals"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/featured_products_text"
+                        android:layout_below="@id/cat_1_text"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
@@ -209,44 +191,41 @@
 
                 </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/banner_2"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"/>
-
                 <RelativeLayout
+                    android:id="@+id/cat_2_section"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
 
                     <TextView
-                        android:id="@+id/best_selling_text"
+                        android:id="@+id/cat_2_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="@string/best_selling"
-                        android:textStyle="bold"
+                        android:text="@string/todays_deal"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
 
-                    <View
-                        android:layout_width="75dp"
-                        android:layout_height="3dp"
-                        android:layout_alignBottom="@id/best_selling_text"
+                    <TextView
+                        android:id="@+id/cat_2_see_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/cat_2_text"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/colorPrimary" />
+                        android:text="@string/see_all"
+                        android:textColor="@color/colorPrimary"
+                        android:visibility="gone" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/best_selling"
+                        android:id="@+id/cat_2_deals"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/best_selling_text"
+                        android:layout_below="@id/cat_2_text"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
@@ -254,38 +233,95 @@
 
                 </RelativeLayout>
 
-                <!--                <com.kingfisher.easyviewindicator.AnyViewIndicator-->
-                <!--                    android:id="@+id/anyViewIndicator"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_gravity="center_horizontal"-->
-                <!--                    android:layout_marginTop="0dp"-->
-                <!--                    android:paddingBottom="10dp"-->
-                <!--                    android:gravity="center"-->
-                <!--                    app:avi_animation_enable="false"-->
-                <!--                    app:avi_drawable="@drawable/selected_radius"-->
-                <!--                    app:avi_drawable_unselected="@drawable/gray_radius"-->
-                <!--                    android:background="@color/cardview_light_background"-->
-                <!--                    app:avi_height="6dp"-->
-                <!--                    app:avi_margin="5dp"-->
-                <!--                    app:avi_orientation="horizontal"-->
-                <!--                    app:avi_width="6dp"-->
-                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                    app:layout_constraintEnd_toEndOf="@id/best_selling"-->
-                <!--                    app:layout_constraintStart_toStartOf="@id/best_selling"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@id/best_selling" />-->
-
-                <ImageView
-                    android:id="@+id/banner_3"
-                    android:layout_marginTop="10dp"
+                <RelativeLayout
+                    android:id="@+id/cat_3_section"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:id="@+id/cat_3_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/todays_deal"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:id="@+id/cat_3_see_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/cat_3_text"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/see_all"
+                        android:textColor="@color/colorPrimary"
+                        android:visibility="gone" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/cat_3_deals"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/cat_3_text"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/cat_4_section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:id="@+id/cat_4_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/todays_deal"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:id="@+id/cat_4_see_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/cat_4_text"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/see_all"
+                        android:textColor="@color/colorPrimary"
+                        android:visibility="gone" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/cat_4_deals"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/cat_4_text"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/popular_brands_text"
@@ -295,9 +331,9 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:text="@string/our_popular_brands"
-                        android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <View
                         android:layout_width="75dp"
@@ -323,7 +359,8 @@
                 <RelativeLayout
                     android:id="@+id/auction_product_section"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/auction_products_text"
@@ -333,9 +370,9 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:text="@string/auction_products"
-                        android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <View
                         android:layout_width="75dp"
