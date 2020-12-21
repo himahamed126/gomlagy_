@@ -11,25 +11,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.SubCategorymodel;
+import com.onoo.gomlgy.Models.Category;
 import com.onoo.gomlgy.Presentation.ui.listeners.AllCategoryClickListener;
 import com.onoo.gomlgy.R;
-import com.onoo.gomlgy.Utils.HelperMethod;
-import com.onoo.gomlgy.Utils.ItemAnimation;
 
 import java.util.List;
 
 public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.ViewHolder> {
     int selected_position = 0;
     private Context context;
-    private List<SubCategorymodel> mCategories;
+    private List<Category> mCategories;
     private LayoutInflater mInflater;
     private AllCategoryClickListener mClickListener;
-    int selectedPosition=-1;
-    private int lastPosition = -1;
-    private boolean on_attach = true;
+//    int selectedPosition = -1;
+//    private int lastPosition = -1;
+//    private boolean on_attach = true;
 
-    public AllCategoryAdapter(Context context, List<SubCategorymodel> categories, AllCategoryClickListener listener) {
+    public AllCategoryAdapter(Context context, List<Category> categories, AllCategoryClickListener listener) {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
         this.mCategories = categories;
@@ -42,6 +40,7 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
         View view = mInflater.inflate(R.layout.category_list_item, parent, false);
         return new ViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(mCategories.get(position));
@@ -56,18 +55,19 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
     }
 
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageView;
         TextView textView;
+
         ViewHolder(View itemView) {
             super(itemView);
-        //    imageView = itemView.findViewById(R.id.category_icon);
+            //    imageView = itemView.findViewById(R.id.category_icon);
             textView = itemView.findViewById(R.id.category_name);
             itemView.setOnClickListener(this);
         }
 
-        public void bind(final SubCategorymodel category) {
-           // Glide.with(context).load(AppConfig.ASSET_URL + category.getIcon()).into(imageView);
+        public void bind(final Category category) {
+            // Glide.with(context).load(AppConfig.ASSET_URL + category.getIcon()).into(imageView);
             textView.setText(category.getName());
 
         }
@@ -78,7 +78,8 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
             notifyItemChanged(selected_position);
             selected_position = getAdapterPosition();
             notifyItemChanged(selected_position);
-            if (mClickListener != null) mClickListener.onCategoryClick(mCategories.get(getAdapterPosition()));
+            if (mClickListener != null)
+                mClickListener.onCategoryClick(mCategories.get(getAdapterPosition()));
         }
     }
 }

@@ -6,8 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.onoo.gomlgy.Models.Category;
-import com.onoo.gomlgy.Models.SubCategorymodel;
 import com.onoo.gomlgy.Presentation.presenters.CategoryPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.SubCategoryActivity;
 import com.onoo.gomlgy.Presentation.ui.adapters.AllCategoryAdapter;
@@ -22,17 +27,12 @@ import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-public class CategoriesFragment extends Fragment implements CategoryView, AllCategoryClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class CategoriesFragment extends Fragment implements CategoryView, AllCategoryClickListener,
+        SwipeRefreshLayout.OnRefreshListener {
     private View v;
     private CategoryPresenter categoryPresenter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private List<SubCategorymodel> mCategories = new ArrayList<>();
+    private List<Category> mCategories = new ArrayList<>();
     private RecyclerView recyclerView;
     private AllCategoryAdapter adapter;
 
@@ -52,7 +52,7 @@ public class CategoriesFragment extends Fragment implements CategoryView, AllCat
                 = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new AllCategoryAdapter(getActivity(), mCategories, CategoriesFragment.this);
-        recyclerView.addItemDecoration( new LayoutMarginDecoration( 1,  AppConfig.convertDpToPx(getContext(), 10)) );
+        recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getContext(), 10)));
         recyclerView.setAdapter(adapter);
 
         categoryPresenter = new CategoryPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
@@ -62,7 +62,7 @@ public class CategoriesFragment extends Fragment implements CategoryView, AllCat
     }
 
     @Override
-    public void setAllCategories(List<SubCategorymodel> categories) {
+    public void setAllCategories(List<Category> categories) {
         mCategories.clear();
         mCategories.addAll(categories);
         adapter.notifyDataSetChanged();
@@ -70,7 +70,7 @@ public class CategoriesFragment extends Fragment implements CategoryView, AllCat
     }
 
     @Override
-    public void onCategoryClick(SubCategorymodel category) {
+    public void onCategoryClick(Category category) {
         Intent intent = new Intent(getContext(), SubCategoryActivity.class);
 //        intent.putExtra("category", category);
         startActivity(intent);
