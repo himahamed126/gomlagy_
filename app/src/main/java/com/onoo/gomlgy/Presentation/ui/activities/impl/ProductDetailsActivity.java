@@ -65,6 +65,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     private ProductDetailsPresenter productDetailsPresenter;
     private CardView shop_info, image_card;
     private boolean isBuyNow = false;
+    private RecyclerView modelRv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,6 +198,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     }
 
     private void initviews() {
+        modelRv = findViewById(R.id.model_rv);
         product_details = findViewById(R.id.product_details);
         product_buttons = findViewById(R.id.product_buttons);
         progress_bar = findViewById(R.id.item_progress_bar);
@@ -231,6 +233,10 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         progressDialog = new ProgressDialog(this);
         shop_info = findViewById(R.id.shop_info);
         image_card = findViewById(R.id.image_card);
+    }
+
+    void setModelRv() {
+        modelRv.setLayoutManager(new GridLayoutManager(this, 2));
     }
 
     @Override
