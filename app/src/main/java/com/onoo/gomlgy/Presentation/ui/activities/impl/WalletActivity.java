@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.onoo.gomlgy.Models.Wallet;
+import com.onoo.gomlgy.models.Wallet;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Presentation.presenters.WalletPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.WalletView;

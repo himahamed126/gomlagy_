@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Network.response;
 
-import com.onoo.gomlgy.Models.Category;
+import com.onoo.gomlgy.models.Category;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.Models.PolicyContent;
+import com.onoo.gomlgy.models.PolicyContent;
 import com.onoo.gomlgy.Presentation.ui.activities.PolicyView;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;

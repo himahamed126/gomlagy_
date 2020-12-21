@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.PurchaseHistory;
+import com.onoo.gomlgy.models.PurchaseHistory;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Presentation.presenters.PurchaseHistoryPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.PurchaseHistoryView;

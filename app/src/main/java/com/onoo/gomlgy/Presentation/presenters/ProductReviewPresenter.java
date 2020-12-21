@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.Models.Review;
+import com.onoo.gomlgy.models.Review;
 import com.onoo.gomlgy.Presentation.ui.activities.ProductReviewView;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;

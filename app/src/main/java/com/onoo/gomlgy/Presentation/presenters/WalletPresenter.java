@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.Models.Wallet;
+import com.onoo.gomlgy.models.Wallet;
 import com.onoo.gomlgy.Presentation.ui.activities.WalletView;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;

@@ -1,7 +1,7 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.Models.Product;
-import com.onoo.gomlgy.Models.Shop;
+import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.Shop;
 import com.onoo.gomlgy.Presentation.ui.activities.SellerShopView;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;

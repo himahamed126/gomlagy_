@@ -21,8 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.onoo.gomlgy.Models.ChoiceOption;
-import com.onoo.gomlgy.Models.ProductDetails;
+import com.onoo.gomlgy.models.ChoiceOption;
+import com.onoo.gomlgy.models.ProductDetails;
 import com.onoo.gomlgy.Network.response.AddToCartResponse;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Network.response.VariantResponse;

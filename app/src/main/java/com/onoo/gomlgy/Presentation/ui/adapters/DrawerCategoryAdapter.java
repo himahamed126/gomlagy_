@@ -6,12 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.SubCategorymodel;
+import com.onoo.gomlgy.models.SubCategorymodel;
 import com.onoo.gomlgy.Presentation.ui.listeners.DrawerClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.HelperMethod;

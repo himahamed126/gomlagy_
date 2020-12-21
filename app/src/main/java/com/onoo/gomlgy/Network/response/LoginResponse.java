@@ -2,7 +2,7 @@ package com.onoo.gomlgy.Network.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.onoo.gomlgy.Models.User;
+import com.onoo.gomlgy.models.User;
 
 public class LoginResponse {
 

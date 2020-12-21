@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.widget.TextView;
 
-import com.onoo.gomlgy.Models.PolicyContent;
+import com.onoo.gomlgy.models.PolicyContent;
 import com.onoo.gomlgy.Presentation.presenters.PolicyPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.PolicyView;
 import com.onoo.gomlgy.R;

@@ -6,11 +6,10 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.Category;
-import com.onoo.gomlgy.Models.SubCategory;
-import com.onoo.gomlgy.Presentation.presenters.SubSubCategoryPresenter;
+import com.onoo.gomlgy.models.Category;
+import com.onoo.gomlgy.models.SubCategory;
+import com.onoo.gomlgy.Presentation.presenters.SubCategoryPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.SubCategoryView;
-import com.onoo.gomlgy.Presentation.ui.adapters.SubCategoryAdapter;
 import com.onoo.gomlgy.Presentation.ui.listeners.SubCategoryClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Threading.MainThreadImpl;
@@ -32,8 +31,8 @@ public class SubCategoryActivity extends BaseActivity implements SubCategoryView
         initializeActionBar();
         setTitle(category.getName());
 
-        SubSubCategoryPresenter subSubCategoryPresenter = new SubSubCategoryPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
-        subSubCategoryPresenter.getSubSubCategories(category.getLinks().getSubCategories());
+        SubCategoryPresenter subCategoryPresenter = new SubCategoryPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
+        subCategoryPresenter.getSubSubCategories(category.getLinks().getSubCategories());
     }
 
     @Override
@@ -43,8 +42,8 @@ public class SubCategoryActivity extends BaseActivity implements SubCategoryView
                 = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration( new LayoutMarginDecoration( 1,  AppConfig.convertDpToPx(getApplicationContext(), 10)) );
-        SubCategoryAdapter adapter = new SubCategoryAdapter(this, subCategories, this);
-        recyclerView.setAdapter(adapter);
+//        SubCategoryAdapter adapter = new SubCategoryAdapter(this, subCategories, this);
+//        recyclerView.setAdapter(adapter);
     }
 
     @Override

@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.onoo.gomlgy.Models.Product;
+import com.onoo.gomlgy.models.Product;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductDetailsActivity;
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.R;

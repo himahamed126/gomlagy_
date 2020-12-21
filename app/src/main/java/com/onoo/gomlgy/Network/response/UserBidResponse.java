@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Network.response;
 
-import com.onoo.gomlgy.Models.UserBid;
+import com.onoo.gomlgy.models.UserBid;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

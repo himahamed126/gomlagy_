@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.domain.interactors;
 
-import com.onoo.gomlgy.Models.Wallet;
+import com.onoo.gomlgy.models.Wallet;
 
 import java.util.List;
 

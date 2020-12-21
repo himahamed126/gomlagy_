@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.WishlistModel;
+import com.onoo.gomlgy.models.WishlistModel;
 import com.onoo.gomlgy.Presentation.ui.listeners.WishlistProductClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.AppConfig;

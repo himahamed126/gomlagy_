@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.onoo.gomlgy.Models.Product;
+import com.onoo.gomlgy.models.Product;
 import com.onoo.gomlgy.Presentation.ui.listeners.AllProductClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.AppConfig;

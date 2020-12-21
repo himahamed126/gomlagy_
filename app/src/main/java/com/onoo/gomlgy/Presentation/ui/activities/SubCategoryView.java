@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Presentation.ui.activities;
 
-import com.onoo.gomlgy.Models.SubCategory;
+import com.onoo.gomlgy.models.SubCategory;
 
 import java.util.List;
 

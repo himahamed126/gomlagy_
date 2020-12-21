@@ -27,17 +27,12 @@
             android:layout_height="match_parent"
             android:background="#eee">
 
-            <com.github.ybq.android.spinkit.SpinKitView
-                android:id="@+id/spin_kit"
-                style="@style/SpinKitView.Wave"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:SpinKit_Color="#D45100"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/category_rv"
@@ -50,37 +45,29 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/category_list_item" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.25" />
-
-            <androidx.cardview.widget.CardView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sub_categories_rv"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="0dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/gl"
-                app:layout_constraintTop_toTopOf="parent">
+                tools:listitem="@layout/sub_category_list_item" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/product_rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:clipToPadding="false"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="3"
-                    tools:listitem="@layout/product_box_subcategory" />
-            </androidx.cardview.widget.CardView>
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spin_kit"
+                style="@style/SpinKitView.Wave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:SpinKit_Color="#D45100"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <!--    <fragment-->
             <!--        android:id="@+id/subcategory"-->
             <!--        android:name="com.onoo.gomlgy.Presentation.ui.activities.impl.SubcategoryDetails"-->

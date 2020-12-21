@@ -2,7 +2,7 @@ package com.onoo.gomlgy.Utils;
 
 import android.content.Context;
 
-import com.onoo.gomlgy.Models.AppSettings;
+import com.onoo.gomlgy.models.AppSettings;
 
 import java.text.DecimalFormat;
 

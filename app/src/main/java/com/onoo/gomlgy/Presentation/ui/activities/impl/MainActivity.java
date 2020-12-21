@@ -6,15 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -26,8 +23,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.onoo.gomlgy.Models.SubCategorymodel;
-import com.onoo.gomlgy.Models.collectionmodel;
+import com.onoo.gomlgy.models.SubCategorymodel;
+import com.onoo.gomlgy.models.collectionmodel;
 import com.onoo.gomlgy.Network.ApiClient;
 import com.onoo.gomlgy.Network.response.AppSettingsResponse;
 import com.onoo.gomlgy.Network.services.getProductsWithSubcategory;

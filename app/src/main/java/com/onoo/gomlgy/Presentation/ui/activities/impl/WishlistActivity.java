@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.WishlistModel;
-import com.onoo.gomlgy.Models.WishlistProduct;
+import com.onoo.gomlgy.models.WishlistModel;
+import com.onoo.gomlgy.models.WishlistProduct;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Presentation.presenters.WishlistPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.WishlistView;

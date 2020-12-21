@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Network.services;
 
-import com.onoo.gomlgy.Models.collectionmodel;
+import com.onoo.gomlgy.models.collectionmodel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

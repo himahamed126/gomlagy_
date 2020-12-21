@@ -2,7 +2,7 @@ package com.onoo.gomlgy.domain.interactors.impl;
 
 import android.util.Log;
 
-import com.onoo.gomlgy.Models.offers_sources.offers.Offers;
+import com.onoo.gomlgy.models.offers_sources.offers.Offers;
 import com.onoo.gomlgy.Network.ApiClient;
 import com.onoo.gomlgy.Network.services.OffersApiInterface;
 import com.onoo.gomlgy.domain.executor.Executor;

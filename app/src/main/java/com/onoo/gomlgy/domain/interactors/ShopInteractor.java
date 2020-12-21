@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.domain.interactors;
 
-import com.onoo.gomlgy.Models.Shop;
+import com.onoo.gomlgy.models.Shop;
 
 public interface ShopInteractor {
     interface CallBack {

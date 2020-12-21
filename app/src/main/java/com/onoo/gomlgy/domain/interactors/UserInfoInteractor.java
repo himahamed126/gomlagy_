@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.domain.interactors;
 
-import com.onoo.gomlgy.Models.User;
+import com.onoo.gomlgy.models.User;
 
 public interface UserInfoInteractor {
     interface CallBack {

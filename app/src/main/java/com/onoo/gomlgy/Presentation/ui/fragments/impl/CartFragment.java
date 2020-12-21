@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.CartModel;
+import com.onoo.gomlgy.models.CartModel;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Network.response.CartQuantityUpdateResponse;
 import com.onoo.gomlgy.Network.response.RemoveCartResponse;
@@ -32,7 +32,6 @@ import com.onoo.gomlgy.Utils.CustomToast;
 import com.onoo.gomlgy.Utils.SwipeToDeleteCallback;
 import com.onoo.gomlgy.Utils.UserPrefs;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 
 import java.util.List;
 

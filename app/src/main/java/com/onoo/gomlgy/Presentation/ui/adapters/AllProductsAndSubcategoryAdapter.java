@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.collectionmodel;
+import com.onoo.gomlgy.models.collectionmodel;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductListingActivity;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.HelperMethod;

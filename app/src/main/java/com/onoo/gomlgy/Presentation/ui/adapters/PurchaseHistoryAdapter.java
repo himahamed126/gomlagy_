@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.PurchaseHistory;
+import com.onoo.gomlgy.models.PurchaseHistory;
 import com.onoo.gomlgy.Presentation.ui.listeners.PurchaseHistoryCliclListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.AppConfig;

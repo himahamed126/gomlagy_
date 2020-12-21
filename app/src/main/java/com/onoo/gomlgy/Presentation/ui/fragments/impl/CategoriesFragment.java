@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.onoo.gomlgy.Models.Category;
+import com.onoo.gomlgy.models.Category;
 import com.onoo.gomlgy.Presentation.presenters.CategoryPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.SubCategoryActivity;
 import com.onoo.gomlgy.Presentation.ui.adapters.AllCategoryAdapter;

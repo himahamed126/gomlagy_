@@ -1,7 +1,7 @@
 package com.onoo.gomlgy.Presentation.ui.activities;
 
-import com.onoo.gomlgy.Models.Product;
-import com.onoo.gomlgy.Models.Shop;
+import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.Shop;
 
 import java.util.List;
 

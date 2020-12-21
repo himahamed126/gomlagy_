@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.PurchaseHistory;
+import com.onoo.gomlgy.models.PurchaseHistory;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Network.response.CouponResponse;
 import com.onoo.gomlgy.Network.response.OrderResponse;
@@ -37,7 +37,6 @@ import com.braintreepayments.api.interfaces.PaymentMethodNonceCreatedListener;
 import com.braintreepayments.api.models.PayPalRequest;
 import com.braintreepayments.api.models.PaymentMethodNonce;
 import com.google.gson.JsonObject;
-import com.stripe.android.stripe3ds2.a.n;
 
 import java.util.ArrayList;
 import java.util.List;

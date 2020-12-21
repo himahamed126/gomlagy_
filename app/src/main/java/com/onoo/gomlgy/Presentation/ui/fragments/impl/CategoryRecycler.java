@@ -16,9 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.github.ybq.android.spinkit.SpinKitView;
-import com.onoo.gomlgy.Models.Category;
-import com.onoo.gomlgy.Models.Product;
-import com.onoo.gomlgy.Models.SubCategory;
 import com.onoo.gomlgy.Network.ApiClient;
 import com.onoo.gomlgy.Network.response.ProductListingResponse;
 import com.onoo.gomlgy.Network.services.ProductListingApiInterface;
@@ -34,6 +31,9 @@ import com.onoo.gomlgy.Presentation.ui.listeners.SubCategoryClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
+import com.onoo.gomlgy.models.Category;
+import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.SubCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -169,7 +169,6 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
     @Override
     public void onSubCategoryItemClick(SubCategory subCategory) {
     }
-
 
     @Override
     public void onProductClick(Product product) {

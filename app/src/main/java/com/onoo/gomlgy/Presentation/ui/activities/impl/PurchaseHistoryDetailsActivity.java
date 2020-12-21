@@ -6,8 +6,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.OrderDetail;
-import com.onoo.gomlgy.Models.PurchaseHistory;
+import com.onoo.gomlgy.models.OrderDetail;
+import com.onoo.gomlgy.models.PurchaseHistory;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Presentation.presenters.PurchaseHistoryDetailsPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.PurchaseHistoryDetailsView;

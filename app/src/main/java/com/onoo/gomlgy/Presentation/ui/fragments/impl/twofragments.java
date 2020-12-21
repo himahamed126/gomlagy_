@@ -10,39 +10,46 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.github.ybq.android.spinkit.SpinKitView;
-import com.onoo.gomlgy.Models.Category;
 import com.onoo.gomlgy.Presentation.presenters.CategoryPresenter;
+import com.onoo.gomlgy.Presentation.presenters.SubCategoryPresenter;
+import com.onoo.gomlgy.Presentation.ui.activities.SubCategoryView;
 import com.onoo.gomlgy.Presentation.ui.adapters.AllCategoryAdapter;
+import com.onoo.gomlgy.Presentation.ui.adapters.SubCategoryAdapter;
 import com.onoo.gomlgy.Presentation.ui.fragments.CategoryView;
 import com.onoo.gomlgy.Presentation.ui.listeners.AllCategoryClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
+import com.onoo.gomlgy.models.Category;
+import com.onoo.gomlgy.models.SubCategory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
-        AllCategoryClickListener, CategoryView {
+        AllCategoryClickListener, CategoryView, SubCategoryView {
     private View v;
     private CategoryPresenter categoryPresenter;
+    private SubCategoryPresenter subCategoryPresenter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private List<Category> mCategories = new ArrayList<>();
-    private RecyclerView categoryRv;
-    private AllCategoryAdapter adapter;
+    private RecyclerView categoryRv, subCategoriesRv;
+    private AllCategoryAdapter allCategoryAdapter;
+    private List<SubCategory> subCategories;
+    private SubCategoryAdapter subCategoryAdapter;
+//    private SpinKitView spin;
     //    getProductsWithSubcategory apiService;
-    private static final String TAG = "CategoryRecycler";
+//    private static final String TAG = "CategoryRecycler";
     //    List<Product> productList = new ArrayList<>();
     //    productsOfSubCategoryAdapter productAdapter;
 //    RecyclerView productRv;
 //    private ProductListingApiInterface apiService1;
-    SpinKitView spin;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_twofragments, null);
 
         init();
@@ -52,18 +59,30 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
     void init() {
         mSwipeRefreshLayout = v.findViewById(R.id.swipe_container);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, android.R.color.holo_green_dark, android.R.color.holo_orange_dark, android.R.color.holo_blue_dark);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_dark, android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark);
         categoryRv = v.findViewById(R.id.category_rv);
+        subCategoriesRv = v.findViewById(R.id.sub_categories_rv);
 
         categoryRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new AllCategoryAdapter(getActivity(), mCategories, twofragments.this);
-        categoryRv.setAdapter(adapter);
-        categoryPresenter = new CategoryPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
+        allCategoryAdapter = new AllCategoryAdapter(getActivity(), mCategories,
+                twofragments.this);
+        categoryRv.setAdapter(allCategoryAdapter);
+        categoryPresenter = new CategoryPresenter(ThreadExecutor.getInstance(),
+                MainThreadImpl.getInstance(), this);
         categoryPresenter.getAllCategories();
-        spin = v.findViewById(R.id.spin_kit);
+        subCategoryPresenter = new SubCategoryPresenter(ThreadExecutor.getInstance(),
+                MainThreadImpl.getInstance(), this);
+        subCategories = new ArrayList<>();
+        subCategoryAdapter = new SubCategoryAdapter(subCategories);
+        subCategoriesRv.setAdapter(subCategoryAdapter);
+
+//        spin = v.findViewById(R.id.spin_kit);
 
 //        productRv = v.findViewById(R.id.product_rv);
-//        productAdapter = new productsOfSubCategoryAdapter(getActivity(), productList,this::onProductClick);
+//        productAdapter = new productsOfSubCategoryAdapter(getActivity(), productList,
+//        this::onProductClick);
 //
 //        productRv.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
 //        productRv.setAdapter(productAdapter);
@@ -105,24 +124,38 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public void onRefresh() {
         mSwipeRefreshLayout.setRefreshing(true);
-        categoryPresenter.getAllCategories();
+
     }
 
     @Override
     public void onCategoryClick(Category category) {
 //        Log.i(TAG, "onCategoryClick: " + category.getName());
 //        getDAta(category.getId());
+        subCategoryPresenter.getSubSubCategories(category.getLinks().getSubCategories());
+
     }
 
     @Override
     public void setAllCategories(List<Category> categories) {
         mCategories.clear();
         mCategories.addAll(categories);
-        adapter.notifyDataSetChanged();
+        allCategoryAdapter.notifyDataSetChanged();
         mSwipeRefreshLayout.setRefreshing(false);
+
+        subCategoryPresenter.getSubSubCategories(categories.get(0).getLinks().getSubCategories());
+
 //        if (!categories.isEmpty()) {
 //            getDAta(6);
 //        }
+    }
+
+    @Override
+    public void setSubCategories(List<SubCategory> subCategories) {
+
+        this.subCategories.clear();
+        this.subCategories.addAll(subCategories);
+        subCategoryAdapter.notifyDataSetChanged();
+
     }
 
 //    @Override
