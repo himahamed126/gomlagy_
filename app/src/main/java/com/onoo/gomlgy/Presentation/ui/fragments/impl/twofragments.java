@@ -1,5 +1,6 @@
 package com.onoo.gomlgy.Presentation.ui.fragments.impl;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.onoo.gomlgy.Presentation.presenters.CategoryPresenter;
 import com.onoo.gomlgy.Presentation.presenters.SubCategoryPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.SubCategoryView;
+import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductListingActivity;
 import com.onoo.gomlgy.Presentation.ui.adapters.AllCategoryAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.SubCategoryAdapter;
 import com.onoo.gomlgy.Presentation.ui.fragments.CategoryView;
@@ -168,7 +170,12 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
 
     @Override
     public void onSeeAllProductsOfSubCategoryClicked(int position) {
-        Toast.makeText(getActivity(), "See All", Toast.LENGTH_SHORT).show();
+
+        Intent i = new Intent(getActivity(), ProductListingActivity.class);
+        i.putExtra(getString(R.string.url), subCategories.get(position).getLinks().getProducts());
+        i.putExtra(getString(R.string.title), subCategories.get(position).getName());
+        startActivity(i);
+
     }
 
     @Override
