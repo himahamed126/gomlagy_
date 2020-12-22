@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.onoo.gomlgy.Presentation.ui.listeners.SubCategoryClickListener;
 import com.onoo.gomlgy.Presentation.ui.listeners.SubSubCategoryClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.databinding.ProductListItemBinding;
@@ -21,8 +22,10 @@ public class SubSubCategoryAdapter extends RecyclerView.Adapter<SubSubCategoryAd
     private LayoutInflater layoutInflater;
 
     // data is passed into the constructor
-    public SubSubCategoryAdapter(List<SubSubCategory> subSubCategories) {
+    public SubSubCategoryAdapter(List<SubSubCategory> subSubCategories,
+                                 SubSubCategoryClickListener clickListener) {
         this.subSubCategories = subSubCategories;
+        subSubCategoryClickListener = clickListener;
     }
 
     // inflates the row layout from xml when needed
@@ -40,6 +43,8 @@ public class SubSubCategoryAdapter extends RecyclerView.Adapter<SubSubCategoryAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.productListItemBinding.setProduct(subSubCategories.get(position));
+        holder.productListItemBinding.productItemCl.setOnClickListener(view ->
+                subSubCategoryClickListener.onSubSubCategoryClick(position));
     }
 
     // total number of rows

@@ -19,7 +19,7 @@ import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration;
 
 import java.util.List;
 
-public class SubCategoryActivity extends BaseActivity implements SubCategoryView, SubCategoryClickListener {
+public class SubCategoryActivity extends BaseActivity implements SubCategoryView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +46,11 @@ public class SubCategoryActivity extends BaseActivity implements SubCategoryView
 //        recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public void onSubCategoryItemClick(SubCategory subCategory) {
-        Intent intent = new Intent(this, ProductListingActivity.class);
-        intent.putExtra("title", subCategory.getName());
-        intent.putExtra("url", subCategory.getLinks().getProducts());
-        startActivity(intent);
-    }
+//    @Override
+//    public void onSubCategoryItemClick(SubCategory subCategory) {
+//        Intent intent = new Intent(this, ProductListingActivity.class);
+//        intent.putExtra("title", subCategory.getName());
+//        intent.putExtra("url", subCategory.getLinks().getProducts());
+//        startActivity(intent);
+//    }
 }

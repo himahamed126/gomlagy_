@@ -14,6 +14,13 @@ public class SubCategory {
     @Expose
     private Link links;
 
+    public SubCategory() {
+    }
+
+    public SubCategory(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

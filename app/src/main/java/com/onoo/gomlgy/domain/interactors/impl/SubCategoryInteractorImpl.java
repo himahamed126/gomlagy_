@@ -9,6 +9,11 @@ import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;
 import com.onoo.gomlgy.domain.interactors.SubCategoryInteractor;
 import com.onoo.gomlgy.domain.interactors.base.AbstractInteractor;
+import com.onoo.gomlgy.models.SubCategory;
+import com.onoo.gomlgy.models.SubSubCategory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,7 +24,8 @@ public class SubCategoryInteractorImpl extends AbstractInteractor {
     private SubSubCategoryApiInterface apiService;
     private String url;
 
-    public SubCategoryInteractorImpl(Executor threadExecutor, MainThread mainThread, SubCategoryInteractor.CallBack callBack, String url) {
+    public SubCategoryInteractorImpl(Executor threadExecutor, MainThread mainThread,
+                                     SubCategoryInteractor.CallBack callBack, String url) {
         super(threadExecutor, mainThread);
         mCallback = callBack;
         this.url = url;
@@ -34,7 +40,13 @@ public class SubCategoryInteractorImpl extends AbstractInteractor {
             @Override
             public void onResponse(Call<SubCategoryResponse> call, Response<SubCategoryResponse> response) {
                 try {
-                    mCallback.onSubSubCategoriesDownloaded(response.body().getData());
+
+//                    Add an item showing "All products" to the sub categories list
+                    List<SubCategory> subCategories = new ArrayList<>();
+                    subCategories.add(new SubCategory("All products"));
+                    subCategories.addAll(response.body().getData());
+                    mCallback.onSubSubCategoriesDownloaded(subCategories);
+
                 } catch (Exception e) {
                     Log.e("Exception", e.getMessage());
                 }

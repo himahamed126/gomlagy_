@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,10 +18,12 @@ import com.onoo.gomlgy.Presentation.ui.adapters.AllCategoryAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.SubCategoryAdapter;
 import com.onoo.gomlgy.Presentation.ui.fragments.CategoryView;
 import com.onoo.gomlgy.Presentation.ui.listeners.AllCategoryClickListener;
+import com.onoo.gomlgy.Presentation.ui.listeners.SubCategoryClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 import com.onoo.gomlgy.models.Category;
+import com.onoo.gomlgy.models.Product;
 import com.onoo.gomlgy.models.SubCategory;
 
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ import java.util.List;
 
 
 public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
-        AllCategoryClickListener, CategoryView, SubCategoryView {
+        AllCategoryClickListener, CategoryView, SubCategoryView, SubCategoryClickListener {
     private View v;
     private CategoryPresenter categoryPresenter;
     private SubCategoryPresenter subCategoryPresenter;
@@ -75,7 +78,7 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
         subCategoryPresenter = new SubCategoryPresenter(ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(), this);
         subCategories = new ArrayList<>();
-        subCategoryAdapter = new SubCategoryAdapter(subCategories);
+        subCategoryAdapter = new SubCategoryAdapter(subCategories, this);
         subCategoriesRv.setAdapter(subCategoryAdapter);
 
 //        spin = v.findViewById(R.id.spin_kit);
@@ -156,6 +159,21 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
         this.subCategories.addAll(subCategories);
         subCategoryAdapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public void onAllProductsClicked() {
+        Toast.makeText(getActivity(), "All", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSeeAllProductsOfSubCategoryClicked(int position) {
+        Toast.makeText(getActivity(), "See All", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onProductClicked(Product product) {
+        Toast.makeText(getActivity(), "product", Toast.LENGTH_SHORT).show();
     }
 
 //    @Override

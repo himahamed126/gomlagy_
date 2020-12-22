@@ -27,7 +27,6 @@ import com.onoo.gomlgy.Presentation.ui.adapters.productsOfSubCategoryAdapter;
 import com.onoo.gomlgy.Presentation.ui.fragments.CategoryView;
 import com.onoo.gomlgy.Presentation.ui.listeners.AllCategoryClickListener;
 import com.onoo.gomlgy.Presentation.ui.listeners.AllProductClickListener;
-import com.onoo.gomlgy.Presentation.ui.listeners.SubCategoryClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
@@ -45,8 +44,7 @@ import retrofit2.Response;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class CategoryRecycler extends Fragment implements CategoryView, AllCategoryClickListener,
-        SwipeRefreshLayout.OnRefreshListener, SubCategoryView, SubCategoryClickListener,
-        AllProductClickListener {
+        SwipeRefreshLayout.OnRefreshListener, SubCategoryView, AllProductClickListener {
     private View v;
     private CategoryPresenter categoryPresenter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -166,9 +164,9 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
 
     }
 
-    @Override
-    public void onSubCategoryItemClick(SubCategory subCategory) {
-    }
+//    @Override
+//    public void onSubCategoryItemClick(SubCategory subCategory) {
+//    }
 
     @Override
     public void onProductClick(Product product) {

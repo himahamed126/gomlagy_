@@ -1,7 +1,13 @@
 package com.onoo.gomlgy.Presentation.ui.listeners;
 
-import com.onoo.gomlgy.models.SubCategory;
+import com.onoo.gomlgy.models.Product;
 
 public interface SubCategoryClickListener {
-    void onSubCategoryItemClick(SubCategory subCategory);
+
+    void onAllProductsClicked();
+
+    void onSeeAllProductsOfSubCategoryClicked(int position);
+
+    void onProductClicked(Product product);
+
 }
