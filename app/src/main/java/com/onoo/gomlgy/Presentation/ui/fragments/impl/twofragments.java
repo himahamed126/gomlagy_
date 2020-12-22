@@ -43,6 +43,7 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
     private AllCategoryAdapter allCategoryAdapter;
     private List<SubCategory> subCategories;
     private SubCategoryAdapter subCategoryAdapter;
+    private Category category;
 //    private SpinKitView spin;
     //    getProductsWithSubcategory apiService;
 //    private static final String TAG = "CategoryRecycler";
@@ -137,6 +138,7 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
 //        Log.i(TAG, "onCategoryClick: " + category.getName());
 //        getDAta(category.getId());
         subCategoryPresenter.getSubSubCategories(category.getLinks().getSubCategories());
+        this.category = category;
 
     }
 
@@ -148,6 +150,7 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
         mSwipeRefreshLayout.setRefreshing(false);
 
         subCategoryPresenter.getSubSubCategories(categories.get(0).getLinks().getSubCategories());
+        category = categories.get(0);
 
 //        if (!categories.isEmpty()) {
 //            getDAta(6);
@@ -165,7 +168,12 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
 
     @Override
     public void onAllProductsClicked() {
-        Toast.makeText(getActivity(), "All", Toast.LENGTH_SHORT).show();
+
+        Intent i = new Intent(getActivity(), ProductListingActivity.class);
+        i.putExtra(getString(R.string.url), category.getLinks().getProducts());
+        i.putExtra(getString(R.string.title), category.getName());
+        startActivity(i);
+
     }
 
     @Override
