@@ -13,6 +13,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.onoo.gomlgy.Network.response.ProductListingResponse;
 import com.onoo.gomlgy.Presentation.presenters.ProductListingPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.ProductListingView;
@@ -40,6 +41,7 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
     private List<OffersData> sliderImages;
     private ActivityProductListingBinding productListingBinding;
     private String url;
+    private BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,11 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
                     }
                 });
         productListingBinding.itemProgressBar.setVisibility(View.VISIBLE);
+
+        bottomSheetBehavior = BottomSheetBehavior.from(productListingBinding.include.filtersSheetCl);
+
+        productListingBinding.filterTv.setOnClickListener(view ->
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED));
 
     }
 

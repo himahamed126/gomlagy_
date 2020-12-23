@@ -160,4 +160,9 @@
     <string name="popularity">Popularity</string>
     <string name="title">title</string>
     <string name="url">url</string>
+    <string name="brand">Brand</string>
+    <string name="price_egp">Price (EGP)</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="apply">Apply</string>
 </resources>
