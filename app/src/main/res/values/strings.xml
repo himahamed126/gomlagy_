@@ -165,4 +165,6 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="apply">Apply</string>
+    <string name="category_id">categoryId</string>
+    <string name="sub_category_id">subCategoryId</string>
 </resources>

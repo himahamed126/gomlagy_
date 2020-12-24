@@ -15,7 +15,9 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.onoo.gomlgy.Network.response.ProductListingResponse;
+import com.onoo.gomlgy.Presentation.presenters.FiltersPresenter;
 import com.onoo.gomlgy.Presentation.presenters.ProductListingPresenter;
+import com.onoo.gomlgy.Presentation.ui.activities.FiltersView;
 import com.onoo.gomlgy.Presentation.ui.activities.ProductListingView;
 import com.onoo.gomlgy.Presentation.ui.adapters.ProductListingAdapter;
 import com.onoo.gomlgy.Presentation.ui.listeners.EndlessRecyclerOnScrollListener;
@@ -25,6 +27,7 @@ import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.Utils.RecyclerViewMargin;
 import com.onoo.gomlgy.databinding.ActivityProductListingBinding;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
+import com.onoo.gomlgy.models.FilterData;
 import com.onoo.gomlgy.models.Product;
 import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 
@@ -32,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductListingActivity extends BaseActivity implements ProductListingView,
-        ProductClickListener {
+        ProductClickListener, FiltersView {
 
     private List<Product> mProducts = new ArrayList<>();
     private ProductListingResponse productListingResponse = null;
@@ -40,8 +43,9 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
     private ProductListingAdapter adapter;
     private List<OffersData> sliderImages;
     private ActivityProductListingBinding productListingBinding;
-    private String url;
+    private String url, categoryId, subcategoryId;
     private BottomSheetBehavior bottomSheetBehavior;
+    private FiltersPresenter filtersPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,8 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
 
         initView();
         productListingPresenter = new ProductListingPresenter(ThreadExecutor.getInstance(),
+                MainThreadImpl.getInstance(), this);
+        filtersPresenter = new FiltersPresenter(ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(), this);
         getIntentExtras();
         productListingPresenter.getSliderImages();
@@ -100,6 +106,14 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
             url = getIntent().getStringExtra(getString(R.string.url));
             productListingPresenter.getProducts(url);
         }
+
+        if (getIntent().getStringExtra(getString(R.string.category_id)) != null)
+            categoryId = getIntent().getStringExtra(getString(R.string.category_id));
+
+        if (getIntent().getStringExtra(getString(R.string.sub_category_id)) != null)
+            subcategoryId = getIntent().getStringExtra(getString(R.string.category_id));
+
+        filtersPresenter.getFilterData(categoryId, "13");
 
     }
 
@@ -175,4 +189,8 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
         return (int) (dp * context.getResources().getDisplayMetrics().density);
     }
 
+    @Override
+    public void setFilters(FilterData filterData) {
+        Log.e("tttt", filterData.getMaxPrice().toString());
+    }
 }
