@@ -35,6 +35,8 @@ public class BrandData implements Serializable {
     @Expose
     private String updatedAt;
 
+    private Boolean selected;
+
     public Integer getId() {
         return id;
     }
@@ -107,4 +109,11 @@ public class BrandData implements Serializable {
         this.updatedAt = updatedAt;
     }
 
+    public Boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
+    }
 }

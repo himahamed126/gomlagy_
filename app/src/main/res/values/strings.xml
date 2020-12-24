@@ -167,4 +167,6 @@
     <string name="apply">Apply</string>
     <string name="category_id">categoryId</string>
     <string name="sub_category_id">subCategoryId</string>
+    <string name="enter_less_than">please enter less than</string>
+    <string name="enter_more">Please enter more than</string>
 </resources>

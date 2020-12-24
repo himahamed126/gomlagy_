@@ -144,7 +144,8 @@
                     app:layout_constraintTop_toBottomOf="@id/from_tv"
                     android:textSize="21sp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"/>
+                    android:layout_marginEnd="16dp"
+                    android:focusable="false" />
 
                 <TextView
                     android:id="@+id/to_tv"
@@ -166,7 +167,8 @@
                     android:background="@drawable/background_edittext"
                     app:layout_constraintTop_toBottomOf="@id/from_tv"
                     android:textSize="21sp"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="8dp"
+                    android:focusable="false"/>
 
                 <View
                     android:id="@+id/view3"

@@ -3,9 +3,7 @@ package com.onoo.gomlgy.domain.interactors;
 import android.util.Log;
 
 import com.onoo.gomlgy.Network.ApiClient;
-import com.onoo.gomlgy.Network.response.CategoryResponse;
 import com.onoo.gomlgy.Network.response.FiltersResponse;
-import com.onoo.gomlgy.Network.services.AllCategoryApiInterface;
 import com.onoo.gomlgy.Network.services.FiltersInterface;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;
@@ -38,8 +36,12 @@ public class FiltersInteractorImpl extends AbstractInteractor {
         getProducts.enqueue(new Callback<FiltersResponse>() {
             @Override
             public void onResponse(Call<FiltersResponse> call, Response<FiltersResponse> response) {
-                assert response.body() != null;
-                mCallback.onAllFiltersDownloaded(response.body().getData());
+                try {
+                    assert response.body() != null;
+                    mCallback.onAllFiltersDownloaded(response.body().getData());
+                } catch (Exception e) {
+                    Log.e("Exception", e.getMessage());
+                }
             }
 
             @Override
