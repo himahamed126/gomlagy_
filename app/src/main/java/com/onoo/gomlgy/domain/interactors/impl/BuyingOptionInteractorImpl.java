@@ -41,14 +41,16 @@ public class BuyingOptionInteractorImpl extends AbstractInteractor {
                 try {
                     //Log.d("Test", response.body().getVariant());
                     mCallback.onGetVariantPrice(response.body());
+                    Log.i("ffff", response.body().getVariant() + response.body().getInStock());
+
                 } catch (Exception e) {
-                    Log.e("Exception", e.getMessage());
+                    Log.i("ffff", e.getMessage());
                 }
             }
 
             @Override
             public void onFailure(Call<VariantResponse> call, Throwable t) {
-                //Log.d("Test", String.valueOf(call.isExecuted()));
+                Log.i("ffff", String.valueOf(call.isExecuted()));
                 mCallback.onGetVariantPriceError();
             }
         });

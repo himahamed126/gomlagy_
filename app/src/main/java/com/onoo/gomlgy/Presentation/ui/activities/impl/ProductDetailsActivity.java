@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -18,19 +19,28 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.onoo.gomlgy.Models.ChoiceOption;
 import com.onoo.gomlgy.Models.Product;
-import com.onoo.gomlgy.Models.ProductDetails;
+import com.onoo.gomlgy.Models.ProductDetails2;
 import com.onoo.gomlgy.Network.response.AddToCartResponse;
 import com.onoo.gomlgy.Network.response.AddToWishlistResponse;
 import com.onoo.gomlgy.Network.response.AppSettingsResponse;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Network.response.CheckWishlistResponse;
 import com.onoo.gomlgy.Network.response.RemoveWishlistResponse;
+import com.onoo.gomlgy.Network.response.VariantResponse;
 import com.onoo.gomlgy.Presentation.presenters.ProductDetailsPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.ProductDetailsView;
 import com.onoo.gomlgy.Presentation.ui.adapters.BestSellingofSellerAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.FeaturedProductAdapter;
+import com.onoo.gomlgy.Presentation.ui.adapters.ProductsModelsAdapter;
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
+import com.onoo.gomlgy.Presentation.ui.listeners.ProductModelsClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.Utils.AppConfig;
@@ -43,12 +53,14 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class ProductDetailsActivity extends BaseActivity implements ProductDetailsView, ProductClickListener {
+public class ProductDetailsActivity extends BaseActivity implements ProductDetailsView, ProductClickListener, ProductModelsClickListener {
     private String product_name, link, top_selling_link;
     private SliderLayout sliderLayout;
-    private TextView name;
+    private TextView name, subPriceTv;
     private RatingBar ratingBar;
     private TextView rating_count, price_1, price_2, price_3, quntity_1, quntity_2, quntity_3;
     private ImageView shop_logo, heart_icon;
@@ -59,13 +71,23 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     private LinearLayout product_buttons;
     private ProgressBar progress_bar;
     private Button addTocart, buyNow;
-    private ProductDetails productDetails = null;
+    private ProductDetails2 productDetails = null;
     private ProgressDialog progressDialog;
     private AuthResponse authResponse;
     private ProductDetailsPresenter productDetailsPresenter;
     private CardView shop_info, image_card;
     private boolean isBuyNow = false;
     private RecyclerView modelRv;
+    private RecyclerView productsModelsRv;
+
+    List<String> productModelsList = new ArrayList<>();
+    private HashMap<String, String> maps = new HashMap<>();
+    private HashMap<String, String> selectedChoices = new HashMap<>();
+
+    Button qtyIncrease, qtyDecrease;
+    EditText quantity;
+    int subPrice = 0;
+    int getQuantity = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +144,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProductDetailsActivity.this, ProductReviewActivity.class);
-                intent.putExtra("url", productDetails.getLinks().getReviews());
+//                intent.putExtra("url", productDetails.getLinks().getReviews());
                 startActivity(intent);
             }
         });
@@ -169,7 +191,64 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
                 processAddToCart();
             }
         });
+
+
+        qtyIncrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int qty = Integer.parseInt(quantity.getText().toString()) + 1;
+                quantity.setText(String.valueOf(qty));
+                qtyDecrease.setEnabled(true);
+
+                calc();
+//                cartItemListener.onQuantityUpdate(qty, product);
+            }
+        });
+
+        qtyDecrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Integer.parseInt(quantity.getText().toString()) > 1) {
+                    int qty = Integer.parseInt(quantity.getText().toString()) - 1;
+                    quantity.setText(String.valueOf(qty));
+                    calc();
+//                    cartItemListener.onQuantityUpdate(qty, product);
+                    if (qty == 1) {
+                        qtyDecrease.setEnabled(false);
+                    }
+                }
+            }
+        });
+
+
     }
+
+    void calc() {
+        int min1 = productDetails.getQuantityPrice().getMinQuantity1();
+        int min2 = productDetails.getQuantityPrice().getMinQuantity2();
+        int min3 = productDetails.getQuantityPrice().getMinQuantity3();
+
+        int max1 = productDetails.getQuantityPrice().getMaxQuantity1();
+        int max2 = productDetails.getQuantityPrice().getMaxQuantity2();
+        int max3 = productDetails.getQuantityPrice().getMaxQuantity3();
+
+        int price1 = productDetails.getQuantityPrice().getPrice1();
+        int price2 = productDetails.getQuantityPrice().getPrice2();
+        int price3 = productDetails.getQuantityPrice().getPrice3();
+
+        getQuantity = Integer.parseInt(quantity.getText().toString());
+
+        if (getQuantity >= min1 && getQuantity <= max1) {
+            subPrice = price1 * getQuantity;
+        } else if (getQuantity >= min2 && getQuantity <= max2) {
+            subPrice = price2 * getQuantity;
+        } else if (getQuantity >= min3 && getQuantity <= max3) {
+            subPrice = price3 * getQuantity;
+        }
+
+        subPriceTv.setText(String.valueOf(subPrice));
+    }
+
 
     private void processAddToCart() {
         if (productDetails != null && (productDetails.getChoiceOptions().size() > 0 || productDetails.getColors().size() > 0)) {
@@ -179,7 +258,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             if (authResponse != null && authResponse.getUser() != null) {
                 progressDialog.setMessage(getString(R.string.adding_item_to_your_shopping_cart_please_wait));
                 progressDialog.show();
-                productDetailsPresenter.addToCart(authResponse.getAccessToken(), authResponse.getUser().getId(), productDetails.getId(), null);
+                productDetailsPresenter.addToCart(authResponse.getAccessToken(), authResponse.getUser().getId(), productDetails.getId(), null, getQuantity);
             } else {
                 startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), 100);
                 finish();
@@ -198,7 +277,6 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     }
 
     private void initviews() {
-        modelRv = findViewById(R.id.model_rv);
         product_details = findViewById(R.id.product_details);
         product_buttons = findViewById(R.id.product_buttons);
         progress_bar = findViewById(R.id.item_progress_bar);
@@ -233,14 +311,20 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         progressDialog = new ProgressDialog(this);
         shop_info = findViewById(R.id.shop_info);
         image_card = findViewById(R.id.image_card);
-    }
 
-    void setModelRv() {
-        modelRv.setLayoutManager(new GridLayoutManager(this, 2));
+        productsModelsRv = findViewById(R.id.product_models_rv);
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_END);
+        productsModelsRv.setLayoutManager(layoutManager);
+        subPriceTv = findViewById(R.id.price_tv);
+        qtyIncrease = findViewById(R.id.cart_quantity_increase);
+        qtyDecrease = findViewById(R.id.cart_quantity_decrease);
+        quantity = findViewById(R.id.cart_quantity);
     }
 
     @Override
-    public void setProductDetails(ProductDetails productDetails) {
+    public void setProductDetails(ProductDetails2 productDetails) {
         this.productDetails = productDetails;
         for (String photo : productDetails.getPhotos()) {
             TextSliderView textSliderView = new TextSliderView(this);
@@ -290,21 +374,19 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             }
         }
 
-        if (productDetails.getPriceLower().equals(productDetails.getPriceHigher())) {
-            price_1.setText(AppConfig.convertPrice(this, productDetails.getPriceLower()));
-        } else {
-            price_1.setText(AppConfig.convertPrice(this, productDetails.getPriceLower()) + "-" + AppConfig.convertPrice(this, productDetails.getPriceHigher()));
-        }
-        price_2.setText(AppConfig.convertPrice(this, productDetails.getPriceLower()));
-        price_3.setText(AppConfig.convertPrice(this, productDetails.getPriceLower()));
-        quntity_1.setText("1-50" + " " + getString(R.string.piece));
-        quntity_2.setText("50-100" + " " + getString(R.string.piece));
-        quntity_3.setText("100-500" + " " + getString(R.string.piece));
+        price_1.setText(AppConfig.convertPrice(this, Double.valueOf(productDetails.getQuantityPrice().getPrice1())));
+        price_2.setText(AppConfig.convertPrice(this, Double.valueOf(productDetails.getQuantityPrice().getPrice2())));
+        price_3.setText(AppConfig.convertPrice(this, Double.valueOf(productDetails.getQuantityPrice().getPrice3())));
 
+        quntity_1.setText(productDetails.getQuantityPrice().getMinQuantity1() + " _ " + productDetails.getQuantityPrice().getMaxQuantity1() + " " + getString(R.string.piece));
+        quntity_2.setText(productDetails.getQuantityPrice().getMinQuantity2() + " _ " + productDetails.getQuantityPrice().getMaxQuantity2() + " " + getString(R.string.piece));
+        quntity_3.setText(productDetails.getQuantityPrice().getMinQuantity3() + " _ " + productDetails.getQuantityPrice().getMaxQuantity3() + " " + getString(R.string.piece));
 
         progress_bar.setVisibility(View.GONE);
         product_details.setVisibility(View.VISIBLE);
         product_buttons.setVisibility(View.VISIBLE);
+
+        subPriceTv.setText(String.valueOf(productDetails.getQuantityPrice().getPrice1()));
 
         new ProductDetailsPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this).getRelatedProducts(productDetails.getLinks().getRelated());
 
@@ -383,11 +465,48 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     }
 
     @Override
+    public void setVariantprice(VariantResponse variantResponse) {
+
+    }
+
+    @Override
     public void onProductItemClick(Product product) {
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra("product_name", product.getName());
         intent.putExtra("link", product.getLinks().getDetails());
         intent.putExtra("top_selling", product.getLinks().getRelated());
         startActivity(intent);
+    }
+
+    @Override
+    public void onModelsItemClick(String option) {
+        createSelectedChoiceList(option);
+    }
+
+    private void createSelectedChoiceList(String value) {
+        String choiceName = maps.get(value);
+        if (!choiceName.equals("color")) {
+            selectedChoices.put(choiceName, value);
+        } else {
+            selectedChoices.put("color", value);
+        }
+
+        int id = productDetails.getId();
+        String color = selectedChoices.get("color") != null ? selectedChoices.get("color") : null;
+        JsonArray choicesArray = new JsonArray();
+
+        for (ChoiceOption choiceOption : productDetails.getChoiceOptions()) {
+            if (selectedChoices.get(choiceOption.getName()) != null) {
+                JsonObject choice = new JsonObject();
+                choice.addProperty("section", choiceOption.getName());
+                choice.addProperty("title", choiceOption.getTitle());
+                choice.addProperty("name", selectedChoices.get(choiceOption.getName()));
+                choicesArray.add(choice);
+            }
+        }
+
+        //Log.d("Test", choicesArray.toString());
+
+        productDetailsPresenter.getVariantPrice(id, color, choicesArray);
     }
 }

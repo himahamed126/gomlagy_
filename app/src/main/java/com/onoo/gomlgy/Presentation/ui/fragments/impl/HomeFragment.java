@@ -124,10 +124,10 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         homePresenter.getBanners();
         apiService1 = ApiClient.getClient().create(ProductListingApiInterface.class);
 
-        getData1(6);
-        getData2(7);
-        getData3(8);
-        getData4(9);
+        getData1(23);
+        getData2(21);
+        getData3(22);
+        getData4(14);
         return v;
     }
 
@@ -225,7 +225,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
     }
 
     void goToProductList(int subCategoryID) {
-        int categoryId1 = 1;
+        int categoryId1 = 5;
         Log.i("URLLLL", "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId1 + "&sub_category_id=" + subCategoryID);
         Intent i = new Intent(getActivity(), ProductListingActivity.class);
         i.putExtra("url", "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId1 + "&sub_category_id=" + subCategoryID);
@@ -240,7 +240,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         GridLayoutManager horizontalLayoutManager
                 = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        int categoryId = 1;
+        int categoryId = 5;
         String url = "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID;
         Call<ProductListingResponse> call = apiService1.getProducts(url);
         SubCategorymodel subCategorymodel;
@@ -277,7 +277,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         GridLayoutManager horizontalLayoutManager
                 = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        int categoryId = 1;
+        int categoryId = 5;
         String url = "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID;
         Call<ProductListingResponse> call = apiService1.getProducts(url);
         call.enqueue(new Callback<ProductListingResponse>() {
@@ -313,7 +313,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         GridLayoutManager horizontalLayoutManager
                 = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        int categoryId = 1;
+        int categoryId = 5;
         String url = "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID;
         Call<ProductListingResponse> call = apiService1.getProducts(url);
         call.enqueue(new Callback<ProductListingResponse>() {
@@ -349,7 +349,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         GridLayoutManager horizontalLayoutManager
                 = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        int categoryId = 1;
+        int categoryId = 5;
         String url = "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID;
         Call<ProductListingResponse> call = apiService1.getProducts(url);
         call.enqueue(new Callback<ProductListingResponse>() {

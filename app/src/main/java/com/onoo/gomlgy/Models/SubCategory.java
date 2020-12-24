@@ -3,7 +3,9 @@ package com.onoo.gomlgy.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SubCategory {
+import java.io.Serializable;
+
+public class SubCategory implements Serializable {
     @SerializedName("name")
     @Expose
     private String name;

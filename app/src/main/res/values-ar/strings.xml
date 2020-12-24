@@ -148,4 +148,6 @@
     <string name="what_are_you_looking_for">عن ماذا تبحث ؟</string>
     <string name="choose_a_shipping_address">اختار عنوان الشحن</string>
     <string name="piece">قطعة</string>
+    <string name="choose_the_type_of_product">اختار نوع المنتج</string>
+    <string name="quantity">الكمية</string>
 </resources>

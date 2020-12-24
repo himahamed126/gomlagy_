@@ -1,7 +1,7 @@
 package com.onoo.gomlgy.domain.interactors.impl;
 
 import com.onoo.gomlgy.Network.ApiClient;
-import com.onoo.gomlgy.Network.response.ProductDetialsResponse;
+import com.onoo.gomlgy.Network.response.ProductDetailsResponse2;
 import com.onoo.gomlgy.Network.services.ProductDetailsApiInterface;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;
@@ -26,11 +26,11 @@ public class ProductDetailsInteractorImpl extends AbstractInteractor {
     @Override
     public void run() {
         apiService = ApiClient.getClient().create(ProductDetailsApiInterface.class);
-        Call<ProductDetialsResponse> call = apiService.getProductDetails(url);
+        Call<ProductDetailsResponse2> call = apiService.getProductDetails(url);
 
-        call.enqueue(new Callback<ProductDetialsResponse>() {
+        call.enqueue(new Callback<ProductDetailsResponse2>() {
             @Override
-            public void onResponse(Call<ProductDetialsResponse> call, Response<ProductDetialsResponse> response) {
+            public void onResponse(Call<ProductDetailsResponse2> call, Response<ProductDetailsResponse2> response) {
                 try {
                     //Log.d("Mehedi", response.toString());
                     mCallback.onProductDetailsDownloaded(response.body().getData().get(0));
@@ -40,7 +40,7 @@ public class ProductDetailsInteractorImpl extends AbstractInteractor {
             }
 
             @Override
-            public void onFailure(Call<ProductDetialsResponse> call, Throwable t) {
+            public void onFailure(Call<ProductDetailsResponse2> call, Throwable t) {
                 //Log.d("Mehedi", t.getLocalizedMessage());
                 mCallback.onProductDetailsDownloadError();
             }

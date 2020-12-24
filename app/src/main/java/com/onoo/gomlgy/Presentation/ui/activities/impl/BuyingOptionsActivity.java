@@ -10,10 +10,12 @@ import android.graphics.drawable.DrawableContainer;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 
 import com.onoo.gomlgy.Models.ChoiceOption;
 import com.onoo.gomlgy.Models.ProductDetails;
+import com.onoo.gomlgy.Models.ProductDetails2;
 import com.onoo.gomlgy.Network.response.AddToCartResponse;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Network.response.VariantResponse;
@@ -45,7 +48,7 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
     RadioGroup dynamicRadiogroup;
     LinearLayout linearLayout;
     MyRadioButton radioButton;
-    ProductDetails productDetails;
+    ProductDetails2 productDetails;
     private TextView name;
     private RatingBar ratingBar;
     private TextView price;
@@ -58,8 +61,11 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
     private ProgressDialog progressDialog;
     LayoutInflater inflater;
     private boolean isBuyNow = false;
+    private static final String TAG = "BuyingOptionsActivity";
 
-    private void initviews(){
+    int quantity = 1;
+
+    private void initviews() {
         product_image = findViewById(R.id.product_image);
         name = findViewById(R.id.product_name);
         price = findViewById(R.id.product_price);
@@ -72,15 +78,15 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
 
         progressDialog = new ProgressDialog(this);
 
+
         inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    private void createSelectedChoiceList(String value){
+    private void createSelectedChoiceList(String value) {
         String choiceName = maps.get(value);
-        if(!choiceName.equals("color")){
+        if (!choiceName.equals("color")) {
             selectedChoices.put(choiceName, value);
-        }
-        else {
+        } else {
             selectedChoices.put("color", value);
         }
 
@@ -88,8 +94,8 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
         String color = selectedChoices.get("color") != null ? selectedChoices.get("color") : null;
         JsonArray choicesArray = new JsonArray();
 
-        for (ChoiceOption choiceOption : productDetails.getChoiceOptions()){
-            if(selectedChoices.get(choiceOption.getName()) != null){
+        for (ChoiceOption choiceOption : productDetails.getChoiceOptions()) {
+            if (selectedChoices.get(choiceOption.getName()) != null) {
                 JsonObject choice = new JsonObject();
                 choice.addProperty("section", choiceOption.getName());
                 choice.addProperty("title", choiceOption.getTitle());
@@ -110,7 +116,7 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
         setContentView(R.layout.activity_buying_options);
         initviews();
 
-        productDetails = (ProductDetails) getIntent().getSerializableExtra("product_details");
+        productDetails = (ProductDetails2) getIntent().getSerializableExtra("product_details");
 
         initializeActionBar();
         setTitle("Buying Options");
@@ -121,16 +127,16 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
 
         linearLayout = (LinearLayout) findViewById(R.id.test);
 
-        for (ChoiceOption choiceOption : productDetails.getChoiceOptions()){
+        for (ChoiceOption choiceOption : productDetails.getChoiceOptions()) {
             dynamicRadiogroup = new RadioGroup(BuyingOptionsActivity.this);
 
             LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams
                     (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-            layoutparams.setMargins(0,0,16,0);
+            layoutparams.setMargins(0, 0, 16, 0);
             dynamicRadiogroup.setLayoutParams(layoutparams);
 
-            for (String optionvalue : choiceOption.getOptions()){
+            for (String optionvalue : choiceOption.getOptions()) {
                 radioButton = (MyRadioButton) inflater.inflate(R.layout.my_radio_button, null);
                 radioButton.setText(optionvalue);
                 radioButton.setLayoutParams(layoutparams);
@@ -143,7 +149,7 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
             textview.setText(choiceOption.getTitle());
             textview.setBackgroundColor(Color.parseColor("#F1F1F5"));
             textview.setTextColor(Color.BLACK);
-            textview.setPadding(16, 25,0,25);
+            textview.setPadding(16, 25, 0, 25);
             textview.setTextSize(20);
 
             linearLayout.addView(textview);
@@ -163,12 +169,12 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
 
         //adding color radio buttons
 
-        if(productDetails.getColors().size() > 0){
+        if (productDetails.getColors().size() > 0) {
             TextView textview = new TextView(this);
             textview.setText("Colors");
             textview.setBackgroundColor(Color.parseColor("#F1F1F5"));
             textview.setTextColor(Color.BLACK);
-            textview.setPadding(16, 25,0,25);
+            textview.setPadding(16, 25, 0, 25);
             textview.setTextSize(20);
 
             linearLayout.addView(textview);
@@ -182,16 +188,16 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
             //Radio Button params
             LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams
                     (convertDpToPx(this, 50), convertDpToPx(this, 50));
-            layoutparams.setMargins(16,16,16,16);
+            layoutparams.setMargins(16, 16, 16, 16);
 
-            for (String color : productDetails.getColors()){
+            for (String color : productDetails.getColors()) {
                 radioButton = (MyRadioButton) inflater.inflate(R.layout.color_radio_button, null);
 
                 StateListDrawable drawable = (StateListDrawable) radioButton.getBackground();
-                DrawableContainer.DrawableContainerState dcs = (DrawableContainer.DrawableContainerState)drawable.getConstantState();
+                DrawableContainer.DrawableContainerState dcs = (DrawableContainer.DrawableContainerState) drawable.getConstantState();
                 Drawable[] drawableItems = dcs.getChildren();
-                GradientDrawable gradientDrawableChecked = (GradientDrawable)drawableItems[0]; // item 1
-                GradientDrawable gradientDrawableUnChecked = (GradientDrawable)drawableItems[1]; // item 2
+                GradientDrawable gradientDrawableChecked = (GradientDrawable) drawableItems[0]; // item 1
+                GradientDrawable gradientDrawableUnChecked = (GradientDrawable) drawableItems[1]; // item 2
 
                 //solid color
                 gradientDrawableChecked.setColor(Color.parseColor(color));
@@ -242,20 +248,18 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
         });
     }
 
-    private void processAddToCart(){
+    private void processAddToCart() {
         AuthResponse authResponse = new UserPrefs(getApplicationContext()).getAuthPreferenceObjectJson("auth_response");
-        if(authResponse != null && authResponse.getUser() != null){
-            if (variantResponse != null && variantResponse.getInStock()){
+        if (authResponse != null && authResponse.getUser() != null) {
+            if (variantResponse != null && variantResponse.getInStock()) {
                 //Log.d("Test", variantResponse.getVariant());
                 progressDialog.setMessage(getString(R.string.adding_item_to_your_shopping_cart_please_wait));
                 progressDialog.show();
-                buyingOptionPresenter.addToCart(authResponse.getAccessToken(), authResponse.getUser().getId(), variantResponse.getProductId(), variantResponse.getVariant());
-            }
-            else {
+                buyingOptionPresenter.addToCart(authResponse.getAccessToken(), authResponse.getUser().getId(), variantResponse.getProductId(), variantResponse.getVariant(), quantity);
+            } else {
                 CustomToast.showToast(BuyingOptionsActivity.this, getString(R.string.this_variant_of_this_product_isnt_available_now), R.color.colorWarning);
             }
-        }
-        else {
+        } else {
             startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), 100);
             finish();
         }
@@ -270,14 +274,13 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
     @Override
     public void setAddToCartMessage(AddToCartResponse addToCartResponse) {
         progressDialog.dismiss();
-        if (isBuyNow){
+        if (isBuyNow) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("message", addToCartResponse.getMessage());
             intent.putExtra("position", "cart");
             startActivity(intent);
             finish();
-        }
-        else {
+        } else {
             CustomToast.showToast(this, addToCartResponse.getMessage(), R.color.colorSuccess);
         }
     }

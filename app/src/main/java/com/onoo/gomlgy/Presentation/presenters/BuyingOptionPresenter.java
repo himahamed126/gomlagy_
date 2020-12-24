@@ -25,13 +25,13 @@ public class BuyingOptionPresenter extends AbstractPresenter implements BuyingOp
         new BuyingOptionInteractorImpl(mExecutor, mMainThread, this, id, color, choicesArray).execute();
     }
 
-    public void addToCart(String token, int user_id, int product_id, String variant){
-        new AddToCartInteractorImpl(mExecutor, mMainThread, this, token, user_id, product_id, variant).execute();
+    public void addToCart(String token, int user_id, int product_id, String variant, int quantity) {
+        new AddToCartInteractorImpl(mExecutor, mMainThread, this, token, user_id, product_id, variant,quantity).execute();
     }
 
     @Override
     public void onGetVariantPrice(VariantResponse variantResponse) {
-        if(buyingOptionView != null){
+        if (buyingOptionView != null) {
             buyingOptionView.setVariantprice(variantResponse);
         }
     }
@@ -43,7 +43,7 @@ public class BuyingOptionPresenter extends AbstractPresenter implements BuyingOp
 
     @Override
     public void onCartItemAdded(AddToCartResponse addToCartResponse) {
-        if(buyingOptionView != null){
+        if (buyingOptionView != null) {
             buyingOptionView.setAddToCartMessage(addToCartResponse);
         }
     }

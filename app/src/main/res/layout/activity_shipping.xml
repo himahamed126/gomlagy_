@@ -12,11 +12,14 @@
 
         <TextView
             android:id="@+id/shipping_lbl"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:gravity="center"
             android:text="@string/choose_a_shipping_address"
-            android:textColor="@color/black"
+            android:textColor="@color/carbon_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView

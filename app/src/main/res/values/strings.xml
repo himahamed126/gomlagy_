@@ -155,4 +155,6 @@
     <string name="what_are_you_looking_for">what are you looking for?</string>
     <string name="choose_a_shipping_address">Choose a shipping address</string>
     <string name="piece">Piece</string>
+    <string name="choose_the_type_of_product">Choose the type of product</string>
+    <string name="quantity">quantity</string>
 </resources>

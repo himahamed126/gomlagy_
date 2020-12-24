@@ -20,16 +20,19 @@ public class AddToCartInteractorImpl extends AbstractInteractor {
     private AddToCartApiInterface apiService;
     private int user_id;
     private int product_id;
+    private int quantity;
+
     private String variant;
     private String auth_token;
 
-    public AddToCartInteractorImpl(Executor threadExecutor, MainThread mainThread, AddToCartInteractor.CallBack callBack, String auth_token, int user_id, int product_id, String variant) {
+    public AddToCartInteractorImpl(Executor threadExecutor, MainThread mainThread, AddToCartInteractor.CallBack callBack, String auth_token, int user_id, int product_id, String variant, int quantity) {
         super(threadExecutor, mainThread);
         mCallback = callBack;
         this.user_id = user_id;
         this.product_id = product_id;
         this.variant = variant;
-        this.auth_token = "Bearer "+auth_token;
+        this.auth_token = "Bearer " + auth_token;
+        this.quantity = quantity;
     }
 
     @Override
@@ -40,6 +43,7 @@ public class AddToCartInteractorImpl extends AbstractInteractor {
         jsonObject.addProperty("user_id", user_id);
         jsonObject.addProperty("id", product_id);
         jsonObject.addProperty("variant", variant);
+        jsonObject.addProperty("quantity", quantity);
 
         Call<AddToCartResponse> call = apiService.sendAddToCartRequest(auth_token, jsonObject);
 

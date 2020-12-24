@@ -26,14 +26,16 @@ import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 import com.google.gson.JsonObject;
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShippingActivity extends BaseActivity implements AccountInfoView, ShippingAddressSelectListener {
     private AuthResponse authResponse;
     private Button payment;
-    private Double total = 0.0, shipping = 0.0, tax= 0.0;
+    private Double total = 0.0, shipping = 0.0, tax = 0.0;
     private RecyclerView recyclerView;
     private ShippingAddress shippingAddress = null;
+    List<ShippingAddress> shippingAddresses = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,40 +51,44 @@ public class ShippingActivity extends BaseActivity implements AccountInfoView, S
         initviews();
 
         authResponse = new UserPrefs(this).getAuthPreferenceObjectJson("auth_response");
-        if(authResponse != null && authResponse.getUser() != null){
+        if (authResponse != null && authResponse.getUser() != null) {
             new AccountInfoPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this).getShippingAddresses(authResponse.getUser().getId(), authResponse.getAccessToken());
         }
     }
 
-    private void initviews(){
+    private void initviews() {
         recyclerView = findViewById(R.id.rv_shipping_addresses);
         payment = findViewById(R.id.payment);
 
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (shippingAddress != null){
-                    Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
-                    intent.putExtra("total", total);
-                    intent.putExtra("shipping", shipping);
-                    intent.putExtra("tax", tax);
+                if (!shippingAddresses.isEmpty()) {
+                    if (shippingAddress != null) {
+                        Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
+                        intent.putExtra("total", total);
+                        intent.putExtra("shipping", shipping);
+                        intent.putExtra("tax", tax);
 
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("name", authResponse.getUser().getName());
-                    jsonObject.addProperty("email", authResponse.getUser().getEmail());
-                    jsonObject.addProperty("address", shippingAddress.getAddress());
-                    jsonObject.addProperty("country", shippingAddress.getCountry());
-                    jsonObject.addProperty("city", shippingAddress.getCity());
-                    jsonObject.addProperty("postal_code", shippingAddress.getPostalCode());
-                    jsonObject.addProperty("phone", shippingAddress.getPhone());
-                    jsonObject.addProperty("checkout_type", "logged");
+                        JsonObject jsonObject = new JsonObject();
+                        jsonObject.addProperty("name", authResponse.getUser().getName());
+                        jsonObject.addProperty("email", authResponse.getUser().getEmail());
+                        jsonObject.addProperty("address", shippingAddress.getAddress());
+                        jsonObject.addProperty("country", shippingAddress.getCountry());
+                        jsonObject.addProperty("city", shippingAddress.getCity());
+                        jsonObject.addProperty("postal_code", shippingAddress.getPostalCode());
+                        jsonObject.addProperty("phone", shippingAddress.getPhone());
+                        jsonObject.addProperty("checkout_type", "logged");
 
-                    intent.putExtra("shipping_address", jsonObject.toString());
+                        intent.putExtra("shipping_address", jsonObject.toString());
 
-                    startActivity(intent);
-                }
-                else {
+                        startActivity(intent);
+                    } else {
+                        CustomToast.showToast(ShippingActivity.this, getString(R.string.please_choose_shipping_address), R.color.colorWarning);
+                    }
+                } else {
                     CustomToast.showToast(ShippingActivity.this, getString(R.string.please_choose_shipping_address), R.color.colorWarning);
+                    startActivity(new Intent(ShippingActivity.this, AccountInfoActivity.class));
                 }
             }
         });
@@ -95,11 +101,12 @@ public class ShippingActivity extends BaseActivity implements AccountInfoView, S
 
     @Override
     public void setShippingAddresses(List<ShippingAddress> shippingAddresses) {
-        recyclerView.addItemDecoration( new LayoutMarginDecoration( 1,  AppConfig.convertDpToPx(getApplicationContext(), 10)) );
+        recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getApplicationContext(), 10)));
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        ShippingAddressSelectAdapter adapter = new ShippingAddressSelectAdapter(getApplicationContext(), shippingAddresses, this);
+        this.shippingAddresses.addAll(shippingAddresses);
+        ShippingAddressSelectAdapter adapter = new ShippingAddressSelectAdapter(getApplicationContext(), this.shippingAddresses, this);
         recyclerView.setAdapter(adapter);
     }
 

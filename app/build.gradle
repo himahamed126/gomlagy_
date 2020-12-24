@@ -104,4 +104,6 @@ dependencies {
     //A fast circular ImageView perfect for profile images
     implementation 'de.hdodenhof:circleimageview:3.0.1'
 
+    implementation 'com.google.android:flexbox:1.0.0'
+
 }
