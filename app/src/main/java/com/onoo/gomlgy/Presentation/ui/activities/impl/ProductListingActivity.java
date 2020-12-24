@@ -36,6 +36,7 @@ import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 import com.onoo.gomlgy.models.BrandData;
 import com.onoo.gomlgy.models.FilterData;
 import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.Productmodel;
 import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 
 import java.util.ArrayList;
@@ -157,6 +158,12 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
             }
         });
 
+        productListingBinding.include.applyBtn.setOnClickListener(view ->
+                filtersPresenter.getFilteredProducts(categoryId, "13",
+                        productListingBinding.include.toEt.getText().toString(),
+                        productListingBinding.include.fromEt.getText().toString(),
+                        filterData.getBrands().get(selectedFilterBrandId).getId().toString()));
+
     }
 
     @Override
@@ -258,6 +265,11 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
         brandsList.clear();
         brandsList.addAll(filterData.getBrands());
         brandsAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setProducts(List<Productmodel> products) {
+        Log.e("jjsj", products.get(0).getColors());
     }
 
     @Override

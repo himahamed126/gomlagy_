@@ -1,4 +1,4 @@
-package com.onoo.gomlgy.domain.interactors;
+package com.onoo.gomlgy.domain.interactors.impl;
 
 import android.util.Log;
 
@@ -7,6 +7,7 @@ import com.onoo.gomlgy.Network.response.FiltersResponse;
 import com.onoo.gomlgy.Network.services.FiltersInterface;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;
+import com.onoo.gomlgy.domain.interactors.AllFiltersInteractor;
 import com.onoo.gomlgy.domain.interactors.base.AbstractInteractor;
 
 import retrofit2.Call;
