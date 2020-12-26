@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.domain.interactors;
 
-import com.onoo.gomlgy.Models.ProductDetails2;
+import com.onoo.gomlgy.models.ProductDetails2;
 
 public interface ProductDetailsInteractor {
     interface CallBack {

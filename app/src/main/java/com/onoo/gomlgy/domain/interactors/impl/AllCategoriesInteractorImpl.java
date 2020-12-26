@@ -1,14 +1,10 @@
 package com.onoo.gomlgy.domain.interactors.impl;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import com.onoo.gomlgy.Models.collectionmodel;
+import com.onoo.gomlgy.models.collectionmodel;
 import com.onoo.gomlgy.Network.ApiClient;
-import com.onoo.gomlgy.Network.response.CategoryResponse;
-import com.onoo.gomlgy.Network.services.AllCategoryApiInterface;
 import com.onoo.gomlgy.Network.services.getProductsWithSubcategory;
-import com.onoo.gomlgy.Presentation.ui.activities.impl.MainActivity;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;
 import com.onoo.gomlgy.domain.interactors.AllCategoryInteractor;

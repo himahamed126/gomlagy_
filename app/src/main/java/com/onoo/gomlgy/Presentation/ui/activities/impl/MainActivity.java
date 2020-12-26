@@ -23,8 +23,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.onoo.gomlgy.Models.SubCategorymodel;
-import com.onoo.gomlgy.Models.collectionmodel;
+import com.onoo.gomlgy.models.SubCategorymodel;
+import com.onoo.gomlgy.models.collectionmodel;
 import com.onoo.gomlgy.Network.ApiClient;
 import com.onoo.gomlgy.Network.response.AppSettingsResponse;
 import com.onoo.gomlgy.Network.services.getProductsWithSubcategory;

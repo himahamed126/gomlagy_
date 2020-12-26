@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.Product;
-import com.onoo.gomlgy.Models.Shop;
+import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.Shop;
 import com.onoo.gomlgy.Presentation.presenters.ShopPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.SellerShopView;
 import com.onoo.gomlgy.Presentation.ui.adapters.BestSellingAdapter;

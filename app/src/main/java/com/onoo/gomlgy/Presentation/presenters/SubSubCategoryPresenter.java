@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.Models.SubCategory;
+import com.onoo.gomlgy.models.SubCategory;
 import com.onoo.gomlgy.Presentation.ui.activities.SubCategoryView;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;

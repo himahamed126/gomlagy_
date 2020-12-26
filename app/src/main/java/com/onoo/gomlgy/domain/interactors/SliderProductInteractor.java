@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.domain.interactors;
 
-import com.onoo.gomlgy.Models.offers_sources.offers.OffersData;
+import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 
 import java.util.List;
 

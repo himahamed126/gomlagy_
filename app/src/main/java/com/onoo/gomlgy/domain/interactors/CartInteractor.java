@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.domain.interactors;
 
-import com.onoo.gomlgy.Models.CartModel;
+import com.onoo.gomlgy.models.CartModel;
 
 import java.util.List;
 

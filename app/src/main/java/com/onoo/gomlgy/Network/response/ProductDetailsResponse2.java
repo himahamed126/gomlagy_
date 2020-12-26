@@ -2,7 +2,7 @@ package com.onoo.gomlgy.Network.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.onoo.gomlgy.Models.ProductDetails2;
+import com.onoo.gomlgy.models.ProductDetails2;
 
 import java.util.List;
 

@@ -1,13 +1,12 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.Models.AuctionProduct;
-import com.onoo.gomlgy.Models.Banner;
-import com.onoo.gomlgy.Models.Brand;
-import com.onoo.gomlgy.Models.Category;
-import com.onoo.gomlgy.Models.FlashDeal;
-import com.onoo.gomlgy.Models.Product;
-import com.onoo.gomlgy.Models.SliderImage;
-import com.onoo.gomlgy.Models.offers_sources.offers.OffersData;
+import com.onoo.gomlgy.models.AuctionProduct;
+import com.onoo.gomlgy.models.Banner;
+import com.onoo.gomlgy.models.Brand;
+import com.onoo.gomlgy.models.Category;
+import com.onoo.gomlgy.models.FlashDeal;
+import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 import com.onoo.gomlgy.Network.response.AppSettingsResponse;
 import com.onoo.gomlgy.Network.response.AuctionBidResponse;
 import com.onoo.gomlgy.Presentation.ui.fragments.HomeView;

@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.Models.UserBid;
+import com.onoo.gomlgy.models.UserBid;
 import com.onoo.gomlgy.Network.response.AuctionBidResponse;
 import com.onoo.gomlgy.Presentation.ui.activities.MybidView;
 import com.onoo.gomlgy.domain.executor.Executor;

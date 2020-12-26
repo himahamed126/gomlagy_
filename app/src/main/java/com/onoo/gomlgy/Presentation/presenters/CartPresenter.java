@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.Models.CartModel;
+import com.onoo.gomlgy.models.CartModel;
 import com.onoo.gomlgy.Network.response.CartQuantityUpdateResponse;
 import com.onoo.gomlgy.Network.response.RemoveCartResponse;
 import com.onoo.gomlgy.Presentation.ui.fragments.CartView;

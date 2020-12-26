@@ -11,11 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.SubCategorymodel;
+import com.onoo.gomlgy.models.SubCategorymodel;
 import com.onoo.gomlgy.Presentation.ui.listeners.AllCategoryClickListener;
 import com.onoo.gomlgy.R;
-import com.onoo.gomlgy.Utils.HelperMethod;
-import com.onoo.gomlgy.Utils.ItemAnimation;
 
 import java.util.List;
 

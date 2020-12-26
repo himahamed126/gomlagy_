@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.UserBid;
+import com.onoo.gomlgy.models.UserBid;
 import com.onoo.gomlgy.Network.response.AuctionBidResponse;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Presentation.presenters.MybidsPresenter;

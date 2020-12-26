@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.Models.WishlistModel;
+import com.onoo.gomlgy.models.WishlistModel;
 import com.onoo.gomlgy.Presentation.ui.activities.WishlistView;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;

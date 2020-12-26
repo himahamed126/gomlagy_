@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Presentation.ui.activities;
 
-import com.onoo.gomlgy.Models.UserBid;
+import com.onoo.gomlgy.models.UserBid;
 import com.onoo.gomlgy.Network.response.AuctionBidResponse;
 
 import java.util.List;

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.SubSubCategory;
+import com.onoo.gomlgy.models.SubSubCategory;
 import com.onoo.gomlgy.Presentation.ui.listeners.SubSubCategoryClickListener;
 import com.onoo.gomlgy.R;
 

@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.domain.interactors;
 
-import com.onoo.gomlgy.Models.Brand;
+import com.onoo.gomlgy.models.Brand;
 
 import java.util.List;
 

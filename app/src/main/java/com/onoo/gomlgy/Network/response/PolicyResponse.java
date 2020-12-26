@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Network.response;
 
-import com.onoo.gomlgy.Models.PolicyContent;
+import com.onoo.gomlgy.models.PolicyContent;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

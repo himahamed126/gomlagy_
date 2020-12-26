@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.SearchProduct;
+import com.onoo.gomlgy.models.SearchProduct;
 import com.onoo.gomlgy.Network.response.ProductSearchResponse;
 import com.onoo.gomlgy.Presentation.presenters.ProductSearchPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductDetailsActivity;

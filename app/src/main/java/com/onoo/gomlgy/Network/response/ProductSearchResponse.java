@@ -1,8 +1,8 @@
 package com.onoo.gomlgy.Network.response;
 
-import com.onoo.gomlgy.Models.Meta;
-import com.onoo.gomlgy.Models.ProductLisitingLink;
-import com.onoo.gomlgy.Models.SearchProduct;
+import com.onoo.gomlgy.models.Meta;
+import com.onoo.gomlgy.models.ProductLisitingLink;
+import com.onoo.gomlgy.models.SearchProduct;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

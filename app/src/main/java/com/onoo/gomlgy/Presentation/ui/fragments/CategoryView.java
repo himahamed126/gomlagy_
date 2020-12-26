@@ -1,7 +1,6 @@
 package com.onoo.gomlgy.Presentation.ui.fragments;
 
-import com.onoo.gomlgy.Models.Category;
-import com.onoo.gomlgy.Models.SubCategorymodel;
+import com.onoo.gomlgy.models.SubCategorymodel;
 
 import java.util.List;
 

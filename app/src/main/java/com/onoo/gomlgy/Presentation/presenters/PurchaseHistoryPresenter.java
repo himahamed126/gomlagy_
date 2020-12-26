@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.Models.PurchaseHistory;
+import com.onoo.gomlgy.models.PurchaseHistory;
 import com.onoo.gomlgy.Presentation.ui.activities.PurchaseHistoryView;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;

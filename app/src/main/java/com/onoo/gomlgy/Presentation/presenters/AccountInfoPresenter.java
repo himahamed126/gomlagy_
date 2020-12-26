@@ -1,7 +1,7 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.Models.ShippingAddress;
-import com.onoo.gomlgy.Models.User;
+import com.onoo.gomlgy.models.ShippingAddress;
+import com.onoo.gomlgy.models.User;
 import com.onoo.gomlgy.Network.response.ProfileInfoUpdateResponse;
 import com.onoo.gomlgy.Network.response.ShippingInfoResponse;
 import com.onoo.gomlgy.Presentation.ui.activities.AccountInfoView;

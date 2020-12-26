@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.domain.interactors;
 
-import com.onoo.gomlgy.Models.UserBid;
+import com.onoo.gomlgy.models.UserBid;
 
 import java.util.List;
 

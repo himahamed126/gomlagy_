@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.domain.interactors;
 
-import com.onoo.gomlgy.Models.SubCategorymodel;
+import com.onoo.gomlgy.models.SubCategorymodel;
 
 import java.util.List;
 

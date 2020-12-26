@@ -6,8 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.onoo.gomlgy.Models.Category;
-import com.onoo.gomlgy.Models.SubCategorymodel;
+import com.onoo.gomlgy.models.SubCategorymodel;
 import com.onoo.gomlgy.Presentation.presenters.CategoryPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.SubCategoryActivity;
 import com.onoo.gomlgy.Presentation.ui.adapters.AllCategoryAdapter;

@@ -6,8 +6,8 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.Category;
-import com.onoo.gomlgy.Models.SubCategory;
+import com.onoo.gomlgy.models.Category;
+import com.onoo.gomlgy.models.SubCategory;
 import com.onoo.gomlgy.Presentation.presenters.SubSubCategoryPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.SubCategoryView;
 import com.onoo.gomlgy.Presentation.ui.adapters.SubCategoryAdapter;

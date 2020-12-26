@@ -16,11 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.github.ybq.android.spinkit.SpinKitView;
-import com.onoo.gomlgy.Models.Product;
-import com.onoo.gomlgy.Models.Productmodel;
-import com.onoo.gomlgy.Models.SubCategory;
-import com.onoo.gomlgy.Models.SubCategorymodel;
-import com.onoo.gomlgy.Models.collectionmodel;
+import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.SubCategory;
+import com.onoo.gomlgy.models.SubCategorymodel;
 import com.onoo.gomlgy.Network.ApiClient;
 import com.onoo.gomlgy.Network.response.ProductListingResponse;
 import com.onoo.gomlgy.Network.services.ProductListingApiInterface;

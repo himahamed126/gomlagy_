@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.onoo.gomlgy.Models.UserBid;
+import com.onoo.gomlgy.models.UserBid;
 import com.onoo.gomlgy.Presentation.ui.listeners.MyBidClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.AppConfig;

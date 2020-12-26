@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
-import com.onoo.gomlgy.Models.Product;
+import com.onoo.gomlgy.models.Product;
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.R;
 

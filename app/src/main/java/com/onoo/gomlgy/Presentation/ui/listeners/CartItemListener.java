@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Presentation.ui.listeners;
 
-import com.onoo.gomlgy.Models.CartModel;
+import com.onoo.gomlgy.models.CartModel;
 
 public interface CartItemListener {
     void onCartRemove(CartModel cartModel);

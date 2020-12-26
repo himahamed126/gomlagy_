@@ -6,24 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.Product;
-import com.onoo.gomlgy.Models.Productmodel;
-import com.onoo.gomlgy.Network.response.ProductListingResponse;
-import com.onoo.gomlgy.Presentation.presenters.ProductListingPresenter;
-import com.onoo.gomlgy.Presentation.ui.activities.ProductListingView;
-import com.onoo.gomlgy.Presentation.ui.adapters.ProductListingAdapter;
+import com.onoo.gomlgy.models.Productmodel;
 import com.onoo.gomlgy.Presentation.ui.adapters.ProductListingAdapterAlternative;
 import com.onoo.gomlgy.Presentation.ui.listeners.EndlessRecyclerOnScrollListener;
-import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.R;
-import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.Utils.RecyclerViewMargin;
-import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 
 import java.util.ArrayList;
 import java.util.List;

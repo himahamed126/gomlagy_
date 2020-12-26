@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.SearchProduct;
+import com.onoo.gomlgy.models.SearchProduct;
 import com.onoo.gomlgy.Presentation.ui.listeners.SearchProductClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.AppConfig;

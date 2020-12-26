@@ -1,7 +1,6 @@
 package com.onoo.gomlgy.Presentation.ui.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.Models.ShippingAddress;
+import com.onoo.gomlgy.models.ShippingAddress;
 import com.onoo.gomlgy.Presentation.ui.listeners.ShippingAddressSelectListener;
 import com.onoo.gomlgy.R;
 
