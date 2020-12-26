@@ -1,6 +1,7 @@
 package com.onoo.gomlgy.Presentation.ui.listeners;
 
 import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.Productmodel;
 
 public interface SubCategoryClickListener {
 
@@ -8,6 +9,6 @@ public interface SubCategoryClickListener {
 
     void onSeeAllProductsOfSubCategoryClicked(int position);
 
-    void onProductClicked(Product product);
+    void onProductClicked(Productmodel product);
 
 }

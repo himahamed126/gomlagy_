@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.onoo.gomlgy.Presentation.presenters.CategoryPresenter;
 import com.onoo.gomlgy.Presentation.presenters.SubCategoryPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.SubCategoryView;
+import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductDetailsActivity;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductListingActivity;
 import com.onoo.gomlgy.Presentation.ui.adapters.AllCategoryAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.SubCategoryAdapter;
@@ -25,11 +25,13 @@ import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 import com.onoo.gomlgy.models.Category;
-import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.Productmodel;
 import com.onoo.gomlgy.models.SubCategorymodel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.onoo.gomlgy.Network.ApiClient.BASE_URL;
 
 public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
         AllCategoryClickListener, CategoryView, SubCategoryView, SubCategoryClickListener {
@@ -187,8 +189,11 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     @Override
-    public void onProductClicked(Product product) {
-        Toast.makeText(getActivity(), "product", Toast.LENGTH_SHORT).show();
+    public void onProductClicked(Productmodel product) {
+        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+        intent.putExtra("product_name", product.getName());
+        intent.putExtra("link", BASE_URL + "products/" + product.getId());
+        startActivity(intent);
     }
 
 //    @Override

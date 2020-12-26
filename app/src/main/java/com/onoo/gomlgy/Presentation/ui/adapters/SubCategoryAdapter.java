@@ -62,7 +62,8 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 ((ViewHolder) holder).subCategoryBinding.productsRv
                         .setAdapter(new SubSubCategoryAdapter(subCategories.get(position)
                                 .getProducts(), productPosition ->
-                                subCategoryClickListener.onProductClicked(null)));
+                                subCategoryClickListener.onProductClicked(subCategories
+                                        .get(position).getProducts().get(productPosition))));
             }
 
             ((ViewHolder) holder).subCategoryBinding.seeAllTv.setOnClickListener(view ->
