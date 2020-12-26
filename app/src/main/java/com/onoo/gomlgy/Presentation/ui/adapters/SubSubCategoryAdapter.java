@@ -10,20 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.onoo.gomlgy.Presentation.ui.listeners.SubSubCategoryClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.databinding.ProductListItemBinding;
-import com.onoo.gomlgy.models.SubSubCategory;
+import com.onoo.gomlgy.models.Productmodel;
 
 import java.util.List;
 
 public class SubSubCategoryAdapter extends RecyclerView.Adapter<SubSubCategoryAdapter.ViewHolder> {
 
-    private List<SubSubCategory> subSubCategories;
+    private List<Productmodel> products;
     private SubSubCategoryClickListener subSubCategoryClickListener;
     private LayoutInflater layoutInflater;
 
     // data is passed into the constructor
-    public SubSubCategoryAdapter(List<SubSubCategory> subSubCategories,
+    public SubSubCategoryAdapter(List<Productmodel> products,
                                  SubSubCategoryClickListener clickListener) {
-        this.subSubCategories = subSubCategories;
+        this.products = products;
         subSubCategoryClickListener = clickListener;
     }
 
@@ -41,7 +41,7 @@ public class SubSubCategoryAdapter extends RecyclerView.Adapter<SubSubCategoryAd
     // binds the data to the view and textview in each row
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.productListItemBinding.setProduct(subSubCategories.get(position));
+        holder.productListItemBinding.setProduct(products.get(position));
         holder.productListItemBinding.productItemCl.setOnClickListener(view ->
                 subSubCategoryClickListener.onSubSubCategoryClick(position));
     }
@@ -49,7 +49,7 @@ public class SubSubCategoryAdapter extends RecyclerView.Adapter<SubSubCategoryAd
     // total number of rows
     @Override
     public int getItemCount() {
-        return subSubCategories.size();
+        return products.size();
     }
 
     // stores and recycles views as they are scrolled off screen

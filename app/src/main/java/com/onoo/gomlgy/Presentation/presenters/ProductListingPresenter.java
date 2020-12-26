@@ -1,14 +1,14 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 import com.onoo.gomlgy.Network.response.ProductListingResponse;
 import com.onoo.gomlgy.Presentation.ui.activities.ProductListingView;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;
 import com.onoo.gomlgy.domain.interactors.ProductListingInteractor;
-import com.onoo.gomlgy.domain.interactors.impl.ProductListingInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.SliderProductInteractor;
+import com.onoo.gomlgy.domain.interactors.impl.ProductListingInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.SliderProductInteractorImpl;
+import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 
 import java.util.List;
 

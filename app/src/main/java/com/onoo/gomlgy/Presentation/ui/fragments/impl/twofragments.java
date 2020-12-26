@@ -26,7 +26,7 @@ import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 import com.onoo.gomlgy.models.Category;
 import com.onoo.gomlgy.models.Product;
-import com.onoo.gomlgy.models.SubCategory;
+import com.onoo.gomlgy.models.SubCategorymodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
     private List<Category> mCategories = new ArrayList<>();
     private RecyclerView categoryRv, subCategoriesRv;
     private AllCategoryAdapter allCategoryAdapter;
-    private List<SubCategory> subCategories;
+    private List<SubCategorymodel> subCategories;
     private SubCategoryAdapter subCategoryAdapter;
     private Category category;
 //    private SpinKitView spin;
@@ -136,7 +136,7 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
     public void onCategoryClick(Category category) {
 //        Log.i(TAG, "onCategoryClick: " + category.getName());
 //        getDAta(category.getId());
-        subCategoryPresenter.getSubSubCategories(category.getLinks().getSubCategories());
+        subCategoryPresenter.getSubSubCategories(String.valueOf(category.getId()));
         this.category = category;
 
     }
@@ -148,7 +148,7 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
         allCategoryAdapter.notifyDataSetChanged();
         mSwipeRefreshLayout.setRefreshing(false);
 
-        subCategoryPresenter.getSubSubCategories(categories.get(0).getLinks().getSubCategories());
+        subCategoryPresenter.getSubSubCategories(String.valueOf(categories.get(0).getId()));
         category = categories.get(0);
 
 //        if (!categories.isEmpty()) {
@@ -157,7 +157,7 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     @Override
-    public void setSubCategories(List<SubCategory> subCategories) {
+    public void setSubCategories(List<SubCategorymodel> subCategories) {
 
         this.subCategories.clear();
         this.subCategories.addAll(subCategories);
@@ -179,7 +179,8 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
     public void onSeeAllProductsOfSubCategoryClicked(int position) {
 
         Intent i = new Intent(getActivity(), ProductListingActivity.class);
-        i.putExtra(getString(R.string.url), subCategories.get(position).getLinks().getProducts());
+        i.putExtra(getString(R.string.url),
+                subCategories.get(position).getLinks().getProducts());
         i.putExtra(getString(R.string.title), subCategories.get(position).getName());
         startActivity(i);
 

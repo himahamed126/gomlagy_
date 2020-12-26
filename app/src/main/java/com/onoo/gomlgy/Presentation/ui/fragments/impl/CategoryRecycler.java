@@ -32,7 +32,7 @@ import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 import com.onoo.gomlgy.models.Category;
 import com.onoo.gomlgy.models.Product;
-import com.onoo.gomlgy.models.SubCategory;
+import com.onoo.gomlgy.models.SubCategorymodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -160,7 +160,7 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
     }
 
     @Override
-    public void setSubCategories(List<SubCategory> subCategories) {
+    public void setSubCategories(List<SubCategorymodel> subCategories) {
 
     }
 

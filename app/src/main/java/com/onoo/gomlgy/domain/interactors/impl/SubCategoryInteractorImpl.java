@@ -4,13 +4,12 @@ import android.util.Log;
 
 import com.onoo.gomlgy.Network.ApiClient;
 import com.onoo.gomlgy.Network.response.SubCategoryResponse;
-import com.onoo.gomlgy.Network.services.SubSubCategoryApiInterface;
+import com.onoo.gomlgy.Network.services.SubCategoryApiInterface;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;
 import com.onoo.gomlgy.domain.interactors.SubCategoryInteractor;
 import com.onoo.gomlgy.domain.interactors.base.AbstractInteractor;
-import com.onoo.gomlgy.models.SubCategory;
-import com.onoo.gomlgy.models.SubSubCategory;
+import com.onoo.gomlgy.models.SubCategorymodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,20 +20,20 @@ import retrofit2.Response;
 
 public class SubCategoryInteractorImpl extends AbstractInteractor {
     private SubCategoryInteractor.CallBack mCallback;
-    private SubSubCategoryApiInterface apiService;
-    private String url;
+    private SubCategoryApiInterface apiService;
+    private String categoryId;
 
     public SubCategoryInteractorImpl(Executor threadExecutor, MainThread mainThread,
-                                     SubCategoryInteractor.CallBack callBack, String url) {
+                                     SubCategoryInteractor.CallBack callBack, String categoryId) {
         super(threadExecutor, mainThread);
         mCallback = callBack;
-        this.url = url;
+        this.categoryId = categoryId;
     }
 
     @Override
     public void run() {
-        apiService = ApiClient.getClient().create(SubSubCategoryApiInterface.class);
-        Call<SubCategoryResponse> call = apiService.getSubSubcategories(url);
+        apiService = ApiClient.getClient().create(SubCategoryApiInterface.class);
+        Call<SubCategoryResponse> call = apiService.getSubSubcategories(categoryId);
 
         call.enqueue(new Callback<SubCategoryResponse>() {
             @Override
@@ -42,8 +41,8 @@ public class SubCategoryInteractorImpl extends AbstractInteractor {
                 try {
 
 //                    Add an item showing "All products" to the sub categories list
-                    List<SubCategory> subCategories = new ArrayList<>();
-                    subCategories.add(new SubCategory("All products"));
+                    List<SubCategorymodel> subCategories = new ArrayList<>();
+                    subCategories.add(new SubCategorymodel("All products"));
                     subCategories.addAll(response.body().getData());
                     mCallback.onSubSubCategoriesDownloaded(subCategories);
 

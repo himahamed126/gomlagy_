@@ -35,6 +35,17 @@ public class SubCategorymodel {
     @Expose
     private List<Productmodel> products = null;
 
+    @SerializedName("links")
+    @Expose
+    private Link links;
+
+    public SubCategorymodel() {
+    }
+
+    public SubCategorymodel(String name) {
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -107,4 +118,11 @@ public class SubCategorymodel {
         this.products = products;
     }
 
+    public Link getLinks() {
+        return links;
+    }
+
+    public void setLinks(Link links) {
+        this.links = links;
+    }
 }

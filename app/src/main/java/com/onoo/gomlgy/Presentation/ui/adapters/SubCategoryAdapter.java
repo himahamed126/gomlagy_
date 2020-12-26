@@ -11,20 +11,20 @@ import com.onoo.gomlgy.Presentation.ui.listeners.SubCategoryClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.databinding.SubCategoryHeaderItemBinding;
 import com.onoo.gomlgy.databinding.SubCategoryListItemBinding;
-import com.onoo.gomlgy.models.SubCategory;
+import com.onoo.gomlgy.models.SubCategorymodel;
 
 import java.util.List;
 
 public class SubCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<SubCategory> subCategories;
+    private List<SubCategorymodel> subCategories;
     private LayoutInflater layoutInflater;
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
     SubCategoryClickListener subCategoryClickListener;
 
     // data is passed into the constructor
-    public SubCategoryAdapter(List<SubCategory> subCategories,
+    public SubCategoryAdapter(List<SubCategorymodel> subCategories,
                               SubCategoryClickListener clickListener) {
         this.subCategories = subCategories;
         subCategoryClickListener = clickListener;
@@ -57,12 +57,12 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if (holder instanceof ViewHolder) {
 
             ((ViewHolder) holder).subCategoryBinding.setSubCategory(subCategories.get(position));
-            if (subCategories.get(position).getSubSubCategories() != null &&
-                    subCategories.get(position).getSubSubCategories().getData().size() > 0) {
+            if (subCategories.get(position).getProducts() != null &&
+                    subCategories.get(position).getProducts().size() > 0) {
                 ((ViewHolder) holder).subCategoryBinding.productsRv
                         .setAdapter(new SubSubCategoryAdapter(subCategories.get(position)
-                                .getSubSubCategories().getData(),
-                                productPosition -> subCategoryClickListener.onProductClicked(null)));
+                                .getProducts(), productPosition ->
+                                subCategoryClickListener.onProductClicked(null)));
             }
 
             ((ViewHolder) holder).subCategoryBinding.seeAllTv.setOnClickListener(view ->
