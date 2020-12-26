@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class SubSubCategoryResponse {
+public class SubCategoryResponse {
     @SerializedName("data")
     @Expose
     private List<SubCategory> data = null;

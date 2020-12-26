@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/filters_sheet_cl"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@drawable/bottom_sheet_background"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:showIn="@layout/activity_product_listing">
+
+        <TextView
+            android:id="@+id/filter_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/filter"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/minimize" />
+
+        <View
+            android:id="@+id/minimize"
+            android:layout_width="70dp"
+            android:layout_height="8dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/bottom_sheet_minimization"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/filter_tv">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/expand_brands_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    app:layout_constraintBottom_toBottomOf="@id/brands_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/brands_tv" />
+
+                <ImageView
+                    android:id="@+id/minimize_brands_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/brands_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/brands_tv" />
+
+                <TextView
+                    android:id="@+id/brands_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/brand"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/brands_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/brands_tv"
+                    app:layout_constraintTop_toBottomOf="@id/brands_tv"
+                    android:visibility="gone"/>
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightGrey"
+                    app:layout_constraintTop_toBottomOf="@id/brands_rv"
+                    android:layout_margin="16dp"/>
+
+                <TextView
+                    android:id="@+id/price_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="@string/price_egp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view1"/>
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/price_tv"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"/>
+
+                <TextView
+                    android:id="@+id/from_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/slider"
+                    app:layout_constraintTop_toBottomOf="@id/slider"
+                    android:text="@string/from"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"/>
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <EditText
+                    android:id="@+id/from_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/from_tv"
+                    app:layout_constraintEnd_toStartOf="@id/view2"
+                    android:background="@drawable/background_edittext"
+                    app:layout_constraintTop_toBottomOf="@id/from_tv"
+                    android:textSize="21sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:focusable="false" />
+
+                <TextView
+                    android:id="@+id/to_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/view2"
+                    app:layout_constraintTop_toBottomOf="@id/slider"
+                    android:text="@string/to"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"/>
+
+                <EditText
+                    android:id="@+id/to_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/to_tv"
+                    app:layout_constraintEnd_toEndOf="@id/slider"
+                    android:background="@drawable/background_edittext"
+                    app:layout_constraintTop_toBottomOf="@id/from_tv"
+                    android:textSize="21sp"
+                    android:layout_marginTop="8dp"
+                    android:focusable="false"/>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightGrey"
+                    app:layout_constraintTop_toBottomOf="@id/from_et"
+                    android:layout_margin="16dp"/>
+
+                <Button
+                    android:id="@+id/apply_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/apply"
+                    android:textAllCaps="false"
+                    app:layout_constraintTop_toBottomOf="@id/view3"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toEndOf="@id/from_et"
+                    app:layout_constraintEnd_toEndOf="@id/to_et"/>
+
+                <Button
+                    android:id="@+id/clear_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="@string/clear"
+                    android:textAllCaps="false"
+                    app:layout_constraintTop_toBottomOf="@id/view3"
+                    app:layout_constraintTop_toTopOf="@id/apply_btn"
+                    app:layout_constraintBottom_toBottomOf="@id/apply_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/apply_btn"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@color/lightGrey"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

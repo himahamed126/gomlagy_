@@ -1,12 +1,13 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.models.SubCategorymodel;
 import com.onoo.gomlgy.Presentation.ui.fragments.CategoryView;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;
 import com.onoo.gomlgy.domain.interactors.AllCategoryInteractor;
 import com.onoo.gomlgy.domain.interactors.impl.AllCategoriesInteractorImpl;
+import com.onoo.gomlgy.models.Category;
 
+import java.util.Collections;
 import java.util.List;
 
 public class CategoryPresenter extends AbstractPresenter implements AllCategoryInteractor.CallBack {
@@ -23,8 +24,11 @@ public class CategoryPresenter extends AbstractPresenter implements AllCategoryI
     }
 
     @Override
-    public void onAllCategoriesDownloaded(List<SubCategorymodel> categories) {
+    public void onAllCategoriesDownloaded(List<Category> categories) {
         if (categoryView != null) {
+//            Sort categories with id
+            Collections.sort(categories, (categoryModel1, categoryModel2) ->
+                    (int) (categoryModel1.getId() - categoryModel2.getId()));
             categoryView.setAllCategories(categories);
         }
     }

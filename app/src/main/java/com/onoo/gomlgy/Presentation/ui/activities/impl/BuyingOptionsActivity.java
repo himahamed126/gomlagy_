@@ -21,8 +21,9 @@ import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.onoo.gomlgy.models.ChoiceOption;
-import com.onoo.gomlgy.models.ProductDetails2;
+import com.bumptech.glide.Glide;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.onoo.gomlgy.Network.response.AddToCartResponse;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Network.response.VariantResponse;
@@ -35,9 +36,8 @@ import com.onoo.gomlgy.Utils.AppConfig;
 import com.onoo.gomlgy.Utils.CustomToast;
 import com.onoo.gomlgy.Utils.UserPrefs;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
-import com.bumptech.glide.Glide;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.onoo.gomlgy.models.ChoiceOption;
+import com.onoo.gomlgy.models.ProductDetails2;
 
 import java.util.HashMap;
 

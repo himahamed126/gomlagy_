@@ -16,9 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.github.ybq.android.spinkit.SpinKitView;
-import com.onoo.gomlgy.models.Product;
-import com.onoo.gomlgy.models.SubCategory;
-import com.onoo.gomlgy.models.SubCategorymodel;
 import com.onoo.gomlgy.Network.ApiClient;
 import com.onoo.gomlgy.Network.response.ProductListingResponse;
 import com.onoo.gomlgy.Network.services.ProductListingApiInterface;
@@ -30,10 +27,12 @@ import com.onoo.gomlgy.Presentation.ui.adapters.productsOfSubCategoryAdapter;
 import com.onoo.gomlgy.Presentation.ui.fragments.CategoryView;
 import com.onoo.gomlgy.Presentation.ui.listeners.AllCategoryClickListener;
 import com.onoo.gomlgy.Presentation.ui.listeners.AllProductClickListener;
-import com.onoo.gomlgy.Presentation.ui.listeners.SubCategoryClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
+import com.onoo.gomlgy.models.Category;
+import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.SubCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,11 +43,12 @@ import retrofit2.Response;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class CategoryRecycler extends Fragment implements CategoryView, AllCategoryClickListener, SwipeRefreshLayout.OnRefreshListener, SubCategoryView, SubCategoryClickListener, AllProductClickListener {
+public class CategoryRecycler extends Fragment implements CategoryView, AllCategoryClickListener,
+        SwipeRefreshLayout.OnRefreshListener, SubCategoryView, AllProductClickListener {
     private View v;
     private CategoryPresenter categoryPresenter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private List<SubCategorymodel> mCategories = new ArrayList<>();
+    private List<Category> mCategories = new ArrayList<>();
     private RecyclerView recyclerView;
     private AllCategoryAdapter adapter;
     getProductsWithSubcategory apiService;
@@ -71,7 +71,7 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
             fragmentManager = getFragmentManager();
 //            rightFragment = fragmentManager.findFragmentById(R.id.subcategory);
             productRv = rightFragment.getView().findViewById(R.id.List_subcategory_products);
-            productAdapter = new productsOfSubCategoryAdapter(getActivity(), productList,this);
+            productAdapter = new productsOfSubCategoryAdapter(getActivity(), productList, this);
             productRv.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
             productRv.setAdapter(productAdapter);
 //
@@ -107,7 +107,7 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
 
 
     @Override
-    public void setAllCategories(List<SubCategorymodel> categories) {
+    public void setAllCategories(List<Category> categories) {
         mCategories.clear();
         mCategories.addAll(categories);
         adapter.notifyDataSetChanged();
@@ -115,7 +115,7 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
     }
 
     @Override
-    public void onCategoryClick(SubCategorymodel category) {
+    public void onCategoryClick(Category category) {
         Log.i(TAG, "onCategoryClick: " + category.getName());
         getDAta(category.getId());
     }
@@ -164,10 +164,9 @@ public class CategoryRecycler extends Fragment implements CategoryView, AllCateg
 
     }
 
-    @Override
-    public void onSubCategoryItemClick(SubCategory subCategory) {
-    }
-
+//    @Override
+//    public void onSubCategoryItemClick(SubCategory subCategory) {
+//    }
 
     @Override
     public void onProductClick(Product product) {

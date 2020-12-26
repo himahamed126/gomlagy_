@@ -1,8 +1,6 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
 import com.google.gson.JsonArray;
-import com.onoo.gomlgy.models.Product;
-import com.onoo.gomlgy.models.ProductDetails2;
 import com.onoo.gomlgy.Network.response.AddToCartResponse;
 import com.onoo.gomlgy.Network.response.AddToWishlistResponse;
 import com.onoo.gomlgy.Network.response.CheckWishlistResponse;
@@ -25,6 +23,8 @@ import com.onoo.gomlgy.domain.interactors.impl.CheckWishlistInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.ProductDetailsInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.ProductInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.RemoveWishlistInteractorImpl;
+import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.ProductDetails2;
 
 import java.util.List;
 

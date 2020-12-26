@@ -5,94 +5,136 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
-import com.onoo.gomlgy.models.Product;
-import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.slider.RangeSlider;
 import com.onoo.gomlgy.Network.response.ProductListingResponse;
+import com.onoo.gomlgy.Presentation.presenters.FiltersPresenter;
 import com.onoo.gomlgy.Presentation.presenters.ProductListingPresenter;
+import com.onoo.gomlgy.Presentation.ui.activities.FiltersView;
 import com.onoo.gomlgy.Presentation.ui.activities.ProductListingView;
+import com.onoo.gomlgy.Presentation.ui.adapters.FilterBrandsAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.ProductListingAdapter;
 import com.onoo.gomlgy.Presentation.ui.listeners.EndlessRecyclerOnScrollListener;
+import com.onoo.gomlgy.Presentation.ui.listeners.FilterBrandCallback;
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.Utils.RecyclerViewMargin;
+import com.onoo.gomlgy.databinding.ActivityProductListingBinding;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
+import com.onoo.gomlgy.models.BrandData;
+import com.onoo.gomlgy.models.FilterData;
+import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductListingActivity extends BaseActivity implements ProductListingView, ProductClickListener, ViewPagerEx.OnPageChangeListener {
+public class ProductListingActivity extends BaseActivity implements ProductListingView,
+        ProductClickListener, FiltersView, FilterBrandCallback {
 
     private List<Product> mProducts = new ArrayList<>();
     private ProductListingResponse productListingResponse = null;
     private ProductListingPresenter productListingPresenter;
     private ProductListingAdapter adapter;
-    private RecyclerView recyclerView;
-    private ProgressBar progressBar;
-    private TextView products_empty_text;
-    private SliderLayout sliderLayout;
-    private ImageView orint;
-    private static final String TAG = "ProductListingActivity";
-    List<OffersData> sliderImages;
+    private List<OffersData> sliderImages;
+    private ActivityProductListingBinding productListingBinding;
+    private String url, categoryId, subcategoryId;
+    private BottomSheetBehavior bottomSheetBehavior;
+    private FiltersPresenter filtersPresenter;
+    private List<BrandData> brandsList = new ArrayList<>();
+    private FilterBrandsAdapter brandsAdapter;
+    private int selectedFilterBrandId;
+    private Boolean isBrandSelected = false;
+    private FilterData filterData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_listing);
+        productListingBinding = DataBindingUtil.setContentView(ProductListingActivity.this,
+                R.layout.activity_product_listing);
 
-        String title = getIntent().getStringExtra("title");
-        String url = getIntent().getStringExtra("url");
+        initView();
+        productListingPresenter = new ProductListingPresenter(ThreadExecutor.getInstance(),
+                MainThreadImpl.getInstance(), this);
+        filtersPresenter = new FiltersPresenter(ThreadExecutor.getInstance(),
+                MainThreadImpl.getInstance(), this);
+        getIntentExtras();
+        productListingPresenter.getSliderImages();
 
-        Log.i(TAG, "onCreate: " + url);
+    }
+
+    @Override
+    public void initView() {
+
         initializeActionBar();
-        setTitle(title);
 
-        adapter = new ProductListingAdapter(getApplicationContext(), mProducts, this, ProductListingAdapter.ViewType.VIEW_TYPE_List);
-        recyclerView = findViewById(R.id.product_list);
-        progressBar = findViewById(R.id.item_progress_bar);
-        products_empty_text = findViewById(R.id.products_empty_text);
-        sliderLayout = findViewById(R.id.imageSlider);
+        adapter = new ProductListingAdapter(getApplicationContext(), mProducts,
+                this, ProductListingAdapter.ViewType.VIEW_TYPE_List);
 
         GridLayoutManager horizontalLayoutManager
                 = new GridLayoutManager(ProductListingActivity.this, 2);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
+        productListingBinding.productList.setLayoutManager(horizontalLayoutManager);
         //adapter.setClickListener(this);
-        RecyclerViewMargin decoration = new RecyclerViewMargin(convertDpToPx(this, 10), 2);
-        recyclerView.addItemDecoration(decoration);
-        recyclerView.setAdapter(adapter);
+        RecyclerViewMargin decoration = new RecyclerViewMargin(convertDpToPx(this, 10),
+                2);
+        productListingBinding.productList.addItemDecoration(decoration);
+        productListingBinding.productList.setAdapter(adapter);
 
-        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
-            @Override
-            public void onLoadMore() {
-                addDataToList(productListingResponse);
-            }
+        productListingBinding.productList.addOnScrollListener(
+                new EndlessRecyclerOnScrollListener() {
+                    @Override
+                    public void onLoadMore() {
+                        addDataToList(productListingResponse);
+                    }
+                });
+        productListingBinding.itemProgressBar.setVisibility(View.VISIBLE);
+
+        productListingBinding.filterTv.setOnClickListener(view -> {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         });
-        progressBar.setVisibility(View.VISIBLE);
-        productListingPresenter = new ProductListingPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
-        productListingPresenter.getProducts(url);
-        productListingPresenter.getSliderImages();
+
+    }
+
+    @Override
+    public void getIntentExtras() {
+
+        if (getIntent().getStringExtra(getString(R.string.title)) != null)
+            setTitle(getIntent().getStringExtra(getString(R.string.title)));
+
+        if (getIntent().getStringExtra(getString(R.string.url)) != null) {
+            url = getIntent().getStringExtra(getString(R.string.url));
+            productListingPresenter.getProducts(url);
+        }
+
+        if (getIntent().getStringExtra(getString(R.string.category_id)) != null)
+            categoryId = getIntent().getStringExtra(getString(R.string.category_id));
+
+        if (getIntent().getStringExtra(getString(R.string.sub_category_id)) != null)
+            subcategoryId = getIntent().getStringExtra(getString(R.string.category_id));
+
+        filtersPresenter.getFilterData(categoryId, "13");
+
     }
 
     @Override
     public void setProducts(ProductListingResponse productListingResponse) {
         mProducts.addAll(productListingResponse.getData());
         this.productListingResponse = productListingResponse;
-        progressBar.setVisibility(View.GONE);
+        productListingBinding.itemProgressBar.setVisibility(View.GONE);
         adapter.notifyDataSetChanged();
 
         if (mProducts.size() <= 0) {
-            products_empty_text.setVisibility(View.VISIBLE);
+            productListingBinding.productsEmptyText.setVisibility(View.VISIBLE);
         }
     }
 
@@ -105,19 +147,39 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
                     .description("")
                     .image(offersData.getOfferImagePath())
                     .setScaleType(BaseSliderView.ScaleType.Fit);
-            sliderLayout.addSlider(textSliderView);
+            productListingBinding.imageSlider.addSlider(textSliderView);
             //Log.d("Sliders", AppConfig.ASSET_URL + sliderImage.getPhoto());
         }
-        sliderLayout.setPresetTransformer(SliderLayout.Transformer.Default);
-        sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        sliderLayout.addOnPageChangeListener(this);
-        sliderLayout.setVisibility(View.VISIBLE);
+        productListingBinding.imageSlider.setPresetTransformer(SliderLayout.Transformer.Default);
+        productListingBinding.imageSlider
+                .setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        productListingBinding.imageSlider.addOnPageChangeListener(
+                new ViewPagerEx.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset,
+                                               int positionOffsetPixels) {
+
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+
+                    }
+                });
+        productListingBinding.imageSlider.setVisibility(View.VISIBLE);
     }
 
     public void addDataToList(ProductListingResponse productListingResponse) {
-        if (productListingResponse != null && productListingResponse.getMeta() != null && !productListingResponse.getMeta().getCurrentPage().equals(productListingResponse.getMeta().getLastPage())) {
-            progressBar.setVisibility(View.VISIBLE);
-            productListingPresenter.getProducts(productListingResponse.getLinks().getNext().toString());
+        if (productListingResponse != null && productListingResponse.getMeta() != null &&
+                !productListingResponse.getMeta().getCurrentPage()
+                        .equals(productListingResponse.getMeta().getLastPage())) {
+            productListingBinding.itemProgressBar.setVisibility(View.VISIBLE);
+            productListingPresenter.getProducts(productListingResponse.getLinks().getNext());
         }
     }
 
@@ -137,17 +199,133 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
     }
 
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    public void setFilters(FilterData filterData) {
+        this.filterData = filterData;
+        initBottomSheet();
+        brandsList.clear();
+        brandsList.addAll(filterData.getBrands());
+        brandsAdapter.notifyDataSetChanged();
+    }
+
+    private void initBottomSheet() {
+
+        bottomSheetBehavior = BottomSheetBehavior.from(productListingBinding.include.filtersSheetCl);
+
+        brandsAdapter = new FilterBrandsAdapter(brandsList, this);
+        productListingBinding.include.brandsRv.setAdapter(brandsAdapter);
+
+        productListingBinding.include.expandBrandsIv.setOnClickListener(view -> {
+            productListingBinding.include.brandsRv.setVisibility(View.VISIBLE);
+            productListingBinding.include.expandBrandsIv.setVisibility(View.GONE);
+            productListingBinding.include.minimizeBrandsIv.setVisibility(View.VISIBLE);
+        });
+
+        productListingBinding.include.minimizeBrandsIv.setOnClickListener(view -> {
+            productListingBinding.include.brandsRv.setVisibility(View.GONE);
+            productListingBinding.include.expandBrandsIv.setVisibility(View.VISIBLE);
+            productListingBinding.include.minimizeBrandsIv.setVisibility(View.GONE);
+        });
+
+        if (filterData != null) {
+            productListingBinding.include.fromEt.setText(String.valueOf(filterData.getMinPrice()));
+            productListingBinding.include.toEt.setText(String.valueOf(filterData.getMaxPrice()));
+
+            productListingBinding.include.slider.setValueFrom(filterData.getMinPrice());
+            productListingBinding.include.slider.setValueTo(filterData.getMaxPrice());
+            productListingBinding.include.slider.setValues(Float.valueOf(filterData.getMinPrice()),
+                    Float.valueOf(filterData.getMaxPrice()));
+        }
+
+//        Change edit texts on slider values changed
+        productListingBinding.include.slider.addOnSliderTouchListener(new RangeSlider
+                .OnSliderTouchListener() {
+            @Override
+            public void onStartTrackingTouch(@NonNull RangeSlider slider) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(@NonNull RangeSlider slider) {
+                productListingBinding.include.fromEt.setText(String
+                        .valueOf(Math.round(slider.getValues().get(0))));
+                productListingBinding.include.toEt.setText(String
+                        .valueOf(Math.round(slider.getValues().get(1))));
+            }
+        });
+
+        productListingBinding.include.applyBtn.setOnClickListener(view -> {
+//            Check if any filter applied or not
+            if (isBrandSelected || Integer.parseInt(productListingBinding.include.toEt.getText()
+                    .toString()) != Math.round(filterData.getMaxPrice()) ||
+                    Integer.parseInt(productListingBinding.include.fromEt.getText().toString())
+                            != Math.round(filterData.getMinPrice())) {
+
+//                if applied get filtered data
+//                if user choosed a brand to filter with
+                if (isBrandSelected)
+                    filtersPresenter.getFilteredProducts(categoryId, "13",
+                            productListingBinding.include.toEt.getText().toString(),
+                            productListingBinding.include.fromEt.getText().toString(),
+                            filterData.getBrands().get(selectedFilterBrandId).getId().toString());
+//                if no brand choose
+                else
+                    filtersPresenter.getFilteredProducts(categoryId, "13",
+                            productListingBinding.include.toEt.getText().toString(),
+                            productListingBinding.include.fromEt.getText().toString(), null);
+
+            } else
+                productListingPresenter.getProducts(url);
+
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+        });
+
+        productListingBinding.include.clearBtn.setOnClickListener(view -> {
+            initBottomSheet();
+            productListingPresenter.getProducts(url);
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        });
 
     }
 
     @Override
-    public void onPageSelected(int position) {
+    public void setProducts(List<Product> products) {
+        if (products.size() > 0) {
+            productListingBinding.productsEmptyText.setVisibility(View.GONE);
+            productListingBinding.productList.setVisibility(View.VISIBLE);
+            mProducts.clear();
+            mProducts.addAll(products);
+            adapter.notifyDataSetChanged();
+        } else {
+            productListingBinding.productList.setVisibility(View.GONE);
+            productListingBinding.productsEmptyText.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onBrandSelected(int position) {
+
+//        Determine whether the user select a brand to filter with previously or not
+        if (!isBrandSelected)
+            isBrandSelected = true;
+//        Set the previous selected brand to not selected
+        brandsList.get(selectedFilterBrandId).setSelected(false);
+        selectedFilterBrandId = position;
+//        Set the current selected brand to selected
+        brandsList.get(selectedFilterBrandId).setSelected(true);
+
+        brandsAdapter.notifyDataSetChanged();
 
     }
 
     @Override
-    public void onPageScrollStateChanged(int state) {
+    public void onBackPressed() {
 
+//        if back pressed and the bottom sheet is expanded collapse it
+        if (bottomSheetBehavior != null &&
+                bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED)
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        else
+            super.onBackPressed();
     }
 }

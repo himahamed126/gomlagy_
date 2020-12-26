@@ -1,47 +1,77 @@
 package com.onoo.gomlgy.Presentation.ui.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.models.SubCategory;
 import com.onoo.gomlgy.Presentation.ui.listeners.SubCategoryClickListener;
 import com.onoo.gomlgy.R;
+import com.onoo.gomlgy.databinding.SubCategoryHeaderItemBinding;
+import com.onoo.gomlgy.databinding.SubCategoryListItemBinding;
+import com.onoo.gomlgy.models.SubCategory;
 
 import java.util.List;
 
-public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.ViewHolder> {
+public class SubCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context context;
     private List<SubCategory> subCategories;
-    private LayoutInflater mInflater;
-    private SubCategoryClickListener subCategoryClickListener;
+    private LayoutInflater layoutInflater;
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_ITEM = 1;
+    SubCategoryClickListener subCategoryClickListener;
 
     // data is passed into the constructor
-    public SubCategoryAdapter(Context context, List<SubCategory> subCategories, SubCategoryClickListener subCategoryClickListener) {
-        this.context = context;
-        this.mInflater = LayoutInflater.from(context);
+    public SubCategoryAdapter(List<SubCategory> subCategories,
+                              SubCategoryClickListener clickListener) {
         this.subCategories = subCategories;
-        this.subCategoryClickListener = subCategoryClickListener;
+        subCategoryClickListener = clickListener;
     }
 
     // inflates the row layout from xml when needed
     @Override
     @NonNull
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.sub_category_list_item, parent, false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        if (layoutInflater == null)
+            layoutInflater = LayoutInflater.from(parent.getContext());
+        if (viewType == TYPE_HEADER) {
+            SubCategoryHeaderItemBinding subCategoryHeaderBinding =
+                    DataBindingUtil.inflate(layoutInflater, R.layout.sub_category_header_item,
+                            parent, false);
+            return new ViewHeaderHolder(subCategoryHeaderBinding);
+        } else if (viewType == TYPE_ITEM) {
+            SubCategoryListItemBinding subCategoryBinding = DataBindingUtil.inflate(layoutInflater,
+                    R.layout.sub_category_list_item, parent, false);
+            return new ViewHolder(subCategoryBinding);
+        } else
+            return null;
+
     }
 
-    // binds the data to the view and textview in each row
+    // binds the data to the view in each row
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bind(subCategories.get(position));
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof ViewHolder) {
+
+            ((ViewHolder) holder).subCategoryBinding.setSubCategory(subCategories.get(position));
+            if (subCategories.get(position).getSubSubCategories() != null &&
+                    subCategories.get(position).getSubSubCategories().getData().size() > 0) {
+                ((ViewHolder) holder).subCategoryBinding.productsRv
+                        .setAdapter(new SubSubCategoryAdapter(subCategories.get(position)
+                                .getSubSubCategories().getData(),
+                                productPosition -> subCategoryClickListener.onProductClicked(null)));
+            }
+
+            ((ViewHolder) holder).subCategoryBinding.seeAllTv.setOnClickListener(view ->
+                    subCategoryClickListener.onSeeAllProductsOfSubCategoryClicked(position));
+
+        } else if (holder instanceof ViewHeaderHolder) {
+            ((ViewHeaderHolder) holder).subCategoryHeaderBinding.allProductsCl
+                    .setOnClickListener(view -> subCategoryClickListener.onAllProductsClicked());
+        }
     }
 
     // total number of rows
@@ -50,30 +80,36 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         return subCategories.size();
     }
 
+    //    Determine whether the item is the header item or not
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0) {
+            return TYPE_HEADER;
+        } else
+            return TYPE_ITEM;
+    }
+
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
-        RecyclerView recyclerView;
+    //    Returns sub category header item (first item) binding
+    class ViewHeaderHolder extends RecyclerView.ViewHolder {
+        SubCategoryHeaderItemBinding subCategoryHeaderBinding;
 
-        ViewHolder(View itemView) {
-            super(itemView);
-            textView = itemView.findViewById(R.id.subcategory_name);
-//            recyclerView = itemView.findViewById(R.id.subsubcategory_list);
+        ViewHeaderHolder(SubCategoryHeaderItemBinding subCategoryHeaderBinding) {
+            super(subCategoryHeaderBinding.getRoot());
+            this.subCategoryHeaderBinding = subCategoryHeaderBinding;
         }
 
-        public void bind(final SubCategory subCategory) {
-            textView.setText(subCategory.getName());
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    subCategoryClickListener.onSubCategoryItemClick(subCategory);
-                }
-            });
-//            LinearLayoutManager linearLayoutManager
-//                    = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
-//            recyclerView.setLayoutManager(linearLayoutManager);
-//            SubSubCategoryAdapter adapter = new SubSubCategoryAdapter(context, subCategory.getSubSubCategories().getData());
-//            recyclerView.setAdapter(adapter);
+    }
+
+    // stores and recycles views as they are scrolled off screen
+    //    Returns sub category item (not the first item) binding
+    class ViewHolder extends RecyclerView.ViewHolder {
+        SubCategoryListItemBinding subCategoryBinding;
+
+        ViewHolder(SubCategoryListItemBinding subCategoryBinding) {
+            super(subCategoryBinding.getRoot());
+            this.subCategoryBinding = subCategoryBinding;
         }
+
     }
 }

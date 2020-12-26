@@ -157,4 +157,19 @@
     <string name="piece">Piece</string>
     <string name="choose_the_type_of_product">Choose the type of product</string>
     <string name="quantity">quantity</string>
+    <string name="all_products">All products</string>
+    <string name="filter">Filter</string>
+    <string name="popularity">Popularity</string>
+    <string name="title">title</string>
+    <string name="url" translatable="false">url</string>
+    <string name="brand">Brand</string>
+    <string name="price_egp">Price (EGP)</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="apply">Apply</string>
+    <string name="category_id" translatable="false">categoryId</string>
+    <string name="sub_category_id" translatable="false">subCategoryId</string>
+    <string name="enter_less_than" translatable="false">please enter less than</string>
+    <string name="enter_more" translatable="false">Please enter more than</string>
+    <string name="clear">Clear</string>
 </resources>

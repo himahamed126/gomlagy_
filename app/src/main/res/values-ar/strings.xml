@@ -8,7 +8,6 @@
     <string name="image">صورة</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
     <string name="account_information">معلومات الحساب</string>
@@ -150,4 +149,15 @@
     <string name="piece">قطعة</string>
     <string name="choose_the_type_of_product">اختار نوع المنتج</string>
     <string name="quantity">الكمية</string>
+    <string name="all_products">كل المنتجات</string>
+    <string name="filter">تصفيه</string>
+    <string name="popularity">الشعبيه</string>
+    <string name="title">العنوان</string>
+    <string name="brand">ماركه</string>
+    <string name="price_egp">السعر بالجنيه المصري</string>
+    <string name="from">من</string>
+    <string name="to">الي</string>
+    <string name="apply">حفظ</string>
+    <string name="clear">مسح</string>
+
 </resources>

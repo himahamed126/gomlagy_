@@ -1,10 +1,10 @@
 package com.onoo.gomlgy.Presentation.ui.fragments;
 
-import com.onoo.gomlgy.models.SubCategorymodel;
+import com.onoo.gomlgy.models.Category;
 
 import java.util.List;
 
 public interface CategoryView {
 
-    void setAllCategories(List<SubCategorymodel> categories);
+    void setAllCategories(List<Category> categories);
 }
