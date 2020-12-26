@@ -1,9 +1,17 @@
 package com.onoo.gomlgy.models;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.onoo.gomlgy.R;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Productmodel implements Serializable {
 
@@ -151,6 +159,20 @@ public class Productmodel implements Serializable {
     @SerializedName("image_path")
     @Expose
     private String image_path;
+    @SerializedName("thumbnail_path")
+    @Expose
+    private List<String> thumbnailPath = null;
+
+    @BindingAdapter("loadImage")
+    public static void loadImageByGlide(ImageView imageView, String imgUrl) {
+        RequestOptions requestOptions = new RequestOptions()
+                .fitCenter()
+                .error(R.drawable.logo_gomlgy)
+                .placeholder(R.drawable.logo_gomlgy);
+
+        Glide.with(imageView.getContext()).setDefaultRequestOptions(requestOptions)
+                .load(imgUrl).into(imageView);
+    }
 
     public String getImage_path() {
         return image_path;
@@ -536,4 +558,11 @@ public class Productmodel implements Serializable {
         this.updatedAt = updatedAt;
     }
 
+    public List<String> getThumbnailPath() {
+        return thumbnailPath;
+    }
+
+    public void setThumbnailPath(List<String> thumbnailPath) {
+        this.thumbnailPath = thumbnailPath;
+    }
 }

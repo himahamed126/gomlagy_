@@ -10,6 +10,15 @@
         android:layout_margin="8dp">
 
         <ImageView
+            android:id="@+id/product_image_iv"
+            loadImage="@{product.thumbnailPath.get(0)}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/lightGrey"
@@ -17,15 +26,8 @@
             app:layout_constraintEnd_toEndOf="@id/product_image_iv"
             app:layout_constraintStart_toStartOf="@id/product_image_iv"
             app:layout_constraintTop_toTopOf="@id/product_image_iv"
-            tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:id="@+id/product_image_iv"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            android:alpha="0.2"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,7 +36,8 @@
             android:text="@{product.name}"
             app:layout_constraintEnd_toEndOf="@id/product_image_iv"
             app:layout_constraintStart_toStartOf="@id/product_image_iv"
-            app:layout_constraintTop_toBottomOf="@id/product_image_iv" />
+            app:layout_constraintTop_toBottomOf="@id/product_image_iv"
+            android:maxLines="2"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -42,7 +45,7 @@
 
         <variable
             name="product"
-            type="com.onoo.gomlgy.models.SubSubCategory" />
+            type="com.onoo.gomlgy.models.Productmodel" />
     </data>
 
 </layout>

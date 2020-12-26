@@ -58,6 +58,6 @@
 
         <variable
             name="subCategory"
-            type="com.onoo.gomlgy.models.SubCategory" />
+            type="com.onoo.gomlgy.models.SubCategorymodel" />
     </data>
 </layout>

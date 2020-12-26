@@ -12,7 +12,7 @@ import com.onoo.gomlgy.Threading.MainThreadImpl;
 import com.onoo.gomlgy.Utils.AppConfig;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 import com.onoo.gomlgy.models.Category;
-import com.onoo.gomlgy.models.SubCategory;
+import com.onoo.gomlgy.models.SubCategorymodel;
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration;
 
 import java.util.List;
@@ -30,11 +30,11 @@ public class SubCategoryActivity extends BaseActivity implements SubCategoryView
         setTitle(category.getName());
 
         SubCategoryPresenter subCategoryPresenter = new SubCategoryPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
-        subCategoryPresenter.getSubSubCategories(category.getLinks().getSubCategories());
+        subCategoryPresenter.getSubSubCategories(String.valueOf(category.getId()));
     }
 
     @Override
-    public void setSubCategories(List<SubCategory> subCategories) {
+    public void setSubCategories(List<SubCategorymodel> subCategories) {
         RecyclerView recyclerView = findViewById(R.id.subcategory_list);
         LinearLayoutManager linearLayoutManager
                 = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);

@@ -1,11 +1,11 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.models.SubCategory;
 import com.onoo.gomlgy.Presentation.ui.activities.SubCategoryView;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;
 import com.onoo.gomlgy.domain.interactors.SubCategoryInteractor;
 import com.onoo.gomlgy.domain.interactors.impl.SubCategoryInteractorImpl;
+import com.onoo.gomlgy.models.SubCategorymodel;
 
 import java.util.List;
 
@@ -17,12 +17,12 @@ public class SubCategoryPresenter extends AbstractPresenter implements SubCatego
         this.subCategoryView = subSubCategoryView;
     }
 
-    public void getSubSubCategories(String url) {
-        new SubCategoryInteractorImpl(mExecutor, mMainThread, this, url).execute();
+    public void getSubSubCategories(String categoryId) {
+        new SubCategoryInteractorImpl(mExecutor, mMainThread, this, categoryId).execute();
     }
 
     @Override
-    public void onSubSubCategoriesDownloaded(List<SubCategory> subCategories) {
+    public void onSubSubCategoriesDownloaded(List<SubCategorymodel> subCategories) {
         if (subCategoryView != null) {
             subCategoryView.setSubCategories(subCategories);
         }

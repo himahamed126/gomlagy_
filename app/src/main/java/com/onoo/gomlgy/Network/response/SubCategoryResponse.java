@@ -1,15 +1,15 @@
 package com.onoo.gomlgy.Network.response;
 
-import com.onoo.gomlgy.models.SubCategory;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.onoo.gomlgy.models.SubCategorymodel;
 
 import java.util.List;
 
 public class SubCategoryResponse {
     @SerializedName("data")
     @Expose
-    private List<SubCategory> data = null;
+    private List<SubCategorymodel> data = null;
     @SerializedName("success")
     @Expose
     private Boolean success;
@@ -17,11 +17,11 @@ public class SubCategoryResponse {
     @Expose
     private Integer status;
 
-    public List<SubCategory> getData() {
+    public List<SubCategorymodel> getData() {
         return data;
     }
 
-    public void setData(List<SubCategory> data) {
+    public void setData(List<SubCategorymodel> data) {
         this.data = data;
     }
 
