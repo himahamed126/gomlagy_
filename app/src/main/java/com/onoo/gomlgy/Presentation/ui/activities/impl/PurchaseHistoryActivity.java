@@ -29,6 +29,7 @@ public class PurchaseHistoryActivity extends BaseActivity implements PurchaseHis
     private PurchaseHistoryPresenter purchaseHistoryPresenter;
     private ProgressBar progressBar;
     private TextView purchase_history_empty_text;
+    public String from;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +45,30 @@ public class PurchaseHistoryActivity extends BaseActivity implements PurchaseHis
         purchaseHistoryPresenter = new PurchaseHistoryPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
 
         authResponse = new UserPrefs(getApplicationContext()).getAuthPreferenceObjectJson("auth_response");
-        if(authResponse != null && authResponse.getUser() != null){
+        if (authResponse != null && authResponse.getUser() != null) {
             progressBar.setVisibility(View.VISIBLE);
             purchaseHistoryPresenter.getPurchaseHistoryItems(authResponse.getUser().getId(), authResponse.getAccessToken());
         }
+
+
+        Intent intent = getIntent();
+        from = intent.getStringExtra("from");
+
     }
 
     @Override
     public void onPurchaseHistoryLoaded(List<PurchaseHistory> purchaseHistoryList) {
         progressBar.setVisibility(View.GONE);
-        if (purchaseHistoryList.size() > 0){
+        if (purchaseHistoryList.size() > 0) {
             RecyclerView recyclerView = findViewById(R.id.purchase_history_list);
             GridLayoutManager horizontalLayoutManager
                     = new GridLayoutManager(getApplicationContext(), 1);
             recyclerView.setLayoutManager(horizontalLayoutManager);
             PurchaseHistoryAdapter adapter = new PurchaseHistoryAdapter(getApplicationContext(), purchaseHistoryList, this);
-            RecyclerViewMargin decoration = new RecyclerViewMargin(AppConfig.convertDpToPx(this,10), 1);
+            RecyclerViewMargin decoration = new RecyclerViewMargin(AppConfig.convertDpToPx(this, 10), 1);
             recyclerView.addItemDecoration(decoration);
             recyclerView.setAdapter(adapter);
-        }
-        else {
+        } else {
             purchase_history_empty_text.setVisibility(View.VISIBLE);
         }
     }
@@ -73,5 +78,14 @@ public class PurchaseHistoryActivity extends BaseActivity implements PurchaseHis
         Intent intent = new Intent(this, PurchaseHistoryDetailsActivity.class);
         intent.putExtra("purchase_history", purchaseHistory);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (from.equals("payment")) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+
     }
 }

@@ -71,7 +71,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         TextView shipping_cost;
         TextView quantity;
         TextView price;
-        Button qtyIncrease, qtyDecrease;
+        ImageView qtyIncrease, qtyDecrease;
 
         ViewHolder(View itemView) {
             super(itemView);

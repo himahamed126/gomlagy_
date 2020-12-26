@@ -1,12 +1,19 @@
-package com.onoo.gomlgy.models;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+package com.onoo.gomlgy.models.ProductDetails3;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class ProductDetails2 implements Serializable {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import com.onoo.gomlgy.models.Brand;
+import com.onoo.gomlgy.models.Category;
+import com.onoo.gomlgy.models.ChoiceOption;
+import com.onoo.gomlgy.models.Links___;
+import com.onoo.gomlgy.models.ProductOwner;
+import com.onoo.gomlgy.models.SubCategory;
+
+public class ProductDetails3 implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -49,7 +56,7 @@ public class ProductDetails2 implements Serializable {
     private List<ChoiceOption> choiceOptions = null;
     @SerializedName("colors")
     @Expose
-    private List<String> colors = null;
+    private List<Object> colors = null;
     @SerializedName("todays_deal")
     @Expose
     private Integer todaysDeal;
@@ -89,12 +96,36 @@ public class ProductDetails2 implements Serializable {
     @SerializedName("rating_count")
     @Expose
     private Integer ratingCount;
-    @SerializedName("description")
+    @SerializedName("unit_price")
     @Expose
-    private String description;
-    @SerializedName("quantity_price")
+    private Integer unitPrice;
+    @SerializedName("min_quantity1")
     @Expose
-    private QuantityPrice quantityPrice;
+    private Integer minQuantity1;
+    @SerializedName("max_quantity1")
+    @Expose
+    private Integer maxQuantity1;
+    @SerializedName("unit_price2")
+    @Expose
+    private Integer unitPrice2;
+    @SerializedName("min_quantity2")
+    @Expose
+    private Integer minQuantity2;
+    @SerializedName("max_quantity2")
+    @Expose
+    private Integer maxQuantity2;
+    @SerializedName("unit_price3")
+    @Expose
+    private Integer unitPrice3;
+    @SerializedName("min_quantity3")
+    @Expose
+    private Integer minQuantity3;
+    @SerializedName("max_quantity3")
+    @Expose
+    private Integer maxQuantity3;
+    @SerializedName("product_stocks")
+    @Expose
+    private List<ProductStock> productStocks = null;
     @SerializedName("links")
     @Expose
     private Links___ links;
@@ -203,11 +234,11 @@ public class ProductDetails2 implements Serializable {
         this.choiceOptions = choiceOptions;
     }
 
-    public List<String> getColors() {
+    public List<Object> getColors() {
         return colors;
     }
 
-    public void setColors(List<String> colors) {
+    public void setColors(List<Object> colors) {
         this.colors = colors;
     }
 
@@ -315,20 +346,84 @@ public class ProductDetails2 implements Serializable {
         this.ratingCount = ratingCount;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setUnitPrice(Integer unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
-    public QuantityPrice getQuantityPrice() {
-        return quantityPrice;
+    public Integer getMinQuantity1() {
+        return minQuantity1;
     }
 
-    public void setQuantityPrice(QuantityPrice quantityPrice) {
-        this.quantityPrice = quantityPrice;
+    public void setMinQuantity1(Integer minQuantity1) {
+        this.minQuantity1 = minQuantity1;
+    }
+
+    public Integer getMaxQuantity1() {
+        return maxQuantity1;
+    }
+
+    public void setMaxQuantity1(Integer maxQuantity1) {
+        this.maxQuantity1 = maxQuantity1;
+    }
+
+    public Integer getUnitPrice2() {
+        return unitPrice2;
+    }
+
+    public void setUnitPrice2(Integer unitPrice2) {
+        this.unitPrice2 = unitPrice2;
+    }
+
+    public Integer getMinQuantity2() {
+        return minQuantity2;
+    }
+
+    public void setMinQuantity2(Integer minQuantity2) {
+        this.minQuantity2 = minQuantity2;
+    }
+
+    public Integer getMaxQuantity2() {
+        return maxQuantity2;
+    }
+
+    public void setMaxQuantity2(Integer maxQuantity2) {
+        this.maxQuantity2 = maxQuantity2;
+    }
+
+    public Integer getUnitPrice3() {
+        return unitPrice3;
+    }
+
+    public void setUnitPrice3(Integer unitPrice3) {
+        this.unitPrice3 = unitPrice3;
+    }
+
+    public Integer getMinQuantity3() {
+        return minQuantity3;
+    }
+
+    public void setMinQuantity3(Integer minQuantity3) {
+        this.minQuantity3 = minQuantity3;
+    }
+
+    public Integer getMaxQuantity3() {
+        return maxQuantity3;
+    }
+
+    public void setMaxQuantity3(Integer maxQuantity3) {
+        this.maxQuantity3 = maxQuantity3;
+    }
+
+    public List<ProductStock> getProductStocks() {
+        return productStocks;
+    }
+
+    public void setProductStocks(List<ProductStock> productStocks) {
+        this.productStocks = productStocks;
     }
 
     public Links___ getLinks() {

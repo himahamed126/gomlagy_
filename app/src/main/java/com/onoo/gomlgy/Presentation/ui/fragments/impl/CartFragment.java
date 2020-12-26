@@ -43,7 +43,7 @@ public class CartFragment extends Fragment implements CartView, CartItemListener
     private View v;
     private CartPresenter cartPresenter;
     private AuthResponse authResponse;
-    private Button btnCheckout;
+    private TextView btnCheckout;
     private ProgressBar progressBar;
     private LinearLayout linearLayout;
     private TextView total_amount;

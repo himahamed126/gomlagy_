@@ -7,11 +7,12 @@ import com.onoo.gomlgy.Network.response.RemoveWishlistResponse;
 import com.onoo.gomlgy.Network.response.VariantResponse;
 import com.onoo.gomlgy.models.Product;
 import com.onoo.gomlgy.models.ProductDetails2;
+import com.onoo.gomlgy.models.ProductDetails3.ProductDetails3;
 
 import java.util.List;
 
 public interface ProductDetailsView {
-    void setProductDetails(ProductDetails2 productDetails);
+    void setProductDetails(ProductDetails3 productDetails);
 
     void setRelatedProducts(List<Product> relatedProducts);
 

@@ -245,11 +245,9 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
         progressDialog.dismiss();
         if (orderResponse.getSuccess()) {
             CustomToast.showToast(this, orderResponse.getMessage(), R.color.colorSuccess);
-//            Intent intent = new Intent(this, MainActivity.class);
-//            intent.putExtra("message", orderResponse.getMessage());
-//            intent.putExtra("position", "cart");
-//            startActivity(intent);
-            startActivity(new Intent(this, PurchaseHistoryActivity.class));
+            Intent intent = new Intent(this, PurchaseHistoryActivity.class);
+            intent.putExtra("from", "payment");
+            startActivity(intent);
             finish();
         } else {
             CustomToast.showToast(this, orderResponse.getMessage(), R.color.colorDanger);

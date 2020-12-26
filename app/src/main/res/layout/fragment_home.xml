@@ -9,7 +9,9 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never">
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="60dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -142,8 +144,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/todays_deals_text"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp">
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp">
 
                     </androidx.recyclerview.widget.RecyclerView>
 
@@ -309,6 +311,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/cat_4_deals"
                         android:layout_width="match_parent"
+                        android:overScrollMode="never"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/cat_4_text"
                         android:layout_marginStart="10dp"

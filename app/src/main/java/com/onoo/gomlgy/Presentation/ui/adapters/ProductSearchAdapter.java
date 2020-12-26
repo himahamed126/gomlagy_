@@ -67,7 +67,7 @@ public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdap
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
-        TextView discounted_price, price;
+        TextView price1, price2, price3;
         TextView name;
         TextView sales;
         RatingBar ratingBar;
@@ -75,8 +75,9 @@ public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdap
         ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.product_image);
-            discounted_price = itemView.findViewById(R.id.product_discounted_price);
-            price = itemView.findViewById(R.id.product_price);
+            price1 = itemView.findViewById(R.id.price_1);
+            price2 = itemView.findViewById(R.id.price_2);
+            price3 = itemView.findViewById(R.id.price_3);
             name = itemView.findViewById(R.id.product_name);
             ratingBar = itemView.findViewById(R.id.product_rating);
             sales = itemView.findViewById(R.id.product_rating_count);
@@ -84,12 +85,9 @@ public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdap
 
         public void bind(SearchProduct product) {
             Glide.with(context).load(AppConfig.ASSET_URL + product.getThumbnailImage()).into(image);
-            discounted_price.setText(AppConfig.convertPrice(context, product.getBaseDiscountedPrice()));
-            price.setText(AppConfig.convertPrice(context, product.getBasePrice()));
-            if (product.getBaseDiscountedPrice().equals(product.getBasePrice())) {
-                price.setVisibility(View.GONE);
-            }
-            price.setPaintFlags(price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            price1.setText(AppConfig.convertPrice2(context, product.getBaseDiscountedPrice()));
+            price2.setText(AppConfig.convertPrice2(context, product.getBaseDiscountedPrice()));
+            price3.setText(AppConfig.convertPrice2(context, product.getBaseDiscountedPrice()));
             name.setText(product.getName());
             ratingBar.setRating(product.getRating());
 

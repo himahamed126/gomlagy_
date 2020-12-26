@@ -183,7 +183,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
             if (productList.size() < 4) {
                 productList.add(products.get(x));
                 TodaysDealAdapter adapter = new TodaysDealAdapter(getActivity(), productList, this);
-                recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
+                recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 4)));
                 recyclerView.setAdapter(adapter);
             }
         }
@@ -203,7 +203,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
             if (productList.size() < 4) {
                 productList.add(products.get(x));
                 BestSellingAdapter adapter = new BestSellingAdapter(getActivity(), productList, this);
-                recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getContext(), 10)));
+                recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getContext(), 3)));
                 recyclerView.setAdapter(adapter);
             }
         }

@@ -36,7 +36,6 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
     private View v;
     private CategoryPresenter categoryPresenter;
     private SubCategoryPresenter subCategoryPresenter;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
     private List<Category> mCategories = new ArrayList<>();
     private RecyclerView categoryRv, subCategoriesRv;
     private AllCategoryAdapter allCategoryAdapter;
@@ -62,11 +61,7 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     void init() {
-        mSwipeRefreshLayout = v.findViewById(R.id.swipe_container);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
-                android.R.color.holo_green_dark, android.R.color.holo_orange_dark,
-                android.R.color.holo_blue_dark);
+
         categoryRv = v.findViewById(R.id.category_rv);
         subCategoriesRv = v.findViewById(R.id.sub_categories_rv);
 
@@ -128,7 +123,6 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
 
     @Override
     public void onRefresh() {
-        mSwipeRefreshLayout.setRefreshing(true);
 
     }
 
@@ -146,7 +140,7 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
         mCategories.clear();
         mCategories.addAll(categories);
         allCategoryAdapter.notifyDataSetChanged();
-        mSwipeRefreshLayout.setRefreshing(false);
+
 
         subCategoryPresenter.getSubSubCategories(categories.get(0).getLinks().getSubCategories());
         category = categories.get(0);

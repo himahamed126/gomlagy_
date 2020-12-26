@@ -155,15 +155,12 @@
                 android:layout_marginTop="8dp"
                 android:layoutDirection="ltr">
 
-                <Button
+                <ImageView
                     android:id="@+id/cart_quantity_increase"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="24dp"
-                    android:background="@drawable/roundedbutton_white"
-                    android:text="+"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
+                    android:src="@drawable/ic_plus"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -189,15 +186,12 @@
                     app:layout_constraintStart_toEndOf="@id/cart_quantity_increase"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
+                <ImageView
                     android:id="@+id/cart_quantity_decrease"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="12dp"
-                    android:background="@drawable/roundedbutton_white"
-                    android:text="-"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
+                    android:src="@drawable/ic_minus_"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/cart_quantity"
                     app:layout_constraintTop_toTopOf="parent" />

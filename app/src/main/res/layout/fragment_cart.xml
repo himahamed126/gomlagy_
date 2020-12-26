@@ -47,12 +47,14 @@
 
         </RelativeLayout>
 
-        <Button
+        <TextView
             android:id="@+id/checkout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginBottom="60dp"
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
             android:text="@string/proceed_to_checkout"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />

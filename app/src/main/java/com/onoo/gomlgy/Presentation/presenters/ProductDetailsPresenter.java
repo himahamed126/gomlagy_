@@ -25,6 +25,7 @@ import com.onoo.gomlgy.domain.interactors.impl.ProductInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.RemoveWishlistInteractorImpl;
 import com.onoo.gomlgy.models.Product;
 import com.onoo.gomlgy.models.ProductDetails2;
+import com.onoo.gomlgy.models.ProductDetails3.ProductDetails3;
 
 import java.util.List;
 
@@ -69,7 +70,7 @@ public class ProductDetailsPresenter extends AbstractPresenter implements Produc
 
 
     @Override
-    public void onProductDetailsDownloaded(ProductDetails2 productDetails) {
+    public void onProductDetailsDownloaded(ProductDetails3 productDetails) {
         if (productDetailsView != null) {
             productDetailsView.setProductDetails(productDetails);
         }

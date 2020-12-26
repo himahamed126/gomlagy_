@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
 
 
         apiService = ApiClient.getClient().create(getProductsWithSubcategory.class);
-        Call<collectionmodel> getProducts = apiService.get_Products_With_SubCategory("Mobile accessories");
+        Call<collectionmodel> getProducts = apiService.get_Products_With_SubCategory("اكسسوارات موبايل");
 
         getProducts.enqueue(new Callback<collectionmodel>() {
             @Override
@@ -318,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
 
     @Override
     public void onCategoryItemClick(SubCategorymodel model, int pos) {
-        int categoryId = 1;
+        int categoryId = 5;
         int subCategoryID = model.getId();
         Log.i("URLLLL", "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID);
         Intent i = new Intent(getApplicationContext(), ProductListingActivity.class);

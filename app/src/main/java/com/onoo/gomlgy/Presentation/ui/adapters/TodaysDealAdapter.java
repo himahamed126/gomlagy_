@@ -66,19 +66,23 @@ public class TodaysDealAdapter extends RecyclerView.Adapter<TodaysDealAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
-        TextView discounted_price;
+        TextView price1, price2, price3;
         TextView price;
 
         ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.product_image);
-            discounted_price = itemView.findViewById(R.id.product_discounted_price);
+            price1 = itemView.findViewById(R.id.price_1);
+            price2 = itemView.findViewById(R.id.price_2);
+            price3 = itemView.findViewById(R.id.price_3);
             //price = itemView.findViewById(R.id.product_price);
         }
 
         public void bind(Product product) {
             Glide.with(context).load(AppConfig.ASSET_URL + product.getThumbnailImage()).into(image);
-            discounted_price.setText(AppConfig.convertPrice(context, product.getBaseDiscountedPrice()));
+            price1.setText(AppConfig.convertPrice2(context, product.getBaseDiscountedPrice()));
+            price2.setText(AppConfig.convertPrice2(context, product.getBaseDiscountedPrice()));
+            price3.setText(AppConfig.convertPrice2(context, product.getBaseDiscountedPrice()));
 //            price.setText(AppConfig.convertPrice(product.getBaseDiscountedPrice()));
 //            if (product.getBaseDiscountedPrice().equals(product.getBasePrice())) {
 //                price.setVisibility(View.GONE);
