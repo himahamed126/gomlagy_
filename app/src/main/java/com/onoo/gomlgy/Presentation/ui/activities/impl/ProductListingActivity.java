@@ -280,6 +280,12 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
 
         });
 
+        productListingBinding.include.clearBtn.setOnClickListener(view -> {
+            initBottomSheet();
+            productListingPresenter.getProducts(url);
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        });
+
     }
 
     @Override

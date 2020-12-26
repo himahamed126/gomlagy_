@@ -169,4 +169,5 @@
     <string name="sub_category_id">subCategoryId</string>
     <string name="enter_less_than">please enter less than</string>
     <string name="enter_more">Please enter more than</string>
+    <string name="clear">Clear</string>
 </resources>
