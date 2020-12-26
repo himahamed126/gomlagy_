@@ -2,7 +2,7 @@ package com.onoo.gomlgy.Network.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.onoo.gomlgy.models.Productmodel;
+import com.onoo.gomlgy.models.Product;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class GetFilteredDataResponse {
     private Boolean success;
     @SerializedName("data")
     @Expose
-    private List<Productmodel> data = null;
+    private List<Product> data = null;
     @SerializedName("message")
     @Expose
     private String message;
@@ -26,11 +26,11 @@ public class GetFilteredDataResponse {
         this.success = success;
     }
 
-    public List<Productmodel> getData() {
+    public List<Product> getData() {
         return data;
     }
 
-    public void setData(List<Productmodel> data) {
+    public void setData(List<Product> data) {
         this.data = data;
     }
 

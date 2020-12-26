@@ -3,8 +3,6 @@ package com.onoo.gomlgy.Presentation.ui.activities.impl;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 
@@ -36,7 +34,6 @@ import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 import com.onoo.gomlgy.models.BrandData;
 import com.onoo.gomlgy.models.FilterData;
 import com.onoo.gomlgy.models.Product;
-import com.onoo.gomlgy.models.Productmodel;
 import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 
 import java.util.ArrayList;
@@ -102,67 +99,9 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
                 });
         productListingBinding.itemProgressBar.setVisibility(View.VISIBLE);
 
-        initBottomSheet();
-
         productListingBinding.filterTv.setOnClickListener(view -> {
-
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-
-            if (filterData != null) {
-                productListingBinding.include.fromEt.setText(String.valueOf(filterData.getMinPrice()));
-                productListingBinding.include.toEt.setText(String.valueOf(filterData.getMaxPrice()));
-
-                productListingBinding.include.slider.setValueFrom(filterData.getMinPrice());
-                productListingBinding.include.slider.setValueTo(filterData.getMaxPrice());
-                productListingBinding.include.slider.setValues(Float.valueOf(filterData.getMinPrice()),
-                        Float.valueOf(filterData.getMaxPrice()));
-            }
-
         });
-
-    }
-
-    private void initBottomSheet() {
-
-        bottomSheetBehavior = BottomSheetBehavior.from(productListingBinding.include.filtersSheetCl);
-
-        brandsAdapter = new FilterBrandsAdapter(brandsList, this);
-        productListingBinding.include.brandsRv.setAdapter(brandsAdapter);
-
-        productListingBinding.include.expandBrandsIv.setOnClickListener(view -> {
-            productListingBinding.include.brandsRv.setVisibility(View.VISIBLE);
-            productListingBinding.include.expandBrandsIv.setVisibility(View.GONE);
-            productListingBinding.include.minimizeBrandsIv.setVisibility(View.VISIBLE);
-        });
-
-        productListingBinding.include.minimizeBrandsIv.setOnClickListener(view -> {
-            productListingBinding.include.brandsRv.setVisibility(View.GONE);
-            productListingBinding.include.expandBrandsIv.setVisibility(View.VISIBLE);
-            productListingBinding.include.minimizeBrandsIv.setVisibility(View.GONE);
-        });
-
-//        Change edit texts on slider values changed
-        productListingBinding.include.slider.addOnSliderTouchListener(new RangeSlider
-                .OnSliderTouchListener() {
-            @Override
-            public void onStartTrackingTouch(@NonNull RangeSlider slider) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(@NonNull RangeSlider slider) {
-                productListingBinding.include.fromEt.setText(String
-                        .valueOf(Math.round(slider.getValues().get(0))));
-                productListingBinding.include.toEt.setText(String
-                        .valueOf(Math.round(slider.getValues().get(1))));
-            }
-        });
-
-        productListingBinding.include.applyBtn.setOnClickListener(view ->
-                filtersPresenter.getFilteredProducts(categoryId, "13",
-                        productListingBinding.include.toEt.getText().toString(),
-                        productListingBinding.include.fromEt.getText().toString(),
-                        filterData.getBrands().get(selectedFilterBrandId).getId().toString()));
 
     }
 
@@ -262,14 +201,99 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
     @Override
     public void setFilters(FilterData filterData) {
         this.filterData = filterData;
+        initBottomSheet();
         brandsList.clear();
         brandsList.addAll(filterData.getBrands());
         brandsAdapter.notifyDataSetChanged();
     }
 
+    private void initBottomSheet() {
+
+        bottomSheetBehavior = BottomSheetBehavior.from(productListingBinding.include.filtersSheetCl);
+
+        brandsAdapter = new FilterBrandsAdapter(brandsList, this);
+        productListingBinding.include.brandsRv.setAdapter(brandsAdapter);
+
+        productListingBinding.include.expandBrandsIv.setOnClickListener(view -> {
+            productListingBinding.include.brandsRv.setVisibility(View.VISIBLE);
+            productListingBinding.include.expandBrandsIv.setVisibility(View.GONE);
+            productListingBinding.include.minimizeBrandsIv.setVisibility(View.VISIBLE);
+        });
+
+        productListingBinding.include.minimizeBrandsIv.setOnClickListener(view -> {
+            productListingBinding.include.brandsRv.setVisibility(View.GONE);
+            productListingBinding.include.expandBrandsIv.setVisibility(View.VISIBLE);
+            productListingBinding.include.minimizeBrandsIv.setVisibility(View.GONE);
+        });
+
+        if (filterData != null) {
+            productListingBinding.include.fromEt.setText(String.valueOf(filterData.getMinPrice()));
+            productListingBinding.include.toEt.setText(String.valueOf(filterData.getMaxPrice()));
+
+            productListingBinding.include.slider.setValueFrom(filterData.getMinPrice());
+            productListingBinding.include.slider.setValueTo(filterData.getMaxPrice());
+            productListingBinding.include.slider.setValues(Float.valueOf(filterData.getMinPrice()),
+                    Float.valueOf(filterData.getMaxPrice()));
+        }
+
+//        Change edit texts on slider values changed
+        productListingBinding.include.slider.addOnSliderTouchListener(new RangeSlider
+                .OnSliderTouchListener() {
+            @Override
+            public void onStartTrackingTouch(@NonNull RangeSlider slider) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(@NonNull RangeSlider slider) {
+                productListingBinding.include.fromEt.setText(String
+                        .valueOf(Math.round(slider.getValues().get(0))));
+                productListingBinding.include.toEt.setText(String
+                        .valueOf(Math.round(slider.getValues().get(1))));
+            }
+        });
+
+        productListingBinding.include.applyBtn.setOnClickListener(view -> {
+//            Check if any filter applied or not
+            if (isBrandSelected || Integer.parseInt(productListingBinding.include.toEt.getText()
+                    .toString()) != Math.round(filterData.getMaxPrice()) ||
+                    Integer.parseInt(productListingBinding.include.fromEt.getText().toString())
+                            != Math.round(filterData.getMinPrice())) {
+
+//                if applied get filtered data
+//                if user choosed a brand to filter with
+                if (isBrandSelected)
+                    filtersPresenter.getFilteredProducts(categoryId, "13",
+                            productListingBinding.include.toEt.getText().toString(),
+                            productListingBinding.include.fromEt.getText().toString(),
+                            filterData.getBrands().get(selectedFilterBrandId).getId().toString());
+//                if no brand choose
+                else
+                    filtersPresenter.getFilteredProducts(categoryId, "13",
+                            productListingBinding.include.toEt.getText().toString(),
+                            productListingBinding.include.fromEt.getText().toString(), null);
+
+            } else
+                productListingPresenter.getProducts(url);
+
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+        });
+
+    }
+
     @Override
-    public void setProducts(List<Productmodel> products) {
-        Log.e("jjsj", products.get(0).getColors());
+    public void setProducts(List<Product> products) {
+        if (products.size() > 0) {
+            productListingBinding.productsEmptyText.setVisibility(View.GONE);
+            productListingBinding.productList.setVisibility(View.VISIBLE);
+            mProducts.clear();
+            mProducts.addAll(products);
+            adapter.notifyDataSetChanged();
+        } else {
+            productListingBinding.productList.setVisibility(View.GONE);
+            productListingBinding.productsEmptyText.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -286,5 +310,16 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
 
         brandsAdapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+
+//        if back pressed and the bottom sheet is expanded collapse it
+        if (bottomSheetBehavior != null &&
+                bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED)
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        else
+            super.onBackPressed();
     }
 }

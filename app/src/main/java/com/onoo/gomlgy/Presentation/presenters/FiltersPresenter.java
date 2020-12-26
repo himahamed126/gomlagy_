@@ -8,7 +8,7 @@ import com.onoo.gomlgy.domain.interactors.FilteredDataInteractor;
 import com.onoo.gomlgy.domain.interactors.impl.FilteredDataInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.FiltersInteractorImpl;
 import com.onoo.gomlgy.models.FilterData;
-import com.onoo.gomlgy.models.Productmodel;
+import com.onoo.gomlgy.models.Product;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class FiltersPresenter extends AbstractPresenter implements AllFiltersInt
     }
 
     @Override
-    public void onProductsFiltered(List<Productmodel> filteredData) {
+    public void onProductsFiltered(List<Product> filteredData) {
         if (filtersView != null)
             filtersView.setProducts(filteredData);
     }
