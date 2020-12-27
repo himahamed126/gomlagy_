@@ -42,13 +42,13 @@ import java.util.List;
 public class ProductListingActivity extends BaseActivity implements ProductListingView,
         ProductClickListener, FiltersView, FilterBrandCallback {
 
-    private List<Product> mProducts = new ArrayList<>();
+    private final List<Product> mProducts = new ArrayList<>();
     private ProductListingResponse productListingResponse = null;
     private ProductListingPresenter productListingPresenter;
     private ProductListingAdapter adapter;
     private List<OffersData> sliderImages;
     private ActivityProductListingBinding productListingBinding;
-    private String url, categoryId, subcategoryId;
+    private String url, categoryId, subCategoryId;
     private BottomSheetBehavior bottomSheetBehavior;
     private FiltersPresenter filtersPresenter;
     private List<BrandData> brandsList = new ArrayList<>();
@@ -99,9 +99,8 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
                 });
         productListingBinding.itemProgressBar.setVisibility(View.VISIBLE);
 
-        productListingBinding.filterTv.setOnClickListener(view -> {
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        });
+        productListingBinding.filterTv.setOnClickListener(view ->
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED));
 
     }
 
@@ -120,9 +119,9 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
             categoryId = getIntent().getStringExtra(getString(R.string.category_id));
 
         if (getIntent().getStringExtra(getString(R.string.sub_category_id)) != null)
-            subcategoryId = getIntent().getStringExtra(getString(R.string.category_id));
+            subCategoryId = getIntent().getStringExtra(getString(R.string.sub_category_id));
 
-        filtersPresenter.getFilterData(categoryId, "13");
+        filtersPresenter.getFilterData(categoryId, subCategoryId);
 
     }
 
@@ -261,15 +260,15 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
                             != Math.round(filterData.getMinPrice())) {
 
 //                if applied get filtered data
-//                if user choosed a brand to filter with
+//                if user choose a brand to filter with
                 if (isBrandSelected)
-                    filtersPresenter.getFilteredProducts(categoryId, "13",
+                    filtersPresenter.getFilteredProducts(categoryId, subCategoryId,
                             productListingBinding.include.toEt.getText().toString(),
                             productListingBinding.include.fromEt.getText().toString(),
                             filterData.getBrands().get(selectedFilterBrandId).getId().toString());
 //                if no brand choose
                 else
-                    filtersPresenter.getFilteredProducts(categoryId, "13",
+                    filtersPresenter.getFilteredProducts(categoryId, subCategoryId,
                             productListingBinding.include.toEt.getText().toString(),
                             productListingBinding.include.fromEt.getText().toString(), null);
 

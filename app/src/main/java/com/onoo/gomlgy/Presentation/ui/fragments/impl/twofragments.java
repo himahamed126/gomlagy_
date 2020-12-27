@@ -167,6 +167,7 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
         Intent i = new Intent(getActivity(), ProductListingActivity.class);
         i.putExtra(getString(R.string.url), category.getLinks().getProducts());
         i.putExtra(getString(R.string.title), category.getName());
+        i.putExtra(getString(R.string.category_id), String.valueOf(category.getId()));
         startActivity(i);
 
     }
@@ -175,8 +176,9 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
     public void onSeeAllProductsOfSubCategoryClicked(int position) {
 
         Intent i = new Intent(getActivity(), ProductListingActivity.class);
-        i.putExtra(getString(R.string.url),
-                subCategories.get(position).getLinks().getProducts());
+        i.putExtra(getString(R.string.url), subCategories.get(position).getLinks().getProducts());
+        i.putExtra(getString(R.string.sub_category_id),
+                subCategories.get(position).getId().toString());
         i.putExtra(getString(R.string.title), subCategories.get(position).getName());
         startActivity(i);
 
