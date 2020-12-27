@@ -49,7 +49,6 @@ import com.onoo.gomlgy.Utils.UserPrefs;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 import com.onoo.gomlgy.models.ChoiceOption;
 import com.onoo.gomlgy.models.Product;
-import com.onoo.gomlgy.models.ProductDetails2;
 import com.onoo.gomlgy.models.ProductDetails3.ProductDetails3;
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration;
 
@@ -246,7 +245,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             subPrice = price3 * getQuantity;
         }
 
-        subPriceTv.setText(String.valueOf(subPrice));
+        subPriceTv.setText(AppConfig.convertPrice2(this, (double) subPrice));
     }
 
 
@@ -374,19 +373,19 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             }
         }
 
-        price_1.setText(AppConfig.convertPrice(this, Double.valueOf(productDetails.getUnitPrice())));
-        price_2.setText(AppConfig.convertPrice(this, Double.valueOf(productDetails.getUnitPrice2())));
-        price_3.setText(AppConfig.convertPrice(this, Double.valueOf(productDetails.getUnitPrice3())));
+        price_1.setText(AppConfig.convertPrice2(this, Double.valueOf(productDetails.getUnitPrice())));
+        price_2.setText(AppConfig.convertPrice2(this, Double.valueOf(productDetails.getUnitPrice2())));
+        price_3.setText(AppConfig.convertPrice2(this, Double.valueOf(productDetails.getUnitPrice3())));
 
-        quntity_1.setText(productDetails.getMinQuantity1() + " _ " + productDetails.getMaxQuantity1() + " " + getString(R.string.piece));
-        quntity_2.setText(productDetails.getMinQuantity2() + " _ " + productDetails.getMaxQuantity2() + " " + getString(R.string.piece));
-        quntity_3.setText(productDetails.getMinQuantity3() + " _ " + productDetails.getMaxQuantity3() + " " + getString(R.string.piece));
+        quntity_1.setText(productDetails.getMinQuantity1() + " - " + productDetails.getMaxQuantity1() + " " + getString(R.string.piece));
+        quntity_2.setText(productDetails.getMinQuantity2() + " - " + productDetails.getMaxQuantity2() + " " + getString(R.string.piece));
+        quntity_3.setText(productDetails.getMinQuantity3() + " - " + productDetails.getMaxQuantity3() + " " + getString(R.string.piece));
 
         progress_bar.setVisibility(View.GONE);
         product_details.setVisibility(View.VISIBLE);
         product_buttons.setVisibility(View.VISIBLE);
 
-        subPriceTv.setText(String.valueOf(productDetails.getUnit()));
+        subPriceTv.setText(AppConfig.convertPrice2(this, Double.valueOf(productDetails.getUnitPrice())));
 
         new ProductDetailsPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this).getRelatedProducts(productDetails.getLinks().getRelated());
 

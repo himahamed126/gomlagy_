@@ -16,7 +16,7 @@ public class Product implements Serializable {
     @SerializedName("thumbnail_image")
     @Expose
     private String thumbnailImage;
-//    @SerializedName("featured_image")
+    //    @SerializedName("featured_image")
 //    @Expose
 //    private String featuredImage;
 //    @SerializedName("flash_deal_image")
@@ -52,6 +52,39 @@ public class Product implements Serializable {
     @SerializedName("links")
     @Expose
     private ProductLinks links;
+    @SerializedName("unit_price")
+    @Expose
+    private Double unitPrice;
+    @SerializedName("unit_price2")
+    @Expose
+    private Double unitPrice2;
+    @SerializedName("unit_price3")
+    @Expose
+    private Double unitPrice3;
+
+    public Double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(Double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public Double getUnitPrice2() {
+        return unitPrice2;
+    }
+
+    public void setUnitPrice2(Double unitPrice2) {
+        this.unitPrice2 = unitPrice2;
+    }
+
+    public Double getUnitPrice3() {
+        return unitPrice3;
+    }
+
+    public void setUnitPrice3(Double unitPrice3) {
+        this.unitPrice3 = unitPrice3;
+    }
 
     public String getName() {
         return name;
@@ -76,6 +109,7 @@ public class Product implements Serializable {
     public void setThumbnailImage(String thumbnailImage) {
         this.thumbnailImage = thumbnailImage;
     }
+
     //    public String getFeaturedImage() {
 //        return featuredImage;
 //    }

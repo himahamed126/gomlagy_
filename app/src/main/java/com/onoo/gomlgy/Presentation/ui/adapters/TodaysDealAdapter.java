@@ -80,14 +80,12 @@ public class TodaysDealAdapter extends RecyclerView.Adapter<TodaysDealAdapter.Vi
 
         public void bind(Product product) {
             Glide.with(context).load(AppConfig.ASSET_URL + product.getThumbnailImage()).into(image);
-            price1.setText(AppConfig.convertPrice2(context, product.getBaseDiscountedPrice()));
-            price2.setText(AppConfig.convertPrice2(context, product.getBaseDiscountedPrice()));
-            price3.setText(AppConfig.convertPrice2(context, product.getBaseDiscountedPrice()));
-//            price.setText(AppConfig.convertPrice(product.getBaseDiscountedPrice()));
-//            if (product.getBaseDiscountedPrice().equals(product.getBasePrice())) {
-//                price.setVisibility(View.GONE);
-//            }
-//            price.setPaintFlags(price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+            double p1 = product.getUnitPrice();
+            double p2 = product.getUnitPrice2();
+            double p3 = product.getUnitPrice3();
+
+            AppConfig.calcLessPrice(p1, p2, p3, price1, price2, price3, context);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -97,4 +95,6 @@ public class TodaysDealAdapter extends RecyclerView.Adapter<TodaysDealAdapter.Vi
             });
         }
     }
+
+
 }

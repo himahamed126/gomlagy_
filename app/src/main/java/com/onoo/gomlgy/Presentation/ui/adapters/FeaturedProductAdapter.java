@@ -60,7 +60,6 @@ public class FeaturedProductAdapter extends RecyclerView.Adapter<FeaturedProduct
     }
 
 
-
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
@@ -82,9 +81,9 @@ public class FeaturedProductAdapter extends RecyclerView.Adapter<FeaturedProduct
 
         public void bind(Product product) {
             Glide.with(context).load(AppConfig.ASSET_URL + product.getThumbnailImage()).into(image);
-            price1.setText(AppConfig.convertPrice2(context, product.getBaseDiscountedPrice()));
-            price2.setText(AppConfig.convertPrice2(context, product.getBaseDiscountedPrice()));
-            price3.setText(AppConfig.convertPrice2(context, product.getBaseDiscountedPrice()));
+
+            double p1 = product.getUnitPrice(), p2 = product.getUnitPrice2(), p3 = product.getUnitPrice3();
+            AppConfig.calcLessPrice(p1, p2, p3, price1, price2, price3, context);
 
             name.setText(product.getName());
             ratingBar.setRating(product.getRating());
