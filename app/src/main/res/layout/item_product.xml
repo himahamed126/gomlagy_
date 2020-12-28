@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@{product.prices.get(0).toString()}"
+                convertPrice="@{product.prices.get(0)}"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +67,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@{product.prices.get(1).toString()}"
+                convertPrice="@{product.prices.get(1)}"
                 app:layout_constraintEnd_toEndOf="@id/price_1"
                 app:layout_constraintTop_toBottomOf="@id/price_1" />
 
@@ -76,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@{product.prices.get(2).toString()}"
+                convertPrice="@{product.prices.get(2)}"
                 app:layout_constraintEnd_toEndOf="@id/price_1"
                 app:layout_constraintTop_toBottomOf="@id/price_2" />
 
