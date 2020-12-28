@@ -27,8 +27,12 @@ public class AppConfig {
     }
 
     public static String convertPrice2(Context context, Double price) {
-        appSettings = new UserPrefs(context).getAppSettingsPreferenceObjectJson("app_settings_response").getData().get(0);
-        return appSettings.getCurrency().getSymbol() + new DecimalFormat("#,###").format(Double.parseDouble(String.valueOf(price * appSettings.getCurrency().getExchangeRate())));
+        appSettings = new UserPrefs(context)
+                .getAppSettingsPreferenceObjectJson("app_settings_response").getData()
+                .get(0);
+        return appSettings.getCurrency().getSymbol() + new DecimalFormat("#,###")
+                .format(Double.parseDouble(String.valueOf(price * appSettings.getCurrency()
+                        .getExchangeRate())));
     }
 
     public static AppSettings getAppSettings(Context context) {

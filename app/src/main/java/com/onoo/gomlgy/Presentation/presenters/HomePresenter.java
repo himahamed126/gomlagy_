@@ -38,7 +38,12 @@ import com.onoo.gomlgy.domain.interactors.impl.TodaysDealInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.TopCategoriesInteractorImpl;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
+import static com.onoo.gomlgy.Utils.AppConfig.ASSET_URL;
 
 public class HomePresenter extends AbstractPresenter implements AppSettingsInteractor.CallBack, SliderInteractor.CallBack, HomeCategoriesInteractor.CallBack, TodaysDealInteractor.CallBack, FlashDealInteractor.CallBack, BestSellingInteractor.CallBack, BannerInteractor.CallBack, FeaturedProductInteractor.CallBack, BrandInteractor.CallBack, TopCategoryInteractor.CallBack, AuctionProductInteractor.CallBack, AuctionBidInteractor.CallBack {
     private HomeView homeView;
@@ -157,8 +162,21 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
     }
 
     @Override
-    public void onFeaturedProductDownloaded(List<Product> products) {
+    public void onFeaturedProductDownloaded(List<Product> response) {
         if (homeView != null) {
+            List<Product> products = new ArrayList<>();
+            for (Product product : response){
+
+                List<Double> prices = new ArrayList<>();
+                prices.add(product.getUnitPrice());
+                prices.add(product.getUnitPrice2());
+                prices.add(product.getUnitPrice3());
+
+                Collections.sort(prices);
+                product.setPrices(prices);
+                product.setThumbnailImage(ASSET_URL + product.getThumbnailImage());
+                products.add(product);
+            }
             homeView.setFeaturedProducts(products);
         }
     }
