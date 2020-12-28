@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.R;
+import com.onoo.gomlgy.Utils.HelperMethod;
+import com.onoo.gomlgy.Utils.ItemAnimation;
 import com.onoo.gomlgy.databinding.ItemProductBinding;
 import com.onoo.gomlgy.databinding.ItemProductVerticalBinding;
 import com.onoo.gomlgy.models.Product;
@@ -42,6 +44,8 @@ public class ProductsVerticalAdapter extends RecyclerView.Adapter<ProductsVertic
     public void onBindViewHolder(@NonNull ProductsVerticalAdapter.ViewHolder holder, int position) {
 
         holder.binding.setProduct(mProducts.get(position));
+        HelperMethod.setAnimation(holder.itemView, position, ItemAnimation.LEFT_RIGHT,
+                -1, true);
         holder.binding.productCv.setOnClickListener(view ->
                 productClickListener.onProductItemClick(mProducts.get(position)));
 

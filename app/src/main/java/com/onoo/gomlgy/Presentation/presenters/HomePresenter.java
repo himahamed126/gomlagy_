@@ -139,7 +139,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
     @Override
     public void onTodaysDealProductDownloaded(List<Product> products) {
         if (homeView != null) {
-            homeView.setTodaysDeal(products);
+            homeView.setTodaysDeal(mapResponse(products));
         }
     }
 

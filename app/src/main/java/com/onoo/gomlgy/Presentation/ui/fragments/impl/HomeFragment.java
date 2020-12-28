@@ -34,12 +34,9 @@ import com.onoo.gomlgy.Presentation.ui.activities.impl.LoginActivity;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductDetailsActivity;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductListingActivity;
 import com.onoo.gomlgy.Presentation.ui.adapters.AuctionProductAdapter;
-import com.onoo.gomlgy.Presentation.ui.adapters.BestSellingAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.BrandAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.ProductsAdapter;
-import com.onoo.gomlgy.Presentation.ui.adapters.HomeSubCategoryAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.ProductsVerticalAdapter;
-import com.onoo.gomlgy.Presentation.ui.adapters.TodaysDealAdapter;
 import com.onoo.gomlgy.Presentation.ui.fragments.HomeView;
 import com.onoo.gomlgy.Presentation.ui.listeners.AuctionClickListener;
 import com.onoo.gomlgy.Presentation.ui.listeners.BrandClickListener;
@@ -60,13 +57,18 @@ import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment implements HomeView, CategoryClickListener, BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener, ProductClickListener, BrandClickListener, AuctionClickListener {
+import static com.onoo.gomlgy.Utils.AppConfig.ASSET_URL;
+
+public class HomeFragment extends Fragment implements HomeView, CategoryClickListener,
+        BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener,
+        ProductClickListener, BrandClickListener, AuctionClickListener {
     List<OffersData> sliderImages;
     //    private SliderLayout sliderLayout;
     private HomePresenter homePresenter;
@@ -125,8 +127,8 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         homePresenter.getFlashDeal();
         homePresenter.getBestSelling();
         homePresenter.getFeaturedProducts();
-        homePresenter.getPopularbrands();
-        homePresenter.getAuctionProducts();
+//        homePresenter.getPopularbrands();
+//        homePresenter.getAuctionProducts();
     }
 
     @Override
@@ -161,16 +163,13 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
     public void setTodaysDeal(List<Product> products) {
         List<Product> productList = new ArrayList<>();
         for (int x = 0; x < products.size(); x++) {
-            if (productList.size() < 4) {
+            if (productList.size() < 4)
                 productList.add(products.get(x));
-                TodaysDealAdapter adapter = new TodaysDealAdapter(getActivity(), productList,
-                        this);
-                binding.todaysDeals.addItemDecoration(new
-                        LayoutMarginDecoration(2,
-                        AppConfig.convertDpToPx(getContext(), 4)));
-                binding.todaysDeals.setAdapter(adapter);
-            }
         }
+        ProductsAdapter adapter = new ProductsAdapter(productList, this);
+        binding.todaysDeals.addItemDecoration(new LayoutMarginDecoration(2,
+                AppConfig.convertDpToPx(getContext(), 4)));
+        binding.todaysDeals.setAdapter(adapter);
         binding.todaysDealSection.setVisibility(View.VISIBLE);
     }
 
@@ -180,17 +179,14 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         List<Product> productList = new ArrayList<>();
         //recyclerView.addItemDecoration(new CirclePagerIndicatorDecoration());
         for (int x = 0; x < products.size(); x++) {
-            if (productList.size() < 4) {
+            if (productList.size() < 4)
                 productList.add(products.get(x));
-                ProductsVerticalAdapter adapter = new ProductsVerticalAdapter(productList,
-                        this);
-                binding.bestSelling.addItemDecoration(new
-                        LayoutMarginDecoration(1,
-                        AppConfig.convertDpToPx(getContext(), 3)));
-                binding.bestSelling.setAdapter(adapter);
-            }
         }
-
+        ProductsVerticalAdapter adapter = new ProductsVerticalAdapter(productList,
+                this);
+        binding.bestSelling.addItemDecoration(new LayoutMarginDecoration(1,
+                AppConfig.convertDpToPx(getContext(), 3)));
+        binding.bestSelling.setAdapter(adapter);
 //        bestSellingSeeAll = v.findViewById(R.id.best_selling_see_all);
 //        bestSellingSeeAll.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -228,16 +224,14 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
                                    Response<ProductListingResponse> response) {
                 try {
                     for (int x = 0; x < response.body().getData().size(); x++) {
-                        if (productList.size() < 4) {
+                        if (productList.size() < 4)
                             productList.add(response.body().getData().get(x));
-                            HomeSubCategoryAdapter adapter = new
-                                    HomeSubCategoryAdapter(getActivity(), productList);
-                            binding.cat1Deals.addItemDecoration(new
-                                    LayoutMarginDecoration(2,
-                                    AppConfig.convertDpToPx(getContext(), 10)));
-                            binding.cat1Deals.setAdapter(adapter);
-                        }
                     }
+                    ProductsAdapter adapter = new ProductsAdapter(mapResponse(productList),
+                            HomeFragment.this);
+                    binding.cat1Deals.addItemDecoration(new LayoutMarginDecoration(2,
+                            AppConfig.convertDpToPx(getContext(), 10)));
+                    binding.cat1Deals.setAdapter(adapter);
                     binding.cat1SeeAll.setVisibility(View.VISIBLE);
                     binding.cat1SeeAll.setOnClickListener(v -> goToProductList(subCategoryID));
                 } catch (Exception e) {
@@ -263,16 +257,14 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
                                    Response<ProductListingResponse> response) {
                 try {
                     for (int x = 0; x < response.body().getData().size(); x++) {
-                        if (productList.size() < 4) {
+                        if (productList.size() < 4)
                             productList.add(response.body().getData().get(x));
-                            HomeSubCategoryAdapter adapter = new
-                                    HomeSubCategoryAdapter(getActivity(), productList);
-                            binding.cat2Deals.addItemDecoration(new
-                                    LayoutMarginDecoration(2,
-                                    AppConfig.convertDpToPx(getContext(), 10)));
-                            binding.cat2Deals.setAdapter(adapter);
-                        }
                     }
+                    ProductsAdapter adapter = new ProductsAdapter(mapResponse(productList),
+                            HomeFragment.this);
+                    binding.cat2Deals.addItemDecoration(new LayoutMarginDecoration(2,
+                            AppConfig.convertDpToPx(getContext(), 10)));
+                    binding.cat2Deals.setAdapter(adapter);
                     binding.cat2SeeAll.setVisibility(View.VISIBLE);
                     binding.cat2SeeAll.setOnClickListener(v -> goToProductList(subCategoryID));
                 } catch (Exception e) {
@@ -298,16 +290,14 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
                                    Response<ProductListingResponse> response) {
                 try {
                     for (int x = 0; x < response.body().getData().size(); x++) {
-                        if (productList.size() < 4) {
+                        if (productList.size() < 4)
                             productList.add(response.body().getData().get(x));
-                            HomeSubCategoryAdapter adapter = new
-                                    HomeSubCategoryAdapter(getActivity(), productList);
-                            binding.cat3Deals.addItemDecoration(new
-                                    LayoutMarginDecoration(2,
-                                    AppConfig.convertDpToPx(getContext(), 10)));
-                            binding.cat3Deals.setAdapter(adapter);
-                        }
                     }
+                    ProductsAdapter adapter = new ProductsAdapter(mapResponse(productList),
+                            HomeFragment.this);
+                    binding.cat3Deals.addItemDecoration(new LayoutMarginDecoration(2,
+                            AppConfig.convertDpToPx(getContext(), 10)));
+                    binding.cat3Deals.setAdapter(adapter);
                     binding.cat3SeeAll.setVisibility(View.VISIBLE);
                     binding.cat3SeeAll.setOnClickListener(v -> goToProductList(subCategoryID));
                 } catch (Exception e) {
@@ -333,16 +323,14 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
                                    Response<ProductListingResponse> response) {
                 try {
                     for (int x = 0; x < response.body().getData().size(); x++) {
-                        if (productList.size() < 4) {
+                        if (productList.size() < 4)
                             productList.add(response.body().getData().get(x));
-                            HomeSubCategoryAdapter adapter = new
-                                    HomeSubCategoryAdapter(getActivity(), productList);
-                            binding.cat4Deals.addItemDecoration(new
-                                    LayoutMarginDecoration(2,
-                                    AppConfig.convertDpToPx(getContext(), 10)));
-                            binding.cat4Deals.setAdapter(adapter);
-                        }
                     }
+                    ProductsAdapter adapter = new ProductsAdapter(mapResponse(productList),
+                            HomeFragment.this);
+                    binding.cat4Deals.addItemDecoration(new LayoutMarginDecoration(2,
+                            AppConfig.convertDpToPx(getContext(), 10)));
+                    binding.cat4Deals.setAdapter(adapter);
                     binding.cat4SeeAll.setVisibility(View.VISIBLE);
                     binding.cat4SeeAll.setOnClickListener(v -> goToProductList(subCategoryID));
                 } catch (Exception e) {
@@ -499,4 +487,22 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         CustomToast.showToast(getActivity(), auctionBidResponse.getMessage(), R.color.colorSuccess);
         homePresenter.getAuctionProducts();
     }
+
+    private List<Product> mapResponse(List<Product> response) {
+        List<Product> products = new ArrayList<>();
+        for (Product product : response) {
+
+            List<Double> prices = new ArrayList<>();
+            prices.add(product.getUnitPrice());
+            prices.add(product.getUnitPrice2());
+            prices.add(product.getUnitPrice3());
+
+            Collections.sort(prices);
+            product.setPrices(prices);
+            product.setThumbnailImage(ASSET_URL + product.getThumbnailImage());
+            products.add(product);
+        }
+        return products;
+    }
+
 }
