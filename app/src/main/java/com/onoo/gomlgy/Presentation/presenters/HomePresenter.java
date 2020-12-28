@@ -1,12 +1,6 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.models.AuctionProduct;
-import com.onoo.gomlgy.models.Banner;
-import com.onoo.gomlgy.models.Brand;
-import com.onoo.gomlgy.models.Category;
-import com.onoo.gomlgy.models.FlashDeal;
-import com.onoo.gomlgy.models.Product;
-import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
+import com.google.gson.JsonObject;
 import com.onoo.gomlgy.Network.response.AppSettingsResponse;
 import com.onoo.gomlgy.Network.response.AuctionBidResponse;
 import com.onoo.gomlgy.Presentation.ui.fragments.HomeView;
@@ -36,10 +30,15 @@ import com.onoo.gomlgy.domain.interactors.impl.HomeCategoriesInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.SliderInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.TodaysDealInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.TopCategoriesInteractorImpl;
-import com.google.gson.JsonObject;
+import com.onoo.gomlgy.models.AuctionProduct;
+import com.onoo.gomlgy.models.Banner;
+import com.onoo.gomlgy.models.Brand;
+import com.onoo.gomlgy.models.Category;
+import com.onoo.gomlgy.models.FlashDeal;
+import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -53,7 +52,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
         this.homeView = homeView;
     }
 
-    public void getAppSettings(){
+    public void getAppSettings() {
         new AppSettingsInteractorImpl(mExecutor, mMainThread, this).execute();
     }
 
@@ -97,13 +96,13 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
         new AuctionProductInteractorImpl(mExecutor, mMainThread, this).execute();
     }
 
-    public void submitBid(JsonObject jsonObject, String token){
+    public void submitBid(JsonObject jsonObject, String token) {
         new AuctionBidInteractorImpl(mExecutor, mMainThread, this, jsonObject, token).execute();
     }
 
     @Override
     public void onAppSettingsLoaded(AppSettingsResponse appSettingsResponse) {
-        if (homeView != null){
+        if (homeView != null) {
             homeView.onAppSettingsLoaded(appSettingsResponse);
         }
     }
@@ -152,7 +151,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
     @Override
     public void onBestSellingProductDownloaded(List<Product> products) {
         if (homeView != null) {
-            homeView.setBestSelling(products);
+            homeView.setBestSelling(mapResponse(products));
         }
     }
 
@@ -164,20 +163,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
     @Override
     public void onFeaturedProductDownloaded(List<Product> response) {
         if (homeView != null) {
-            List<Product> products = new ArrayList<>();
-            for (Product product : response){
-
-                List<Double> prices = new ArrayList<>();
-                prices.add(product.getUnitPrice());
-                prices.add(product.getUnitPrice2());
-                prices.add(product.getUnitPrice3());
-
-                Collections.sort(prices);
-                product.setPrices(prices);
-                product.setThumbnailImage(ASSET_URL + product.getThumbnailImage());
-                products.add(product);
-            }
-            homeView.setFeaturedProducts(products);
+            homeView.setFeaturedProducts(mapResponse(response));
         }
     }
 
@@ -212,7 +198,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
 
     @Override
     public void onBannersDownloaded(List<Banner> banners) {
-        if (homeView != null){
+        if (homeView != null) {
 
         }
     }
@@ -224,7 +210,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
 
     @Override
     public void onBrandsDownloaded(List<Brand> brands) {
-        if (homeView != null){
+        if (homeView != null) {
             homeView.setPopularBrands(brands);
         }
     }
@@ -236,7 +222,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
 
     @Override
     public void onBidSubmitted(AuctionBidResponse auctionBidResponse) {
-        if (homeView != null){
+        if (homeView != null) {
             homeView.onAuctionBidSubmitted(auctionBidResponse);
         }
     }
@@ -257,4 +243,22 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
     public void onFlashDealProductDownloadError() {
 
     }
+
+    private List<Product> mapResponse(List<Product> response) {
+        List<Product> products = new ArrayList<>();
+        for (Product product : response) {
+
+            List<Double> prices = new ArrayList<>();
+            prices.add(product.getUnitPrice());
+            prices.add(product.getUnitPrice2());
+            prices.add(product.getUnitPrice3());
+
+            Collections.sort(prices);
+            product.setPrices(prices);
+            product.setThumbnailImage(ASSET_URL + product.getThumbnailImage());
+            products.add(product);
+        }
+        return products;
+    }
+
 }

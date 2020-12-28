@@ -38,6 +38,7 @@ import com.onoo.gomlgy.Presentation.ui.adapters.BestSellingAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.BrandAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.ProductsAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.HomeSubCategoryAdapter;
+import com.onoo.gomlgy.Presentation.ui.adapters.ProductsVerticalAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.TodaysDealAdapter;
 import com.onoo.gomlgy.Presentation.ui.fragments.HomeView;
 import com.onoo.gomlgy.Presentation.ui.listeners.AuctionClickListener;
@@ -181,7 +182,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         for (int x = 0; x < products.size(); x++) {
             if (productList.size() < 4) {
                 productList.add(products.get(x));
-                BestSellingAdapter adapter = new BestSellingAdapter(getActivity(), productList,
+                ProductsVerticalAdapter adapter = new ProductsVerticalAdapter(productList,
                         this);
                 binding.bestSelling.addItemDecoration(new
                         LayoutMarginDecoration(1,
