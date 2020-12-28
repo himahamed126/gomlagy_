@@ -82,9 +82,9 @@ public class HomeSubCategoryAdapter extends RecyclerView.Adapter<HomeSubCategory
 
         public void bind(Product product) {
             Glide.with(context).load(AppConfig.ASSET_URL + product.getThumbnailImage()).into(image);
-            price1.setText(AppConfig.convertPrice2(context, product.getUnitPrice()));
-            price2.setText(AppConfig.convertPrice2(context, product.getUnitPrice2()));
-            price3.setText(AppConfig.convertPrice2(context, product.getUnitPrice3()));
+//            price1.setText(AppConfig.convertPrice2(context, product.getUnitPrice()));
+//            price2.setText(AppConfig.convertPrice2(context, product.getUnitPrice2()));
+//            price3.setText(AppConfig.convertPrice2(context, product.getUnitPrice3()));
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

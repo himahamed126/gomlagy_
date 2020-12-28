@@ -1,6 +1,7 @@
 package com.onoo.gomlgy.Network.response;
 
 import com.onoo.gomlgy.models.Meta;
+import com.onoo.gomlgy.models.Product;
 import com.onoo.gomlgy.models.ProductLisitingLink;
 import com.onoo.gomlgy.models.SearchProduct;
 import com.google.gson.annotations.Expose;
@@ -11,7 +12,7 @@ import java.util.List;
 public class ProductSearchResponse {
     @SerializedName("data")
     @Expose
-    private List<SearchProduct> data = null;
+    private List<Product> data = null;
     @SerializedName("links")
     @Expose
     private ProductLisitingLink links;
@@ -25,11 +26,11 @@ public class ProductSearchResponse {
     @Expose
     private Integer status;
 
-    public List<SearchProduct> getData() {
+    public List<Product> getData() {
         return data;
     }
 
-    public void setData(List<SearchProduct> data) {
+    public void setData(List<Product> data) {
         this.data = data;
     }
 

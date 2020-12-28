@@ -1,7 +1,6 @@
 package com.onoo.gomlgy.Presentation.ui.adapters;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +41,7 @@ public class BestSellingAdapter extends RecyclerView.Adapter<BestSellingAdapter.
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.search_product_box, parent, false);
+        View view = mInflater.inflate(R.layout.item_product_vertical, parent, false);
         return new ViewHolder(view);
     }
 

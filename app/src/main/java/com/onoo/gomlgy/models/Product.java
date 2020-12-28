@@ -62,29 +62,7 @@ public class Product implements Serializable {
     @Expose
     private Double unitPrice3;
 
-    public Double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(Double unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public Double getUnitPrice2() {
-        return unitPrice2;
-    }
-
-    public void setUnitPrice2(Double unitPrice2) {
-        this.unitPrice2 = unitPrice2;
-    }
-
-    public Double getUnitPrice3() {
-        return unitPrice3;
-    }
-
-    public void setUnitPrice3(Double unitPrice3) {
-        this.unitPrice3 = unitPrice3;
-    }
+    private List<Double> prices;
 
     public String getName() {
         return name;
@@ -203,5 +181,37 @@ public class Product implements Serializable {
 
     public void setLinks(ProductLinks links) {
         this.links = links;
+    }
+
+    public Double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(Double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public Double getUnitPrice2() {
+        return unitPrice2;
+    }
+
+    public void setUnitPrice2(Double unitPrice2) {
+        this.unitPrice2 = unitPrice2;
+    }
+
+    public Double getUnitPrice3() {
+        return unitPrice3;
+    }
+
+    public void setUnitPrice3(Double unitPrice3) {
+        this.unitPrice3 = unitPrice3;
+    }
+
+    public List<Double> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(List<Double> prices) {
+        this.prices = prices;
     }
 }

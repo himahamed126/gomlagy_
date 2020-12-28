@@ -18,7 +18,7 @@ import com.onoo.gomlgy.models.Shop;
 import com.onoo.gomlgy.Presentation.presenters.ShopPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.SellerShopView;
 import com.onoo.gomlgy.Presentation.ui.adapters.BestSellingAdapter;
-import com.onoo.gomlgy.Presentation.ui.adapters.FeaturedProductAdapter;
+import com.onoo.gomlgy.Presentation.ui.adapters.ProductsAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.ProductListingAdapter;
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.R;
@@ -111,7 +111,7 @@ public class SellerShopActivity extends BaseActivity implements SellerShopView, 
         GridLayoutManager horizontalLayoutManager
                 = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        FeaturedProductAdapter adapter = new FeaturedProductAdapter(this, products, this);
+        ProductsAdapter adapter = new ProductsAdapter(products, this);
         recyclerView.setAdapter(adapter);
     }
 

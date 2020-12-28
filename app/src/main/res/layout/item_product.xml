@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/product_cv"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="180dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/product_image"
+                loadImage="@{product.thumbnailImage}"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RatingBar
+                android:id="@+id/product_rating"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/price_1"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:clickable="false"
+                android:numStars="5"
+                android:rating="@{product.rating}"
+                android:theme="@style/RatingBar"
+                app:layout_constraintBottom_toBottomOf="@id/price_3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/price_1" />
+
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart"
+                android:maxLines="2"
+                android:padding="10dp"
+                android:text="@{product.name}"
+                app:layout_constraintEnd_toStartOf="@id/price_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_image" />
+
+            <TextView
+                android:id="@+id/price_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                convertPrice="@{product.prices.get(0)}"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_image" />
+
+            <TextView
+                android:id="@+id/price_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                convertPrice="@{product.prices.get(1)}"
+                app:layout_constraintEnd_toEndOf="@id/price_1"
+                app:layout_constraintTop_toBottomOf="@id/price_1" />
+
+            <TextView
+                android:id="@+id/price_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                convertPrice="@{product.prices.get(2)}"
+                app:layout_constraintEnd_toEndOf="@id/price_1"
+                app:layout_constraintTop_toBottomOf="@id/price_2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.onoo.gomlgy.models.Product" />
+    </data>
+</layout>

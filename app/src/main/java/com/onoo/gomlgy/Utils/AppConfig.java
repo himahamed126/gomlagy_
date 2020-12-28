@@ -4,8 +4,12 @@ import android.content.Context;
 import android.widget.TextView;
 
 import com.onoo.gomlgy.models.AppSettings;
+import com.onoo.gomlgy.models.Product;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class AppConfig {
     public static AppSettings appSettings;
@@ -27,8 +31,12 @@ public class AppConfig {
     }
 
     public static String convertPrice2(Context context, Double price) {
-        appSettings = new UserPrefs(context).getAppSettingsPreferenceObjectJson("app_settings_response").getData().get(0);
-        return appSettings.getCurrency().getSymbol() + new DecimalFormat("#,###").format(Double.parseDouble(String.valueOf(price * appSettings.getCurrency().getExchangeRate())));
+        appSettings = new UserPrefs(context)
+                .getAppSettingsPreferenceObjectJson("app_settings_response").getData()
+                .get(0);
+        return appSettings.getCurrency().getSymbol() + new DecimalFormat("#,###")
+                .format(Double.parseDouble(String.valueOf(price * appSettings.getCurrency()
+                        .getExchangeRate())));
     }
 
     public static AppSettings getAppSettings(Context context) {
@@ -54,4 +62,22 @@ public class AppConfig {
             tv3.setText(AppConfig.convertPrice2(context, p2));
         }
     }
+
+    public static List<Product> mapResponse(List<Product> response) {
+        List<Product> products = new ArrayList<>();
+        for (Product product : response) {
+
+            List<Double> prices = new ArrayList<>();
+            prices.add(product.getUnitPrice());
+            prices.add(product.getUnitPrice2());
+            prices.add(product.getUnitPrice3());
+
+            Collections.sort(prices);
+            product.setPrices(prices);
+            product.setThumbnailImage(ASSET_URL + product.getThumbnailImage());
+            products.add(product);
+        }
+        return products;
+    }
+
 }
