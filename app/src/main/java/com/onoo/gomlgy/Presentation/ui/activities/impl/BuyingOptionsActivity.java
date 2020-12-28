@@ -37,6 +37,7 @@ import com.onoo.gomlgy.Utils.CustomToast;
 import com.onoo.gomlgy.Utils.UserPrefs;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 import com.onoo.gomlgy.models.ChoiceOption;
+import com.onoo.gomlgy.models.ProductDetails3.ProductDetails3;
 
 import java.util.HashMap;
 
@@ -44,7 +45,7 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
     RadioGroup dynamicRadiogroup;
     LinearLayout linearLayout;
     MyRadioButton radioButton;
-    com.onoo.gomlgy.models.ProductDetails2 productDetails;
+    ProductDetails3 productDetails;
     private TextView name;
     private RatingBar ratingBar;
     private TextView price;
@@ -112,7 +113,7 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
         setContentView(R.layout.activity_buying_options);
         initviews();
 
-        productDetails = (com.onoo.gomlgy.models.ProductDetails2) getIntent().getSerializableExtra("product_details");
+        productDetails = (ProductDetails3) getIntent().getSerializableExtra("product_details");
 
         initializeActionBar();
         setTitle("Buying Options");

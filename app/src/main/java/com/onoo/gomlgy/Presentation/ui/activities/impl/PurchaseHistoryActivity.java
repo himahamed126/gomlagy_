@@ -1,10 +1,13 @@
 package com.onoo.gomlgy.Presentation.ui.activities.impl;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -84,8 +87,8 @@ public class PurchaseHistoryActivity extends BaseActivity implements PurchaseHis
     public void onBackPressed() {
         if (from.equals("payment")) {
             startActivity(new Intent(this, MainActivity.class));
-            finish();
         }
+        finish();
 
     }
 }

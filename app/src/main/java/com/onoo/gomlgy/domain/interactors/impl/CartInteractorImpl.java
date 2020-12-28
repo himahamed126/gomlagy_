@@ -24,13 +24,14 @@ public class CartInteractorImpl extends AbstractInteractor {
         super(threadExecutor, mainThread);
         mCallback = callBack;
         this.user_id = id;
-        this.token = "Bearer "+token;
+        this.token = "Bearer " + token;
     }
 
     @Override
     public void run() {
         apiService = ApiClient.getClient().create(CartApiInterface.class);
-        Call<CartResponse> call = apiService.getCartItems(token,"carts/"+user_id);
+        Call<CartResponse> call = apiService.getCartItems(token, "carts/" + user_id);
+        Log.i("dddd", "run: " + token + "---" + user_id);
 
         call.enqueue(new Callback<CartResponse>() {
             @Override

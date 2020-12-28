@@ -75,7 +75,9 @@ public class AccountFragment extends Fragment implements AccountView, AppSetting
             @Override
             public void onClick(View v) {
                 if (authResponse != null && authResponse.getUser() != null) {
-                    startActivity(new Intent(getContext(), PurchaseHistoryActivity.class));
+                    Intent intent = new Intent(getContext(), PurchaseHistoryActivity.class);
+                    intent.putExtra("from", "account");
+                    startActivity(intent);
                 } else {
                     startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
                 }

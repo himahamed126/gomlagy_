@@ -21,10 +21,11 @@ import com.onoo.gomlgy.Utils.AppConfig;
 import com.onoo.gomlgy.Utils.HelperMethod;
 import com.onoo.gomlgy.Utils.ItemAnimation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeSubCategoryAdapter extends RecyclerView.Adapter<HomeSubCategoryAdapter.ViewHolder> {
-    private List<Product> mProducts;
+    private List<Product> mProducts = new ArrayList<>();
     private LayoutInflater mInflater;
     private Context context;
     private ProductClickListener productClickListener;
@@ -32,10 +33,9 @@ public class HomeSubCategoryAdapter extends RecyclerView.Adapter<HomeSubCategory
     private boolean on_attach = true;
 
     // data is passed into the constructor
-    public HomeSubCategoryAdapter(Context context, List<Product> mProducts) {
+    public HomeSubCategoryAdapter(Context context) {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
-        this.mProducts = mProducts;
         this.productClickListener = productClickListener;
     }
 
@@ -100,5 +100,10 @@ public class HomeSubCategoryAdapter extends RecyclerView.Adapter<HomeSubCategory
                 }
             });
         }
+    }
+
+    public void setItems(List<Product> mProducts) {
+        this.mProducts = mProducts;
+        notifyDataSetChanged();
     }
 }

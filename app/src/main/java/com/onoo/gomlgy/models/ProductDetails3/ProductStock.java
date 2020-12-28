@@ -3,7 +3,9 @@ package com.onoo.gomlgy.models.ProductDetails3;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ProductStock {
+import java.io.Serializable;
+
+public class ProductStock implements Serializable {
 
     @SerializedName("id")
     @Expose

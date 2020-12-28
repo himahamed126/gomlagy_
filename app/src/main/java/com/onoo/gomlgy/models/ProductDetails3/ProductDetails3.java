@@ -56,7 +56,7 @@ public class ProductDetails3 implements Serializable {
     private List<ChoiceOption> choiceOptions = null;
     @SerializedName("colors")
     @Expose
-    private List<Object> colors = null;
+    private List<String> colors = null;
     @SerializedName("todays_deal")
     @Expose
     private Integer todaysDeal;
@@ -234,11 +234,11 @@ public class ProductDetails3 implements Serializable {
         this.choiceOptions = choiceOptions;
     }
 
-    public List<Object> getColors() {
+    public List<String> getColors() {
         return colors;
     }
 
-    public void setColors(List<Object> colors) {
+    public void setColors(List<String> colors) {
         this.colors = colors;
     }
 

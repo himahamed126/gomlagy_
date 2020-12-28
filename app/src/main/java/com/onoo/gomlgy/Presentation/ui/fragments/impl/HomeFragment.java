@@ -88,6 +88,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
 
 
     TextView bestSellingSeeAll, cat1SeeAll, cat2SeeAll, cat3SeeAll, cat4SeeAll;
+    HomeSubCategoryAdapter catAdapter;
 
     @Nullable
     @Override
@@ -124,10 +125,6 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         homePresenter.getBanners();
         apiService1 = ApiClient.getClient().create(ProductListingApiInterface.class);
 
-        getData1(23);
-        getData2(21);
-        getData3(22);
-        getData4(14);
         return v;
     }
 
@@ -142,6 +139,10 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         homePresenter.getFeaturedProducts();
         homePresenter.getPopularbrands();
         homePresenter.getAuctionProducts();
+        homePresenter.getCat1();
+        homePresenter.getCat2();
+        homePresenter.getCat3();
+        homePresenter.getCat4();
     }
 
     @Override
@@ -208,20 +209,6 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
             }
         }
 
-//        bestSellingSeeAll = v.findViewById(R.id.best_selling_see_all);
-//        bestSellingSeeAll.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int categoryId = 1;
-//                int subCategoryID = model.getId();
-//                Log.i("URLLLL", "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID);
-//                Intent i = new Intent(getApplicationContext(), ProductListingActivity.class);
-//                i.putExtra("url", "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID);
-//                i.putExtra("title", model.getName());
-//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                MainActivity.this.startActivity(i);
-//            }
-//        });
     }
 
     void goToProductList(int subCategoryID) {
@@ -232,152 +219,6 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
 //                i.putExtra("title", model.getName());
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getActivity().startActivity(i);
-    }
-
-    private void getData1(int subCategoryID) {
-        List<Product> productList = new ArrayList<>();
-        RecyclerView recyclerView = v.findViewById(R.id.cat_1_deals);
-        GridLayoutManager horizontalLayoutManager
-                = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
-        int categoryId = 5;
-        String url = "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID;
-        Call<ProductListingResponse> call = apiService1.getProducts(url);
-        SubCategorymodel subCategorymodel;
-        call.enqueue(new Callback<ProductListingResponse>() {
-            @Override
-            public void onResponse(Call<ProductListingResponse> call, Response<ProductListingResponse> response) {
-                try {
-                    for (int x = 0; x < response.body().getData().size(); x++) {
-                        if (productList.size() < 4) {
-                            productList.add(response.body().getData().get(x));
-                            HomeSubCategoryAdapter adapter = new HomeSubCategoryAdapter(getActivity(), productList);
-                            recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
-                            recyclerView.setAdapter(adapter);
-                        }
-                    }
-                    cat1SeeAll = v.findViewById(R.id.cat_1_see_all);
-                    cat1SeeAll.setVisibility(View.VISIBLE);
-                    cat1SeeAll.setOnClickListener(v -> goToProductList(subCategoryID));
-                } catch (Exception e) {
-                    Log.e("Exception", e.getMessage());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ProductListingResponse> call, Throwable t) {
-                Log.e("Exception", t.getMessage());
-            }
-        });
-    }
-
-    private void getData2(int subCategoryID) {
-        List<Product> productList = new ArrayList<>();
-        RecyclerView recyclerView = v.findViewById(R.id.cat_2_deals);
-        GridLayoutManager horizontalLayoutManager
-                = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
-        int categoryId = 5;
-        String url = "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID;
-        Call<ProductListingResponse> call = apiService1.getProducts(url);
-        call.enqueue(new Callback<ProductListingResponse>() {
-            @Override
-            public void onResponse(Call<ProductListingResponse> call, Response<ProductListingResponse> response) {
-                try {
-                    for (int x = 0; x < response.body().getData().size(); x++) {
-                        if (productList.size() < 4) {
-                            productList.add(response.body().getData().get(x));
-                            HomeSubCategoryAdapter adapter = new HomeSubCategoryAdapter(getActivity(), productList);
-                            recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
-                            recyclerView.setAdapter(adapter);
-                        }
-                    }
-                    cat2SeeAll = v.findViewById(R.id.cat_2_see_all);
-                    cat2SeeAll.setVisibility(View.VISIBLE);
-                    cat2SeeAll.setOnClickListener(v -> goToProductList(subCategoryID));
-                } catch (Exception e) {
-                    Log.e("Exception", e.getMessage());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ProductListingResponse> call, Throwable t) {
-                Log.e("Exception", t.getMessage());
-            }
-        });
-    }
-
-    private void getData3(int subCategoryID) {
-        List<Product> productList = new ArrayList<>();
-        RecyclerView recyclerView = v.findViewById(R.id.cat_3_deals);
-        GridLayoutManager horizontalLayoutManager
-                = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
-        int categoryId = 5;
-        String url = "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID;
-        Call<ProductListingResponse> call = apiService1.getProducts(url);
-        call.enqueue(new Callback<ProductListingResponse>() {
-            @Override
-            public void onResponse(Call<ProductListingResponse> call, Response<ProductListingResponse> response) {
-                try {
-                    for (int x = 0; x < response.body().getData().size(); x++) {
-                        if (productList.size() < 4) {
-                            productList.add(response.body().getData().get(x));
-                            HomeSubCategoryAdapter adapter = new HomeSubCategoryAdapter(getActivity(), productList);
-                            recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
-                            recyclerView.setAdapter(adapter);
-                        }
-                    }
-                    cat3SeeAll = v.findViewById(R.id.cat_3_see_all);
-                    cat3SeeAll.setVisibility(View.VISIBLE);
-                    cat3SeeAll.setOnClickListener(v -> goToProductList(subCategoryID));
-                } catch (Exception e) {
-                    Log.e("Exception", e.getMessage());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ProductListingResponse> call, Throwable t) {
-                Log.e("Exception", t.getMessage());
-            }
-        });
-    }
-
-    private void getData4(int subCategoryID) {
-        List<Product> productList = new ArrayList<>();
-        RecyclerView recyclerView = v.findViewById(R.id.cat_4_deals);
-        GridLayoutManager horizontalLayoutManager
-                = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
-        int categoryId = 5;
-        String url = "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID;
-        Call<ProductListingResponse> call = apiService1.getProducts(url);
-        call.enqueue(new Callback<ProductListingResponse>() {
-            @Override
-            public void onResponse(Call<ProductListingResponse> call, Response<ProductListingResponse> response) {
-                try {
-                    for (int x = 0; x < response.body().getData().size(); x++) {
-                        if (productList.size() < 4) {
-                            productList.add(response.body().getData().get(x));
-                            HomeSubCategoryAdapter adapter = new HomeSubCategoryAdapter(getActivity(), productList);
-                            recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
-                            recyclerView.setAdapter(adapter);
-                        }
-                    }
-                    cat4SeeAll = v.findViewById(R.id.cat_4_see_all);
-                    cat4SeeAll.setVisibility(View.VISIBLE);
-                    cat4SeeAll.setOnClickListener(v -> goToProductList(subCategoryID));
-                } catch (Exception e) {
-                    Log.e("Exception", e.getMessage());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ProductListingResponse> call, Throwable t) {
-                Log.e("Exception", t.getMessage());
-            }
-        });
-
     }
 
     @Override
@@ -393,16 +234,85 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
 
     }
 
-//    @Override
-//    public void setTopCategories(List<Category> categories) {
-//        RecyclerView recyclerView = v.findViewById(R.id.top_categories);
-//        GridLayoutManager horizontalLayoutManager
-//                = new GridLayoutManager(getActivity(), 1, GridLayoutManager.HORIZONTAL, false);
-//        recyclerView.setLayoutManager(horizontalLayoutManager);
-//        TopCategoryAdapter adapter = new TopCategoryAdapter(getActivity(), categories, HomeFragment.this);
-//        recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getContext(), 10)));
-//        recyclerView.setAdapter(adapter);
-//    }
+    @Override
+    public void setCat1(List<Product> products) {
+        RecyclerView recyclerView = v.findViewById(R.id.cat_1_deals);
+        GridLayoutManager horizontalLayoutManager = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+        catAdapter = new HomeSubCategoryAdapter(getActivity());
+        recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
+        recyclerView.setAdapter(catAdapter);
+        cat1SeeAll = v.findViewById(R.id.cat_1_see_all);
+        cat1SeeAll.setVisibility(View.VISIBLE);
+        cat1SeeAll.setOnClickListener(v -> goToProductList(13));
+
+        List<Product> productList = new ArrayList<>();
+
+        for (int x = 0; x < products.size(); x++)
+            if (productList.size() < 4) productList.add(products.get(x));
+
+        catAdapter.setItems(productList);
+    }
+
+    @Override
+    public void setCat2(List<Product> products) {
+        RecyclerView recyclerView = v.findViewById(R.id.cat_2_deals);
+        GridLayoutManager horizontalLayoutManager = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+        catAdapter = new HomeSubCategoryAdapter(getActivity());
+        recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
+        recyclerView.setAdapter(catAdapter);
+        cat2SeeAll = v.findViewById(R.id.cat_2_see_all);
+        cat2SeeAll.setVisibility(View.VISIBLE);
+        cat2SeeAll.setOnClickListener(v -> goToProductList(13));
+
+        List<Product> productList = new ArrayList<>();
+
+        for (int x = 0; x < products.size(); x++)
+            if (productList.size() < 4) productList.add(products.get(x));
+
+        catAdapter.setItems(productList);
+    }
+
+    @Override
+    public void setCat3(List<Product> products) {
+        RecyclerView recyclerView = v.findViewById(R.id.cat_3_deals);
+        GridLayoutManager horizontalLayoutManager = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+        catAdapter = new HomeSubCategoryAdapter(getActivity());
+        recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
+        recyclerView.setAdapter(catAdapter);
+        cat3SeeAll = v.findViewById(R.id.cat_3_see_all);
+        cat3SeeAll.setVisibility(View.VISIBLE);
+        cat3SeeAll.setOnClickListener(v -> goToProductList(13));
+
+        List<Product> productList = new ArrayList<>();
+
+        for (int x = 0; x < products.size(); x++)
+            if (productList.size() < 4) productList.add(products.get(x));
+
+        catAdapter.setItems(productList);
+    }
+
+    @Override
+    public void setCat4(List<Product> products) {
+        RecyclerView recyclerView = v.findViewById(R.id.cat_4_deals);
+        GridLayoutManager horizontalLayoutManager = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+        catAdapter = new HomeSubCategoryAdapter(getActivity());
+        recyclerView.addItemDecoration(new LayoutMarginDecoration(2, AppConfig.convertDpToPx(getContext(), 10)));
+        recyclerView.setAdapter(catAdapter);
+        cat4SeeAll = v.findViewById(R.id.cat_4_see_all);
+        cat4SeeAll.setVisibility(View.VISIBLE);
+        cat4SeeAll.setOnClickListener(v -> goToProductList(13));
+
+        List<Product> productList = new ArrayList<>();
+
+        for (int x = 0; x < products.size(); x++)
+            if (productList.size() < 4) productList.add(products.get(x));
+
+        catAdapter.setItems(productList);
+    }
 
     @Override
     public void setPopularBrands(List<Brand> brands) {
@@ -433,7 +343,8 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
     }
 
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    public void onPageScrolled(int position, float positionOffset,
+                               int positionOffsetPixels) {
         //Log.d("SliderPosition", String.valueOf(position));
     }
 

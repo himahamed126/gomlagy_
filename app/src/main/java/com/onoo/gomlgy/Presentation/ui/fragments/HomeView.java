@@ -24,6 +24,14 @@ public interface HomeView {
 
     void setFeaturedProducts(List<Product> products);
 
+    void setCat1(List<Product> products);
+
+    void setCat2(List<Product> products);
+
+    void setCat3(List<Product> products);
+
+    void setCat4(List<Product> products);
+
     void setPopularBrands(List<Brand> brands);
 
     void setAuctionProducts(List<AuctionProduct> auctionProducts);

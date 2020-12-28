@@ -1,5 +1,13 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
+import com.onoo.gomlgy.domain.interactors.Cat1Interactor;
+import com.onoo.gomlgy.domain.interactors.Cat2Interactor;
+import com.onoo.gomlgy.domain.interactors.Cat3Interactor;
+import com.onoo.gomlgy.domain.interactors.Cat4Interactor;
+import com.onoo.gomlgy.domain.interactors.impl.Cat1InteractorImpl;
+import com.onoo.gomlgy.domain.interactors.impl.Cat2InteractorImpl;
+import com.onoo.gomlgy.domain.interactors.impl.Cat3InteractorImpl;
+import com.onoo.gomlgy.domain.interactors.impl.Cat4InteractorImpl;
 import com.onoo.gomlgy.models.AuctionProduct;
 import com.onoo.gomlgy.models.Banner;
 import com.onoo.gomlgy.models.Brand;
@@ -40,7 +48,12 @@ import com.google.gson.JsonObject;
 
 import java.util.List;
 
-public class HomePresenter extends AbstractPresenter implements AppSettingsInteractor.CallBack, SliderInteractor.CallBack, HomeCategoriesInteractor.CallBack, TodaysDealInteractor.CallBack, FlashDealInteractor.CallBack, BestSellingInteractor.CallBack, BannerInteractor.CallBack, FeaturedProductInteractor.CallBack, BrandInteractor.CallBack, TopCategoryInteractor.CallBack, AuctionProductInteractor.CallBack, AuctionBidInteractor.CallBack {
+public class HomePresenter extends AbstractPresenter implements
+        AppSettingsInteractor.CallBack, SliderInteractor.CallBack, HomeCategoriesInteractor.CallBack,
+        TodaysDealInteractor.CallBack, FlashDealInteractor.CallBack, BestSellingInteractor.CallBack,
+        BannerInteractor.CallBack, FeaturedProductInteractor.CallBack, BrandInteractor.CallBack,
+        TopCategoryInteractor.CallBack, AuctionProductInteractor.CallBack, AuctionBidInteractor.CallBack,
+        Cat1Interactor.CallBack, Cat2Interactor.CallBack, Cat3Interactor.CallBack, Cat4Interactor.CallBack {
     private HomeView homeView;
 
     public HomePresenter(Executor executor, MainThread mainThread, HomeView homeView) {
@@ -48,7 +61,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
         this.homeView = homeView;
     }
 
-    public void getAppSettings(){
+    public void getAppSettings() {
         new AppSettingsInteractorImpl(mExecutor, mMainThread, this).execute();
     }
 
@@ -62,6 +75,22 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
 
     public void getTodaysDeal() {
         new TodaysDealInteractorImpl(mExecutor, mMainThread, this).execute();
+    }
+
+    public void getCat1() {
+        new Cat1InteractorImpl(mExecutor, mMainThread, this, 23).execute();
+    }
+
+    public void getCat2() {
+        new Cat2InteractorImpl(mExecutor, mMainThread, this, 21).execute();
+    }
+
+    public void getCat3() {
+        new Cat3InteractorImpl(mExecutor, mMainThread, this, 22).execute();
+    }
+
+    public void getCat4() {
+        new Cat4InteractorImpl(mExecutor, mMainThread, this, 14).execute();
     }
 
     public void getFlashDeal() {
@@ -92,13 +121,13 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
         new AuctionProductInteractorImpl(mExecutor, mMainThread, this).execute();
     }
 
-    public void submitBid(JsonObject jsonObject, String token){
+    public void submitBid(JsonObject jsonObject, String token) {
         new AuctionBidInteractorImpl(mExecutor, mMainThread, this, jsonObject, token).execute();
     }
 
     @Override
     public void onAppSettingsLoaded(AppSettingsResponse appSettingsResponse) {
-        if (homeView != null){
+        if (homeView != null) {
             homeView.onAppSettingsLoaded(appSettingsResponse);
         }
     }
@@ -163,6 +192,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
         }
     }
 
+
     @Override
     public void onFeaturedProductDownloadError() {
 
@@ -194,7 +224,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
 
     @Override
     public void onBannersDownloaded(List<Banner> banners) {
-        if (homeView != null){
+        if (homeView != null) {
 
         }
     }
@@ -206,7 +236,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
 
     @Override
     public void onBrandsDownloaded(List<Brand> brands) {
-        if (homeView != null){
+        if (homeView != null) {
             homeView.setPopularBrands(brands);
         }
     }
@@ -218,7 +248,7 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
 
     @Override
     public void onBidSubmitted(AuctionBidResponse auctionBidResponse) {
-        if (homeView != null){
+        if (homeView != null) {
             homeView.onAuctionBidSubmitted(auctionBidResponse);
         }
     }
@@ -237,6 +267,54 @@ public class HomePresenter extends AbstractPresenter implements AppSettingsInter
 
     @Override
     public void onFlashDealProductDownloadError() {
+
+    }
+
+    @Override
+    public void onCat1ProductDownloaded(List<Product> products) {
+        if (homeView != null) {
+            homeView.setCat1(products);
+        }
+    }
+
+    @Override
+    public void onCat1ProductDownloadError() {
+
+    }
+
+    @Override
+    public void onCat2ProductDownloaded(List<Product> products) {
+        if (homeView != null) {
+            homeView.setCat2(products);
+        }
+    }
+
+    @Override
+    public void onCat2ProductDownloadError() {
+
+    }
+
+    @Override
+    public void onCat3ProductDownloaded(List<Product> products) {
+        if (homeView != null) {
+            homeView.setCat3(products);
+        }
+    }
+
+    @Override
+    public void onCat3ProductDownloadError() {
+
+    }
+
+    @Override
+    public void onCat4ProductDownloaded(List<Product> products) {
+        if (homeView != null) {
+            homeView.setCat4(products);
+        }
+    }
+
+    @Override
+    public void onCat4ProductDownloadError() {
 
     }
 }
