@@ -57,14 +57,13 @@ import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.onoo.gomlgy.Utils.AppConfig.ASSET_URL;
+import static com.onoo.gomlgy.Utils.AppConfig.mapResponse;
 
 public class HomeFragment extends Fragment implements HomeView, CategoryClickListener,
         BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener,
@@ -486,23 +485,6 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         progressDialog.dismiss();
         CustomToast.showToast(getActivity(), auctionBidResponse.getMessage(), R.color.colorSuccess);
         homePresenter.getAuctionProducts();
-    }
-
-    private List<Product> mapResponse(List<Product> response) {
-        List<Product> products = new ArrayList<>();
-        for (Product product : response) {
-
-            List<Double> prices = new ArrayList<>();
-            prices.add(product.getUnitPrice());
-            prices.add(product.getUnitPrice2());
-            prices.add(product.getUnitPrice3());
-
-            Collections.sort(prices);
-            product.setPrices(prices);
-            product.setThumbnailImage(ASSET_URL + product.getThumbnailImage());
-            products.add(product);
-        }
-        return products;
     }
 
 }
