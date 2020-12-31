@@ -1,20 +1,6 @@
 package com.onoo.gomlgy.Presentation.presenters;
 
-import com.onoo.gomlgy.domain.interactors.Cat1Interactor;
-import com.onoo.gomlgy.domain.interactors.Cat2Interactor;
-import com.onoo.gomlgy.domain.interactors.Cat3Interactor;
-import com.onoo.gomlgy.domain.interactors.Cat4Interactor;
-import com.onoo.gomlgy.domain.interactors.impl.Cat1InteractorImpl;
-import com.onoo.gomlgy.domain.interactors.impl.Cat2InteractorImpl;
-import com.onoo.gomlgy.domain.interactors.impl.Cat3InteractorImpl;
-import com.onoo.gomlgy.domain.interactors.impl.Cat4InteractorImpl;
-import com.onoo.gomlgy.models.AuctionProduct;
-import com.onoo.gomlgy.models.Banner;
-import com.onoo.gomlgy.models.Brand;
-import com.onoo.gomlgy.models.Category;
-import com.onoo.gomlgy.models.FlashDeal;
-import com.onoo.gomlgy.models.Product;
-import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
+import com.google.gson.JsonObject;
 import com.onoo.gomlgy.Network.response.AppSettingsResponse;
 import com.onoo.gomlgy.Network.response.AuctionBidResponse;
 import com.onoo.gomlgy.Presentation.ui.fragments.HomeView;
@@ -26,6 +12,10 @@ import com.onoo.gomlgy.domain.interactors.AuctionProductInteractor;
 import com.onoo.gomlgy.domain.interactors.BannerInteractor;
 import com.onoo.gomlgy.domain.interactors.BestSellingInteractor;
 import com.onoo.gomlgy.domain.interactors.BrandInteractor;
+import com.onoo.gomlgy.domain.interactors.Cat1Interactor;
+import com.onoo.gomlgy.domain.interactors.Cat2Interactor;
+import com.onoo.gomlgy.domain.interactors.Cat3Interactor;
+import com.onoo.gomlgy.domain.interactors.Cat4Interactor;
 import com.onoo.gomlgy.domain.interactors.FeaturedProductInteractor;
 import com.onoo.gomlgy.domain.interactors.FlashDealInteractor;
 import com.onoo.gomlgy.domain.interactors.HomeCategoriesInteractor;
@@ -38,22 +28,35 @@ import com.onoo.gomlgy.domain.interactors.impl.AuctionProductInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.BannerInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.BestSellingInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.BrandInteractorImpl;
+import com.onoo.gomlgy.domain.interactors.impl.Cat1InteractorImpl;
+import com.onoo.gomlgy.domain.interactors.impl.Cat2InteractorImpl;
+import com.onoo.gomlgy.domain.interactors.impl.Cat3InteractorImpl;
+import com.onoo.gomlgy.domain.interactors.impl.Cat4InteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.FeaturedProductInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.FlashDealInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.HomeCategoriesInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.SliderInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.TodaysDealInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.TopCategoriesInteractorImpl;
-import com.google.gson.JsonObject;
+import com.onoo.gomlgy.models.AuctionProduct;
+import com.onoo.gomlgy.models.Banner;
+import com.onoo.gomlgy.models.Brand;
+import com.onoo.gomlgy.models.Category;
+import com.onoo.gomlgy.models.FlashDeal;
+import com.onoo.gomlgy.models.Product;
+import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 
 import java.util.List;
 
-public class HomePresenter extends AbstractPresenter implements
-        AppSettingsInteractor.CallBack, SliderInteractor.CallBack, HomeCategoriesInteractor.CallBack,
-        TodaysDealInteractor.CallBack, FlashDealInteractor.CallBack, BestSellingInteractor.CallBack,
-        BannerInteractor.CallBack, FeaturedProductInteractor.CallBack, BrandInteractor.CallBack,
-        TopCategoryInteractor.CallBack, AuctionProductInteractor.CallBack, AuctionBidInteractor.CallBack,
-        Cat1Interactor.CallBack, Cat2Interactor.CallBack, Cat3Interactor.CallBack, Cat4Interactor.CallBack {
+import static com.onoo.gomlgy.Utils.AppConfig.mapResponse;
+
+public class HomePresenter extends AbstractPresenter implements AppSettingsInteractor.CallBack,
+        SliderInteractor.CallBack, HomeCategoriesInteractor.CallBack, TodaysDealInteractor.CallBack,
+        FlashDealInteractor.CallBack, BestSellingInteractor.CallBack, BannerInteractor.CallBack,
+        FeaturedProductInteractor.CallBack, BrandInteractor.CallBack, TopCategoryInteractor.CallBack,
+        AuctionProductInteractor.CallBack, AuctionBidInteractor.CallBack, Cat1Interactor.CallBack,
+        Cat2Interactor.CallBack, Cat3Interactor.CallBack, Cat4Interactor.CallBack {
+
     private HomeView homeView;
 
     public HomePresenter(Executor executor, MainThread mainThread, HomeView homeView) {
@@ -164,7 +167,7 @@ public class HomePresenter extends AbstractPresenter implements
     @Override
     public void onTodaysDealProductDownloaded(List<Product> products) {
         if (homeView != null) {
-            homeView.setTodaysDeal(products);
+            homeView.setTodaysDeal(mapResponse(products));
         }
     }
 
@@ -176,7 +179,7 @@ public class HomePresenter extends AbstractPresenter implements
     @Override
     public void onBestSellingProductDownloaded(List<Product> products) {
         if (homeView != null) {
-            homeView.setBestSelling(products);
+            homeView.setBestSelling(mapResponse(products));
         }
     }
 
@@ -186,9 +189,9 @@ public class HomePresenter extends AbstractPresenter implements
     }
 
     @Override
-    public void onFeaturedProductDownloaded(List<Product> products) {
+    public void onFeaturedProductDownloaded(List<Product> response) {
         if (homeView != null) {
-            homeView.setFeaturedProducts(products);
+            homeView.setFeaturedProducts(mapResponse(response));
         }
     }
 

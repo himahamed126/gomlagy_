@@ -23,6 +23,7 @@ import com.onoo.gomlgy.Presentation.ui.activities.FiltersView;
 import com.onoo.gomlgy.Presentation.ui.activities.ProductListingView;
 import com.onoo.gomlgy.Presentation.ui.adapters.FilterBrandsAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.ProductListingAdapter;
+import com.onoo.gomlgy.Presentation.ui.adapters.ProductsAdapter;
 import com.onoo.gomlgy.Presentation.ui.listeners.EndlessRecyclerOnScrollListener;
 import com.onoo.gomlgy.Presentation.ui.listeners.FilterBrandCallback;
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
@@ -39,13 +40,16 @@ import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.onoo.gomlgy.Utils.AppConfig.mapResponse;
+
 public class ProductListingActivity extends BaseActivity implements ProductListingView,
         ProductClickListener, FiltersView, FilterBrandCallback {
 
     private final List<Product> mProducts = new ArrayList<>();
     private ProductListingResponse productListingResponse = null;
     private ProductListingPresenter productListingPresenter;
-    private ProductListingAdapter adapter;
+//    private ProductListingAdapter adapter;
+    private ProductsAdapter adapter;
     private List<OffersData> sliderImages;
     private ActivityProductListingBinding productListingBinding;
     private String url, categoryId, subCategoryId;
@@ -78,8 +82,10 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
 
         initializeActionBar();
 
-        adapter = new ProductListingAdapter(getApplicationContext(), mProducts,
-                this, ProductListingAdapter.ViewType.VIEW_TYPE_List);
+//        adapter = new ProductListingAdapter(getApplicationContext(), mProducts,
+//                this, ProductListingAdapter.ViewType.VIEW_TYPE_List);
+
+        adapter = new ProductsAdapter(mProducts, this);
 
         GridLayoutManager horizontalLayoutManager
                 = new GridLayoutManager(ProductListingActivity.this, 2);
@@ -127,7 +133,7 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
 
     @Override
     public void setProducts(ProductListingResponse productListingResponse) {
-        mProducts.addAll(productListingResponse.getData());
+        mProducts.addAll(mapResponse(productListingResponse.getData()));
         this.productListingResponse = productListingResponse;
         productListingBinding.itemProgressBar.setVisibility(View.GONE);
         adapter.notifyDataSetChanged();

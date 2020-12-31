@@ -38,7 +38,7 @@ import com.onoo.gomlgy.Network.response.VariantResponse;
 import com.onoo.gomlgy.Presentation.presenters.ProductDetailsPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.ProductDetailsView;
 import com.onoo.gomlgy.Presentation.ui.adapters.BestSellingofSellerAdapter;
-import com.onoo.gomlgy.Presentation.ui.adapters.FeaturedProductAdapter;
+import com.onoo.gomlgy.Presentation.ui.adapters.ProductsAdapter;
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductModelsClickListener;
 import com.onoo.gomlgy.R;
@@ -395,10 +395,12 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     @Override
     public void setRelatedProducts(List<Product> relatedProducts) {
         RecyclerView recyclerView = findViewById(R.id.related_products);
-        GridLayoutManager horizontalLayoutManager
-                = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
+        GridLayoutManager horizontalLayoutManager = new
+                GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL,
+                false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        FeaturedProductAdapter adapter = new FeaturedProductAdapter(this, relatedProducts, this);
+        ProductsAdapter adapter = new ProductsAdapter(relatedProducts,
+                this);
         recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getApplicationContext(), 10)));
         recyclerView.setAdapter(adapter);
     }

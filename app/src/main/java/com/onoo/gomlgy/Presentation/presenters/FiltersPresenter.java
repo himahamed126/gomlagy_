@@ -12,6 +12,8 @@ import com.onoo.gomlgy.models.Product;
 
 import java.util.List;
 
+import static com.onoo.gomlgy.Utils.AppConfig.mapResponse;
+
 public class FiltersPresenter extends AbstractPresenter implements AllFiltersInteractor.CallBack,
         FilteredDataInteractor.CallBack {
 
@@ -47,7 +49,7 @@ public class FiltersPresenter extends AbstractPresenter implements AllFiltersInt
     @Override
     public void onProductsFiltered(List<Product> filteredData) {
         if (filtersView != null)
-            filtersView.setProducts(filteredData);
+            filtersView.setProducts(mapResponse(filteredData));
     }
 
     @Override

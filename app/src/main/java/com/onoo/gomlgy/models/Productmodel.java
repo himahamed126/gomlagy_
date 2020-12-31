@@ -1,6 +1,7 @@
 package com.onoo.gomlgy.models;
 
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 
@@ -9,6 +10,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.onoo.gomlgy.R;
+import com.onoo.gomlgy.Utils.AppConfig;
 
 import java.io.Serializable;
 import java.util.List;
@@ -172,6 +174,11 @@ public class Productmodel implements Serializable {
 
         Glide.with(imageView.getContext()).setDefaultRequestOptions(requestOptions)
                 .load(imgUrl).into(imageView);
+    }
+
+    @BindingAdapter("convertPrice")
+    public static void convertDoubleToPrice(TextView textView, Double price) {
+        textView.setText(AppConfig.convertPrice2(textView.getContext(), price));
     }
 
     public String getImage_path() {

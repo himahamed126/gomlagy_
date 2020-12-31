@@ -12,10 +12,12 @@ import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
 
 import java.util.List;
 
-public class ProductListingPresenter extends AbstractPresenter implements ProductListingInteractor.CallBack, SliderProductInteractor.CallBack {
+public class ProductListingPresenter extends AbstractPresenter implements
+        ProductListingInteractor.CallBack, SliderProductInteractor.CallBack {
     private ProductListingView productListingView;
 
-    public ProductListingPresenter(Executor executor, MainThread mainThread, ProductListingView productListingView) {
+    public ProductListingPresenter(Executor executor, MainThread mainThread,
+                                   ProductListingView productListingView) {
         super(executor, mainThread);
         this.productListingView = productListingView;
     }
