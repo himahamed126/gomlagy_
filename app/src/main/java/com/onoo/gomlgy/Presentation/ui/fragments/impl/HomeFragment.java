@@ -270,7 +270,6 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
 
         for (int x = 0; x < products.size(); x++)
             if (productList.size() < 4) productList.add(products.get(x));
-
         catAdapter.setItems(productList);
     }
 
