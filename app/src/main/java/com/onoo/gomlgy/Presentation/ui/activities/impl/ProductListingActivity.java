@@ -48,7 +48,7 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
     private final List<Product> mProducts = new ArrayList<>();
     private ProductListingResponse productListingResponse = null;
     private ProductListingPresenter productListingPresenter;
-//    private ProductListingAdapter adapter;
+    //    private ProductListingAdapter adapter;
     private ProductsAdapter adapter;
     private List<OffersData> sliderImages;
     private ActivityProductListingBinding productListingBinding;
@@ -67,6 +67,7 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
         productListingBinding = DataBindingUtil.setContentView(ProductListingActivity.this,
                 R.layout.activity_product_listing);
 
+        getSupportActionBar().hide();
         initView();
         productListingPresenter = new ProductListingPresenter(ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(), this);
@@ -80,12 +81,13 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
     @Override
     public void initView() {
 
-        initializeActionBar();
+//        initializeActionBar();
 
 //        adapter = new ProductListingAdapter(getApplicationContext(), mProducts,
 //                this, ProductListingAdapter.ViewType.VIEW_TYPE_List);
 
-        adapter = new ProductsAdapter(mProducts, this);
+        adapter = new ProductsAdapter(this,mProducts, this);
+
 
         GridLayoutManager horizontalLayoutManager
                 = new GridLayoutManager(ProductListingActivity.this, 2);
@@ -105,7 +107,7 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
                 });
         productListingBinding.itemProgressBar.setVisibility(View.VISIBLE);
 
-        productListingBinding.filterTv.setOnClickListener(view ->
+        productListingBinding.filterIv.setOnClickListener(view ->
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED));
 
     }
@@ -114,7 +116,9 @@ public class ProductListingActivity extends BaseActivity implements ProductListi
     public void getIntentExtras() {
 
         if (getIntent().getStringExtra(getString(R.string.title)) != null)
-            setTitle(getIntent().getStringExtra(getString(R.string.title)));
+            productListingBinding.titleTv.setText(getIntent().getStringExtra(getString(R.string.title)));
+
+//            setTitle(getIntent().getStringExtra(getString(R.string.title)));
 
         if (getIntent().getStringExtra(getString(R.string.url)) != null) {
             url = getIntent().getStringExtra(getString(R.string.url));

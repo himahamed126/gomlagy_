@@ -1,65 +1,127 @@
 package com.onoo.gomlgy.Presentation.ui.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.R;
-import com.onoo.gomlgy.databinding.ItemProductBinding;
+import com.onoo.gomlgy.databinding.ItemProductHorBinding;
+import com.onoo.gomlgy.databinding.ItemProductGridBinding;
+import com.onoo.gomlgy.databinding.ItemProductVerBinding;
 import com.onoo.gomlgy.models.Product;
 
 import java.util.List;
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
-    private List<Product> mProducts;
-    private LayoutInflater layoutInflater;
-    private ProductClickListener productClickListener;
+import static com.onoo.gomlgy.Utils.AppConfig.calcLessPrice;
 
-    // data is passed into the constructor
-    public ProductsAdapter(List<Product> mProducts, ProductClickListener productClickListener) {
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
+    private final List<Product> mProducts;
+    private LayoutInflater layoutInflater;
+    private final ProductClickListener productClickListener;
+    private final Context context;
+    int TYPE;
+
+    private static final int HOR_TYPE = 1, VIR_TYPE = 2, GRID_TYPE = 3;
+
+    public ProductsAdapter(Context context, List<Product> mProducts, ProductClickListener productClickListener) {
+        this.context = context;
         this.mProducts = mProducts;
         this.productClickListener = productClickListener;
     }
 
-    // inflates the row layout from xml when needed
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (layoutInflater == null)
             layoutInflater = LayoutInflater.from(parent.getContext());
-        ItemProductBinding binding = DataBindingUtil.inflate(layoutInflater,
-                R.layout.item_product, parent, false);
-        return new ProductsAdapter.ViewHolder(binding);
+        ViewDataBinding binding;
+
+        switch (viewType) {
+            case HOR_TYPE:
+                binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_product_hor, parent, false);
+                return new ViewHolder((ItemProductHorBinding) binding);
+            case VIR_TYPE:
+                binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_product_ver, parent, false);
+                return new ViewHolder((ItemProductVerBinding) binding);
+            default:
+                binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_product_grid, parent, false);
+                return new ViewHolder((ItemProductGridBinding) binding);
+        }
     }
 
-    // binds the data to the view and textview in each row
     @Override
     public void onBindViewHolder(@NonNull ProductsAdapter.ViewHolder holder, int position) {
+        Product product = mProducts.get(position);
+        double p1 = product.getUnitPrice(), p2 = product.getUnitPrice2(), p3 = product.getUnitPrice3();
 
-        holder.binding.setProduct(mProducts.get(position));
-        holder.binding.productCv.setOnClickListener(view ->
-                productClickListener.onProductItemClick(mProducts.get(position)));
-
+        switch (holder.getItemViewType()) {
+            case GRID_TYPE:
+                ItemProductGridBinding gridBinding = holder.gridBinding;
+                calcLessPrice(p1, p2, p3, gridBinding.price1, gridBinding.price2, gridBinding.price3, context);
+                gridBinding.setProduct(product);
+                gridBinding.productCv.setOnClickListener(view -> productClickListener.onProductItemClick(product));
+                break;
+            case HOR_TYPE:
+                ItemProductHorBinding horBinding = holder.horBinding;
+                calcLessPrice(p1, p2, p3, horBinding.price1, horBinding.price2, horBinding.price3, context);
+                horBinding.setProduct(product);
+                horBinding.productCv.setOnClickListener(view -> productClickListener.onProductItemClick(product));
+                break;
+            case VIR_TYPE:
+                ItemProductVerBinding verBinding = holder.verBinding;
+                calcLessPrice(p1, p2, p3, verBinding.price1, verBinding.price2, verBinding.price3, context);
+                verBinding.setProduct(product);
+                verBinding.productCv.setOnClickListener(view -> productClickListener.onProductItemClick(product));
+                break;
+        }
     }
 
-    // total number of rows
+    @Override
+    public int getItemViewType(int position) {
+        switch (TYPE) {
+            case 1:
+                return HOR_TYPE;
+            case 2:
+                return VIR_TYPE;
+            default:
+                return GRID_TYPE;
+        }
+    }
+
     @Override
     public int getItemCount() {
         return mProducts.size();
     }
 
+    public void setViewType(int type) {
+        this.TYPE = type;
+        notifyDataSetChanged();
+    }
 
-    // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        ItemProductBinding binding;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private ItemProductGridBinding gridBinding;
+        private ItemProductHorBinding horBinding;
+        private ItemProductVerBinding verBinding;
 
-        ViewHolder(ItemProductBinding binding) {
+        ViewHolder(ItemProductGridBinding binding) {
             super(binding.getRoot());
-            this.binding = binding;
+            this.gridBinding = binding;
+        }
+
+        ViewHolder(ItemProductHorBinding binding) {
+            super(binding.getRoot());
+            this.horBinding = binding;
+        }
+
+        ViewHolder(ItemProductVerBinding binding) {
+            super(binding.getRoot());
+            this.verBinding = binding;
         }
     }
 }

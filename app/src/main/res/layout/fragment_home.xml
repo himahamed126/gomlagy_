@@ -61,7 +61,7 @@
                             android:layout_marginEnd="10dp"
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                            tools:listitem="@layout/item_product">
+                            tools:listitem="@layout/item_product_hor">
 
                         </androidx.recyclerview.widget.RecyclerView>
 
@@ -91,7 +91,8 @@
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="10dp"
                             android:text="@string/see_all"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary"
+                            android:visibility="gone" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/best_selling"
@@ -138,8 +139,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/todays_deals_text"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginEnd="16dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                             app:spanCount="2">
@@ -156,15 +157,8 @@
 
                         <TextView
                             android:id="@+id/cat_1_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
+                            style="@style/cat_style"
                             android:text="@string/todays_deal"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
                             android:visibility="invisible" />
 
                         <TextView
@@ -200,15 +194,8 @@
 
                         <TextView
                             android:id="@+id/cat_2_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
+                            style="@style/cat_style"
                             android:text="@string/todays_deal"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
                             android:visibility="invisible" />
 
                         <TextView
@@ -244,15 +231,8 @@
 
                         <TextView
                             android:id="@+id/cat_3_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
+                            style="@style/cat_style"
                             android:text="@string/todays_deal"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
                             android:visibility="invisible" />
 
                         <TextView
@@ -289,15 +269,8 @@
 
                         <TextView
                             android:id="@+id/cat_4_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
+                            style="@style/cat_style"
                             android:text="@string/todays_deal"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
                             android:visibility="invisible" />
 
                         <TextView

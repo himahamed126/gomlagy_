@@ -111,7 +111,7 @@ public class SellerShopActivity extends BaseActivity implements SellerShopView, 
         GridLayoutManager horizontalLayoutManager
                 = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        ProductsAdapter adapter = new ProductsAdapter(products, this);
+        ProductsAdapter adapter = new ProductsAdapter(this,products, this);
         recyclerView.setAdapter(adapter);
     }
 

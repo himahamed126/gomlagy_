@@ -41,7 +41,7 @@ public class BestSellingAdapter extends RecyclerView.Adapter<BestSellingAdapter.
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.item_product_vertical, parent, false);
+        View view = mInflater.inflate(R.layout.item_product_ver, parent, false);
         return new ViewHolder(view);
     }
 

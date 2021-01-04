@@ -1,8 +1,10 @@
 package com.onoo.gomlgy.Utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.TextView;
 
+import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.models.AppSettings;
 import com.onoo.gomlgy.models.Product;
 
@@ -24,6 +26,8 @@ public class AppConfig {
     public static String BRAINTREE_KEY = "sandbox_pghddbzc_h44cx45wt7g27wmc";
     public static boolean CASH_ON_DELIVERY = true;
     public static boolean WALLET_USE = true;
+
+    private static final String TAG = "AppConfig";
 
     public static String convertPrice(Context context, Double price) {
         appSettings = new UserPrefs(context).getAppSettingsPreferenceObjectJson("app_settings_response").getData().get(0);
@@ -60,6 +64,17 @@ public class AppConfig {
             tv1.setText(AppConfig.convertPrice2(context, p3));
             tv2.setText(AppConfig.convertPrice2(context, p1));
             tv3.setText(AppConfig.convertPrice2(context, p2));
+        } else if (p1 > p2 && p1 > p3) {
+            tv1.setText(AppConfig.convertPrice2(context, p1));
+            tv2.setText(AppConfig.convertPrice2(context, p2));
+            tv3.setText(AppConfig.convertPrice2(context, p3));
+        } else if (p1 == p2 && p2 == p3 && p1 == p3) {
+            tv1.setTextColor(context.getResources().getColor(R.color.carbon_grey_500));
+            tv1.setText(AppConfig.convertPrice2(context, p1));
+            tv2.setText(AppConfig.convertPrice2(context, p2));
+            tv3.setText(AppConfig.convertPrice2(context, p3));
+        } else {
+            Log.i(TAG, "calcLessPrice: " + p1 + " - " + p2 + " - " + p3 + " - ");
         }
     }
 

@@ -11,8 +11,7 @@ import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.HelperMethod;
 import com.onoo.gomlgy.Utils.ItemAnimation;
-import com.onoo.gomlgy.databinding.ItemProductBinding;
-import com.onoo.gomlgy.databinding.ItemProductVerticalBinding;
+import com.onoo.gomlgy.databinding.ItemProductVerBinding;
 import com.onoo.gomlgy.models.Product;
 
 import java.util.List;
@@ -34,8 +33,8 @@ public class ProductsVerticalAdapter extends RecyclerView.Adapter<ProductsVertic
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (layoutInflater == null)
             layoutInflater = LayoutInflater.from(parent.getContext());
-        ItemProductVerticalBinding binding = DataBindingUtil.inflate(layoutInflater,
-                R.layout.item_product_vertical, parent, false);
+        ItemProductVerBinding binding = DataBindingUtil.inflate(layoutInflater,
+                R.layout.item_product_ver, parent, false);
         return new ProductsVerticalAdapter.ViewHolder(binding);
     }
 
@@ -60,9 +59,9 @@ public class ProductsVerticalAdapter extends RecyclerView.Adapter<ProductsVertic
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ItemProductVerticalBinding binding;
+        ItemProductVerBinding binding;
 
-        ViewHolder(ItemProductVerticalBinding binding) {
+        ViewHolder(ItemProductVerBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

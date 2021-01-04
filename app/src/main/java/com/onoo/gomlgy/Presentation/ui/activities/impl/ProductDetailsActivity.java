@@ -399,7 +399,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
                 GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL,
                 false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        ProductsAdapter adapter = new ProductsAdapter(relatedProducts,
+        ProductsAdapter adapter = new ProductsAdapter(this,relatedProducts,
                 this);
         recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getApplicationContext(), 10)));
         recyclerView.setAdapter(adapter);
