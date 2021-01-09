@@ -47,6 +47,7 @@
                     android:layout_below="@id/product_rating"
                     android:layout_toEndOf="@id/product_image"
                     android:padding="10dp"
+                    android:visibility="gone"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold" />
 

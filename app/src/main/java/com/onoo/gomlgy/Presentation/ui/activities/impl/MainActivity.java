@@ -1,6 +1,6 @@
 package com.onoo.gomlgy.Presentation.ui.activities.impl;
 
-import  android.app.Activity;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,8 +23,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.onoo.gomlgy.Network.response.CatDrawerResponse;
+import com.onoo.gomlgy.Network.services.getDrawerCategory;
+import com.onoo.gomlgy.models.CatDrawer;
 import com.onoo.gomlgy.models.SubCategorymodel;
-import com.onoo.gomlgy.models.collectionmodel;
 import com.onoo.gomlgy.Network.ApiClient;
 import com.onoo.gomlgy.Network.response.AppSettingsResponse;
 import com.onoo.gomlgy.Network.services.getProductsWithSubcategory;
@@ -69,8 +71,8 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
 
     boolean focus = false;
     int tabId = 1;
-    getProductsWithSubcategory apiService;
-    private List<SubCategorymodel> mCategories = new ArrayList<>();
+    getDrawerCategory apiService;
+    private List<CatDrawer> mCategories = new ArrayList<>();
     RecyclerView drawerRv;
     TextView name, email;
 
@@ -228,15 +230,15 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
         drawerRv.setAdapter(drawerCategoryAdapter);
 
 
-        apiService = ApiClient.getClient().create(getProductsWithSubcategory.class);
-        Call<collectionmodel> getProducts = apiService.get_Products_With_SubCategory("اكسسوارات موبايل");
+        apiService = ApiClient.getClient().create(getDrawerCategory.class);
+        Call<CatDrawerResponse> getProducts = apiService.get_Category(5);
 
-        getProducts.enqueue(new Callback<collectionmodel>() {
+        getProducts.enqueue(new Callback<CatDrawerResponse>() {
             @Override
-            public void onResponse(Call<collectionmodel> call, Response<collectionmodel> response) {
+            public void onResponse(Call<CatDrawerResponse> call, Response<CatDrawerResponse> response) {
                 try {
-                    collectionmodel model = response.body();
-                    mCategories.addAll(model.getData().get(0).getSubCategories());
+                    CatDrawerResponse model = response.body();
+                    mCategories.addAll(model.getData());
                     drawerCategoryAdapter.notifyDataSetChanged();
                 } catch (Exception e) {
                     Log.e("Exception", e.getMessage());
@@ -244,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
             }
 
             @Override
-            public void onFailure(Call<collectionmodel> call, Throwable t) {
+            public void onFailure(Call<CatDrawerResponse> call, Throwable t) {
                 Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
@@ -317,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
     }
 
     @Override
-    public void onCategoryItemClick(SubCategorymodel model, int pos) {
+    public void onCategoryItemClick(CatDrawer model, int pos) {
         int categoryId = 5;
         int subCategoryID = model.getId();
         Log.i("URLLLL", "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID);

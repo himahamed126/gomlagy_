@@ -1,7 +1,7 @@
 package com.onoo.gomlgy.Presentation.ui.listeners;
 
-import com.onoo.gomlgy.models.SubCategorymodel;
+import com.onoo.gomlgy.models.CatDrawer;
 
 public interface DrawerClickListener {
-    void onCategoryItemClick(SubCategorymodel subCategorymodel, int pos);
+    void onCategoryItemClick(CatDrawer subCategorymodel, int pos);
 }

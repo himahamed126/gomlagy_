@@ -18,7 +18,7 @@ public class FilteredDataInteractorImpl extends AbstractInteractor {
     private FilteredDataInteractor.CallBack mCallback;
     private FiltersInterface apiService;
     private String categoryId, subCategoryId, maxPrice, minPrice, brandId;
-
+    private static final String TAG = "FilteredData";
     public FilteredDataInteractorImpl(Executor threadExecutor, MainThread mainThread,
                                       FilteredDataInteractor.CallBack callBack, String categoryId,
                                       String subCategoryId, String maxPrice, String minPrice,
@@ -46,8 +46,9 @@ public class FilteredDataInteractorImpl extends AbstractInteractor {
                 try {
                     assert response.body() != null;
                     mCallback.onProductsFiltered(response.body().getData());
+                    Log.i(TAG, "FilteredData "+response.body().getData());
                 } catch (Exception e) {
-                    Log.e("Exception", e.getMessage());
+                    Log.e("Exceptionn", e.getMessage());
                 }
             }
 

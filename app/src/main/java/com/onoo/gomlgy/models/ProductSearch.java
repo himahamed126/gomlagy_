@@ -1,21 +1,18 @@
+
 package com.onoo.gomlgy.models;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class WishlistProduct {
+public class ProductSearch {
+
     @SerializedName("name")
     @Expose
     private String name;
     @SerializedName("thumbnail_image")
     @Expose
-    private String thumbnailImage;
-    @SerializedName("base_price")
-    @Expose
-    private Integer basePrice;
-    @SerializedName("base_discounted_price")
-    @Expose
-    private Integer baseDiscountedPrice;
+    private List<String> thumbnailImage = null;
     @SerializedName("unit_price")
     @Expose
     private Integer unitPrice;
@@ -25,12 +22,18 @@ public class WishlistProduct {
     @SerializedName("unit_price3")
     @Expose
     private Integer unitPrice3;
+    @SerializedName("base_price")
+    @Expose
+    private Integer basePrice;
+    @SerializedName("base_discounted_price")
+    @Expose
+    private Integer baseDiscountedPrice;
     @SerializedName("rating")
     @Expose
     private Integer rating;
     @SerializedName("links")
-    @Expose
-    private ProductLinks links;
+//    @Expose
+//    private Links links;
 
     public String getName() {
         return name;
@@ -40,28 +43,12 @@ public class WishlistProduct {
         this.name = name;
     }
 
-    public String getThumbnailImage() {
+    public List<String> getThumbnailImage() {
         return thumbnailImage;
     }
 
-    public void setThumbnailImage(String thumbnailImage) {
+    public void setThumbnailImage(List<String> thumbnailImage) {
         this.thumbnailImage = thumbnailImage;
-    }
-
-    public Integer getBasePrice() {
-        return basePrice;
-    }
-
-    public void setBasePrice(Integer basePrice) {
-        this.basePrice = basePrice;
-    }
-
-    public Integer getBaseDiscountedPrice() {
-        return baseDiscountedPrice;
-    }
-
-    public void setBaseDiscountedPrice(Integer baseDiscountedPrice) {
-        this.baseDiscountedPrice = baseDiscountedPrice;
     }
 
     public Integer getUnitPrice() {
@@ -88,6 +75,22 @@ public class WishlistProduct {
         this.unitPrice3 = unitPrice3;
     }
 
+    public Integer getBasePrice() {
+        return basePrice;
+    }
+
+    public void setBasePrice(Integer basePrice) {
+        this.basePrice = basePrice;
+    }
+
+    public Integer getBaseDiscountedPrice() {
+        return baseDiscountedPrice;
+    }
+
+    public void setBaseDiscountedPrice(Integer baseDiscountedPrice) {
+        this.baseDiscountedPrice = baseDiscountedPrice;
+    }
+
     public Integer getRating() {
         return rating;
     }
@@ -96,12 +99,13 @@ public class WishlistProduct {
         this.rating = rating;
     }
 
-    public  ProductLinks getLinks() {
-        return links;
-    }
+//    public Links getLinks() {
+//        return links;
+//    }
+//
+//    public void setLinks(Links links) {
+//        this.links = links;
+//    }
 
-    public void setLinks(ProductLinks links) {
-        this.links = links;
-    }
 
 }

@@ -60,7 +60,7 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
     private boolean isBuyNow = false;
     private static final String TAG = "BuyingOptionsActivity";
 
-    int quantity = 1;
+    int quantity;
 
     private void initviews() {
         product_image = findViewById(R.id.product_image);
@@ -114,6 +114,7 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
         initviews();
 
         productDetails = (ProductDetails3) getIntent().getSerializableExtra("product_details");
+        quantity = getIntent().getIntExtra("qunatity", 1);
 
         initializeActionBar();
         setTitle("Buying Options");

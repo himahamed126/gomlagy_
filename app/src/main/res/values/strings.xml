@@ -172,4 +172,10 @@
     <string name="enter_less_than" translatable="false">please enter less than</string>
     <string name="enter_more" translatable="false">Please enter more than</string>
     <string name="clear">Clear</string>
+    <string name="cables">Cables</string>
+    <string name="headphone">Headphone</string>
+    <string name="cover">cover</string>
+    <string name="glass_protector">Glass protector</string>
+    <string name="acc_" translatable="false">himahamed999@gmail.com</string>
+    <string name="pass_" translatable="false">01126545826</string>
 </resources>

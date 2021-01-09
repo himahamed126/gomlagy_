@@ -3,6 +3,7 @@ package com.onoo.gomlgy.Presentation.ui.activities.impl;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,6 +56,8 @@ import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.onoo.gomlgy.Utils.AppConfig.mapResponse;
 
 public class ProductDetailsActivity extends BaseActivity implements ProductDetailsView, ProductClickListener, ProductModelsClickListener {
     private String product_name, link, top_selling_link;
@@ -192,29 +195,23 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         });
 
 
-        qtyIncrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int qty = Integer.parseInt(quantity.getText().toString()) + 1;
-                quantity.setText(String.valueOf(qty));
-                qtyDecrease.setEnabled(true);
+        qtyIncrease.setOnClickListener(v -> {
+            int qty = Integer.parseInt(quantity.getText().toString()) + 1;
+            quantity.setText(String.valueOf(qty));
+            qtyDecrease.setEnabled(true);
 
-                calc();
+            calc();
 //                cartItemListener.onQuantityUpdate(qty, product);
-            }
         });
 
-        qtyDecrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Integer.parseInt(quantity.getText().toString()) > 1) {
-                    int qty = Integer.parseInt(quantity.getText().toString()) - 1;
-                    quantity.setText(String.valueOf(qty));
-                    calc();
+        qtyDecrease.setOnClickListener(v -> {
+            if (Integer.parseInt(quantity.getText().toString()) > 1) {
+                int qty = Integer.parseInt(quantity.getText().toString()) - 1;
+                quantity.setText(String.valueOf(qty));
+                calc();
 //                    cartItemListener.onQuantityUpdate(qty, product);
-                    if (qty == 1) {
-                        qtyDecrease.setEnabled(false);
-                    }
+                if (qty == 1) {
+                    qtyDecrease.setEnabled(false);
                 }
             }
         });
@@ -241,7 +238,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             subPrice = price1 * getQuantity;
         } else if (getQuantity >= min2 && getQuantity <= max2) {
             subPrice = price2 * getQuantity;
-        } else if (getQuantity >= min3 && getQuantity <= max3) {
+        } else if (getQuantity >= min3 && getQuantity <= 1000000000) {
             subPrice = price3 * getQuantity;
         }
 
@@ -269,6 +266,8 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         if (productDetails != null && (productDetails.getChoiceOptions().size() > 0 || productDetails.getColors().size() > 0)) {
             Intent intent = new Intent(getApplicationContext(), BuyingOptionsActivity.class);
             intent.putExtra("product_details", productDetails);
+            intent.putExtra("qunatity", getQuantity);
+
             startActivity(intent);
         } else {
             CustomToast.showToast(this, getString(R.string.this_product_doesnt_have_any_buying_options), R.color.colorWarning);
@@ -399,8 +398,9 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
                 GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL,
                 false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        ProductsAdapter adapter = new ProductsAdapter(this,relatedProducts,
+        ProductsAdapter adapter = new ProductsAdapter(this, mapResponse(relatedProducts),
                 this);
+        adapter.setViewType(1);
         recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getApplicationContext(), 10)));
         recyclerView.setAdapter(adapter);
     }
@@ -408,11 +408,10 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     @Override
     public void setTopSellingProducts(List<Product> topSellingProducts) {
         RecyclerView recyclerView = findViewById(R.id.top_selling);
-        LinearLayoutManager horizontalLayoutManager
-                = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
-        BestSellingofSellerAdapter adapter = new BestSellingofSellerAdapter(this, topSellingProducts, this);
-        recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getApplicationContext(), 10)));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        ProductsAdapter adapter = new ProductsAdapter(this, mapResponse(topSellingProducts), this);
+        Log.i("ccccc: ", "ccccc" + topSellingProducts.get(0).getThumbnailImage());
+        adapter.setViewType(3);
         recyclerView.setAdapter(adapter);
     }
 

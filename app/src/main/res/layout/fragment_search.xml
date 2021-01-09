@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:colorBackground">
@@ -16,89 +16,12 @@
             android:theme="@style/RatingBar"
             android:visibility="gone" />
 
-        <!--    <RadioGroup-->
-        <!--        android:layout_below="@id/search_key"-->
-        <!--        android:id="@+id/scope_radio"-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:layout_marginStart="10dp"-->
-        <!--        android:layout_marginStart="10dp"-->
-        <!--        android:layout_marginTop="10dp"-->
-        <!--        android:layout_marginEnd="10dp"-->
-        <!--        android:layout_marginEnd="10dp"-->
-        <!--        android:layout_marginBottom="10dp"-->
-        <!--        android:gravity="center_horizontal"-->
-        <!--        android:orientation="horizontal"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent"-->
-        <!--        app:layout_constraintTop_toTopOf="parent">-->
-
-        <!--        <RadioButton-->
-        <!--            android:id="@+id/radio0"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:gravity="center"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@drawable/radio_flat_selector"-->
-        <!--            android:button="@android:color/transparent"-->
-        <!--            android:checked="true"-->
-        <!--            android:padding="10dp"-->
-        <!--            android:text="Product"-->
-        <!--            android:textColor="@drawable/radio_flat_text_selector" />-->
-
-        <!--        <RadioButton-->
-        <!--            android:id="@+id/radio1"-->
-        <!--            android:gravity="center"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@drawable/radio_flat_selector"-->
-        <!--            android:button="@android:color/transparent"-->
-        <!--            android:padding="10dp"-->
-        <!--            android:text="Category"-->
-        <!--            android:textColor="@drawable/radio_flat_text_selector" />-->
-
-        <!--        <RadioButton-->
-        <!--            android:id="@+id/radio2"-->
-        <!--            android:gravity="center"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@drawable/radio_flat_selector"-->
-        <!--            android:button="@android:color/transparent"-->
-        <!--            android:padding="10dp"-->
-        <!--            android:text="Brand"-->
-        <!--            android:textColor="@drawable/radio_flat_text_selector" />-->
-
-        <!--        <RadioButton-->
-        <!--            android:id="@+id/radio4"-->
-        <!--            android:gravity="center"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@drawable/radio_flat_selector"-->
-        <!--            android:button="@android:color/transparent"-->
-        <!--            android:padding="10dp"-->
-        <!--            android:text="Shop"-->
-        <!--            android:textColor="@drawable/radio_flat_text_selector" />-->
-
-        <!--    </RadioGroup>-->
-
-        <RelativeLayout
-            android:id="@+id/search_filter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-        </RelativeLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/search_filter"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="1" />
+            android:clipToPadding="false"
+            android:paddingBottom="70dp" />
 
     </RelativeLayout>
 </layout>

@@ -159,5 +159,8 @@
     <string name="to">الي</string>
     <string name="apply">حفظ</string>
     <string name="clear">مسح</string>
-
+    <string name="cables">الكابلات</string>
+    <string name="headphone">سماعات</string>
+    <string name="cover">جرابات</string>
+    <string name="glass_protector">واقي زجاجى</string>
 </resources>

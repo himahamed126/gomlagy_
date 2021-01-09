@@ -9,8 +9,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.R;
+import com.onoo.gomlgy.Utils.AppConfig;
 import com.onoo.gomlgy.databinding.ItemProductHorBinding;
 import com.onoo.gomlgy.databinding.ItemProductGridBinding;
 import com.onoo.gomlgy.databinding.ItemProductVerBinding;

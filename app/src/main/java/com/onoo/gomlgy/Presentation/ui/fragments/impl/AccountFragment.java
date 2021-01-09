@@ -113,11 +113,13 @@ public class AccountFragment extends Fragment implements AccountView, AppSetting
             @Override
             public void onClick(View v) {
                 if (authResponse != null && authResponse.getUser() != null) {
-                    new UserPrefs(getContext()).clearPreference();
+//                    new UserPrefs(getContext()).clearPreference();
 
+                    new UserPrefs(getContext()).clearUser("auth_response");
                     new AppSettingsInteractorImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), AccountFragment.this).execute();
 
                     logout.setVisibility(View.GONE);
+
 
 //                    getActivity().recreate();
 

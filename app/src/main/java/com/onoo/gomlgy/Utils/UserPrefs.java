@@ -72,6 +72,12 @@ public class UserPrefs {
         return settings.getString(data_Key, "");
     }
 
+
+    public void clearUser(String key) {
+        editor.remove(key).apply();
+    }
+
+
     public void showChangeLanguage(Activity activity) {
         String[] list = {"عربي", "English"};
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);

@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.onoo.gomlgy.Presentation.ui.adapters.ProductsAdapter;
+import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
+import com.onoo.gomlgy.models.Product;
 import com.onoo.gomlgy.models.WishlistModel;
 import com.onoo.gomlgy.models.WishlistProduct;
 import com.onoo.gomlgy.Network.response.AuthResponse;
@@ -24,6 +27,8 @@ import com.onoo.gomlgy.Utils.UserPrefs;
 import com.onoo.gomlgy.domain.executor.impl.ThreadExecutor;
 
 import java.util.List;
+
+import static com.onoo.gomlgy.Utils.AppConfig.mapResponse;
 
 public class WishlistActivity extends BaseActivity implements WishlistView, WishlistProductClickListener {
     private AuthResponse authResponse;
@@ -45,11 +50,10 @@ public class WishlistActivity extends BaseActivity implements WishlistView, Wish
         wishlistPresenter = new WishlistPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
 
         authResponse = new UserPrefs(getApplicationContext()).getAuthPreferenceObjectJson("auth_response");
-        if(authResponse != null && authResponse.getUser() != null){
+        if (authResponse != null && authResponse.getUser() != null) {
             progressBar.setVisibility(View.VISIBLE);
             wishlistPresenter.getWishlistItems(authResponse.getUser().getId(), authResponse.getAccessToken());
-        }
-        else {
+        } else {
             //startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
             //getActivity().finish();
         }
@@ -58,17 +62,16 @@ public class WishlistActivity extends BaseActivity implements WishlistView, Wish
     @Override
     public void setWishlistProducts(List<WishlistModel> wishlistModels) {
         progressBar.setVisibility(View.GONE);
-        if (wishlistModels.size() > 0){
+        if (wishlistModels.size() > 0) {
             WishlistAdapter adapter = new WishlistAdapter(getApplicationContext(), wishlistModels, this);
             RecyclerView recyclerView = findViewById(R.id.product_list);
             LinearLayoutManager horizontalLayoutManager
                     = new LinearLayoutManager(WishlistActivity.this, RecyclerView.VERTICAL, false);
             recyclerView.setLayoutManager(horizontalLayoutManager);
-            RecyclerViewMargin decoration = new RecyclerViewMargin(AppConfig.convertDpToPx(this,10), 1);
+            RecyclerViewMargin decoration = new RecyclerViewMargin(AppConfig.convertDpToPx(this, 10), 1);
             recyclerView.addItemDecoration(decoration);
             recyclerView.setAdapter(adapter);
-        }
-        else {
+        } else {
             wishlist_empty_text.setVisibility(View.VISIBLE);
         }
     }
@@ -81,4 +84,5 @@ public class WishlistActivity extends BaseActivity implements WishlistView, Wish
         intent.putExtra("top_selling", product.getLinks().getRelated());
         startActivity(intent);
     }
+
 }

@@ -10,15 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
@@ -27,23 +24,16 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.JsonObject;
-import com.kingfisher.easyviewindicator.AnyViewIndicator;
-import com.onoo.gomlgy.Network.ApiClient;
 import com.onoo.gomlgy.Network.response.AppSettingsResponse;
 import com.onoo.gomlgy.Network.response.AuctionBidResponse;
 import com.onoo.gomlgy.Network.response.AuthResponse;
-import com.onoo.gomlgy.Network.services.ProductListingApiInterface;
 import com.onoo.gomlgy.Presentation.presenters.HomePresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.LoginActivity;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductDetailsActivity;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.ProductListingActivity;
 import com.onoo.gomlgy.Presentation.ui.adapters.AuctionProductAdapter;
-import com.onoo.gomlgy.Presentation.ui.adapters.BestSellingAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.BrandAdapter;
-import com.onoo.gomlgy.Presentation.ui.adapters.HomeSubCategoryAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.ProductsAdapter;
-import com.onoo.gomlgy.Presentation.ui.adapters.ProductsVerticalAdapter;
-import com.onoo.gomlgy.Presentation.ui.adapters.TodaysDealAdapter;
 import com.onoo.gomlgy.Presentation.ui.fragments.HomeView;
 import com.onoo.gomlgy.Presentation.ui.listeners.AuctionClickListener;
 import com.onoo.gomlgy.Presentation.ui.listeners.BrandClickListener;
@@ -61,13 +51,10 @@ import com.onoo.gomlgy.models.Brand;
 import com.onoo.gomlgy.models.Category;
 import com.onoo.gomlgy.models.Product;
 import com.onoo.gomlgy.models.offers_sources.offers.OffersData;
-import com.stripe.android.stripe3ds2.a.n;
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cn.iwgang.countdownview.CountdownView;
 
 import static com.onoo.gomlgy.Utils.AppConfig.mapResponse;
 
@@ -219,7 +206,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         binding.cat1Deals.setAdapter(adapter);
         binding.cat1SeeAll.setVisibility(View.VISIBLE);
         binding.cat1Text.setVisibility(View.VISIBLE);
-        binding.cat1Text.setText("اسكرينات");
+        binding.cat1Text.setText(getString(R.string.glass_protector));
         binding.cat1SeeAll.setOnClickListener(v -> goToProductList(23));
     }
 
@@ -238,7 +225,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         binding.cat2Deals.setAdapter(adapter);
         binding.cat2SeeAll.setVisibility(View.VISIBLE);
         binding.cat2Text.setVisibility(View.VISIBLE);
-        binding.cat2Text.setText("كوفر");
+        binding.cat2Text.setText(getString(R.string.cover));
         binding.cat2SeeAll.setOnClickListener(v -> goToProductList(21));
     }
 
@@ -256,7 +243,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         binding.cat3Deals.setAdapter(adapter);
         binding.cat3SeeAll.setVisibility(View.VISIBLE);
         binding.cat3Text.setVisibility(View.VISIBLE);
-        binding.cat3Text.setText("سماعات");
+        binding.cat3Text.setText(getString(R.string.headphone));
         binding.cat3SeeAll.setOnClickListener(v -> goToProductList(22));
     }
 
@@ -274,7 +261,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         binding.cat4Deals.setAdapter(adapter);
         binding.cat4SeeAll.setVisibility(View.VISIBLE);
         binding.cat4Text.setVisibility(View.VISIBLE);
-        binding.cat4Text.setText("كابل");
+        binding.cat4Text.setText(getString(R.string.cables));
         binding.cat4SeeAll.setOnClickListener(v -> goToProductList(14));
     }
 
@@ -333,7 +320,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
         intent.putExtra("product_name", product.getName());
         intent.putExtra("link", product.getLinks().getDetails());
-        intent.putExtra("top_selling", product.getLinks().getRelated());
+        intent.putExtra("top_selling", product.getLinks().getTopFromSeller());
         startActivity(intent);
     }
 

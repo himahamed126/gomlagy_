@@ -10,7 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.onoo.gomlgy.models.SubCategorymodel;
+import com.bumptech.glide.Glide;
+import com.onoo.gomlgy.Utils.AppConfig;
+import com.onoo.gomlgy.models.CatDrawer;
 import com.onoo.gomlgy.Presentation.ui.listeners.DrawerClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.HelperMethod;
@@ -21,14 +23,14 @@ import java.util.List;
 public class DrawerCategoryAdapter extends RecyclerView.Adapter<DrawerCategoryAdapter.ViewHolder> {
 
     private Context context;
-    private List<SubCategorymodel> mCategories;
+    private List<CatDrawer> mCategories;
     private LayoutInflater mInflater;
     private DrawerClickListener mClickListener;
     private int lastPosition = -1;
     private boolean on_attach = true;
 
     // data is passed into the constructor
-    public DrawerCategoryAdapter(Context context, List<SubCategorymodel> categories, DrawerClickListener listener) {
+    public DrawerCategoryAdapter(Context context, List<CatDrawer> categories, DrawerClickListener listener) {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
         this.mCategories = categories;
@@ -67,8 +69,10 @@ public class DrawerCategoryAdapter extends RecyclerView.Adapter<DrawerCategoryAd
             textView = itemView.findViewById(R.id.drawer_item_tv);
         }
 
-        public void bind(final SubCategorymodel category) {
-            imageView.setImageResource(R.drawable.ic_baseline_phone_android_24);
+        public void bind(final CatDrawer category) {
+
+            Glide.with(context).load(category.getPhoto()).into(imageView);
+
 
             textView.setText(category.getName());
             itemView.setOnClickListener(v -> {
