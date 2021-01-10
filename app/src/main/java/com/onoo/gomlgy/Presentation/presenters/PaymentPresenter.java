@@ -2,6 +2,7 @@ package com.onoo.gomlgy.Presentation.presenters;
 
 import com.onoo.gomlgy.Network.response.CouponResponse;
 import com.onoo.gomlgy.Network.response.OrderResponse;
+import com.onoo.gomlgy.Network.response.SendEmailOrderResponse;
 import com.onoo.gomlgy.Network.response.StripeClientSecretResponse;
 import com.onoo.gomlgy.Presentation.ui.activities.PaymentView;
 import com.onoo.gomlgy.Presentation.ui.activities.StripePaymentView;
@@ -11,17 +12,19 @@ import com.onoo.gomlgy.domain.interactors.CODInteractor;
 import com.onoo.gomlgy.domain.interactors.CouponInteractor;
 import com.onoo.gomlgy.domain.interactors.OrderInteractor;
 import com.onoo.gomlgy.domain.interactors.PaypalInteractor;
+import com.onoo.gomlgy.domain.interactors.SendEmailOrderInteractor;
 import com.onoo.gomlgy.domain.interactors.StripeInteractor;
 import com.onoo.gomlgy.domain.interactors.WalletInteractor;
 import com.onoo.gomlgy.domain.interactors.impl.CODInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.CouponInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.OrderInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.PaypalInteractorImpl;
+import com.onoo.gomlgy.domain.interactors.impl.SendOrderEmailInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.StripeInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.WalletInteractorImpl;
 import com.google.gson.JsonObject;
 
-public class PaymentPresenter extends AbstractPresenter implements CouponInteractor.CallBack, PaypalInteractor.CallBack, StripeInteractor.CallBack, CODInteractor.CallBack, OrderInteractor.CallBack, WalletInteractor.CallBack {
+public class PaymentPresenter extends AbstractPresenter implements CouponInteractor.CallBack, PaypalInteractor.CallBack, StripeInteractor.CallBack, CODInteractor.CallBack, OrderInteractor.CallBack, WalletInteractor.CallBack, SendEmailOrderInteractor.CallBack {
     private PaymentView paymentView;
     private StripePaymentView stripePaymentView;
 
@@ -57,6 +60,10 @@ public class PaymentPresenter extends AbstractPresenter implements CouponInterac
 
     public void submitOrder(String token, JsonObject jsonObject) {
         new OrderInteractorImpl(mExecutor, mMainThread, this, token, jsonObject).execute();
+    }
+
+    public void sendEmailOrder(String token, JsonObject jsonObject) {
+        new SendOrderEmailInteractorImpl(mExecutor, mMainThread, this, token,jsonObject).execute();
     }
 
     @Override
@@ -128,6 +135,18 @@ public class PaymentPresenter extends AbstractPresenter implements CouponInterac
 
     @Override
     public void onWalletOrderSubmitError() {
+
+    }
+
+    @Override
+    public void onSendEmailOrderSubmitted(SendEmailOrderResponse sendEmailOrderResponse) {
+        if (paymentView != null){
+            paymentView.onSendEmailOrderSubmitted(sendEmailOrderResponse);
+        }
+    }
+
+    @Override
+    public void onSendEmailOrderSubmitError() {
 
     }
 }

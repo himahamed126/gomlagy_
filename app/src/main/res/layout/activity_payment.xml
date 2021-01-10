@@ -33,7 +33,7 @@
             <EditText
                 android:id="@+id/coupon_code"
                 android:layout_width="250dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/edit_text_style"
                 android:hint="@string/coupon_code"
@@ -41,7 +41,7 @@
             <Button
                 android:id="@+id/apply_coupon"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/coupon_code"
                 android:layout_alignParentEnd="true"
                 android:layout_toEndOf="@+id/coupon_code"

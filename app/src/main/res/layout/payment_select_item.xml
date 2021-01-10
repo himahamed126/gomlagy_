@@ -33,7 +33,7 @@
             android:maxLines="1"
             android:text="@string/checkout_with_PayPal"
             android:textColor="#000"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <CheckBox
             android:id="@+id/checkbox_payment"

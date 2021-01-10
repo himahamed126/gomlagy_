@@ -13,10 +13,11 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.onoo.gomlgy.Network.response.OrderResponse;
+import com.onoo.gomlgy.Network.response.SendEmailOrderResponse;
 import com.onoo.gomlgy.models.PurchaseHistory;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Network.response.CouponResponse;
-import com.onoo.gomlgy.Network.response.OrderResponse;
 import com.onoo.gomlgy.Presentation.presenters.PaymentPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.PaymentView;
 import com.onoo.gomlgy.Presentation.ui.adapters.PaymentSelectAdapter;
@@ -245,13 +246,18 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
         progressDialog.dismiss();
         if (orderResponse.getSuccess()) {
             CustomToast.showToast(this, orderResponse.getMessage(), R.color.colorSuccess);
-            Intent intent = new Intent(this, PurchaseHistoryActivity.class);
-            intent.putExtra("from", "payment");
-            startActivity(intent);
-            finish();
+            new PaymentPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this).sendEmailOrder(authResponse.getAccessToken(), jsonObject);
         } else {
             CustomToast.showToast(this, orderResponse.getMessage(), R.color.colorDanger);
         }
+    }
+
+    @Override
+    public void onSendEmailOrderSubmitted(SendEmailOrderResponse sendEmailOrderResponse) {
+        Intent intent = new Intent(this, PurchaseHistoryActivity.class);
+        intent.putExtra("from", "payment");
+        startActivity(intent);
+        finish();
     }
 
     public class PaymentModel {

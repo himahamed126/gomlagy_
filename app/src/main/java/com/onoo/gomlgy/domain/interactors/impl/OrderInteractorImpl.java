@@ -3,11 +3,11 @@ package com.onoo.gomlgy.domain.interactors.impl;
 import android.util.Log;
 
 import com.onoo.gomlgy.Network.ApiClient;
-import com.onoo.gomlgy.Network.response.OrderResponse;
 import com.onoo.gomlgy.Network.services.OrderApiInterface;
 import com.onoo.gomlgy.domain.executor.Executor;
 import com.onoo.gomlgy.domain.executor.MainThread;
 import com.onoo.gomlgy.domain.interactors.OrderInteractor;
+import com.onoo.gomlgy.Network.response.OrderResponse;
 import com.onoo.gomlgy.domain.interactors.base.AbstractInteractor;
 import com.google.gson.JsonObject;
 
@@ -24,7 +24,7 @@ public class OrderInteractorImpl extends AbstractInteractor {
     public OrderInteractorImpl(Executor threadExecutor, MainThread mainThread, OrderInteractor.CallBack callBack, String auth_token, JsonObject jsonObject) {
         super(threadExecutor, mainThread);
         mCallback = callBack;
-        this.auth_token = "Bearer "+auth_token;
+        this.auth_token = "Bearer " + auth_token;
         this.jsonObject = jsonObject;
     }
 
@@ -41,7 +41,7 @@ public class OrderInteractorImpl extends AbstractInteractor {
                     //Log.d("Test", response.body().getVariant());
                     mCallback.onOrderSubmitted(response.body());
                 } catch (Exception e) {
-                    Log.e("Exception", e.getMessage());
+                    Log.e("Exceptionn", e.getMessage());
                 }
             }
 
