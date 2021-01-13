@@ -1,6 +1,7 @@
 package com.onoo.gomlgy.domain.interactors.impl;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.onoo.gomlgy.Network.ApiClient;
 import com.onoo.gomlgy.Network.response.VariantResponse;
@@ -35,16 +36,18 @@ public class BuyingOptionInteractorImpl extends AbstractInteractor {
     @Override
     public void run() {
         apiService = ApiClient.getClient().create(VariantPriceApiInterface.class);
+        //Log.i("SentDAta", "run: "id:"+id+"");
         Call<VariantResponse> call = apiService.getVariantPrice(id, color, choicesArray.toString());
-
+      //  Call<VariantResponse> call = apiService.getVariantPrice(137, "#00FFFF", "[{\"section\":\"3\",\"title\":\"model\",\"name\":\"s2\"}]");
+       // Log.i("wwwwww", "id : " + id + " color : " + color + " choice : " + choicesArray.toString());
+      //  Toast.makeText(, "", Toast.LENGTH_SHORT).show();
         call.enqueue(new Callback<VariantResponse>() {
             @Override
             public void onResponse(Call<VariantResponse> call, Response<VariantResponse> response) {
                 try {
-                    //Log.d("Test", response.body().getVariant());
+                    Log.d("Test", response.body().getVariant());
                     mCallback.onGetVariantPrice(response.body());
                     Log.i(TAG, "id : " + id + " color : " + color + " choice : " + choicesArray);
-
                 } catch (Exception e) {
                     Log.i("ffff", e.getMessage());
                 }

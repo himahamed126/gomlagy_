@@ -18,6 +18,18 @@ public class VariantResponse {
     @Expose
     private Boolean inStock;
 
+    @SerializedName("Quantity")
+    @Expose
+    private int quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public Integer getProductId() {
         return productId;
     }

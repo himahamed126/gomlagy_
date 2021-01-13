@@ -13,29 +13,23 @@ import com.google.gson.JsonArray;
 
 
 public class BuyingOptionPresenter extends AbstractPresenter implements BuyingOptionInteractor.CallBack, AddToCartInteractor.CallBack {
-
     private BuyingOptionView buyingOptionView;
-
     public BuyingOptionPresenter(Executor executor, MainThread mainThread, BuyingOptionView buyingOptionView) {
         super(executor, mainThread);
         this.buyingOptionView = buyingOptionView;
     }
-
     public void getVariantPrice(int id, String color, JsonArray choicesArray) {
         new BuyingOptionInteractorImpl(mExecutor, mMainThread, this, id, color, choicesArray).execute();
     }
-
     public void addToCart(String token, int user_id, int product_id, String variant, int quantity) {
         new AddToCartInteractorImpl(mExecutor, mMainThread, this, token, user_id, product_id, variant,quantity).execute();
     }
-
     @Override
     public void onGetVariantPrice(VariantResponse variantResponse) {
         if (buyingOptionView != null) {
             buyingOptionView.setVariantprice(variantResponse);
         }
     }
-
     @Override
     public void onGetVariantPriceError() {
 
