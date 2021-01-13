@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="warranty"
+            type="com.onoo.gomlgy.models.WarrantyData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="4dp"
+            app:cardCornerRadius="8dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="4dp"
+                android:paddingVertical="6dp">
+
+                <TextView
+                    android:id="@+id/item_warranty_name_lbl_tv"
+                    style="@style/warranty_lbl_tv_style"
+                    android:text="@string/product_name"
+                    app:layout_constraintBottom_toTopOf="@id/item_warranty_price_lbl_tv"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/item_warranty_price_lbl_tv"
+                    style="@style/warranty_lbl_tv_style"
+                    android:text="@string/price"
+                    app:layout_constraintBottom_toTopOf="@id/item_warranty_code_lbl_tv"
+                    app:layout_constraintTop_toBottomOf="@id/item_warranty_name_lbl_tv"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/item_warranty_code_lbl_tv"
+                    style="@style/warranty_lbl_tv_style"
+                    android:text="@string/code_"
+                    app:layout_constraintBottom_toTopOf="@id/item_warranty_admin_approval_lbl_tv"
+                    app:layout_constraintTop_toBottomOf="@id/item_warranty_price_lbl_tv"
+                    tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/item_warranty_admin_approval_lbl_tv"
+                    style="@style/warranty_lbl_tv_style"
+                    android:text="@string/admin_approval"
+                    app:layout_constraintBottom_toTopOf="@id/item_warranty_start_lbl_tv"
+                    app:layout_constraintTop_toBottomOf="@id/item_warranty_code_lbl_tv"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/item_warranty_start_lbl_tv"
+                    style="@style/warranty_lbl_tv_style"
+                    android:text="@string/warranty_start"
+                    app:layout_constraintBottom_toTopOf="@id/item_warranty_end_lbl_tv"
+                    app:layout_constraintTop_toBottomOf="@id/item_warranty_admin_approval_lbl_tv"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/item_warranty_end_lbl_tv"
+                    style="@style/warranty_lbl_tv_style"
+                    android:text="@string/warranty_end"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_warranty_start_lbl_tv"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.3" />
+
+                <TextView
+                    android:id="@+id/item_warranty_name_tv"
+                    style="@style/warranty_tv_style"
+                    android:text="@{warranty.productName}"
+                    app:layout_constraintBottom_toTopOf="@id/item_warranty_price_tv"
+                    app:layout_constraintEnd_toStartOf="@id/item_warranty_toolbar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/item_warranty_price_tv"
+                    style="@style/warranty_tv_style"
+                    setStringText="@{warranty.price}"
+                    app:layout_constraintBottom_toTopOf="@id/item_warranty_code_tv"
+                    app:layout_constraintTop_toBottomOf="@id/item_warranty_name_tv"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/item_warranty_code_tv"
+                    style="@style/warranty_tv_style"
+                    setStringText="@{warranty.orderCode}"
+                    app:layout_constraintBottom_toTopOf="@id/item_warranty_admin_approval_tv"
+                    app:layout_constraintTop_toBottomOf="@id/item_warranty_price_tv"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/item_warranty_admin_approval_tv"
+                    style="@style/warranty_tv_style"
+                    adminApproval="@{warranty.adminApproval}"
+                    app:layout_constraintBottom_toTopOf="@id/item_warranty_start_tv"
+                    app:layout_constraintTop_toBottomOf="@id/item_warranty_code_tv"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/item_warranty_start_tv"
+                    style="@style/warranty_tv_style"
+                    setStringText="@{warranty.startWarranty}"
+                    app:layout_constraintBottom_toTopOf="@id/item_warranty_end_tv"
+                    app:layout_constraintTop_toBottomOf="@id/item_warranty_admin_approval_tv"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/item_warranty_end_tv"
+                    style="@style/warranty_tv_style"
+                    setStringText="@{warranty.endWarranty}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_warranty_start_tv"
+                    tools:ignore="MissingConstraints" />
+
+                <Toolbar
+                    android:id="@+id/item_warranty_toolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

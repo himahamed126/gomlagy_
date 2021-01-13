@@ -56,4 +56,36 @@
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:layout_marginBottom">12dp</item>
     </style>
+
+    <style name="warranty_lbl_tv_style">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="layout_constraintEnd_toStartOf">@id/gl_1</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:layout_gravity">start</item>
+    </style>
+
+    <style name="warranty_tv_style">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:text">text view</item>
+        <item name="android:maxLines">1</item>
+        <item name="layout_constraintStart_toEndOf">@id/gl_1</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+    </style>
+
 </resources>

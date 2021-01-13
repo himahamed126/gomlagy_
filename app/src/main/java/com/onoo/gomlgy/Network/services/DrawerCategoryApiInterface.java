@@ -7,7 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface getDrawerCategory {
+public interface DrawerCategoryApiInterface {
     @GET("sub-category-categories")
-    Call<CatDrawerResponse> get_Category(@Query("category_id") int  categoryID);
+    Call<CatDrawerResponse> getCategory(@Query("category_id") int  categoryID);
 }

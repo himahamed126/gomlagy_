@@ -245,19 +245,25 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
     public void onOrderSubmitted(OrderResponse orderResponse) {
         progressDialog.dismiss();
         if (orderResponse.getSuccess()) {
-            CustomToast.showToast(this, orderResponse.getMessage(), R.color.colorSuccess);
-            new PaymentPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this).sendEmailOrder(authResponse.getAccessToken(), jsonObject);
+            JsonObject obj = new JsonObject();
+            obj.addProperty("user_id", authResponse.getUser().getId());
+            new PaymentPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this).sendEmailOrder(authResponse.getAccessToken(), obj);
         } else {
-            CustomToast.showToast(this, orderResponse.getMessage(), R.color.colorDanger);
         }
     }
 
     @Override
     public void onSendEmailOrderSubmitted(SendEmailOrderResponse sendEmailOrderResponse) {
-        Intent intent = new Intent(this, PurchaseHistoryActivity.class);
-        intent.putExtra("from", "payment");
-        startActivity(intent);
-        finish();
+        if (sendEmailOrderResponse.getStatus()) {
+            Intent intent = new Intent(this, PurchaseHistoryActivity.class);
+            intent.putExtra("from", "payment");
+            startActivity(intent);
+            finish();
+            CustomToast.showToast(this, sendEmailOrderResponse.getMessage(), R.color.colorSuccess);
+        }else {
+            CustomToast.showToast(this, sendEmailOrderResponse.getMessage(), R.color.colorDanger);
+
+        }
     }
 
     public class PaymentModel {

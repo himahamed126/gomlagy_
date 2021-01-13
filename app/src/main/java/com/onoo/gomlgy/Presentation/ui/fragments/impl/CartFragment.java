@@ -2,6 +2,7 @@ package com.onoo.gomlgy.Presentation.ui.fragments.impl;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,8 @@ public class CartFragment extends Fragment implements CartView, CartItemListener
     private int qty = 0;
     private TextView cart_empty_text;
 
+    private static final String TAG = "CartFragment";
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_cart, null);
 
@@ -67,11 +70,10 @@ public class CartFragment extends Fragment implements CartView, CartItemListener
         cartPresenter = new CartPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
 
         authResponse = new UserPrefs(getActivity()).getAuthPreferenceObjectJson("auth_response");
-        if(authResponse != null && authResponse.getUser() != null){
+        if (authResponse != null && authResponse.getUser() != null) {
             cartPresenter.getCartItems(authResponse.getUser().getId(), authResponse.getAccessToken());
             progressBar.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             cart_empty_text.setVisibility(View.VISIBLE);
         }
 
@@ -89,16 +91,17 @@ public class CartFragment extends Fragment implements CartView, CartItemListener
         return v;
     }
 
-    private void updateCartBadge(List<CartModel> cartItems){
-        if (cartItems.size() > 0){
+    private void updateCartBadge(List<CartModel> cartItems) {
+        if (cartItems.size() > 0) {
             linearLayout.setVisibility(View.VISIBLE);
             total = 0;
             qty = 0;
 
-            for (CartModel cartModel: cartItems){
-                total += (cartModel.getPrice()+cartModel.getTax()+cartModel.getShippingCost())*cartModel.getQuantity();
-                shipping = cartModel.getShippingCost()*cartModel.getQuantity();
-                tax = cartModel.getTax()+cartModel.getQuantity();
+            for (CartModel cartModel : cartItems) {
+                total += (cartModel.getPrice() + cartModel.getTax() + cartModel.getShippingCost()) * cartModel.getQuantity();
+                Log.i(TAG, "price : " + cartModel.getPrice() + " tax : " + cartModel.getTax() + " shipping : " + cartModel.getShippingCost() + " quantity : " + cartModel.getQuantity());
+                shipping = cartModel.getShippingCost() * cartModel.getQuantity();
+                tax = cartModel.getTax() + cartModel.getQuantity();
                 qty += cartModel.getQuantity();
             }
 
@@ -114,7 +117,7 @@ public class CartFragment extends Fragment implements CartView, CartItemListener
     @Override
     public void setCartItems(List<CartModel> cartItems) {
         progressBar.setVisibility(View.GONE);
-        if (cartItems.size() > 0){
+        if (cartItems.size() > 0) {
             RecyclerView recyclerView = v.findViewById(R.id.product_list);
             LinearLayoutManager horizontalLayoutManager
                     = new LinearLayoutManager(getActivity());
@@ -127,8 +130,7 @@ public class CartFragment extends Fragment implements CartView, CartItemListener
             itemTouchHelper.attachToRecyclerView(recyclerView);
 
             updateCartBadge(cartItems);
-        }
-        else {
+        } else {
             cart_empty_text.setVisibility(View.VISIBLE);
         }
     }

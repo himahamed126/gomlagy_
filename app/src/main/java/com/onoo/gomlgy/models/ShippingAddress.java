@@ -12,6 +12,12 @@ public class ShippingAddress implements Serializable {
     @SerializedName("user_id")
     @Expose
     private Integer userId;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("email")
+    @Expose
+    private String email;
     @SerializedName("address")
     @Expose
     private String address;
@@ -93,5 +99,21 @@ public class ShippingAddress implements Serializable {
 
     public void setSetDefault(Integer setDefault) {
         this.setDefault = setDefault;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

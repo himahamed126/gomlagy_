@@ -163,4 +163,22 @@
     <string name="headphone">سماعات</string>
     <string name="cover">جرابات</string>
     <string name="glass_protector">واقي زجاجى</string>
+    <string name="warranty">الضمان</string>
+    <string name="warranty_start">بداية الضمان</string>
+    <string name="warranty_end">نهاية الضمان</string>
+    <string name="code_">الكود</string>
+    <string name="admin_approval">موافقة الادمن</string>
+    <string name="unconfirmed">غير مؤكد</string>
+    <string name="confirmed">مؤكد</string>
+
+    <string name="send_request">ارسال طلب</string>
+    <string name="reason">السبب</string>
+    <string name="send">ارسال</string>
+    <string name="my_purchases">مشترياتي</string>
+    <string name="enter_the_reason">اذكر السبب</string>
+    <string name="ediit">تعديل</string>
+    <string name="success">تم بنجاح</string>
+    <string name="faild">فشل</string>
+    <string name="there_are_no_requests">لا توجد طلبات</string>
+    <string name="available">متاح</string>
 </resources>

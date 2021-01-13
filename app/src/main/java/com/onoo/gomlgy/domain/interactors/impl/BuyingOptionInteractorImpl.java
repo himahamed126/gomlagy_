@@ -22,6 +22,8 @@ public class BuyingOptionInteractorImpl extends AbstractInteractor {
     private String color;
     private JsonArray choicesArray;
 
+    private static final String TAG = "BuyingOptionse";
+
     public BuyingOptionInteractorImpl(Executor threadExecutor, MainThread mainThread, BuyingOptionInteractor.CallBack callBack, int id, String color, JsonArray choicesArray) {
         super(threadExecutor, mainThread);
         mCallback = callBack;
@@ -41,7 +43,7 @@ public class BuyingOptionInteractorImpl extends AbstractInteractor {
                 try {
                     //Log.d("Test", response.body().getVariant());
                     mCallback.onGetVariantPrice(response.body());
-                    Log.i("ffff", response.body().getVariant() + response.body().getPrice());
+                    Log.i(TAG, "id : " + id + " color : " + color + " choice : " + choicesArray);
 
                 } catch (Exception e) {
                     Log.i("ffff", e.getMessage());

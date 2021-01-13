@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.onoo.gomlgy.Network.response.CatDrawerResponse;
-import com.onoo.gomlgy.Network.services.getDrawerCategory;
+import com.onoo.gomlgy.Network.services.DrawerCategoryApiInterface;
 import com.onoo.gomlgy.models.CatDrawer;
 import com.onoo.gomlgy.models.SubCategorymodel;
 import com.onoo.gomlgy.Network.ApiClient;
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
 
     boolean focus = false;
     int tabId = 1;
-    getDrawerCategory apiService;
+    DrawerCategoryApiInterface apiService;
     private List<CatDrawer> mCategories = new ArrayList<>();
     RecyclerView drawerRv;
     TextView name, email;
@@ -230,8 +230,8 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
         drawerRv.setAdapter(drawerCategoryAdapter);
 
 
-        apiService = ApiClient.getClient().create(getDrawerCategory.class);
-        Call<CatDrawerResponse> getProducts = apiService.get_Category(5);
+        apiService = ApiClient.getClient().create(DrawerCategoryApiInterface.class);
+        Call<CatDrawerResponse> getProducts = apiService.getCategory(5);
 
         getProducts.enqueue(new Callback<CatDrawerResponse>() {
             @Override

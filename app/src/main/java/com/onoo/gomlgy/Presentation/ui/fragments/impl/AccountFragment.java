@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.onoo.gomlgy.Network.response.AppSettingsResponse;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Network.response.LogoutResponse;
+import com.onoo.gomlgy.Presentation.ui.activities.impl.WarrantyActivity;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.AccountInfoActivity;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.LoginActivity;
 import com.onoo.gomlgy.Presentation.ui.activities.impl.PurchaseHistoryActivity;
@@ -35,7 +36,7 @@ import q.rorbin.badgeview.QBadgeView;
 public class AccountFragment extends Fragment implements AccountView, AppSettingsInteractor.CallBack {
     private View v;
     private AuthResponse authResponse;
-    private RelativeLayout wishlist, purchase_history, wallet_info, account_info, language, logout;
+    private RelativeLayout wishlist, purchase_history, wallet_info, account_info, warranty, language, logout;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_account, null);
@@ -102,6 +103,18 @@ public class AccountFragment extends Fragment implements AccountView, AppSetting
             public void onClick(View v) {
                 if (authResponse != null && authResponse.getUser() != null) {
                     startActivity(new Intent(getContext(), AccountInfoActivity.class));
+                } else {
+                    startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
+                }
+            }
+        });
+
+        warranty = v.findViewById(R.id.warranty_ly);
+        warranty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (authResponse != null && authResponse.getUser() != null) {
+                    startActivity(new Intent(getContext(), WarrantyActivity.class));
                 } else {
                     startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
                 }

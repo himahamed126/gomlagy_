@@ -1,24 +1,22 @@
-
 package com.onoo.gomlgy.Network.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SendEmailOrderResponse {
-
-    @SerializedName("status")
+public class AddWarrantyRequestResponse {
+    @SerializedName("success")
     @Expose
-    private Boolean status;
+    private Boolean success;
     @SerializedName("message")
     @Expose
     private String message;
 
-    public Boolean getStatus() {
-        return status;
+    public Boolean getSuccess() {
+        return success;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setSuccess(Boolean success) {
+        this.success = success;
     }
 
     public String getMessage() {
@@ -28,5 +26,4 @@ public class SendEmailOrderResponse {
     public void setMessage(String message) {
         this.message = message;
     }
-
 }

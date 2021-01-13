@@ -12,6 +12,6 @@ import retrofit2.http.POST;
 
 public interface SendEmailOrderApiInterface {
     @Headers("Content-Type: application/json")
-    @POST("payments/pay/paypal")
+    @POST("send-email")
     Call<SendEmailOrderResponse> sendEmailOrderRequest(@Header("Authorization") String authHeader, @Body JsonObject jsonObject);
 }

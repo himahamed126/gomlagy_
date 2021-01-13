@@ -34,20 +34,7 @@ public class CODInteractorImpl extends AbstractInteractor {
     public void run() {
         apiService = ApiClient.getClient().create(CODApiInterface.class);
 
-
-        JsonObject obj = new JsonObject();
-
-
-        obj.addProperty("shipping_address", "aaa");
-        obj.addProperty("user_id", 67);
-        obj.addProperty("payment_type", "cash_on_delivery");
-        obj.addProperty("payment_status", "unpaid");
-        obj.addProperty("grand_total", 222);
-        obj.addProperty("coupon_discount", 20);
-        obj.addProperty("coupon_code", "");
-
-
-        Call<OrderResponse> call = apiService.sendPlaceOrderRequest(auth_token, obj);
+        Call<OrderResponse> call = apiService.sendPlaceOrderRequest(auth_token, jsonObject);
 
         call.enqueue(new Callback<OrderResponse>() {
             @Override
@@ -72,13 +59,5 @@ public class CODInteractorImpl extends AbstractInteractor {
                 Log.i(TAG, " f " + t.getMessage());
             }
         });
-    }
-
-    public class APIError {
-        private String message;
-
-        public String getMessage() {
-            return message;
-        }
     }
 }

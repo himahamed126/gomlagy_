@@ -49,6 +49,7 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
     private TextView name;
     private RatingBar ratingBar;
     private TextView price;
+    private TextView availableLbl, available;
     private ImageView product_image;
     private HashMap<String, String> maps = new HashMap<>();
     private HashMap<String, String> selectedChoices = new HashMap<>();
@@ -66,6 +67,8 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
         product_image = findViewById(R.id.product_image);
         name = findViewById(R.id.product_name);
         price = findViewById(R.id.product_price);
+        available = findViewById(R.id.product_available_tv);
+        availableLbl = findViewById(R.id.product_available_lbl_tv);
         ratingBar = findViewById(R.id.product_rating);
 
         addTocart = findViewById(R.id.addToCart);
@@ -267,6 +270,10 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
     public void setVariantprice(VariantResponse variantResponse) {
         this.variantResponse = variantResponse;
         price.setText(AppConfig.convertPrice(this, variantResponse.getPrice()));
+        availableLbl.setVisibility(View.VISIBLE);
+        available.setVisibility(View.VISIBLE);
+        available.setText(AppConfig.convertPrice(this, variantResponse.getPrice()));
+
     }
 
     @Override

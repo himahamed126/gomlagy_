@@ -19,32 +19,39 @@ public class PurchaseHistoryInteractorImpl extends AbstractInteractor {
     private PurchaseHistoryApiInterface apiService;
     private int user_id;
     private String token;
+    private static final String TAG = "PurHistory";
 
     public PurchaseHistoryInteractorImpl(Executor threadExecutor, MainThread mainThread, PurchaseHistoryInteractor.CallBack callBack, int id, String token) {
         super(threadExecutor, mainThread);
         mCallback = callBack;
         this.user_id = id;
-        this.token = "Bearer "+token;
+        this.token = "Bearer " + token;
     }
 
     @Override
     public void run() {
         apiService = ApiClient.getClient().create(PurchaseHistoryApiInterface.class);
-        Call<PurchaseHistoryResponse> call = apiService.getPurchaseHistories(token,"purchase-history/"+user_id);
+        Call<PurchaseHistoryResponse> call = apiService.getPurchaseHistories(token, "purchase-history/" + user_id);
 
         call.enqueue(new Callback<PurchaseHistoryResponse>() {
             @Override
             public void onResponse(Call<PurchaseHistoryResponse> call, Response<PurchaseHistoryResponse> response) {
                 try {
-                    mCallback.onPurchaseHistoryLodaded(response.body().getData());
+                    if (response.isSuccessful()) {
+                        mCallback.onPurchaseHistoryLodaded(response.body().getData());
+                        Log.i(TAG, " r " + response.body().getSuccess().toString());
+                    } else {
+                        Log.i(TAG, " e " + response.message());
+                    }
                 } catch (Exception e) {
-                    Log.e("Exception", e.getMessage());
+                    Log.i(TAG, e.getMessage());
                 }
             }
 
             @Override
             public void onFailure(Call<PurchaseHistoryResponse> call, Throwable t) {
                 mCallback.onPurchaseHistoryLodadedError();
+                Log.i(TAG, t.getMessage());
             }
         });
 

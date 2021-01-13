@@ -178,4 +178,21 @@
     <string name="glass_protector">Glass protector</string>
     <string name="acc_" translatable="false">himahamed999@gmail.com</string>
     <string name="pass_" translatable="false">01126545826</string>
+    <string name="warranty">Warranty</string>
+    <string name="warranty_start">Warranty start</string>
+    <string name="warranty_end">Warranty end</string>
+    <string name="code_">Code</string>
+    <string name="admin_approval">Admin approval</string>
+    <string name="unconfirmed">unconfirmed</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="send_request">Send request</string>
+    <string name="reason">Reason</string>
+    <string name="send">Send</string>
+    <string name="my_purchases">My purchases</string>
+    <string name="enter_the_reason">Enter the reason</string>
+    <string name="ediit">Edit</string>
+    <string name="success">Success</string>
+    <string name="faild">Faild</string>
+    <string name="there_are_no_requests">There are no requests</string>
+    <string name="available">Available</string>
 </resources>
