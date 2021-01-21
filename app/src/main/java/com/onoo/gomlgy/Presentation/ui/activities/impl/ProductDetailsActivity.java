@@ -1,18 +1,30 @@
 package com.onoo.gomlgy.Presentation.ui.activities.impl;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableContainer;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
@@ -40,6 +52,7 @@ import com.onoo.gomlgy.Presentation.presenters.ProductDetailsPresenter;
 import com.onoo.gomlgy.Presentation.ui.activities.ProductDetailsView;
 import com.onoo.gomlgy.Presentation.ui.adapters.BestSellingofSellerAdapter;
 import com.onoo.gomlgy.Presentation.ui.adapters.ProductsAdapter;
+import com.onoo.gomlgy.Presentation.ui.customui.MyRadioButton;
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductModelsClickListener;
 import com.onoo.gomlgy.R;
@@ -57,6 +70,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.onoo.gomlgy.Utils.AppConfig.convertDpToPx;
 import static com.onoo.gomlgy.Utils.AppConfig.mapResponse;
 
 public class ProductDetailsActivity extends BaseActivity implements ProductDetailsView, ProductClickListener, ProductModelsClickListener {
@@ -90,6 +104,19 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     EditText quantity;
     int subPrice = 0;
     int getQuantity = 1;
+
+
+    RadioGroup dynamicRadiogroup;
+    LinearLayout linearLayout;
+    MyRadioButton radioButton;
+    LayoutInflater inflater;
+    private TextView availableLbl, available;
+
+    private static final String TAG = "ProductDetailss";
+    String selectedColor = null;
+    JsonArray choicesArray = null;
+    int productId;
+    private VariantResponse variantResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,59 +223,148 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
 
 
         qtyIncrease.setOnClickListener(v -> {
+
             int qty = Integer.parseInt(quantity.getText().toString()) + 1;
             quantity.setText(String.valueOf(qty));
             qtyDecrease.setEnabled(true);
-
-            calc();
-//                cartItemListener.onQuantityUpdate(qty, product);
+            productDetailsPresenter.getVariantPrice(productId, selectedColor, choicesArray, qty);
+            Log.i(TAG, "iddddd " + productId);
         });
 
         qtyDecrease.setOnClickListener(v -> {
-            if (Integer.parseInt(quantity.getText().toString()) > 1) {
-                int qty = Integer.parseInt(quantity.getText().toString()) - 1;
-                quantity.setText(String.valueOf(qty));
-                calc();
-//                    cartItemListener.onQuantityUpdate(qty, product);
+            int qty = Integer.parseInt(quantity.getText().toString());
+
+            if (qty > 1) {
                 if (qty == 1) {
                     qtyDecrease.setEnabled(false);
+                    return;
                 }
+                Log.i(TAG, " : " + choicesArray.size());
+                quantity.setText(String.valueOf(qty - 1));
+                qtyDecrease.setEnabled(true);
+                productDetailsPresenter.getVariantPrice(productId, selectedColor, choicesArray, qty);
             }
         });
-
-
     }
 
-    void calc() {
-        int min1 = productDetails.getMinQuantity1();
-        int min2 = productDetails.getMinQuantity2();
-        int min3 = productDetails.getMinQuantity3();
+    void setBuyingOption(ProductDetails3 productDetails) {
+        inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        linearLayout = (LinearLayout) findViewById(R.id.test);
 
-        int max1 = productDetails.getMaxQuantity1();
-        int max2 = productDetails.getMaxQuantity2();
-        int max3 = productDetails.getMaxQuantity3();
+        for (ChoiceOption choiceOption : productDetails.getChoiceOptions()) {
+            dynamicRadiogroup = new RadioGroup(ProductDetailsActivity.this);
+            LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutparams.setMargins(0, 0, 16, 0);
+            dynamicRadiogroup.setLayoutParams(layoutparams);
+            for (String optionvalue : choiceOption.getOptions()) {
+                radioButton = (MyRadioButton) inflater.inflate(R.layout.my_radio_button, null);
+                radioButton.setText(optionvalue);
+                radioButton.setLayoutParams(layoutparams);
+                radioButton.setTextSize(16);
+                maps.put(optionvalue, choiceOption.getName());
+                dynamicRadiogroup.addView(radioButton);
+            }
 
-        int price1 = productDetails.getUnitPrice();
-        int price2 = productDetails.getUnitPrice2();
-        int price3 = productDetails.getUnitPrice3();
+            TextView textview = new TextView(this);
+            textview.setText(choiceOption.getTitle());
+            textview.setBackgroundColor(Color.parseColor("#F1F1F5"));
+            textview.setTextColor(Color.BLACK);
+            textview.setPadding(16, 25, 0, 25);
+            textview.setTextSize(20);
 
-        getQuantity = Integer.parseInt(quantity.getText().toString());
+            linearLayout.addView(textview);
+            linearLayout.addView(dynamicRadiogroup);
 
-        if (getQuantity >= min1 && getQuantity <= max1) {
-            subPrice = price1 * getQuantity;
-        } else if (getQuantity >= min2 && getQuantity <= max2) {
-            subPrice = price2 * getQuantity;
-        } else if (getQuantity >= min3 && getQuantity <= 1000000000) {
-            subPrice = price3 * getQuantity;
+            dynamicRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+                @SuppressLint("ResourceType")
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    // TODO Auto-generated method stub
+                    MyRadioButton radiochecked = (MyRadioButton) findViewById(checkedId);
+                    createSelectedChoiceList(radiochecked.getText().toString());
+                }
+            });
         }
 
-        subPriceTv.setText(AppConfig.convertPrice2(this, (double) subPrice));
+
+        if (productDetails.getColors().size() > 0) {
+            TextView textview = new TextView(this);
+            textview.setText("Colors");
+            textview.setBackgroundColor(Color.parseColor("#F1F1F5"));
+            textview.setTextColor(Color.BLACK);
+            textview.setPadding(16, 25, 0, 25);
+            textview.setTextSize(20);
+            linearLayout.addView(textview);
+            dynamicRadiogroup = new RadioGroup(ProductDetailsActivity.this);
+            LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            dynamicRadiogroup.setOrientation(LinearLayout.HORIZONTAL);
+            dynamicRadiogroup.setLayoutParams(linearParams);
+
+            //Radio Button params
+            LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams
+                    (convertDpToPx(this, 50), convertDpToPx(this, 50));
+            layoutparams.setMargins(16, 16, 16, 16);
+
+            for (String color : productDetails.getColors()) {
+                radioButton = (MyRadioButton) inflater.inflate(R.layout.color_radio_button, null);
+                StateListDrawable drawable = (StateListDrawable) radioButton.getBackground();
+                DrawableContainer.DrawableContainerState dcs = (DrawableContainer.DrawableContainerState) drawable.getConstantState();
+                Drawable[] drawableItems = dcs.getChildren();
+                GradientDrawable gradientDrawableChecked = (GradientDrawable) drawableItems[0]; // item 1
+                GradientDrawable gradientDrawableUnChecked = (GradientDrawable) drawableItems[1]; // item 2
+                //solid color
+                gradientDrawableChecked.setColor(Color.parseColor(color));
+                gradientDrawableUnChecked.setColor(Color.parseColor(color));
+                radioButton.setLayoutParams(layoutparams);
+                radioButton.setText(color);
+                radioButton.setTextColor(Color.parseColor(color));
+                radioButton.setTextSize(0);
+                maps.put(color, "color");
+                dynamicRadiogroup.addView(radioButton);
+            }
+
+
+            HorizontalScrollView horizontalScrollView = new HorizontalScrollView(this);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            horizontalScrollView.setLayoutParams(layoutParams);
+            horizontalScrollView.setHorizontalScrollBarEnabled(false);
+
+            horizontalScrollView.addView(dynamicRadiogroup);
+            linearLayout.addView(horizontalScrollView);
+
+            dynamicRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+                @SuppressLint("ResourceType")
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    // TODO Auto-generated method stub
+                    MyRadioButton radiochecked = (MyRadioButton) findViewById(checkedId);
+                    selectedColor = radiochecked.getText().toString();
+                    createSelectedChoiceList(radiochecked.getText().toString());
+                }
+            });
+        }
     }
 
-
     private void processAddToCart() {
+        getQuantity = Integer.parseInt(quantity.getText().toString());
         if (productDetails != null && (productDetails.getChoiceOptions().size() > 0 || productDetails.getColors().size() > 0)) {
-            startBuyingOptionActivity();
+            if (selectedColor != null) {
+                if (choicesArray.size() > 0) {
+                    if (variantResponse != null && variantResponse.getInStock()) {
+                        progressDialog.setMessage(getString(R.string.adding_item_to_your_shopping_cart_please_wait));
+                        progressDialog.show();
+                        productDetailsPresenter.addToCart(authResponse.getAccessToken(), authResponse.getUser().getId(), productDetails.getId(), variantResponse.getVariant(), getQuantity);
+                    }
+                } else {
+                    Toast.makeText(this, "please select model", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "please select Color", Toast.LENGTH_SHORT).show();
+            }
+//            startBuyingOptionActivity();
         } else {
             AuthResponse authResponse = new UserPrefs(getApplicationContext()).getAuthPreferenceObjectJson("auth_response");
             if (authResponse != null && authResponse.getUser() != null) {
@@ -319,11 +435,16 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         qtyIncrease = findViewById(R.id.cart_quantity_increase);
         qtyDecrease = findViewById(R.id.cart_quantity_decrease);
         quantity = findViewById(R.id.cart_quantity);
+
+        available = findViewById(R.id.product_available_tv);
+        availableLbl = findViewById(R.id.product_available_lbl_tv);
     }
 
     @Override
     public void setProductDetails(ProductDetails3 productDetails) {
         this.productDetails = productDetails;
+
+        productId = productDetails.getId();
         for (String photo : productDetails.getPhotos()) {
             TextSliderView textSliderView = new TextSliderView(this);
             textSliderView
@@ -389,6 +510,8 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         new ProductDetailsPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this).getRelatedProducts(productDetails.getLinks().getRelated());
 
         new ProductDetailsPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this).getTopSellingProducts(top_selling_link);
+
+        setBuyingOption(productDetails);
     }
 
     @Override
@@ -401,7 +524,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         ProductsAdapter adapter = new ProductsAdapter(this, mapResponse(relatedProducts),
                 this);
         adapter.setViewType(1);
-        recyclerView.addItemDecoration(new LayoutMarginDecoration(1, AppConfig.convertDpToPx(getApplicationContext(), 10)));
+        recyclerView.addItemDecoration(new LayoutMarginDecoration(1, convertDpToPx(getApplicationContext(), 10)));
         recyclerView.setAdapter(adapter);
     }
 
@@ -466,7 +589,13 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
 
     @Override
     public void setVariantprice(VariantResponse variantResponse) {
-
+        if (variantResponse != null) {
+            this.variantResponse = variantResponse;
+            subPriceTv.setText(AppConfig.convertPrice2(ProductDetailsActivity.this, ((double) (variantResponse.getPrice() * (Integer.parseInt(quantity.getText().toString()))))));
+            availableLbl.setVisibility(View.VISIBLE);
+            available.setVisibility(View.VISIBLE);
+            available.setText(variantResponse.getQuantity() + "");
+        }
     }
 
     @Override
@@ -484,6 +613,8 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     }
 
     private void createSelectedChoiceList(String value) {
+        choicesArray = new JsonArray();
+
         String choiceName = maps.get(value);
         if (!choiceName.equals("color")) {
             selectedChoices.put(choiceName, value);
@@ -493,7 +624,6 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
 
         int id = productDetails.getId();
         String color = selectedChoices.get("color") != null ? selectedChoices.get("color") : null;
-        JsonArray choicesArray = new JsonArray();
 
         for (ChoiceOption choiceOption : productDetails.getChoiceOptions()) {
             if (selectedChoices.get(choiceOption.getName()) != null) {
@@ -505,8 +635,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             }
         }
 
-        //Log.d("Test", choicesArray.toString());
-
-        productDetailsPresenter.getVariantPrice(id, color, choicesArray);
+        Log.i(TAG, "choicesArray   " + choicesArray.toString());
+        productDetailsPresenter.getVariantPrice(id, color, choicesArray, Integer.parseInt(quantity.getText().toString()));
     }
 }

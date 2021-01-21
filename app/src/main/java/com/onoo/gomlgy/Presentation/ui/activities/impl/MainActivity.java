@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
     private Fragment searchFragment = new ProductSearchFragment();
     final FragmentManager fm = getSupportFragmentManager();
     private Fragment active = homeFragment;
-    MeowBottomNavigation meo;
+  public   MeowBottomNavigation meo;
     private ImageView cartIv, search, clearIv;
     EditText searchEt;
 
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
     DrawerCategoryApiInterface apiService;
     private List<CatDrawer> mCategories = new ArrayList<>();
     RecyclerView drawerRv;
-    TextView name, email;
+    TextView name;
 
     private Toolbar toolbar;
     ActionBarDrawerToggle toggle;
@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
         meo.setOnReselectListener(item -> {
         });
         meo.show(1, true);
+
+        meo.setCount(4,"0");
     }
 
     @Override
@@ -186,8 +188,8 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
         initBottom();
         setDrawer();
 
-        email.setOnClickListener(v -> {
-            if (email.getText().equals(getString(R.string.sign_or_register))) {
+        name.setOnClickListener(v -> {
+            if (name.getText().equals(getString(R.string.sign_or_register))) {
                 startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), 100);
                 drawer.closeDrawer(GravityCompat.START);
             }
@@ -196,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
 
     void setDrawer() {
         name = findViewById(R.id.name_drawer_tv);
-        email = findViewById(R.id.email_drawer_tv);
+
 
         toolbar = findViewById(R.id.toolbarr);
 
@@ -209,10 +211,8 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
                 if (userPrefs.getAuthPreferenceObjectJson("auth_response") != null) {
                     name.setVisibility(View.VISIBLE);
                     name.setText(userPrefs.getAuthPreferenceObjectJson("auth_response").getUser().getName());
-                    email.setText(userPrefs.getAuthPreferenceObjectJson("auth_response").getUser().getEmail());
                 } else {
-                    name.setVisibility(View.GONE);
-                    email.setText(getText(R.string.sign_or_register));
+                    name.setText(getText(R.string.sign_or_register));
                 }
             }
 
@@ -270,8 +270,9 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
             getIntent().removeExtra("position");
 
             if (position.equals("cart")) {
-//                loadFragment(cartFragment);
-//                navView.setSelectedItemId(R.id.navigation_cart);
+                active = cartFragment;
+                HelperMethod.replace(active, fm, R.id.fragment_container, false);
+                meo.show(4, true);
             } else if (position.equals("account")) {
 //                loadFragment(accountFragment);
 //                navView.setSelectedItemId(R.id.navigation_account);
@@ -283,6 +284,8 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
     public void onBackPressed() {
         if (active == homeFragment) {
             super.onBackPressed();
+        } else if (active == cartFragment) {
+            finish();
         } else {
             HelperMethod.replace(homeFragment, fm, R.id.fragment_container, false);
             meo.show(1, true);
@@ -330,4 +333,5 @@ public class MainActivity extends AppCompatActivity implements AppSettingsIntera
         drawer.closeDrawer(GravityCompat.START);
         MainActivity.this.startActivity(i);
     }
+
 }

@@ -11,33 +11,44 @@
 
         <ImageView
             android:id="@+id/product_image_iv"
-            loadImage="@{product.thumbnailPath.get(0)}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
+
         <ImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:alpha="0.2"
             android:background="@color/lightGrey"
             app:layout_constraintBottom_toBottomOf="@id/product_image_iv"
             app:layout_constraintEnd_toEndOf="@id/product_image_iv"
             app:layout_constraintStart_toStartOf="@id/product_image_iv"
             app:layout_constraintTop_toTopOf="@id/product_image_iv"
-            tools:ignore="ContentDescription"
-            android:alpha="0.2"/>
+            tools:ignore="ContentDescription" />
+
+        <ProgressBar
+            android:id="@+id/product_pb"
+            android:theme="@style/RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="50dp"
+            app:layout_constraintBottom_toBottomOf="@id/product_image_iv"
+            app:layout_constraintEnd_toEndOf="@id/product_image_iv"
+            app:layout_constraintStart_toStartOf="@id/product_image_iv"
+            app:layout_constraintTop_toTopOf="@id/product_image_iv" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="2"
             android:padding="8dp"
             android:text="@{product.name}"
             app:layout_constraintEnd_toEndOf="@id/product_image_iv"
             app:layout_constraintStart_toStartOf="@id/product_image_iv"
-            app:layout_constraintTop_toBottomOf="@id/product_image_iv"
-            android:maxLines="2"/>
+            app:layout_constraintTop_toBottomOf="@id/product_image_iv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

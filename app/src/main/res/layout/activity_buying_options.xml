@@ -73,7 +73,6 @@
                     android:textColor="@color/black"
                     android:layout_toEndOf="@id/product_available_lbl_tv"
                     android:gravity="center"
-
                     android:visibility="gone" />
 
                 <RatingBar

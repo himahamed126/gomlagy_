@@ -322,6 +322,7 @@ public class HomeFragment extends Fragment implements HomeView, CategoryClickLis
         intent.putExtra("link", product.getLinks().getDetails());
         intent.putExtra("top_selling", product.getLinks().getTopFromSeller());
         startActivity(intent);
+//        getActivity().finish();
     }
 
     @Override

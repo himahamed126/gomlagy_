@@ -2,13 +2,17 @@ package com.onoo.gomlgy.Presentation.ui.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.request.RequestOptions;
 import com.onoo.gomlgy.Presentation.ui.listeners.SubSubCategoryClickListener;
 import com.onoo.gomlgy.R;
+import com.onoo.gomlgy.Utils.GlideImageLoader;
 import com.onoo.gomlgy.databinding.ProductListItemBinding;
 import com.onoo.gomlgy.models.Productmodel;
 
@@ -41,7 +45,10 @@ public class SubSubCategoryAdapter extends RecyclerView.Adapter<SubSubCategoryAd
     // binds the data to the view and textview in each row
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Productmodel productmodel=products.get(position);
         holder.productListItemBinding.setProduct(products.get(position));
+                setImage(holder.productListItemBinding.productImageIv, holder.productListItemBinding.productPb, productmodel.getThumbnailPath().get(0));
+
         holder.productListItemBinding.productItemCl.setOnClickListener(view ->
                 subSubCategoryClickListener.onSubSubCategoryClick(position));
     }
@@ -60,5 +67,12 @@ public class SubSubCategoryAdapter extends RecyclerView.Adapter<SubSubCategoryAd
             super(productListItemBinding.getRoot());
             this.productListItemBinding = productListItemBinding;
         }
+    }
+    void setImage(ImageView imageView, ProgressBar progressBar, String imageUrl) {
+        RequestOptions requestOptions = new RequestOptions()
+                .fitCenter()
+                .error(R.drawable.logo_gomlgy);
+
+        new GlideImageLoader(imageView, progressBar).load(imageUrl, requestOptions);
     }
 }

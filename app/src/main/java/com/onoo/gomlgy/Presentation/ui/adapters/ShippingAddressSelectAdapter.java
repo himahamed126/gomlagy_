@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -91,10 +92,12 @@ public class ShippingAddressSelectAdapter extends RecyclerView.Adapter<ShippingA
             checkBox.setVisibility(View.VISIBLE);
             checkBox.setChecked(row_index == position);
 
-            itemView.setOnClickListener(v -> {
-                row_index = position;
-                notifyDataSetChanged();
-                shippingAddressSelectListener.onShippingAddressItemClick(shippingAddress);
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked) {
+                    row_index = position;
+                    notifyDataSetChanged();
+                    shippingAddressSelectListener.onShippingAddressItemClick(shippingAddress);
+                }
             });
         }
     }

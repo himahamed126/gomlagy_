@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">جملجي</string>
     <string name="title_home">الصفحة الرئيسية</string>
     <string name="title_dashboard">لوحة القيادة</string>
     <string name="title_notifications">إشعارات</string>
@@ -181,4 +180,5 @@
     <string name="faild">فشل</string>
     <string name="there_are_no_requests">لا توجد طلبات</string>
     <string name="available">متاح</string>
+    <string name="join_as_a_trader" >انضم كابائع</string>
 </resources>

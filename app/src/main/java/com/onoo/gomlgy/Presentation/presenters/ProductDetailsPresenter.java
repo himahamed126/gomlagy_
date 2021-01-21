@@ -143,8 +143,8 @@ public class ProductDetailsPresenter extends AbstractPresenter implements Produc
 
     }
 
-    public void getVariantPrice(int id, String color, JsonArray choicesArray) {
-        new BuyingOptionInteractorImpl(mExecutor, mMainThread, this, id, color, choicesArray).execute();
+    public void getVariantPrice(int id, String color, JsonArray choicesArray, int quantity) {
+        new BuyingOptionInteractorImpl(mExecutor, mMainThread, this, id, color, choicesArray, quantity).execute();
     }
 
     @Override

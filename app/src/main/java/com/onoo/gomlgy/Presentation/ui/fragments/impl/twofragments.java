@@ -80,43 +80,8 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
         subCategoryAdapter = new SubCategoryAdapter(subCategories, this);
         subCategoriesRv.setAdapter(subCategoryAdapter);
 
-//        spin = v.findViewById(R.id.spin_kit);
-
-//        productRv = v.findViewById(R.id.product_rv);
-//        productAdapter = new productsOfSubCategoryAdapter(getActivity(), productList,
-//        this::onProductClick);
-//
-//        productRv.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
-//        productRv.setAdapter(productAdapter);
-
     }
 
-//    private void getDAta(int subCategoryID) {
-//        int categoryId = 1;
-//        String url = "https://www.gomlgy.com/api/v1/get-product?category_id=" + categoryId + "&sub_category_id=" + subCategoryID;
-//        spin.setVisibility(View.VISIBLE);
-//        apiService1 = ApiClient.getClient().create(ProductListingApiInterface.class);
-//        Call<ProductListingResponse> call = apiService1.getProducts(url);
-//        call.enqueue(new Callback<ProductListingResponse>() {
-//            @Override
-//            public void onResponse(Call<ProductListingResponse> call, Response<ProductListingResponse> response) {
-//                try {
-//                    spin.setVisibility(View.GONE);
-//                    productList.clear();
-//                    productList.addAll(response.body().getData());
-//                    productAdapter.notifyDataSetChanged();
-//
-//                } catch (Exception e) {
-//                    Log.e("Exception", e.getMessage());
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<ProductListingResponse> call, Throwable t) {
-////                mCallback.onProductDownloadError();
-//                Log.e("Exception", t.getMessage());
-//            }
-//        });
-//    }
 
     @Override
     public void onStart() {
@@ -130,8 +95,6 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
 
     @Override
     public void onCategoryClick(Category category) {
-//        Log.i(TAG, "onCategoryClick: " + category.getName());
-//        getDAta(category.getId());
         subCategoryPresenter.getSubSubCategories(String.valueOf(category.getId()));
         this.category = category;
 

@@ -25,6 +25,8 @@ public class AddToCartInteractorImpl extends AbstractInteractor {
     private String variant;
     private String auth_token;
 
+    private static final String TAG = "AddToCartt";
+
     public AddToCartInteractorImpl(Executor threadExecutor, MainThread mainThread, AddToCartInteractor.CallBack callBack, String auth_token, int user_id, int product_id, String variant, int quantity) {
         super(threadExecutor, mainThread);
         mCallback = callBack;
@@ -45,6 +47,7 @@ public class AddToCartInteractorImpl extends AbstractInteractor {
         jsonObject.addProperty("variant", variant);
         jsonObject.addProperty("quantity", quantity);
 
+
         Call<AddToCartResponse> call = apiService.sendAddToCartRequest(auth_token, jsonObject);
 
         call.enqueue(new Callback<AddToCartResponse>() {
@@ -52,9 +55,10 @@ public class AddToCartInteractorImpl extends AbstractInteractor {
             public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
                 try {
                     //Log.d("Test", response.body().getVariant());
+                    Log.i(TAG, "product_id : " + product_id + " userId : " + user_id + " variant : " + variant + " quantity : " + quantity);
                     mCallback.onCartItemAdded(response.body());
                 } catch (Exception e) {
-                    Log.e("Exception", e.getMessage());
+                    Log.e(TAG + " Exception", e.getMessage());
                 }
             }
 

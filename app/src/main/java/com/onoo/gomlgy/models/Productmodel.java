@@ -1,6 +1,8 @@
 package com.onoo.gomlgy.models;
 
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
@@ -11,6 +13,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.AppConfig;
+import com.onoo.gomlgy.Utils.GlideImageLoader;
 
 import java.io.Serializable;
 import java.util.List;
@@ -167,13 +170,16 @@ public class Productmodel implements Serializable {
 
     @BindingAdapter("loadImage")
     public static void loadImageByGlide(ImageView imageView, String imgUrl) {
+
+        ProgressBar progressBar = new ProgressBar(imageView.getContext());
+        progressBar.setVisibility(View.VISIBLE);
+
         RequestOptions requestOptions = new RequestOptions()
                 .fitCenter()
                 .error(R.drawable.logo_gomlgy)
                 .placeholder(R.drawable.logo_gomlgy);
 
-        Glide.with(imageView.getContext()).setDefaultRequestOptions(requestOptions)
-                .load(imgUrl).into(imageView);
+        new GlideImageLoader(imageView, progressBar).load(imgUrl, requestOptions);
     }
 
     @BindingAdapter("convertPrice")

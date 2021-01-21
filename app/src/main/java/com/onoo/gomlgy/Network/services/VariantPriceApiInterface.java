@@ -10,5 +10,5 @@ import retrofit2.http.POST;
 public interface VariantPriceApiInterface {
     @FormUrlEncoded
     @POST("products/variant/price")
-    Call<VariantResponse> getVariantPrice(@Field("id") int id, @Field("color") String color, @Field("choice") String choiceArray);
+    Call<VariantResponse> getVariantPrice(@Field("id") int id, @Field("color") String color, @Field("choice") String choiceArray, @Field("quantity") int quantity);
 }

@@ -73,14 +73,15 @@ public class PaymentSelectAdapter extends RecyclerView.Adapter<PaymentSelectAdap
         public void bind(final PaymentModel paymentModel, int position) {
             payment_icon.setImageResource(paymentModel.getDrawable());
             payment_text.setText(paymentModel.getPayment_text());
-
             checkBox.setChecked(row_index == position);
 
-            itemView.setOnClickListener(v -> {
-                row_index = position;
-                notifyDataSetChanged();
-                if (paymentSelectListener != null) {
-                    paymentSelectListener.onPaymentItemClick(paymentModel);
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked) {
+                    row_index = position;
+                    notifyDataSetChanged();
+                    if (paymentSelectListener != null) {
+                        paymentSelectListener.onPaymentItemClick(paymentModel);
+                    }
                 }
             });
         }

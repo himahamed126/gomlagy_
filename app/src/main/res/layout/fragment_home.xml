@@ -57,9 +57,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/featured_products_text"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
+                            android:clipToPadding="false"
                             android:orientation="horizontal"
+                            android:paddingHorizontal="8dp"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                             tools:listitem="@layout/item_product_hor">
 

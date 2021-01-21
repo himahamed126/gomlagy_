@@ -13,22 +13,13 @@ public class VariantResponse {
     private String variant;
     @SerializedName("price")
     @Expose
-    private Double price;
+    private Integer price;
     @SerializedName("in_stock")
     @Expose
     private Boolean inStock;
-
     @SerializedName("Quantity")
     @Expose
-    private int quantity;
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+    private Integer quantity;
 
     public Integer getProductId() {
         return productId;
@@ -46,11 +37,11 @@ public class VariantResponse {
         this.variant = variant;
     }
 
-    public Double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -62,4 +53,11 @@ public class VariantResponse {
         this.inStock = inStock;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 }

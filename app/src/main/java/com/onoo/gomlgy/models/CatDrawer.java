@@ -5,7 +5,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class CatDrawer {
-
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -15,6 +14,9 @@ public class CatDrawer {
     @SerializedName("photo")
     @Expose
     private String photo;
+    @SerializedName("image")
+    @Expose
+    private String image;
 
     public Integer getId() {
         return id;
@@ -40,5 +42,12 @@ public class CatDrawer {
         this.photo = photo;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
 }

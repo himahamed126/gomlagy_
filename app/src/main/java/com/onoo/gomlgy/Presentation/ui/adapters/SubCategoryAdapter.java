@@ -2,13 +2,17 @@ package com.onoo.gomlgy.Presentation.ui.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.request.RequestOptions;
 import com.onoo.gomlgy.Presentation.ui.listeners.SubCategoryClickListener;
 import com.onoo.gomlgy.R;
+import com.onoo.gomlgy.Utils.GlideImageLoader;
 import com.onoo.gomlgy.databinding.SubCategoryHeaderItemBinding;
 import com.onoo.gomlgy.databinding.SubCategoryListItemBinding;
 import com.onoo.gomlgy.models.SubCategorymodel;
@@ -59,8 +63,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ((ViewHolder) holder).subCategoryBinding.setSubCategory(subCategories.get(position));
             if (subCategories.get(position).getProducts() != null &&
                     subCategories.get(position).getProducts().size() > 0) {
-                ((ViewHolder) holder).subCategoryBinding.productsRv
-                        .setAdapter(new SubSubCategoryAdapter(subCategories.get(position)
+                ((ViewHolder) holder).subCategoryBinding.productsRv.setAdapter(new SubSubCategoryAdapter(subCategories.get(position)
                                 .getProducts(), productPosition ->
                                 subCategoryClickListener.onProductClicked(subCategories
                                         .get(position).getProducts().get(productPosition))));
@@ -99,7 +102,6 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             super(subCategoryHeaderBinding.getRoot());
             this.subCategoryHeaderBinding = subCategoryHeaderBinding;
         }
-
     }
 
     // stores and recycles views as they are scrolled off screen
@@ -113,4 +115,6 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
 
     }
+
+
 }

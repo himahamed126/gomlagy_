@@ -101,7 +101,7 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
 
         //Log.d("Test", choicesArray.toString());
 
-        buyingOptionPresenter.getVariantPrice(id, color, choicesArray);
+        buyingOptionPresenter.getVariantPrice(id, color, choicesArray,quantity);
     }
 
     @SuppressLint("ResourceAsColor")
@@ -249,7 +249,7 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
        // Log.i(TAG, );
       //  Toast.makeText(this, "id : " + variantResponse.getProductId() + " color : " + variantResponse.getQuantity() + " choice : " , Toast.LENGTH_LONG).show();
         this.variantResponse = variantResponse;
-        price.setText(AppConfig.convertPrice(this, variantResponse.getPrice()));
+        price.setText(AppConfig.convertPrice(this, Double.valueOf(variantResponse.getPrice())));
         availableLbl.setVisibility(View.VISIBLE);
         available.setVisibility(View.VISIBLE);
     //    available.setText(AppConfig.convertPrice(this, variantResponse.getQuantity()));
@@ -265,8 +265,8 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("message", addToCartResponse.getMessage());
             intent.putExtra("position", "cart");
-            startActivity(intent);
             finish();
+            startActivity(intent);
         } else {
             CustomToast.showToast(this, addToCartResponse.getMessage(), R.color.colorSuccess);
         }

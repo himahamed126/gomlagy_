@@ -3,6 +3,8 @@ package com.onoo.gomlgy.Presentation.ui.adapters;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -10,11 +12,14 @@ import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.onoo.gomlgy.Presentation.ui.listeners.ProductClickListener;
 import com.onoo.gomlgy.R;
 import com.onoo.gomlgy.Utils.AppConfig;
-import com.onoo.gomlgy.databinding.ItemProductHorBinding;
+import com.onoo.gomlgy.Utils.GlideImageLoader;
+
 import com.onoo.gomlgy.databinding.ItemProductGridBinding;
+import com.onoo.gomlgy.databinding.ItemProductHorBinding;
 import com.onoo.gomlgy.databinding.ItemProductVerBinding;
 import com.onoo.gomlgy.models.Product;
 
@@ -65,18 +70,21 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         switch (holder.getItemViewType()) {
             case GRID_TYPE:
                 ItemProductGridBinding gridBinding = holder.gridBinding;
+                setImage(gridBinding.productImage, gridBinding.productPb, product.getThumbnailImage());
                 calcLessPrice(p1, p2, p3, gridBinding.price1, gridBinding.price2, gridBinding.price3, context);
                 gridBinding.setProduct(product);
                 gridBinding.productCv.setOnClickListener(view -> productClickListener.onProductItemClick(product));
                 break;
             case HOR_TYPE:
                 ItemProductHorBinding horBinding = holder.horBinding;
+                setImage(horBinding.productImage, horBinding.productPb, product.getThumbnailImage());
                 calcLessPrice(p1, p2, p3, horBinding.price1, horBinding.price2, horBinding.price3, context);
                 horBinding.setProduct(product);
                 horBinding.productCv.setOnClickListener(view -> productClickListener.onProductItemClick(product));
                 break;
             case VIR_TYPE:
                 ItemProductVerBinding verBinding = holder.verBinding;
+                setImage(verBinding.productImage, verBinding.productPb, product.getThumbnailImage());
                 calcLessPrice(p1, p2, p3, verBinding.price1, verBinding.price2, verBinding.price3, context);
                 verBinding.setProduct(product);
                 verBinding.productCv.setOnClickListener(view -> productClickListener.onProductItemClick(product));
@@ -125,5 +133,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
             super(binding.getRoot());
             this.verBinding = binding;
         }
+    }
+
+    void setImage(ImageView imageView, ProgressBar progressBar, String imageUrl) {
+        RequestOptions requestOptions = new RequestOptions()
+                .fitCenter()
+                .error(R.drawable.logo_gomlgy);
+
+        new GlideImageLoader(imageView, progressBar).load(imageUrl, requestOptions);
     }
 }

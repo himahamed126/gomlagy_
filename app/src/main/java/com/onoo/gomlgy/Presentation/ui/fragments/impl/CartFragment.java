@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.onoo.gomlgy.models.CartModel;
 import com.onoo.gomlgy.Network.response.AuthResponse;
 import com.onoo.gomlgy.Network.response.CartQuantityUpdateResponse;
@@ -111,6 +112,9 @@ public class CartFragment extends Fragment implements CartView, CartItemListener
 //                    (BottomNavigationMenuView) navView.getChildAt(0);
 //            View v = bottomNavigationMenuView.getChildAt(3); // number of menu from left
             new QBadgeView(getActivity()).bindTarget(v).setBadgeText(String.valueOf(qty)).setShowShadow(false);
+
+            MeowBottomNavigation meo = getActivity().findViewById(R.id.bottomNavigation);
+            meo.setCount(4, String.valueOf(qty));
         }
     }
 

@@ -2,6 +2,7 @@ package com.onoo.gomlgy.Presentation.ui.fragments.impl;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,7 @@ import q.rorbin.badgeview.QBadgeView;
 public class AccountFragment extends Fragment implements AccountView, AppSettingsInteractor.CallBack {
     private View v;
     private AuthResponse authResponse;
-    private RelativeLayout wishlist, purchase_history, wallet_info, account_info, warranty, language, logout;
+    private RelativeLayout wishlist, purchase_history, wallet_info, account_info, warranty,trader, language, logout;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_account, null);
@@ -119,6 +120,14 @@ public class AccountFragment extends Fragment implements AccountView, AppSetting
                     startActivityForResult(new Intent(getActivity(), LoginActivity.class), 100);
                 }
             }
+        });
+
+        trader = v.findViewById(R.id.join_as_a_trader);
+        trader.setOnClickListener(v -> {
+            String url = "https://gomlgy.com/shops/create";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
         });
 
         logout = v.findViewById(R.id.logout);

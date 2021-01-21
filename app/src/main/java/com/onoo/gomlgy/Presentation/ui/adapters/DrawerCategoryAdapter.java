@@ -71,7 +71,7 @@ public class DrawerCategoryAdapter extends RecyclerView.Adapter<DrawerCategoryAd
 
         public void bind(final CatDrawer category) {
 
-            Glide.with(context).load(category.getPhoto()).into(imageView);
+            Glide.with(context).load(category.getImage()).into(imageView);
 
 
             textView.setText(category.getName());
