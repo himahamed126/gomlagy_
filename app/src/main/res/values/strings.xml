@@ -100,7 +100,7 @@
     <string name="ordered_products">Ordered Products</string>
     <string name="sub_total">SUB TOTAL</string>
     <string name="tax">TAX</string>
-    <string name="shipping_cost">SHIPPING COST</string>
+    <string name="shipping_cost">Shipping Cost</string>
     <string name="discount">DISCOUNT</string>
     <string name="grand_total">GRAND TOTAL</string>
     <string name="sign_up">SIGN UP</string>
@@ -195,5 +195,6 @@
     <string name="faild">Faild</string>
     <string name="there_are_no_requests">There are no requests</string>
     <string name="available">Available</string>
-    <string name="join_as_a_trader" >Join as a trader</string>
+    <string name="join_as_a_trader">Join as a trader</string>
+    <string name="fatwora">Fatwora</string>
 </resources>

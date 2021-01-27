@@ -1,5 +1,4 @@
 package com.onoo.gomlgy.Presentation.presenters;
-
 import com.onoo.gomlgy.Network.response.AddToCartResponse;
 import com.onoo.gomlgy.Network.response.VariantResponse;
 import com.onoo.gomlgy.Presentation.ui.activities.BuyingOptionView;
@@ -10,8 +9,6 @@ import com.onoo.gomlgy.domain.interactors.BuyingOptionInteractor;
 import com.onoo.gomlgy.domain.interactors.impl.AddToCartInteractorImpl;
 import com.onoo.gomlgy.domain.interactors.impl.BuyingOptionInteractorImpl;
 import com.google.gson.JsonArray;
-
-
 public class BuyingOptionPresenter extends AbstractPresenter implements BuyingOptionInteractor.CallBack, AddToCartInteractor.CallBack {
     private BuyingOptionView buyingOptionView;
 
@@ -39,14 +36,13 @@ public class BuyingOptionPresenter extends AbstractPresenter implements BuyingOp
     public void onGetVariantPriceError() {
 
     }
-
     @Override
     public void onCartItemAdded(AddToCartResponse addToCartResponse) {
         if (buyingOptionView != null) {
             buyingOptionView.setAddToCartMessage(addToCartResponse);
+
         }
     }
-
     @Override
     public void onCartItemAddedError() {
 

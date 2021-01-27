@@ -1,0 +1,95 @@
+package com.onoo.gomlgy.Presentation.ui.adapters;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.onoo.gomlgy.models.CartModel;
+import com.onoo.gomlgy.Presentation.ui.listeners.CartItemListener;
+import com.onoo.gomlgy.R;
+import com.onoo.gomlgy.Utils.AppConfig;
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+
+public class FatworaAdapter extends RecyclerView.Adapter<FatworaAdapter.ViewHolder> {
+
+    private List<CartModel> cartItems;
+    private LayoutInflater mInflater;
+    private Context context;
+    private CartItemListener cartItemListener;
+
+    public Context getContext() {
+        return this.context;
+    }
+
+    // data is passed into the constructor
+    public FatworaAdapter(Context context, List<CartModel> cartItems, CartItemListener cartItemListener) {
+        this.context = context;
+        this.mInflater = LayoutInflater.from(context);
+        this.cartItems = cartItems;
+        this.cartItemListener = cartItemListener;
+    }
+
+    // inflates the row layout from xml when needed
+    @Override
+    @NonNull
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.fatwor_item_card, parent, false);
+        return new ViewHolder(view);
+    }
+
+    // binds the data to the view and textview in each row
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.bind(cartItems.get(position));
+    }
+
+    // total number of rows
+    @Override
+    public int getItemCount() {
+        return cartItems.size();
+    }
+
+    // convenience method for getting data at click position
+    public CartModel getItem(int id) {
+        return cartItems.get(id);
+    }
+
+    // stores and recycles views as they are scrolled off screen
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView image;
+        TextView name;
+        TextView variant;
+        TextView shipping_cost;
+        TextView quantity;
+        TextView price;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+            image = itemView.findViewById(R.id.cart_product_image);
+            name = itemView.findViewById(R.id.cart_product_name);
+            price = itemView.findViewById(R.id.cart_price);
+            variant = itemView.findViewById(R.id.cart_variant);
+            shipping_cost = itemView.findViewById(R.id.cart_shipping_cost);
+            quantity = itemView.findViewById(R.id.cart_quantity);
+        }
+
+        public void bind(CartModel product) {
+            Glide.with(context).load(AppConfig.ASSET_URL + product.getProduct().getImage()).into(image);
+            name.setText(product.getProduct().getName());
+            price.setText(AppConfig.convertPrice(context, product.getPrice()));
+            variant.setText(product.getVariation());
+            shipping_cost.setText("Shipping Cost - " + AppConfig.convertPrice(context, product.getShippingCost()));
+            quantity.setText(product.getQuantity().toString());
+        }
+    }
+}
+

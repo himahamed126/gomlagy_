@@ -55,23 +55,18 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
     private AuthResponse authResponse;
     JsonObject jsonObject;
     PurchaseHistory purchaseHistory;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
-
         total = getIntent().getDoubleExtra("total", 0.0);
         shipping = getIntent().getDoubleExtra("shipping", 0.0);
         tax = getIntent().getDoubleExtra("tax", 0.0);
         shipping_address = getIntent().getStringExtra("shipping_address");
-
         authResponse = new UserPrefs(this).getAuthPreferenceObjectJson("auth_response");
-
         initializeActionBar();
         setTitle("Checkout");
         setPaymentOptions();
-
         progressDialog = new ProgressDialog(this);
         place_order = findViewById(R.id.place_order);
         coupon_code = findViewById(R.id.coupon_code);
@@ -79,7 +74,6 @@ public class PaymentActivity extends BaseActivity implements PaymentSelectListen
         total_amount = findViewById(R.id.total_amount);
 
         total_amount.setText(AppConfig.convertPrice(this, total));
-
         place_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

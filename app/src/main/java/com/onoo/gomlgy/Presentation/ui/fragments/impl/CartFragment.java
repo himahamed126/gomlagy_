@@ -54,30 +54,24 @@ public class CartFragment extends Fragment implements CartView, CartItemListener
     private double tax = 0;
     private int qty = 0;
     private TextView cart_empty_text;
-
     private static final String TAG = "CartFragment";
-
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_cart, null);
-
         btnCheckout = v.findViewById(R.id.checkout);
         progressBar = v.findViewById(R.id.item_progress_bar);
         linearLayout = v.findViewById(R.id.checkout_button);
         total_amount = v.findViewById(R.id.total_amount);
         cart_empty_text = v.findViewById(R.id.cart_empty_text);
-
         linearLayout.setVisibility(View.GONE);
-
         cartPresenter = new CartPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
-
         authResponse = new UserPrefs(getActivity()).getAuthPreferenceObjectJson("auth_response");
         if (authResponse != null && authResponse.getUser() != null) {
             cartPresenter.getCartItems(authResponse.getUser().getId(), authResponse.getAccessToken());
             progressBar.setVisibility(View.VISIBLE);
-        } else {
+        } else
+            {
             cart_empty_text.setVisibility(View.VISIBLE);
-        }
-
+           }
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

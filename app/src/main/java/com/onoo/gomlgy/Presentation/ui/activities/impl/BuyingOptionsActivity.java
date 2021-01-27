@@ -72,7 +72,6 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
         ratingBar = findViewById(R.id.product_rating);
         addTocart = findViewById(R.id.addToCart);
         buyNow = findViewById(R.id.buyNow);
-      //  availble_items=findViewById(R.id.availble_items);
         buyingOptionPresenter = new BuyingOptionPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         progressDialog = new ProgressDialog(this);
         inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -103,7 +102,6 @@ public class BuyingOptionsActivity extends BaseActivity implements BuyingOptionV
 
         buyingOptionPresenter.getVariantPrice(id, color, choicesArray,quantity);
     }
-
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

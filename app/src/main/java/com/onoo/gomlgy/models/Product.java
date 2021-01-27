@@ -61,6 +61,16 @@ public class Product implements Serializable {
     @SerializedName("unit_price3")
     @Expose
     private Double unitPrice3;
+    @SerializedName("shipping_cost")
+    @Expose
+    private Double Shipping_cost;
+    public Double getShipping_cost() {
+        return Shipping_cost;
+    }
+
+    public void setShipping_cost(Double shipping_cost) {
+        Shipping_cost = shipping_cost;
+    }
 
     private List<Double> prices;
 
