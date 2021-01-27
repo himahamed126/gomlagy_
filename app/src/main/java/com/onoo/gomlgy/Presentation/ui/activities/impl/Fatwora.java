@@ -5,8 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
@@ -29,32 +33,35 @@ import com.onoo.gomlgy.models.ShippingAddress;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Fatwora extends AppCompatActivity implements CartView, CartItemListener {
     private CartPresenter cartPresenter;
     private AuthResponse authResponse;
     UserPrefs user;
-    TextView total_txt, shippinAddress, tax_txt, shippingCosttxt,city,country;
+    TextView total_txt, shippinAddresstxt, shippingCosttxt, orderDate;
     private Double total = 0.0, shipping = 0.0, tax = 0.0, coupon_discount = 0.0;
-    private String shippingAddress,address,citytxt,countrytxt;
+    private String shippingAddress, address, citytxt, countrytxt;
+    private TableLayout mTableLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fatwora);
-        shippingCosttxt = findViewById(R.id.total_shipping_cost);
-        tax_txt = findViewById(R.id.tax_cost);
-        shippinAddress = findViewById(R.id.shipping_address);
-        city=findViewById(R.id.city_txt);
-        country=findViewById(R.id.country_txt);
-        total_txt = findViewById(R.id.total_amount);
+        mTableLayout = (TableLayout) findViewById(R.id.tableInvoices);
+        shippinAddresstxt = findViewById(R.id.orderAddresstxt);
+        orderDate = findViewById(R.id.orderDate);
+        total_txt=findViewById(R.id.totalAmount);
+        shippingCosttxt=findViewById(R.id.shippint_cost);
+
         total = getIntent().getDoubleExtra("total", 0.0);
         shipping = getIntent().getDoubleExtra("shipping", 0.0);
-        citytxt=getIntent().getStringExtra("city");
-        countrytxt=getIntent().getStringExtra("country");
-        address=getIntent().getStringExtra("address");
-
+        citytxt = getIntent().getStringExtra("city");
+        countrytxt = getIntent().getStringExtra("country");
+        address = getIntent().getStringExtra("address");
         tax = getIntent().getDoubleExtra("tax", 0.0);
         shippingAddress = getIntent().getStringExtra("shipping_address");
         user = new UserPrefs(Fatwora.this);
@@ -63,39 +70,118 @@ public class Fatwora extends AppCompatActivity implements CartView, CartItemList
         if (authResponse != null && authResponse.getUser() != null) {
             cartPresenter.getCartItems(authResponse.getUser().getId(), authResponse.getAccessToken());
         }
-        if (shippingAddress != null && total != null && shipping != null && tax != null) {
-            total_txt.setText(total.toString());
+        if (shippingAddress != null) {
             try {
+                String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                orderDate.setText(currentDate);
                 JSONObject jsonObj = new JSONObject(getIntent().getStringExtra("shipping_address"));
-                city.setText(jsonObj.get("city").toString());
-                country.setText(jsonObj.get("country").toString());
-                shippinAddress.setText(jsonObj.get("address").toString());
+                shippinAddresstxt.setText(jsonObj.get("address").toString() + "," + jsonObj.get("city").toString() + "," + jsonObj.get("country").toString());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            tax_txt.setText(tax.toString());
         }
     }
-
-
     @Override
     public void setCartItems(List<CartModel> cartItems) {
-        if (cartItems.size() > 0) {
-            RecyclerView recyclerView = findViewById(R.id.fatworaproduct_list);
-            LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(Fatwora.this);
-            recyclerView.setLayoutManager(horizontalLayoutManager);
-            FatworaAdapter adapter = new FatworaAdapter(Fatwora.this, cartItems, this);
-            recyclerView.setAdapter(adapter);
-            setShipingCost(cartItems);
-        }
+        initializeTableLayout();
+        fillTable(cartItems);
+        setShipingCost(cartItems);
+        total_txt.setText(total.toString());
     }
 
+    private void initializeTableLayout() {
+
+        TableRow tr_head = new TableRow(Fatwora.this);
+        tr_head.setId(View.generateViewId());
+        tr_head.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+        tr_head.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+        TableRow tableRow = new TableRow(this);
+
+        TextView label_barcode = new TextView(Fatwora.this);
+
+        label_barcode.setId(View.generateViewId());
+        label_barcode.setText(R.string.product_name);
+        label_barcode.setTextSize(20);
+        label_barcode.setTextColor(Color.BLACK);
+        label_barcode.setGravity(Gravity.CENTER);
+        tr_head.addView(label_barcode);// add the column to the table row here
+
+        TextView label_location = new TextView(Fatwora.this);
+        label_location.setId(View.generateViewId());// define id that must be         unique
+        label_location.setText(R.string.price); // set the text for the header
+        label_location.setTextSize(20);
+        label_location.setTextColor(Color.BLACK); // set the color
+        label_location.setGravity(Gravity.CENTER);
+        tr_head.addView(label_location); // add the column to the table row here
+
+        TextView label_shipping = new TextView(Fatwora.this);
+        label_shipping.setId(View.generateViewId());// define id that must be         unique
+        label_shipping.setText(R.string.shipping); // set the text for the header
+        label_shipping.setTextSize(20);
+        label_shipping.setTextColor(Color.BLACK); // set the color
+        label_shipping.setGravity(Gravity.CENTER);
+        tr_head.addView(label_shipping);
+
+        TextView label_quantity = new TextView(Fatwora.this);
+        label_quantity.setId(View.generateViewId());// define id that must be         unique
+        label_quantity.setText(R.string.quantity); // set the text for the header
+        label_quantity.setTextSize(20);
+        label_quantity.setTextColor(Color.BLACK); // set the color
+        label_quantity.setGravity(Gravity.CENTER);
+        tr_head.addView(label_quantity); //
+        mTableLayout.setScrollContainer(true);
+        mTableLayout.addView(tr_head, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+    }
+    private void fillTable(List<CartModel> cartItems) {
+        Integer count = 0;
+        for (int i = 0; i < cartItems.size(); i++) {
+            TableRow tableRow = new TableRow(Fatwora.this);
+            if (count % 2 != 0) {
+                tableRow.setBackgroundColor(getResources().getColor(R.color.carbon_grey_100));
+            }
+            tableRow.setId(View.generateViewId());
+            tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
+
+            TextView labelBarcode = new TextView(Fatwora.this);
+            labelBarcode.setId(View.generateViewId());
+            labelBarcode.setGravity(Gravity.CENTER);
+            labelBarcode.setTextColor(getResources().getColor(R.color.colorAccent));
+            labelBarcode.setTextSize(18);
+            labelBarcode.setText(cartItems.get(i).getProduct().getName());
+            tableRow.addView(labelBarcode);
+
+            TextView labelLocation = new TextView(Fatwora.this);
+            labelLocation.setId(View.generateViewId());
+            labelLocation.setGravity(Gravity.CENTER);
+            labelLocation.setTextColor(getResources().getColor(R.color.colorAccent));
+            labelLocation.setTextSize(18);
+            labelLocation.setText(cartItems.get(i).getPrice().toString());
+            tableRow.addView(labelLocation);
+
+            TextView labelQuantity = new TextView(Fatwora.this);
+            labelQuantity.setId(View.generateViewId());
+            labelQuantity.setGravity(Gravity.CENTER);
+            labelQuantity.setTextColor(getResources().getColor(R.color.colorAccent));
+            labelQuantity.setTextSize(18);
+            labelQuantity.setText(cartItems.get(i).getShippingCost().toString());
+            tableRow.addView(labelQuantity);
+
+            TextView labelQuantityy = new TextView(Fatwora.this);
+            labelQuantityy.setId(View.generateViewId());
+            labelQuantityy.setGravity(Gravity.CENTER);
+            labelQuantityy.setTextColor(getResources().getColor(R.color.colorAccent));
+            labelQuantityy.setTextSize(18);
+            labelQuantityy.setText(cartItems.get(i).getQuantity().toString());
+            tableRow.addView(labelQuantityy);
+            mTableLayout.addView(tableRow, new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+            count++;
+        }
+    }
     private void setShipingCost(List<CartModel> cartItems) {
-        double sum=0;
-for(int i=0;i<cartItems.size();i++)
-{
-sum+=cartItems.get(i).getShippingCost();
-}
+        double sum = 0;
+        for (int i = 0; i < cartItems.size(); i++) {
+            sum += cartItems.get(i).getShippingCost();
+        }
         shippingCosttxt.setText(String.valueOf(sum));
     }
 
