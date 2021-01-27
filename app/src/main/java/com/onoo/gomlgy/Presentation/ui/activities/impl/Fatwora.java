@@ -147,7 +147,9 @@ public class Fatwora extends AppCompatActivity implements CartView, CartItemList
             labelBarcode.setGravity(Gravity.CENTER);
             labelBarcode.setTextColor(getResources().getColor(R.color.colorAccent));
             labelBarcode.setTextSize(18);
-            labelBarcode.setText(cartItems.get(i).getProduct().getName());
+//            labelBarcode.setText();
+           labelBarcode.setText(cartItems.get(i).getProduct().getName());
+
             tableRow.addView(labelBarcode);
 
             TextView labelLocation = new TextView(Fatwora.this);
