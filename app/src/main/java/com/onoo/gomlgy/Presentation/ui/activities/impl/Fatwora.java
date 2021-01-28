@@ -13,6 +13,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.braintreepayments.api.internal.IntegrationType;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.onoo.gomlgy.Network.response.AuthResponse;
@@ -86,7 +87,8 @@ public class Fatwora extends AppCompatActivity implements CartView, CartItemList
         initializeTableLayout();
         fillTable(cartItems);
         setShipingCost(cartItems);
-        total_txt.setText(total.toString());
+        int toatall=(int)Math.round(total);
+        total_txt.setText(String.valueOf(toatall));
     }
 
     private void initializeTableLayout() {
@@ -133,7 +135,7 @@ public class Fatwora extends AppCompatActivity implements CartView, CartItemList
         mTableLayout.addView(tr_head, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
     }
     private void fillTable(List<CartModel> cartItems) {
-        Integer count = 0;
+        int count = 0;
         for (int i = 0; i < cartItems.size(); i++) {
             TableRow tableRow = new TableRow(Fatwora.this);
             if (count % 2 != 0) {
@@ -157,7 +159,8 @@ public class Fatwora extends AppCompatActivity implements CartView, CartItemList
             labelLocation.setGravity(Gravity.CENTER);
             labelLocation.setTextColor(getResources().getColor(R.color.colorAccent));
             labelLocation.setTextSize(18);
-            labelLocation.setText(cartItems.get(i).getPrice().toString());
+            int price=(int)Math.round(cartItems.get(i).getPrice());
+            labelLocation.setText(price+"");
             tableRow.addView(labelLocation);
 
             TextView labelQuantity = new TextView(Fatwora.this);
@@ -165,7 +168,8 @@ public class Fatwora extends AppCompatActivity implements CartView, CartItemList
             labelQuantity.setGravity(Gravity.CENTER);
             labelQuantity.setTextColor(getResources().getColor(R.color.colorAccent));
             labelQuantity.setTextSize(18);
-            labelQuantity.setText(cartItems.get(i).getShippingCost().toString());
+            int shippingcost=(int)Math.round(cartItems.get(i).getShippingCost());
+            labelQuantity.setText(shippingcost+"");
             tableRow.addView(labelQuantity);
 
             TextView labelQuantityy = new TextView(Fatwora.this);
@@ -184,7 +188,8 @@ public class Fatwora extends AppCompatActivity implements CartView, CartItemList
         for (int i = 0; i < cartItems.size(); i++) {
             sum += cartItems.get(i).getShippingCost();
         }
-        shippingCosttxt.setText(String.valueOf(sum));
+        int summ=(int)Math.round(sum);
+        shippingCosttxt.setText(String.valueOf(summ));
     }
 
     @Override
