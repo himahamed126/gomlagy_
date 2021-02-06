@@ -198,4 +198,6 @@
     <string name="join_as_a_trader">Join as a trader</string>
     <string name="fatwora">Fatwora</string>
     <string name="total">total</string>
+    <string name="color">Color</string>
+    <string name="model">model</string>
 </resources>

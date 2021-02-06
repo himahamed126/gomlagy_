@@ -22,7 +22,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Presentation.ui.activities.impl.Fatwora"></activity>
+        <activity android:name=".Presentation.ui.activities.impl.BuyDataActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Presentation.ui.activities.impl.Fatwora" />
         <activity android:name=".Presentation.ui.activities.impl.WarrantyActivity" />
         <activity android:name=".Presentation.ui.activities.impl.WalletActivity" />
         <activity android:name=".Presentation.ui.activities.impl.SendCodeActivity" />
@@ -31,11 +37,7 @@
         <activity android:name=".Presentation.ui.activities.impl.ForgetPasswordActivity" />
         <activity android:name=".Presentation.ui.activities.impl.MyBidsActivity" />
         <activity android:name=".Presentation.ui.activities.impl.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Presentation.ui.activities.impl.ProductListingActivityAlternative" />
         <activity android:name=".Presentation.ui.activities.impl.ProductReviewActivity" />
@@ -57,7 +59,12 @@
             android:name=".Presentation.ui.activities.impl.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"></activity>
+            tools:ignore="LockedOrientationActivity" >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
         <activity android:name=".Presentation.ui.activities.impl.LoginActivity" />
         <activity
             android:name="com.braintreepayments.api.BraintreeBrowserSwitchActivity"

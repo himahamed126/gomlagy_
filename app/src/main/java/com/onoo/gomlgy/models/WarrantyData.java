@@ -234,18 +234,5 @@ public class WarrantyData {
     }
 
 
-    @BindingAdapter("setStringText")
-    public static void setStringText(TextView textView, Object value) {
-        textView.setText(String.valueOf(value));
-    }
 
-    @BindingAdapter("adminApproval")
-    public static void setAdminApproval(TextView textView, int value) {
-        if (value == 0) {
-            textView.setText(textView.getContext().getString(R.string.unconfirmed));
-        } else {
-            textView.setText(textView.getContext().getString(R.string.confirmed));
-        }
-
-    }
 }

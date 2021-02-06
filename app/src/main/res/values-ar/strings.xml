@@ -183,4 +183,7 @@
     <string name="join_as_a_trader" >انضم كابائع</string>
     <string name="fatwora">الفاتورة</string>
     <string name="total">الاجمالي</string>
+
+    <string name="color">اللون</string>
+    <string name="model">الموديل</string>
 </resources>

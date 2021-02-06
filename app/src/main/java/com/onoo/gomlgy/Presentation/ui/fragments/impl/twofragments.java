@@ -54,19 +54,15 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_twofragments, null);
-
         init();
         return v;
     }
 
     void init() {
-
         categoryRv = v.findViewById(R.id.category_rv);
         subCategoriesRv = v.findViewById(R.id.sub_categories_rv);
-
         categoryRv.setLayoutManager(new LinearLayoutManager(getContext()));
         allCategoryAdapter = new AllCategoryAdapter(getActivity(), mCategories,
                 twofragments.this);
@@ -79,7 +75,6 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
         subCategories = new ArrayList<>();
         subCategoryAdapter = new SubCategoryAdapter(subCategories, this);
         subCategoriesRv.setAdapter(subCategoryAdapter);
-
     }
 
 
@@ -90,14 +85,12 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
 
     @Override
     public void onRefresh() {
-
     }
 
     @Override
     public void onCategoryClick(Category category) {
         subCategoryPresenter.getSubSubCategories(String.valueOf(category.getId()));
         this.category = category;
-
     }
 
     @Override
@@ -105,11 +98,8 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
         mCategories.clear();
         mCategories.addAll(categories);
         allCategoryAdapter.notifyDataSetChanged();
-
-
         subCategoryPresenter.getSubSubCategories(String.valueOf(categories.get(0).getId()));
         category = categories.get(0);
-
 //        if (!categories.isEmpty()) {
 //            getDAta(6);
 //        }
@@ -117,34 +107,28 @@ public class twofragments extends Fragment implements SwipeRefreshLayout.OnRefre
 
     @Override
     public void setSubCategories(List<SubCategorymodel> subCategories) {
-
         this.subCategories.clear();
         this.subCategories.addAll(subCategories);
         subCategoryAdapter.notifyDataSetChanged();
-
     }
 
     @Override
     public void onAllProductsClicked() {
-
         Intent i = new Intent(getActivity(), ProductListingActivity.class);
         i.putExtra(getString(R.string.url), category.getLinks().getProducts());
         i.putExtra(getString(R.string.title), category.getName());
         i.putExtra(getString(R.string.category_id), String.valueOf(category.getId()));
         startActivity(i);
-
     }
 
     @Override
     public void onSeeAllProductsOfSubCategoryClicked(int position) {
-
         Intent i = new Intent(getActivity(), ProductListingActivity.class);
         i.putExtra(getString(R.string.url), subCategories.get(position).getLinks().getProducts());
         i.putExtra(getString(R.string.sub_category_id),
                 subCategories.get(position).getId().toString());
         i.putExtra(getString(R.string.title), subCategories.get(position).getName());
         startActivity(i);
-
     }
 
     @Override
